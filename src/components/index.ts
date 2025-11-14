@@ -16,6 +16,7 @@ export * from "./Odometer";
 export * from "./ScrollArea";
 export * from "./SvgSprite";
 export * from "./Switch";
+export * from "./Tabs";
 export * from "./Tag";
 export * from "./TextArea";
 export * from "./TextField";

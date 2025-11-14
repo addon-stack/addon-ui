@@ -15,6 +15,10 @@ import type {
     OdometerProps,
     ScrollAreaProps,
     SwitchProps,
+    TabsProps,
+    TabsContentProps,
+    TabsListProps,
+    TabsTriggerProps,
     TagProps,
     TextAreaProps,
     TextFieldProps,
@@ -42,6 +46,10 @@ export interface ComponentsProps {
     odometer?: Pick<OdometerProps, "auto" | "format" | "duration">;
     scrollArea?: ScrollAreaProps;
     switch?: SwitchProps;
+    tabs?: TabsProps;
+    tabsContent?: TabsContentProps;
+    tabsList?: TabsListProps;
+    tabsTrigger?: TabsTriggerProps;
     tag?: Pick<TagProps, "variant" | "size" | "color" | "radius" | "clickable">;
     textArea?: TextAreaProps;
     textField?: TextFieldProps;
