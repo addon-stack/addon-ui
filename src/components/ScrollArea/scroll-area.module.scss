@@ -3,6 +3,8 @@ $root: scroll-area;
 .#{$root} {
   box-sizing: border-box;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   &__viewport {
     width: 100%;
