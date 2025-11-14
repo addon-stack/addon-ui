@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import styles from "./tabs.module.scss";
 
-export interface TabsContentProps extends TabsContentRadixProps {}
+export type TabsContentProps = TabsContentRadixProps
 
 const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsContentProps> = (props, ref) => {
     const {

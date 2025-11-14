@@ -28,14 +28,14 @@ const trimMiddle = (el: HTMLElement, text: string, separator: string) => {
     if (measure(text)) return text;
 
     let low = 0;
-    let high = text.length -2;
+    let high = text.length - 2;
     let result = "";
 
     while (low <= high) {
         const size = Math.floor((low + high) / 2);
         const left = text.slice(0, Math.ceil(size / 2));
         const right = text.slice(text.length - Math.floor(size / 2));
-        const trimmed =  left + separator + right;
+        const trimmed = left + separator + right;
 
         if (measure(trimmed)) {
             result = trimmed;
@@ -97,6 +97,7 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
             observer?.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [text, separator, middle]);
 
     return (

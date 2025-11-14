@@ -7,7 +7,7 @@ import {useComponentProps} from "../../providers";
 import styles from "./truncate-list.module.scss";
 import {Tag} from "../Tag";
 
-type TruncateListProps<T = any> = OverflowListProps<T> & {
+export type TruncateListProps<T = unknown> = OverflowListProps<T> & {
     counterClassName?: string;
 };
 

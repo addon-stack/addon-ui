@@ -1,4 +1,4 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo, useMemo} from "react";
+import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
 import classnames from "classnames";
 
 import {TabsTriggerProps as TabsTriggerRadixProps, Trigger} from "@radix-ui/react-tabs";

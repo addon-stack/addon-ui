@@ -31,6 +31,16 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
     const [modificators, setModificators] = useState<{ first?: boolean; last?: boolean }>({});
 
     useEffect(() => {
+        if (!ref) return;
+        if (typeof ref === "function") {
+            ref(listRef.current);
+        } else {
+            ref.current = listRef.current;
+        }
+    }, [ref]);
+
+
+    useEffect(() => {
         const updateIndicator = () => {
             const list = listRef.current;
             const indicator = indicatorRef.current;
