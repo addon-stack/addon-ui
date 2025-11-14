@@ -1,0 +1,21 @@
+@use "../../styles/mixins" as theme;
+
+.truncate {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &--middle {
+    text-overflow: clip;
+
+    padding-right: var(--truncate-around-space, 8px);
+
+    @include theme.rtl() {
+      padding-right: 0;
+      padding-left: var(--truncate-around-space, 8px);
+
+    }
+  }
+}

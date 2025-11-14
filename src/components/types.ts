@@ -24,6 +24,7 @@ import type {
     TextFieldProps,
     ToastProps,
     TooltipProps,
+    TruncateProps,
     ViewProps,
     ViewDrawerProps,
     ViewModalProps,
@@ -67,6 +68,7 @@ export interface ComponentsProps {
         | "color"
     >;
     tooltip?: Omit<TooltipProps, "content">;
+    truncate?: TruncateProps;
     view?: ViewProps;
     viewDrawer?: ViewDrawerProps;
     viewModal?: ViewModalProps;
