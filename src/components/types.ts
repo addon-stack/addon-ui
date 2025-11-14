@@ -25,6 +25,7 @@ import type {
     ToastProps,
     TooltipProps,
     TruncateProps,
+    TruncateListProps,
     ViewProps,
     ViewDrawerProps,
     ViewModalProps,
@@ -69,6 +70,7 @@ export interface ComponentsProps {
     >;
     tooltip?: Omit<TooltipProps, "content">;
     truncate?: TruncateProps;
+    truncateList?: TruncateListProps;
     view?: ViewProps;
     viewDrawer?: ViewDrawerProps;
     viewModal?: ViewModalProps;

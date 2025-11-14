@@ -1,0 +1,20 @@
+@use "../../styles/mixins" as theme;
+
+.truncate-list {
+  gap: var(--truncate-list-gap, 8px);
+
+  @include theme.rtl() {
+    flex-direction: row-reverse;
+  }
+
+  &__counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--truncate-list-counter-br-radius, 9999px);
+    background: var(--truncate-list-counter-bg-color, var(--bg-secondary-color));
+    padding: var(--truncate-list-counter-padding, 0px 4px);
+    color: var(--truncate-list-counter-color, var(--text-secondary-color));
+    font-size: var(--truncate-list-counter-font-size, inherit);
+  }
+}

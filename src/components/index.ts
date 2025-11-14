@@ -23,6 +23,7 @@ export * from "./TextField";
 export * from "./Toast";
 export * from "./Tooltip";
 export * from "./Truncate";
+export * from "./TruncateList";
 export * from "./View";
 export * from "./ViewDrawer";
 export * from "./ViewModal";
