@@ -34,7 +34,7 @@ function TruncateListBase<T>(props: TruncateListProps<T>, ref: React.Ref<HTMLDiv
             ref={ref}
             renderOverflow={RenderOverflow}
             className={classnames(styles["truncate-list"], className)}
-            {...other}
+            {...other as OverflowListProps<T>}
         />
     );
 }
