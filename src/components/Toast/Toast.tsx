@@ -14,7 +14,7 @@ import {IconButton, IconButtonProps} from "../IconButton";
 import {cloneOrCreateElement} from "../../utils";
 import {useComponentProps} from "../../providers";
 
-import {ToastSide, ToastRadius, ToastColor} from "./types";
+import {ToastSide, ToastRadius, ToastColor, ToastAnimation} from "./types";
 
 import styles from "./toast.module.scss";
 
@@ -33,6 +33,8 @@ export interface ToastProps extends Omit<ToastRootProps, "title">, Omit<ToastPro
     radius?: ToastRadius;
     title?: ReactNode;
     action?: ReactNode;
+    animationIn?: ToastAnimation;
+    animationOut?: ToastAnimation;
     description?: ReactNode;
     closeIcon?: ReactElement;
     closeProps?: IconButtonProps;
@@ -54,6 +56,8 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
         radius,
         title,
         action,
+        animationIn = ToastAnimation.Slide,
+        animationOut = ToastAnimation.Slide,
         description,
         fullWidth,
         sticky,
@@ -87,6 +91,8 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
                         [styles[`toast--${side}`]]: side,
                         [styles[`toast--${color}-color`]]: color,
                         [styles[`toast--${radius}-radius`]]: radius,
+                        [styles[`toast--${animationIn}-animation-in`]]: animationIn,
+                        [styles[`toast--${animationOut}-animation-out`]]: animationOut,
                         [styles["toast--sticky"]]: sticky,
                         [styles["toast--full-width"]]: fullWidth,
                     },

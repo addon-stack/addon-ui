@@ -5,7 +5,7 @@ $root: button;
   font-weight: var(--button-font-weight, 500);
   font-size: var(--button-font-size, var(--font-size, 14px));
   letter-spacing: var(--button-letter-spacing, 0.5px);
-  line-height: var(--button-line-height, var(--line-height, 1 rem));
+  line-height: var(--button-line-height, var(--line-height, 1rem));
   height: var(--button-height, 34px);
   border-radius: var(--button-border-radius, 10px);
   padding: var(--button-padding, 0 16px);
@@ -38,6 +38,16 @@ $root: button;
       color: #fff;
       background: var(--accent-color);
     }
+
+    &.#{$root}--error-color {
+      color: #fff;
+      background: var(--error-color);
+    }
+
+    &.#{$root}--success-color {
+      color: #fff;
+      background: var(--success-color);
+    }
   }
 
   &--outlined {
@@ -55,17 +65,27 @@ $root: button;
 
     &.#{$root}--primary-color {
       color: var(--primary-color);
-      border-color: var(--button-outlined-border-primary-color);
+      border-color: var(--button-outlined-border-primary-color, var(--primary-color));
     }
 
     &.#{$root}--secondary-color {
       color: var(--secondary-color);
-      border-color: var(--button-outlined-border-secondary-color);
+      border-color: var(--button-outlined-border-secondary-color, var(--secondary-color));
     }
 
     &.#{$root}--accent-color {
       color: var(--accent-color);
-      border-color: var(--button-outlined-border-accent-color);
+      border-color: var(--button-outlined-border-accent-color, var(--accent-color-color));
+    }
+
+    &.#{$root}--error-color {
+      color: var(--error-color);
+      border-color: var(--button-outlined-border-error-color, var(--error-color));
+    }
+
+    &.#{$root}--success-color {
+      color: var(--success-color);
+      border-color: var(--button-outlined-border-success-color, var(--success-color));
     }
   }
 
@@ -91,6 +111,14 @@ $root: button;
 
     &.#{$root}--accent-color {
       color: var(--accent-color);
+    }
+
+    &.#{$root}--error-color {
+      color: var(--error-color);
+    }
+
+    &.#{$root}--success-color {
+      color: var(--success-color);
     }
   }
 

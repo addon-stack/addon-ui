@@ -19,6 +19,7 @@ $border-width: 1px;
     position: relative;
     display: flex;
     justify-content: space-between;
+    transition: border-bottom-color var(--transition-speed-sm);
 
     @include theme.rtl() {
       & {
@@ -51,7 +52,7 @@ $border-width: 1px;
     font-family: var(--tabs-trigger-font-family, var(--font-family)), sans-serif;
     font-weight: var(--tabs-trigger-font-weight, 400);
     color: var(--tabs-trigger-color, var(--text-primary-color));
-    transition: font-weight var(--transition-speed-sm) ease;
+    transition: color var(--transition-speed-sm) ease, font-weight var(--transition-speed-sm) ease;
 
     &[data-state="active"] {
       font-weight: var(--tabs-trigger-font-weight-active, 600);
@@ -73,6 +74,7 @@ $border-width: 1px;
       border-radius: var(--tabs-trigger-badge-radius, 4px);
       color: var(--tabs-trigger-badge-color, var(--text-secondary-color));
       background-color: var(--tabs-trigger-badge-bg-color, var(--bg-secondary-color));
+      transition: background-color var(--transition-speed-sm) ease, color var(--transition-speed-sm) ease;
 
       .#{$root}__trigger[data-state="active"] & {
         color: var(--tabs-trigger-badge-active-color, white);
@@ -90,13 +92,14 @@ $border-width: 1px;
   }
 
   &__indicator {
-    display: none;
+    opacity: 0;
     position: absolute;
     bottom: calc(-1 * var(--tabs-list-border-width, #{$border-width}));
     height: var(--tabs-indicator-size, 4px);
     background-color: var(--tabs-indicator-color, var(--primary-color));
-    transition: left var(--transition-speed-sm) ease, width var(--transition-speed-sm) ease;
     border-radius: #{$radius} #{$radius} 0 0;
+    will-change: opacity, left, width;
+    transition: opacity var(--transition-speed-sm) ease, left var(--transition-speed-sm) ease, width var(--transition-speed-sm) ease;
 
     .#{$root}--reverse & {
       bottom: auto;
@@ -105,7 +108,7 @@ $border-width: 1px;
     }
 
     &--show {
-      display: block;
+      opacity: 1;
     }
 
     &--first {

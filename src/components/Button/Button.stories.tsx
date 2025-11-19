@@ -7,7 +7,7 @@ import ButtonComponent from "./Button";
 import {ButtonColor, ButtonRadius, ButtonSize, ButtonVariant} from "./types";
 
 const variants: ButtonVariant[] = [ButtonVariant.Contained, ButtonVariant.Outlined, ButtonVariant.Text];
-const colors: (ButtonColor | "default")[] = ["default", ButtonColor.Primary, ButtonColor.Secondary, ButtonColor.Accent];
+const colors: (ButtonColor | "default")[] = ["default", ButtonColor.Primary, ButtonColor.Secondary, ButtonColor.Accent, ButtonColor.Error, ButtonColor.Success];
 const sizes: (ButtonSize | "default")[] = [ButtonSize.Small, "default", ButtonSize.Medium, ButtonSize.Large];
 const radius: (ButtonRadius | "default")[] = [
     ButtonRadius.Small,
@@ -57,7 +57,7 @@ export const Button: StoryObj<typeof ButtonComponent> = {
 
 export const VariantColor = () => {
     return (
-        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(4, auto)"}}>
+        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(6, auto)"}}>
             {variants.map(variant =>
                 colors.map(color => (
                     <div key={`${variant}-${color}`}>
@@ -73,7 +73,7 @@ export const VariantColor = () => {
 
 export const VariantColorDisabled = () => {
     return (
-        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(4, auto)"}}>
+        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(6, auto)"}}>
             {variants.map(variant =>
                 colors.map(color => (
                     <div key={`${variant}-${color}`}>

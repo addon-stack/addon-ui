@@ -3,6 +3,7 @@ import React, {
     forwardRef,
     ForwardRefRenderFunction,
     memo,
+    useImperativeHandle,
     useLayoutEffect,
     useRef,
     useState,
@@ -61,11 +62,7 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
     const innerRef = useRef<HTMLSpanElement | null>(null);
     const [displayedText, setDisplayedText] = useState(text);
 
-    useLayoutEffect(() => {
-        if (!ref) return;
-        if (typeof ref === "function") ref(innerRef.current);
-        else ref.current = innerRef.current;
-    }, [ref]);
+    useImperativeHandle(ref, () => innerRef.current!, []);
 
     useLayoutEffect(() => {
         const el = innerRef.current;

@@ -6,7 +6,7 @@ import {hideInTable} from "../../utils";
 import {Button, ButtonColor, ButtonVariant} from "../index";
 
 import ToastComponent, {ToastProps} from "./Toast";
-import {ToastColor, ToastRadius, ToastSide} from "./types";
+import {ToastColor, ToastRadius, ToastSide, ToastAnimation} from "./types";
 
 const sides: ToastSide[] = [
     ToastSide.TopLeft,
@@ -24,6 +24,8 @@ const radius: (ToastRadius | "default")[] = [
     ToastRadius.Medium,
     ToastRadius.Large,
 ];
+
+const animations = [ToastAnimation.Slide, ToastAnimation.Opacity]
 
 const meta: Meta<typeof ToastComponent> = {
     title: "Components/Toast",
@@ -52,6 +54,14 @@ const meta: Meta<typeof ToastComponent> = {
         },
         color: {
             options: colors,
+            control: {type: "select"},
+        },
+        animationIn: {
+            options: animations,
+            control: {type: "select"},
+        },
+        animationOut: {
+            options: animations,
             control: {type: "select"},
         },
 

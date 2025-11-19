@@ -8,6 +8,8 @@ export enum ButtonColor {
     Primary = "primary",
     Secondary = "secondary",
     Accent = "accent",
+    Error = "error",
+    Success = "success",
 }
 
 export enum ButtonSize {
