@@ -7,7 +7,7 @@ import AvatarComponent from "./Avatar";
 import {AvatarRadius, AvatarSize} from "./types";
 
 const sizes: (AvatarSize | "default")[] = [AvatarSize.Small, "default", AvatarSize.Medium, AvatarSize.Large];
-const radius: (AvatarRadius | "default")[] = [AvatarRadius.Small, AvatarRadius.Medium, AvatarRadius.Large, "default"];
+const radius: (AvatarRadius | "default")[] = [AvatarRadius.None, AvatarRadius.Small, AvatarRadius.Medium, AvatarRadius.Large, "default"];
 
 const meta: Meta<typeof AvatarComponent> = {
     title: "Components/Avatar",
@@ -39,7 +39,7 @@ export const Avatar: StoryObj<typeof AvatarComponent> = {
 
 export const AvatarRadiusGrid = () => {
     return (
-        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(4, auto)"}}>
+        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(5, auto)"}}>
             {radius.map(radius => (
                 <div key={radius} className="item-card">
                     <span className="item-card__title">{capitalizeFirstLetter(radius)}</span>
@@ -103,7 +103,7 @@ export const SizeWithFallback = () => {
 
 export const SizeRadius = () => {
     return (
-        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(4, auto)"}}>
+        <div className="grid-wrapper" style={{gridTemplateColumns: "repeat(5, auto)"}}>
             {sizes.map(size =>
                 radius.map(radius => (
                     <div key={`${radius}-${size}`} className="item-card">

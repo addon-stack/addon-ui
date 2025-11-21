@@ -15,11 +15,17 @@ import type {
     OdometerProps,
     ScrollAreaProps,
     SwitchProps,
+    TabsProps,
+    TabsContentProps,
+    TabsListProps,
+    TabsTriggerProps,
     TagProps,
     TextAreaProps,
     TextFieldProps,
     ToastProps,
     TooltipProps,
+    TruncateProps,
+    TruncateListProps,
     ViewProps,
     ViewDrawerProps,
     ViewModalProps,
@@ -42,6 +48,10 @@ export interface ComponentsProps {
     odometer?: Pick<OdometerProps, "auto" | "format" | "duration">;
     scrollArea?: ScrollAreaProps;
     switch?: SwitchProps;
+    tabs?: TabsProps;
+    tabsContent?: TabsContentProps;
+    tabsList?: TabsListProps;
+    tabsTrigger?: TabsTriggerProps;
     tag?: Pick<TagProps, "variant" | "size" | "color" | "radius" | "clickable">;
     textArea?: TextAreaProps;
     textField?: TextFieldProps;
@@ -59,6 +69,8 @@ export interface ComponentsProps {
         | "color"
     >;
     tooltip?: Omit<TooltipProps, "content">;
+    truncate?: TruncateProps;
+    truncateList?: TruncateListProps;
     view?: ViewProps;
     viewDrawer?: ViewDrawerProps;
     viewModal?: ViewModalProps;

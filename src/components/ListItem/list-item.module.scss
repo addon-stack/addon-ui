@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: var(--list-item-gap, 10px);
   flex-wrap: nowrap;
   box-sizing: border-box;
   line-height: var(--list-item-line-height, var(--line-height, 1 rem));

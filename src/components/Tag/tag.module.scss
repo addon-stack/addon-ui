@@ -49,21 +49,24 @@ $root: tag;
     color: var(--tag-outlined-color, var(--tag-color, var(--text-secondary-color)));
     border: var(--tag-border-width, 1px) solid
       var(--tag-outlined-border-color, var(--tag-outlined-color, var(--text-secondary-color)));
-    background: none;
+    background: var(--tag-outlined-bg-color, none);
 
     &.#{$root}--primary-color {
-      color: var(--primary-color);
-      border-color: var(--tag-outlined-border-primary-color, var(--primary-color));
+      color: var(--tag-outlined-color-primary-color, var(--primary-color));
+      border-color: var(--tag-outlined-border-color-primary-color, var(--primary-color));
+      background: var(--tag-outlined-bg-color-primary-color, none);
     }
 
     &.#{$root}--secondary-color {
-      color: var(--secondary-color);
-      border-color: var(--tag-outlined-border-secondary-color, var(--secondary-color));
+      color: var(--tag-outlined-color-secondary-color, var(--secondary-color));
+      border-color: var(--tag-outlined-border-color-secondary-color, var(--secondary-color));
+      background: var(--tag-outlined-bg-color-secondary-color, none);
     }
 
     &.#{$root}--accent-color {
-      color: var(--accent-color);
-      border-color: var(--tag-outlined-border-accent-color, var(--accent-color));
+      color: var(--tag-outlined-color-accent-color, var(--accent-color));
+      border-color: var(--tag-outlined-border-color-accent-color, var(--accent-color));
+      background: var(--tag-outlined-bg-color-accent-color, none);
     }
   }
 

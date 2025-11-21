@@ -3,13 +3,21 @@ $root: scroll-area;
 .#{$root} {
   box-sizing: border-box;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
   &__viewport {
     width: 100%;
     height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-    &--horizontal > div {
-      display: inherit !important;
+    & > div {
+      flex: 1;
+      display: flex !important;
+      flex-direction: column;
     }
   }
 

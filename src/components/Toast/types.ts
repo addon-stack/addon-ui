@@ -18,3 +18,8 @@ export enum ToastColor {
     Error = "error",
     Success = "success",
 }
+
+export enum ToastAnimation {
+    Slide = "slide",
+    Opacity = "opacity",
+}

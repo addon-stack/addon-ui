@@ -5,6 +5,7 @@ export enum AvatarSize {
 }
 
 export enum AvatarRadius {
+    None = "none",
     Small = "small",
     Medium = "medium",
     Large = "large",

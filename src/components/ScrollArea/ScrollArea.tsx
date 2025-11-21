@@ -40,21 +40,8 @@ const ScrollArea: ForwardRefRenderFunction<HTMLDivElement, ScrollAreaProps> = (p
     const rootRef = React.useRef<HTMLDivElement | null>(null);
     const viewportRef = React.useRef<HTMLDivElement | null>(null);
 
-    useImperativeHandle(
-        ref,
-        () => ({
-            ...rootRef.current!,
-            scrollTo: ((optionsOrX?: ScrollToOptions | number, y?: number) => {
-                if (typeof optionsOrX === 'number') {
-                    viewportRef.current?.scrollTo(optionsOrX, y!);
-                } else {
-                    viewportRef.current?.scrollTo(optionsOrX);
-                }
-            }) as HTMLElement['scrollTo'],
+    useImperativeHandle(ref, () => viewportRef.current!, []);
 
-        }),
-        []
-    );
     return (
         <Root ref={rootRef} className={classnames(styles["scroll-area"], className)} {...other}>
             <Viewport

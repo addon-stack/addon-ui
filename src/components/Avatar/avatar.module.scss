@@ -42,6 +42,10 @@ $root: avatar;
   }
 
   // Radius
+  &--none-radius {
+    border-radius: 0;
+  }
+
   &--small-radius {
     border-radius: var(--avatar-border-radius-sm, 20%);
   }
