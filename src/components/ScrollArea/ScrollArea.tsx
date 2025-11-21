@@ -40,21 +40,8 @@ const ScrollArea: ForwardRefRenderFunction<HTMLDivElement, ScrollAreaProps> = (p
     const rootRef = React.useRef<HTMLDivElement | null>(null);
     const viewportRef = React.useRef<HTMLDivElement | null>(null);
 
-    useImperativeHandle(
-        ref,
-        () => ({
-            ...rootRef.current!,
-            scrollTo: ((optionsOrX?: ScrollToOptions | number, y?: number) => {
-                if (typeof optionsOrX === 'number') {
-                    viewportRef.current?.scrollTo(optionsOrX, y!);
-                } else {
-                    viewportRef.current?.scrollTo(optionsOrX);
-                }
-            }) as HTMLElement['scrollTo'],
+    useImperativeHandle(ref, () => viewportRef.current!, []);
 
-        }),
-        []
-    );
     return (
         <Root ref={rootRef} className={classnames(styles["scroll-area"], className)} {...other}>
             <Viewport
@@ -76,7 +63,7 @@ const ScrollArea: ForwardRefRenderFunction<HTMLDivElement, ScrollAreaProps> = (p
                 style={{padding: `0 ${xOffset}px`}}
                 className={classnames(styles["scroll-area__scrollbar"], scrollbarClassName)}
             >
-                <Thumb className={classnames(styles["scroll-area__thumb"], thumbClassName)}/>
+                <Thumb className={classnames(styles["scroll-area__thumb"], thumbClassName)} />
             </Scrollbar>
 
             <Scrollbar
@@ -84,10 +71,10 @@ const ScrollArea: ForwardRefRenderFunction<HTMLDivElement, ScrollAreaProps> = (p
                 style={{padding: `${yOffset}px 0`}}
                 className={classnames(styles["scroll-area__scrollbar"], scrollbarClassName)}
             >
-                <Thumb className={classnames(styles["scroll-area__thumb"], thumbClassName)}/>
+                <Thumb className={classnames(styles["scroll-area__thumb"], thumbClassName)} />
             </Scrollbar>
 
-            <Corner className={classnames(styles["scroll-area__corner"], cornerClassName)}/>
+            <Corner className={classnames(styles["scroll-area__corner"], cornerClassName)} />
         </Root>
     );
 };

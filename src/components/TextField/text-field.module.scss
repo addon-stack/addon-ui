@@ -43,6 +43,10 @@ $root: text-field;
     &:disabled {
       cursor: not-allowed;
     }
+
+    &::placeholder {
+      color: var(--text-field-placeholder-color, var(--text-secondary-color));
+    }
   }
 
   &__before,
@@ -107,12 +111,12 @@ $root: text-field;
 
   &--medium-size {
     padding: var(--text-field-padding-md, 10px 14px);
-    font-size: var(--text-field-font-size-sm, 16px);
+    font-size: var(--text-field-font-size-md, 16px);
   }
 
   &--large-size {
     padding: var(--text-field-padding-lg, 12px 16px);
-    font-size: var(--text-field-font-size-sm, 18px);
+    font-size: var(--text-field-font-size-lg, 18px);
   }
 
   // Accents

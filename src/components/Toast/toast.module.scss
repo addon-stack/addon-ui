@@ -15,27 +15,55 @@ $root: toast;
   padding: var(--toast-padding, var(--side-padding-xs));
 
   &[data-state="open"] {
-    &.#{$root}--top-left,
-    &.#{$root}--bottom-left {
-      animation: slideInLeft var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+    &.#{$root}--opacity-animation-in {
+      animation: show var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
     }
 
-    &.#{$root}--top-right,
-    &.#{$root}--bottom-right {
-      animation: slideInRight var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
-    }
+    &.#{$root}--slide-animation-in {
+      &.#{$root}--top-left,
+      &.#{$root}--bottom-left {
+        animation: slideInLeft var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
 
-    &.#{$root}--top-center {
-      animation: slideInTop var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
-    }
+      &.#{$root}--top-right,
+      &.#{$root}--bottom-right {
+        animation: slideInRight var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
 
-    &.#{$root}--bottom-center {
-      animation: slideInBottom var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      &.#{$root}--top-center {
+        animation: slideInTop var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
+
+      &.#{$root}--bottom-center {
+        animation: slideInBottom var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
     }
   }
 
   &[data-state="closed"] {
-    animation: hide var(--toast-transition-speed, var(--transition-speed-md)) ease-in;
+    &.#{$root}--opacity-animation-out {
+      animation: hide var(--toast-transition-speed, var(--transition-speed-md)) ease-in;
+    }
+
+    &.#{$root}--slide-animation-out {
+      &.#{$root}--top-left,
+      &.#{$root}--bottom-left {
+        animation: swipeOutLeft var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
+
+      &.#{$root}--top-right,
+      &.#{$root}--bottom-right {
+        animation: swipeOutRight var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
+
+      &.#{$root}--top-center {
+        animation: swipeOutTop var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
+
+      &.#{$root}--bottom-center {
+        animation: swipeOutBottom var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
+      }
+    }
   }
 
   &[data-swipe="move"] {
@@ -52,6 +80,7 @@ $root: toast;
     &.#{$root}--bottom-left {
       animation: swipeOutLeft var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
     }
+
     &.#{$root}--top-right,
     &.#{$root}--bottom-right {
       animation: swipeOutRight var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
@@ -60,6 +89,7 @@ $root: toast;
     &.#{$root}--top-center {
       animation: swipeOutTop var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
     }
+
     &.#{$root}--bottom-center {
       animation: swipeOutBottom var(--toast-transition-speed, var(--transition-speed-md)) ease-out;
     }
@@ -68,12 +98,15 @@ $root: toast;
   &--none-radius {
     border-radius: 0;
   }
+
   &--small-radius {
     border-radius: var(--toast-border-radius, 6px);
   }
+
   &--medium-radius {
     border-radius: var(--toast-border-radius, 15px);
   }
+
   &--large-radius {
     border-radius: var(--toast-border-radius, 20px);
   }
@@ -91,6 +124,7 @@ $root: toast;
     .#{$root}--error-color & {
       color: var(--toast-error-text-color, white);
     }
+
     .#{$root}--success-color & {
       color: var(--toast-success-text-color, white);
     }
@@ -191,6 +225,15 @@ $root: toast;
   }
   to {
     opacity: 0;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

@@ -1,0 +1,166 @@
+@use "../../styles/mixins" as theme;
+
+$root: tabs;
+$radius: var(--tabs-indicator-radius, 10px);
+$border-width: 1px;
+
+.#{$root} {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &--reverse {
+    flex-direction: column-reverse;
+  }
+
+  &__list {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    transition: border-bottom-color var(--transition-speed-sm);
+
+    @include theme.rtl() {
+      & {
+        flex-direction: row-reverse;
+      }
+    }
+
+    &--separator {
+      border-bottom: var(--tabs-list-border-width, #{$border-width}) solid
+        var(--tabs-list-border-color, var(--separator-color));
+
+      .#{$root}--reverse & {
+        border-bottom: none;
+        border-top: var(--tabs-list-border-width, #{$border-width}) solid
+          var(--tabs-list-border-color, var(--separator-color));
+      }
+    }
+  }
+
+  &__trigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-self: center;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    padding: var(--tabs-trigger-padding, 10px) 0;
+    height: var(--tabs-trigger-height, 40px);
+    font-size: var(--tabs-trigger-font-size, 14px);
+    font-family: var(--tabs-trigger-font-family, var(--font-family)), sans-serif;
+    font-weight: var(--tabs-trigger-font-weight, 400);
+    color: var(--tabs-trigger-color, var(--text-primary-color));
+    transition:
+      color var(--transition-speed-sm) ease,
+      font-weight var(--transition-speed-sm) ease;
+
+    &[data-state="active"] {
+      font-weight: var(--tabs-trigger-font-weight-active, 600);
+    }
+
+    &[data-disabled] {
+      cursor: default;
+      opacity: var(--tabs-trigger-dissabled-opacity, 0.6);
+    }
+
+    &__before,
+    &__after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: var(--tabs-trigger-badge-min-width, 18px);
+      font-size: var(--tabs-trigger-badge-font-size, 12px);
+      font-weight: var(--tabs-trigger-badge-font-weight, 700);
+      padding: var(--tabs-trigger-badge-padding, 2px 4px);
+      border-radius: var(--tabs-trigger-badge-radius, 4px);
+      color: var(--tabs-trigger-badge-color, var(--text-secondary-color));
+      background-color: var(--tabs-trigger-badge-bg-color, var(--bg-secondary-color));
+      transition:
+        background-color var(--transition-speed-sm) ease,
+        color var(--transition-speed-sm) ease;
+
+      .#{$root}__trigger[data-state="active"] & {
+        color: var(--tabs-trigger-badge-active-color, white);
+        background-color: var(--tabs-trigger-badge-active-bg-color, var(--primary-color));
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: var(--tabs-trigger-gap, 4px);
+    }
+  }
+
+  &__indicator {
+    opacity: 0;
+    position: absolute;
+    bottom: calc(-1 * var(--tabs-list-border-width, #{$border-width}));
+    height: var(--tabs-indicator-size, 4px);
+    background-color: var(--tabs-indicator-color, var(--primary-color));
+    border-radius: #{$radius} #{$radius} 0 0;
+    will-change: opacity, left, width;
+    transition:
+      opacity var(--transition-speed-sm) ease,
+      left var(--transition-speed-sm) ease,
+      width var(--transition-speed-sm) ease;
+
+    .#{$root}--reverse & {
+      bottom: auto;
+      top: calc(-1 * var(--tabs-list-border-width, #{$border-width}));
+      border-radius: 0 0 #{$radius} #{$radius};
+    }
+
+    &--show {
+      opacity: 1;
+    }
+
+    &--first {
+      @include theme.ltr() {
+        &:not(.#{$root}__indicator--rounded_edges) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+
+      @include theme.rtl() {
+        &:not(.#{$root}__indicator--rounded_edges) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+
+    &--last {
+      @include theme.ltr() {
+        &:not(.#{$root}__indicator--rounded_edges) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      @include theme.rtl() {
+        &:not(.#{$root}__indicator--rounded_edges) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+  }
+
+  &__content {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    &[data-state="active"] {
+      flex: 1;
+    }
+  }
+}
