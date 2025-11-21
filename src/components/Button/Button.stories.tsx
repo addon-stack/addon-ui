@@ -7,7 +7,14 @@ import ButtonComponent from "./Button";
 import {ButtonColor, ButtonRadius, ButtonSize, ButtonVariant} from "./types";
 
 const variants: ButtonVariant[] = [ButtonVariant.Contained, ButtonVariant.Outlined, ButtonVariant.Text];
-const colors: (ButtonColor | "default")[] = ["default", ButtonColor.Primary, ButtonColor.Secondary, ButtonColor.Accent, ButtonColor.Error, ButtonColor.Success];
+const colors: (ButtonColor | "default")[] = [
+    "default",
+    ButtonColor.Primary,
+    ButtonColor.Secondary,
+    ButtonColor.Accent,
+    ButtonColor.Error,
+    ButtonColor.Success,
+];
 const sizes: (ButtonSize | "default")[] = [ButtonSize.Small, "default", ButtonSize.Medium, ButtonSize.Large];
 const radius: (ButtonRadius | "default")[] = [
     ButtonRadius.Small,

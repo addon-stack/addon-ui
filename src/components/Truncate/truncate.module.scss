@@ -15,7 +15,6 @@
     @include theme.rtl() {
       padding-right: 0;
       padding-left: var(--truncate-around-space, 8px);
-
     }
   }
 }

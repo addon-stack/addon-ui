@@ -14,7 +14,7 @@ import {useComponentProps} from "../../providers";
 
 import styles from "./truncate.module.scss";
 
-export interface TruncateProps extends ComponentProps<'span'> {
+export interface TruncateProps extends ComponentProps<"span"> {
     text?: string;
     middle?: boolean;
     separator?: string;
@@ -49,15 +49,8 @@ const trimMiddle = (el: HTMLElement, text: string, separator: string) => {
     return result || text.charAt(0) + separator + text.charAt(text.length - 1);
 };
 
-
 const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (props, ref) => {
-    const {
-        text = '',
-        middle,
-        separator = "...",
-        className,
-        ...other
-    } = {...useComponentProps("truncate"), ...props};
+    const {text = "", middle, separator = "...", className, ...other} = {...useComponentProps("truncate"), ...props};
 
     const innerRef = useRef<HTMLSpanElement | null>(null);
     const [displayedText, setDisplayedText] = useState(text);
@@ -94,15 +87,19 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
             observer?.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [text, separator, middle]);
 
     return (
         <span
             ref={innerRef}
-            className={classnames(styles["truncate"], {
-                [styles["truncate--middle"]]: middle
-            }, className)}
+            className={classnames(
+                styles["truncate"],
+                {
+                    [styles["truncate--middle"]]: middle,
+                },
+                className
+            )}
             {...other}
         >
             {middle ? displayedText : text}

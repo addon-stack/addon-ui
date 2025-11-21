@@ -28,11 +28,13 @@ $border-width: 1px;
     }
 
     &--separator {
-      border-bottom: var(--tabs-list-border-width, #{$border-width}) solid var(--tabs-list-border-color, var(--separator-color));
+      border-bottom: var(--tabs-list-border-width, #{$border-width}) solid
+        var(--tabs-list-border-color, var(--separator-color));
 
       .#{$root}--reverse & {
         border-bottom: none;
-        border-top: var(--tabs-list-border-width, #{$border-width}) solid var(--tabs-list-border-color, var(--separator-color));
+        border-top: var(--tabs-list-border-width, #{$border-width}) solid
+          var(--tabs-list-border-color, var(--separator-color));
       }
     }
   }
@@ -52,7 +54,9 @@ $border-width: 1px;
     font-family: var(--tabs-trigger-font-family, var(--font-family)), sans-serif;
     font-weight: var(--tabs-trigger-font-weight, 400);
     color: var(--tabs-trigger-color, var(--text-primary-color));
-    transition: color var(--transition-speed-sm) ease, font-weight var(--transition-speed-sm) ease;
+    transition:
+      color var(--transition-speed-sm) ease,
+      font-weight var(--transition-speed-sm) ease;
 
     &[data-state="active"] {
       font-weight: var(--tabs-trigger-font-weight-active, 600);
@@ -63,7 +67,8 @@ $border-width: 1px;
       opacity: var(--tabs-trigger-dissabled-opacity, 0.6);
     }
 
-    &__before, &__after {
+    &__before,
+    &__after {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,7 +79,9 @@ $border-width: 1px;
       border-radius: var(--tabs-trigger-badge-radius, 4px);
       color: var(--tabs-trigger-badge-color, var(--text-secondary-color));
       background-color: var(--tabs-trigger-badge-bg-color, var(--bg-secondary-color));
-      transition: background-color var(--transition-speed-sm) ease, color var(--transition-speed-sm) ease;
+      transition:
+        background-color var(--transition-speed-sm) ease,
+        color var(--transition-speed-sm) ease;
 
       .#{$root}__trigger[data-state="active"] & {
         color: var(--tabs-trigger-badge-active-color, white);
@@ -99,7 +106,10 @@ $border-width: 1px;
     background-color: var(--tabs-indicator-color, var(--primary-color));
     border-radius: #{$radius} #{$radius} 0 0;
     will-change: opacity, left, width;
-    transition: opacity var(--transition-speed-sm) ease, left var(--transition-speed-sm) ease, width var(--transition-speed-sm) ease;
+    transition:
+      opacity var(--transition-speed-sm) ease,
+      left var(--transition-speed-sm) ease,
+      width var(--transition-speed-sm) ease;
 
     .#{$root}--reverse & {
       bottom: auto;
@@ -123,8 +133,6 @@ $border-width: 1px;
         &:not(.#{$root}__indicator--rounded_edges) {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
-
-
         }
       }
     }

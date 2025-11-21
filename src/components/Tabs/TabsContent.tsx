@@ -6,14 +6,10 @@ import {useComponentProps} from "../../providers";
 
 import styles from "./tabs.module.scss";
 
-export type TabsContentProps = TabsContentRadixProps
+export type TabsContentProps = TabsContentRadixProps;
 
 const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsContentProps> = (props, ref) => {
-    const {
-        className,
-        children,
-        ...other
-    } = {...useComponentProps("tabsContent"), ...props};
+    const {className, children, ...other} = {...useComponentProps("tabsContent"), ...props};
 
     return (
         <Content ref={ref} className={classnames(styles["tabs__content"], className)} {...other}>

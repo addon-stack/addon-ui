@@ -25,7 +25,7 @@ const radius: (ToastRadius | "default")[] = [
     ToastRadius.Large,
 ];
 
-const animations = [ToastAnimation.Slide, ToastAnimation.Opacity]
+const animations = [ToastAnimation.Slide, ToastAnimation.Opacity];
 
 const meta: Meta<typeof ToastComponent> = {
     title: "Components/Toast",

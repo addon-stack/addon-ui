@@ -49,7 +49,7 @@ const Provider: ForwardRefRenderFunction<HTMLDivElement, PropsWithChildren<Viewp
             setSizes,
             setMode,
             resetSizes,
-            withTransition
+            withTransition,
         }),
         [mode, setSizes, setMode, resetSizes]
     );

@@ -28,13 +28,13 @@ const TabsTrigger: ForwardRefRenderFunction<HTMLButtonElement, TabsTriggerProps>
     return (
         <Trigger ref={ref} asChild={asChild} className={classnames(styles["tabs__trigger"], className)} {...other}>
             <div className={classnames(styles["tabs__trigger-wrapper"])}>
-                {before &&
-                    <span className={classnames(styles["tabs__trigger__before"], beforeClassname)}>{before}</span>}
+                {before && (
+                    <span className={classnames(styles["tabs__trigger__before"], beforeClassname)}>{before}</span>
+                )}
 
-                {typeof children === 'string' ? <span>{children}</span> : children}
+                {typeof children === "string" ? <span>{children}</span> : children}
 
-                {after &&
-                    <span className={classnames(styles["tabs__trigger__after"], afterClassname)}>{after}</span>}
+                {after && <span className={classnames(styles["tabs__trigger__after"], afterClassname)}>{after}</span>}
             </div>
         </Trigger>
     );
