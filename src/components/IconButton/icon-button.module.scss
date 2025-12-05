@@ -7,6 +7,9 @@ $root: icon-button;
   height: var(--icon-button-size, 25px);
   color: var(--icon-button-color);
   background: none;
+  transition:
+    color var(--transition-speed-color),
+    background var(--transition-speed-color);
 
   &:hover:not(:disabled) {
     color: var(--icon-button-color-hover);

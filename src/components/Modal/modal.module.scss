@@ -20,10 +20,10 @@ $root: modal;
     box-shadow: var(--modal-box-shadow, 0 0 4px rgba(0, 0, 0, 0.5));
     background-color: var(--modal-bg-color, var(--bg-primary-color));
     transition:
-      background-color var(--transition-speed-sm),
+      background-color var(--transition-speed-color),
       transform var(--transition-speed-sm),
       opacity var(--transition-speed-sm),
-      color var(--transition-speed-sm) !important;
+      color var(--transition-speed-color) !important;
 
     &[data-state="open"] {
       &.#{$root}-content {

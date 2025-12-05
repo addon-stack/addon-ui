@@ -5,6 +5,7 @@ $root: odometer;
   position: relative;
   color: var(--odometer-color, var(--text-primary-color));
   font-family: var(--odometer-font-family, var(--font-family)), sans-serif;
+  transition: color var(--transition-speed-color);
 
   &-digit {
     display: inline-block;
@@ -66,7 +67,7 @@ $root: odometer;
   &-inside {
     transition:
       all var(--speed),
-      color var(--transition-speed-sm);
+      color var(--transition-speed-color);
 
     &:before {
       content: "";
@@ -75,7 +76,7 @@ $root: odometer;
       color: inherit;
       transition:
         all var(--speed),
-        color var(--transition-speed-sm);
+        color var(--transition-speed-color);
     }
   }
 }

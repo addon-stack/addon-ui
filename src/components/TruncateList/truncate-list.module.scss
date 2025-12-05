@@ -16,5 +16,8 @@
     padding: var(--truncate-list-counter-padding, 0px 4px);
     color: var(--truncate-list-counter-color, var(--text-secondary-color));
     font-size: var(--truncate-list-counter-font-size, inherit);
+    transition:
+      color var(--transition-speed-color),
+      background var(--transition-speed-color);
   }
 }

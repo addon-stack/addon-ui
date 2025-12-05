@@ -27,7 +27,7 @@ $root: scroll-area;
     touch-action: none;
     padding: var(--scroll-area-scrollbar-padding, 3px);
     background: var(--scroll-area-scrollbar-bg-color, transparent);
-    transition: background var(--transition-speed-sm);
+    transition: background var(--transition-speed-color);
 
     &:hover {
       background: var(--scroll-area-scrollbar-bg-color-hover, transparent);
@@ -50,7 +50,7 @@ $root: scroll-area;
     position: relative;
     background: var(--scroll-area-thumb-bg-color);
     border-radius: var(--scroll-area-thumb-border-radius, 100px);
-    transition: background var(--transition-speed-sm);
+    transition: background var(--transition-speed-color);
 
     &:hover {
       background: var(--scroll-area-thumb-bg-color-hover, var(--scroll-area-thumb-bg-color));
@@ -59,6 +59,7 @@ $root: scroll-area;
 
   &__corner {
     background: var(--scroll-area-scrollbar-bg-color, transparent);
+    transition: background var(--transition-speed-color);
 
     &:hover {
       background: var(--scroll-area-scrollbar-bg-color-hover, transparent);

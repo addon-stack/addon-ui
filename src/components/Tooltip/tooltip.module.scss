@@ -20,6 +20,11 @@ $root: tooltip;
     animation-duration: var(--transition-speed-md);
     will-change: transform, opacity;
     box-shadow: var(--tooltip-box-shadow-offset, 0 0 5px 0) var(--tooltip-box-shadow-color, rgba(210, 208, 208, 0.47));
+    transition:
+      border-color var(--transition-speed-color),
+      box-shadow var(--transition-speed-color),
+      color var(--transition-speed-color),
+      background-color var(--transition-speed-color);
 
     &--trigger-width {
       width: var(--radix-tooltip-trigger-width);
@@ -75,6 +80,9 @@ $root: tooltip;
     stroke: var(--tooltip-border-color, var(--tooltip-bg-color, var(--bg-secondary-color)));
     stroke-width: var(--tooltip-border-width, 1px);
     margin-top: calc(var(--tooltip-border-width, 1px) * -1);
+    transition:
+      fill var(--transition-speed-color),
+      stroke var(--transition-speed-color);
   }
 }
 

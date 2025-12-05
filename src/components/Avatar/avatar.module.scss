@@ -17,6 +17,9 @@ $root: avatar;
   border-style: var(--avatar-border-style);
   font-size: var(--avatar-font-size, 18px);
   font-weight: var(--avatar-font-weight, 500);
+  transition:
+    border-color var(--transition-speed-color),
+    background-color var(--transition-speed-color);
 
   &--cursor-pointer {
     cursor: pointer;
@@ -73,10 +76,14 @@ $root: avatar;
     align-items: center;
     justify-content: center;
     color: var(--avatar-fallback-color);
-    line-height: var(--fallback-line-height, var(--line-height, 1 rem));
+    line-height: var(--fallback-line-height, var(--line-height, 1rem));
     background-color: var(--avatar-fallback-bg-color, var(--avatar-bg-color));
     border-width: var(--avatar-fallback-border-width, var(--avatar-border-width));
     border-color: var(--avatar-fallback-border-color, var(--avatar-border-color));
     border-style: var(--avatar-fallback-border-style, var(--avatar-border-style));
+    transition:
+      color var(--transition-speed-color),
+      border-color var(--transition-speed-color),
+      background-color var(--transition-speed-color);
   }
 }

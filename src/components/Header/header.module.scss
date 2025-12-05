@@ -8,6 +8,7 @@ $root: header;
   gap: var(--header-gap, 10px);
   padding: var(--header-padding, var(--side-padding-sm));
   padding-bottom: 0;
+  transition: background var(--transition-speed-color);
 
   &__wrap {
     display: flex;
@@ -22,6 +23,7 @@ $root: header;
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color var(--transition-speed-color);
   }
 
   &__title {
@@ -34,7 +36,6 @@ $root: header;
     font-weight: var(--header-title-font-weight, 700);
     line-height: var(--header-title-line-height, 120%);
     will-change: color;
-    transition: color var(--header-title-transition-speed, var(--transition-speed-md));
 
     .#{$root}--center & {
       justify-content: center;

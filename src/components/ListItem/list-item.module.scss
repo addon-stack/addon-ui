@@ -24,6 +24,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transition: color var(--transition-speed-color);
   }
   &__primary {
     color: var(--list-item-primary-color, var(--text-primary-color));
@@ -37,5 +38,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color var(--transition-speed-color);
   }
 }

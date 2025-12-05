@@ -14,9 +14,9 @@ $root: text-field;
   padding: var(--text-field-padding, 8px 12px);
   border-radius: var(--text-field-border-radius, 8px);
   transition:
-    border-color var(--transition-speed-sm),
-    box-shadow var(--transition-speed-sm),
-    background var(--transition-speed-sm);
+    border-color var(--transition-speed-color),
+    box-shadow var(--transition-speed-color),
+    background var(--transition-speed-color);
 
   @include dir.rtl {
     flex-direction: row-reverse;
@@ -42,6 +42,7 @@ $root: text-field;
     border: none;
     outline: none;
     background: transparent;
+    transition: color var(--transition-speed-color);
 
     &:focus {
       outline: none;
@@ -52,6 +53,13 @@ $root: text-field;
 
     &::placeholder {
       color: var(--text-field-placeholder-color, var(--text-secondary-color));
+      transition: color var(--transition-speed-color);
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 

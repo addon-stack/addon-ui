@@ -13,6 +13,7 @@ $root: toast;
   background-color: var(--toast-bg-color, var(--bg-secondary-color));
   border-radius: var(--toast-border-radius, 10px);
   padding: var(--toast-padding, var(--side-padding-xs));
+  transition: background-color var(--transition-speed-color);
 
   &[data-state="open"] {
     &.#{$root}--opacity-animation-in {
@@ -121,6 +122,8 @@ $root: toast;
 
   &__title,
   &__description {
+    transition: color var(--transition-speed-color);
+
     .#{$root}--error-color & {
       color: var(--toast-error-text-color, white);
     }

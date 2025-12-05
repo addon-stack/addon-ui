@@ -6,6 +6,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color var(--transition-speed-color);
 
   &--middle {
     text-overflow: clip;
@@ -15,7 +16,6 @@
     @include theme.rtl() {
       padding-right: 0;
       padding-left: var(--truncate-around-space, 8px);
-
     }
   }
 }

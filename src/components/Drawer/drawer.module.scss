@@ -9,6 +9,7 @@ $root: drawer;
     padding: var(--drawer-padding, 0);
     box-shadow: var(--drawer-box-shadow, 0 0 4px rgba(0, 0, 0, 0.5));
     background-color: var(--drawer-bg-color, var(--bg-secondary-color));
+    transition: background-color var(--transition-speed-color);
 
     &[data-state="open"] {
       &.#{$root}-content--left-side {

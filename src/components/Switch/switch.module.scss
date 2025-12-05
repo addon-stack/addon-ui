@@ -30,7 +30,7 @@ $root: switch;
   border-radius: var(--switch-border-radius, 9999px);
   background: var(--switch-bg-color, #bbb);
   will-change: background;
-  transition: background var(--transition-speed-sm);
+  transition: background var(--transition-speed-color);
 
   &[data-state="checked"] {
     background-color: var(--switch-cheked-bg-color, var(--primary-color));
@@ -50,7 +50,9 @@ $root: switch;
     background-color: var(--switch-thumb-bg-color, white);
     border-radius: var(--switch-border-radius, 9999px);
     will-change: transform;
-    transition: transform var(--transition-speed-sm) ease-in-out;
+    transition:
+      transform var(--transition-speed-sm) ease-in-out,
+      background-color var(--transition-speed-color);
 
     @include dir.rtl {
       margin-right: calc(#{switch-width()} / 2);

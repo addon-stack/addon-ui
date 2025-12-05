@@ -13,6 +13,9 @@ $root: tag;
   border-radius: var(--tag-border-radius, 999px);
   color: var(--tag-color, var(--text-secondary-color));
   background: var(--tag-bg-color, var(--bg-secondary-color));
+  transition:
+    background var(--transition-speed-color),
+    color var(--transition-speed-color);
 
   &--clickable {
     cursor: pointer;

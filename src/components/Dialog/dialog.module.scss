@@ -23,10 +23,10 @@ $root: dialog;
     position: fixed;
     z-index: 9999;
     transition:
-      background-color var(--transition-speed-sm),
+      background-color var(--transition-speed-color),
       transform var(--transition-speed-sm),
       opacity var(--transition-speed-sm),
-      color var(--transition-speed-sm);
+      color var(--transition-speed-color);
     animation-timing-function: ease-in-out;
   }
 

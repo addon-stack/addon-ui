@@ -122,8 +122,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   will-change: background-color, color;
   transition:
-    background-color var(--transition-speed-md),
-    border-color var(--transition-speed-md),
-    background var(--transition-speed-md),
-    color var(--transition-speed-md);
+    color var(--transition-speed-color),
+    background-color var(--transition-speed-color),
+    border-color var(--transition-speed-color);
 }
