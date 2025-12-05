@@ -11,8 +11,8 @@ const meta: Meta<TruncateListProps> = {
     tags: ["autodocs"],
     argTypes: {
         flushImmediately: {
-            control: {type: 'boolean'},
-            description: 'test'
+            control: {type: "boolean"},
+            description: "test",
         },
     },
 };
@@ -23,21 +23,21 @@ export const TruncateList: StoryObj<TruncateListProps> = {
     args: {
         maxRows: 1,
         maxVisibleItems: 10,
-        flushImmediately: true
+        flushImmediately: true,
     },
 
     render: ({...props}) => {
         return (
-            <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+            <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
                 <span>items + renderItem</span>
                 <div
                     style={{
-                        resize: 'horizontal',
-                        overflow: 'auto',
-                        border: '1px solid #ccc',
-                        padding: '15px 10px',
-                        minWidth: '100px',
-                        maxWidth: '500px',
+                        resize: "horizontal",
+                        overflow: "auto",
+                        border: "1px solid #ccc",
+                        padding: "15px 10px",
+                        minWidth: "100px",
+                        maxWidth: "500px",
                     }}
                 >
                     <TruncateListComponent
@@ -46,21 +46,19 @@ export const TruncateList: StoryObj<TruncateListProps> = {
                         {...props}
                     />
                 </div>
-                <br/>
+                <br />
                 <span>children</span>
                 <div
                     style={{
-                        resize: 'horizontal',
-                        overflow: 'auto',
-                        border: '1px solid #ccc',
-                        padding: '15px 10px',
-                        minWidth: '100px',
-                        maxWidth: '500px',
+                        resize: "horizontal",
+                        overflow: "auto",
+                        border: "1px solid #ccc",
+                        padding: "15px 10px",
+                        minWidth: "100px",
+                        maxWidth: "500px",
                     }}
                 >
-                    <TruncateListComponent
-                        {...props}
-                    >
+                    <TruncateListComponent {...props}>
                         <Tag variant={TagVariant.Outlined}>One</Tag>
                         <Tag color={TagColor.Accent}>Two</Tag>
                         <Tag variant={TagVariant.Soft}>Three</Tag>
@@ -70,7 +68,5 @@ export const TruncateList: StoryObj<TruncateListProps> = {
                 </div>
             </div>
         );
-
-    }
+    },
 };
-

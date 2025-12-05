@@ -6,7 +6,7 @@ import React, {
     useImperativeHandle,
     useLayoutEffect,
     useRef,
-    useState
+    useState,
 } from "react";
 import classnames from "classnames";
 import _debounce from "lodash/debounce";
@@ -38,7 +38,7 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
     const indicatorRef = useRef<HTMLSpanElement | null>(null);
 
     const [mounted, setMounted] = useState(false);
-    const [modificators, setModificators] = useState<{ first?: boolean; last?: boolean }>({});
+    const [modificators, setModificators] = useState<{first?: boolean; last?: boolean}>({});
 
     useImperativeHandle(ref, () => listRef.current!, []);
 
@@ -64,10 +64,7 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
         });
     }, []);
 
-    const updateIndicator = useCallback(
-        _debounce(updateIndicatorImmediate, 50),
-        [updateIndicatorImmediate]
-    );
+    const updateIndicator = useCallback(_debounce(updateIndicatorImmediate, 50), [updateIndicatorImmediate]);
 
     useLayoutEffect(() => {
         updateIndicatorImmediate();
@@ -78,7 +75,7 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
         const mutationObserver = new MutationObserver(updateIndicator);
 
         if (listRef.current) {
-            resizeObserver.observe(listRef.current)
+            resizeObserver.observe(listRef.current);
 
             mutationObserver.observe(listRef.current, {
                 attributes: true,
@@ -99,20 +96,32 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
     }, []);
 
     return (
-        <List ref={listRef} className={classnames(styles["tabs__list"], {
-            [styles["tabs__list--separator"]]: separator,
-        }, className)} {...other}>
+        <List
+            ref={listRef}
+            className={classnames(
+                styles["tabs__list"],
+                {
+                    [styles["tabs__list--separator"]]: separator,
+                },
+                className
+            )}
+            {...other}
+        >
             {children}
             {mounted && (
                 <span
                     ref={indicatorRef}
                     aria-hidden={!mounted || !indicator}
-                    className={classnames(styles["tabs__indicator"], {
-                        [styles["tabs__indicator--show"]]: indicator,
-                        [styles["tabs__indicator--rounded_edges"]]: roundedEdges,
-                        [styles["tabs__indicator--first"]]: modificators.first,
-                        [styles["tabs__indicator--last"]]: modificators.last,
-                    }, indicatorClassname)}
+                    className={classnames(
+                        styles["tabs__indicator"],
+                        {
+                            [styles["tabs__indicator--show"]]: indicator,
+                            [styles["tabs__indicator--rounded_edges"]]: roundedEdges,
+                            [styles["tabs__indicator--first"]]: modificators.first,
+                            [styles["tabs__indicator--last"]]: modificators.last,
+                        },
+                        indicatorClassname
+                    )}
                 />
             )}
         </List>

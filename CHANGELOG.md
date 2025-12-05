@@ -1,5 +1,88 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.6.1 (2025-11-28)
+
+
+### 🧹 Chores
+
+* **ci:** improve readability of `release-it` configuration ([4fb1117](https://github.com/addon-stack/addon-ui/commit/4fb1117c520fbbe1a2fcc89243b490c3967d62b4))
+
+
+
+
+### 🛠️ Refactoring
+
+* add RTL support for TextField and optimize resize handling in Truncate component ([4d24c19](https://github.com/addon-stack/addon-ui/commit/4d24c19249a2ecfccc5d0e1a5b8b4042afb7fcd3))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 3
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 1
+
+## 🚀 Release `addon-ui` v0.6.0 (2025-11-21)
+
+
+### ✨ Features
+
+* add Tabs component ([9a2ac2c](https://github.com/addon-stack/addon-ui/commit/9a2ac2cacb38f95f16c3033d314e803ae43b4341))
+
+
+* add Truncate component ([6a29150](https://github.com/addon-stack/addon-ui/commit/6a291501094a8c4711207f1d55fa7a749bfd0aaa))
+
+
+* add TruncateList component ([e293017](https://github.com/addon-stack/addon-ui/commit/e2930178906f0b757fdc28fa1ba4be87f2aaff54))
+
+
+* **ci:** enhance release-it config with release rules and bump determination logic ([b44da4a](https://github.com/addon-stack/addon-ui/commit/b44da4afb965f45deb9fe7f6a62d3b81f2cfc1f5))
+
+
+
+
+### 🧹 Chores
+
+* cleanup unused file ([dce714a](https://github.com/addon-stack/addon-ui/commit/dce714a57be517b3fca859571da9886fcf2e6ab2))
+
+
+* **deps:** bump dependencies in `package-lock.json` to latest versions ([47b1a28](https://github.com/addon-stack/addon-ui/commit/47b1a28f94ba249280675cec197e7cb8359cefd4))
+
+
+* sync package-lock.json ([385dbc5](https://github.com/addon-stack/addon-ui/commit/385dbc51424bdc5663fdb93866628c2e6d6602e3))
+
+
+* update package.json ([72a3cde](https://github.com/addon-stack/addon-ui/commit/72a3cdeeb26611a9ffbf9daedd5f18f423b139a3))
+
+
+
+
+### 🛠️ Refactoring
+
+* add type casting for OverflowList props in TruncateList component ([3e722d0](https://github.com/addon-stack/addon-ui/commit/3e722d078191fef3bd4c8666733dc35dc005856c))
+
+
+* apply consistent formatting and improve code readability ([65f7684](https://github.com/addon-stack/addon-ui/commit/65f7684183fede0e872dfc6d84842d83b398caf0))
+
+
+* fix eslint-related code issues ([ea31327](https://github.com/addon-stack/addon-ui/commit/ea31327c8a9053da0884d3d7ca4e3ce5393234d8))
+
+
+* improve components styles and internal logic ([3a95072](https://github.com/addon-stack/addon-ui/commit/3a95072c093b128746ab4cec40972023e0fe6170))
+
+
+* update styles for Avatar, List, ListItem, ScrollArea, Tag ([9f9e0c3](https://github.com/addon-stack/addon-ui/commit/9f9e0c335f4ebad0aca4ec010a8f8b8a738c47af))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 10
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 6
+
 ## 🚀 Release `addon-ui` v0.5.0 (2025-10-17)
 
 

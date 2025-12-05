@@ -7,7 +7,13 @@ import AvatarComponent from "./Avatar";
 import {AvatarRadius, AvatarSize} from "./types";
 
 const sizes: (AvatarSize | "default")[] = [AvatarSize.Small, "default", AvatarSize.Medium, AvatarSize.Large];
-const radius: (AvatarRadius | "default")[] = [AvatarRadius.None, AvatarRadius.Small, AvatarRadius.Medium, AvatarRadius.Large, "default"];
+const radius: (AvatarRadius | "default")[] = [
+    AvatarRadius.None,
+    AvatarRadius.Small,
+    AvatarRadius.Medium,
+    AvatarRadius.Large,
+    "default",
+];
 
 const meta: Meta<typeof AvatarComponent> = {
     title: "Components/Avatar",

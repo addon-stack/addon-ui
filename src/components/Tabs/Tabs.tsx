@@ -6,23 +6,22 @@ import {useComponentProps} from "../../providers";
 
 import styles from "./tabs.module.scss";
 
-export interface TabsProps extends Omit<TabsRadixProps, 'orientation'> {
-    reverse?: boolean
+export interface TabsProps extends Omit<TabsRadixProps, "orientation"> {
+    reverse?: boolean;
 }
 const Tabs: ForwardRefRenderFunction<HTMLDivElement, TabsProps> = (props, ref) => {
-    const {
-        reverse,
-        className,
-        children,
-        ...other
-    } = {...useComponentProps("tabs"), ...props};
+    const {reverse, className, children, ...other} = {...useComponentProps("tabs"), ...props};
 
     return (
         <Root
             ref={ref}
-            className={classnames(styles["tabs"], {
-                [styles["tabs--reverse"]]: reverse,
-            },className)}
+            className={classnames(
+                styles["tabs"],
+                {
+                    [styles["tabs--reverse"]]: reverse,
+                },
+                className
+            )}
             {...other}
         >
             {children}
