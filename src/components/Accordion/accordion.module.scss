@@ -1,0 +1,58 @@
+$root: accordion;
+
+.#{$root} {
+  &-item {
+  }
+
+  &-header {
+    position: relative;
+    padding: var(--accordion-header-pading);
+    display: flex;
+    align-items: center;
+    background-color: var(--accordion-header-bg-color, var(--bg-primary-color));
+    will-change: background-color;
+    transition: background-color var(--transition-speed-color);
+
+    &:hover {
+      background: var(--accordion-header-hover-bg-color);
+    }
+  }
+
+  &-trigger {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &-content {
+    background-color: var(--accordion-content-bg-color);
+    will-change: background-color;
+    transition: background-color var(--transition-speed-color);
+
+    &[data-state="open"] {
+      animation: slideDown var(--accordion-transition-animation, var(--transition-speed-sm)) ease-in-out;
+    }
+
+    &[data-state="closed"] {
+      animation: slideUp var(--accordion-transition-animation, var(--transition-speed-sm)) ease-in-out;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

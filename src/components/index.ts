@@ -1,3 +1,4 @@
+export * from "./Accordion";
 export * from "./Avatar";
 export * from "./BaseButton";
 export * from "./Button";
