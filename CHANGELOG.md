@@ -1,5 +1,62 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.7.0 (2025-12-06)
+
+
+### ✨ Features
+
+* add Accordion component and its related stories, styles, and subcomponents ([41d13ad](https://github.com/addon-stack/addon-ui/commit/41d13adc5dd6cccf2cdf275299afadd7c2ac6380))
+
+
+
+
+### 📝 Documentation
+
+* **accordion:** add comprehensive documentation for Accordion component ([c95e022](https://github.com/addon-stack/addon-ui/commit/c95e0222daabeb190f4066dea0f70987e86b4f9e))
+
+
+* **readme:** update component list with new documentation links ([3fc2cc9](https://github.com/addon-stack/addon-ui/commit/3fc2cc90e87bfe7954fc82b61727cc512afc09bf))
+
+
+* **tabs:** add comprehensive documentation for Tabs component ([de9c7b6](https://github.com/addon-stack/addon-ui/commit/de9c7b68816a7588b21fc22a018b163b8c73404d))
+
+
+* **tooltip:** add comprehensive documentation for Tooltip component ([da3eb0d](https://github.com/addon-stack/addon-ui/commit/da3eb0d6ff94dda5774073af9825a1141f950278))
+
+
+* **truncate:** add comprehensive documentation for Truncate component ([73beb14](https://github.com/addon-stack/addon-ui/commit/73beb14267562a7d3ac9c55a3f5f8ff707a9e1eb))
+
+
+* **truncatelist:** add comprehensive documentation for TruncateList component ([cead80e](https://github.com/addon-stack/addon-ui/commit/cead80efe3c08d4be856096806a3aff85b26daea))
+
+
+* update documentation with component-scoped speed variables ([52e799d](https://github.com/addon-stack/addon-ui/commit/52e799d55a6b12b5f8a8d9bdafc7b2492b128828))
+
+
+
+
+### 🛠️ Refactoring
+
+* adjust debounce logic in TabsList to improve consistency ([00aa675](https://github.com/addon-stack/addon-ui/commit/00aa67572e20957c18c6a0d2260b857695cc8523))
+
+
+* improve consistent formatting in components and styles ([9fbfc0e](https://github.com/addon-stack/addon-ui/commit/9fbfc0e8133ce38cfdfeabe2863eb6957ca897e0))
+
+
+* replace `transition-speed-*` variables with scoped `speed-*` variables across styles ([1f45a58](https://github.com/addon-stack/addon-ui/commit/1f45a58df14b269873c1175c16377979770ce4ce))
+
+
+* replace transition-speed-sm with transition-speed-color across styles ([08860da](https://github.com/addon-stack/addon-ui/commit/08860da0f9f189906ed681dbf0fb29f18e826d0e))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 10
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 5
+
 ## 🚀 Release `addon-ui` v0.6.1 (2025-11-28)
 
 
