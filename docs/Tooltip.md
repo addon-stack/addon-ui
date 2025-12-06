@@ -73,10 +73,17 @@ Only variables actually referenced in `src/components/Tooltip/tooltip.module.scs
 | `--tooltip-box-shadow-color`        | `var(--tooltip-box-shadow-color, rgba(210, 208, 208, 0.47))`                      |
 | `--tooltip-slide-distance`          | `var(--tooltip-slide-distance, 2px)`                                              |
 | `--tooltip-arrow-box-shadow-offset` | `var(--tooltip-arrow-box-shadow-offset, 0 1px 4px 2px)`                           |
+| `--tooltip-speed-animation`         | `var(--tooltip-speed-animation, var(--speed-md))`                                 |
+| `--tooltip-speed-border-color`      | `var(--tooltip-speed-border-color, var(--speed-color))`                           |
+| `--tooltip-speed-box-shadow`        | `var(--tooltip-speed-box-shadow, var(--speed-color))`                             |
+| `--tooltip-speed-color`             | `var(--tooltip-speed-color, var(--speed-color))`                                  |
+| `--tooltip-speed-bg`                | `var(--tooltip-speed-bg, var(--speed-color))`                                     |
+| `--tooltip-speed-fill`              | `var(--tooltip-speed-fill, var(--speed-color))`                                   |
+| `--tooltip-speed-stroke`            | `var(--tooltip-speed-stroke, var(--speed-color))`                                 |
 
 Notes:
 
-- Animations use `--transition-speed-md`.
+- Animation duration uses the component-scoped `--tooltip-speed-animation` with fallback to the global `--speed-md`.
 - When `matchTriggerWidth` is enabled, the modifier uses `var(--radix-tooltip-trigger-width)` to match the trigger width.
 
 ---

@@ -111,10 +111,17 @@ Only variables actually referenced in `src/components/Tabs/tabs.module.scss` are
 | `--tabs-indicator-size`                | `var(--tabs-indicator-size, 4px)`                                 |
 | `--tabs-indicator-color`               | `var(--tabs-indicator-color, var(--primary-color))`               |
 | `--tabs-indicator-radius`              | `var(--tabs-indicator-radius, 10px)`                              |
+| `--tabs-speed-border-color`            | `var(--tabs-speed-border-color, var(--speed-color))`              |
+| `--tabs-speed-color`                   | `var(--tabs-speed-color, var(--speed-color))`                     |
+| `--tabs-speed-font-weight`             | `var(--tabs-speed-font-weight, var(--speed-sm))`                  |
+| `--tabs-speed-bg`                      | `var(--tabs-speed-bg, var(--speed-color))`                        |
+| `--tabs-speed-opacity`                 | `var(--tabs-speed-opacity, var(--speed-sm))`                      |
+| `--tabs-speed-left`                    | `var(--tabs-speed-left, var(--speed-sm))`                         |
+| `--tabs-speed-width`                   | `var(--tabs-speed-width, var(--speed-sm))`                        |
 
 Notes:
 
-- Animations use `--transition-speed-sm`.
+- Transitions use component-scoped speed variables (`--tabs-speed-*`) with fallbacks to global tokens like `--speed-sm` and `--speed-color`.
 
 ---
 

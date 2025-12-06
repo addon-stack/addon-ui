@@ -82,7 +82,7 @@ Only variables actually referenced in `src/components/Odometer/odometer.module.s
 Notes:
 
 - The component sets `--speed` inline based on the `duration` prop: `style={{"--speed": `${duration}ms`}}`.
-- Other theme tokens used in fallbacks (like `--text-primary-color`, `--font-family`, `--transition-speed-sm`) should be defined in your theme.
+- Other theme tokens used in fallbacks (like `--text-primary-color`, `--font-family`) should be defined in your theme. Global timing tokens are now `--speed-*` (e.g., `--speed-sm`, `--speed-md`).
 
 ### Theming and global configuration
 

@@ -110,25 +110,28 @@ https://www.radix-ui.com/primitives/docs/components/toast
 
 Only variables actually referenced in `src/components/Toast/toast.module.scss` are listed, with their exact fallback chains. If a variable has no explicit fallback in the stylesheet, it is marked as “none (define in theme)”. Variables starting with `--radix-toast-*` are provided by Radix UI at runtime.
 
-| Variable                     | Fallback chain                                              |
-| ---------------------------- | ----------------------------------------------------------- |
-| `--toast-gap`                | `var(--toast-gap, 15px)`                                    |
-| `--toast-bg-color`           | `var(--toast-bg-color, var(--bg-secondary-color))`          |
-| `--toast-border-radius`      | `var(--toast-border-radius, 10px)`                          |
-| `--toast-padding`            | `var(--toast-padding, var(--side-padding-xs))`              |
-| `--toast-transition-speed`   | `var(--toast-transition-speed, var(--transition-speed-md))` |
-| `--radix-toast-swipe-move-x` | `var(--radix-toast-swipe-move-x)` (provided by Radix)       |
-| `--radix-toast-swipe-move-y` | `var(--radix-toast-swipe-move-y)` (provided by Radix)       |
-| `--radix-toast-swipe-end-x`  | `var(--radix-toast-swipe-end-x)` (provided by Radix)        |
-| `--radix-toast-swipe-end-y`  | `var(--radix-toast-swipe-end-y)` (provided by Radix)        |
-| `--toast-error-bg-color`     | `var(--toast-error-bg-color, var(--error-color))`           |
-| `--toast-success-bg-color`   | `var(--toast-success-bg-color, var(--success-color))`       |
-| `--toast-error-text-color`   | `var(--toast-error-text-color, white)`                      |
-| `--toast-success-text-color` | `var(--toast-success-text-color, white)`                    |
-| `--toast-close-offset`       | `var(--toast-close-offset, 5px)`                            |
-| `--toast-viewport-gap`       | `var(--toast-viewport-gap, 10px)`                           |
-| `--toast-width`              | `var(--toast-width, 300px)`                                 |
-| `--toast-viewport-padding`   | `var(--toast-viewport-padding, var(--side-padding-xs))`     |
+| Variable                     | Fallback chain                                          |
+| ---------------------------- | ------------------------------------------------------- |
+| `--toast-gap`                | `var(--toast-gap, 15px)`                                |
+| `--toast-bg-color`           | `var(--toast-bg-color, var(--bg-secondary-color))`      |
+| `--toast-border-radius`      | `var(--toast-border-radius, 10px)`                      |
+| `--toast-padding`            | `var(--toast-padding, var(--side-padding-xs))`          |
+| `--toast-speed-animation`    | `var(--toast-speed-animation, var(--speed-md))`         |
+| `--toast-speed-transform`    | `var(--toast-speed-transform, var(--speed-sm))`         |
+| `--toast-speed-bg`           | `var(--toast-speed-bg, var(--speed-color))`             |
+| `--toast-speed-color`        | `var(--toast-speed-color, var(--speed-color))`          |
+| `--radix-toast-swipe-move-x` | `var(--radix-toast-swipe-move-x)` (provided by Radix)   |
+| `--radix-toast-swipe-move-y` | `var(--radix-toast-swipe-move-y)` (provided by Radix)   |
+| `--radix-toast-swipe-end-x`  | `var(--radix-toast-swipe-end-x)` (provided by Radix)    |
+| `--radix-toast-swipe-end-y`  | `var(--radix-toast-swipe-end-y)` (provided by Radix)    |
+| `--toast-error-bg-color`     | `var(--toast-error-bg-color, var(--error-color))`       |
+| `--toast-success-bg-color`   | `var(--toast-success-bg-color, var(--success-color))`   |
+| `--toast-error-text-color`   | `var(--toast-error-text-color, white)`                  |
+| `--toast-success-text-color` | `var(--toast-success-text-color, white)`                |
+| `--toast-close-offset`       | `var(--toast-close-offset, 5px)`                        |
+| `--toast-viewport-gap`       | `var(--toast-viewport-gap, 10px)`                       |
+| `--toast-width`              | `var(--toast-width, 300px)`                             |
+| `--toast-viewport-padding`   | `var(--toast-viewport-padding, var(--side-padding-xs))` |
 
 Notes:
 

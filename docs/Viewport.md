@@ -87,20 +87,26 @@ useViewport(): {
 
 Only variables actually referenced in `src/components/Viewport/viewport.module.scss` are listed, with their exact fallback chains. If a variable has no explicit fallback in the stylesheet, it is marked as “none (define in theme)”.
 
-| Variable                | Fallback chain                      |
-| ----------------------- | ----------------------------------- |
-| `--viewport-min-width`  | `var(--viewport-min-width)` (none)  |
-| `--viewport-max-width`  | `var(--viewport-max-width)` (none)  |
-| `--viewport-min-height` | `var(--viewport-min-height)` (none) |
-| `--viewport-max-height` | `var(--viewport-max-height)` (none) |
-| `--viewport-width`      | `var(--viewport-width)` (none)      |
-| `--viewport-height`     | `var(--viewport-height)` (none)     |
+| Variable                      | Fallback chain                                      |
+| ----------------------------- | --------------------------------------------------- |
+| `--viewport-min-width`        | `var(--viewport-min-width)` (none)                  |
+| `--viewport-max-width`        | `var(--viewport-max-width)` (none)                  |
+| `--viewport-min-height`       | `var(--viewport-min-height)` (none)                 |
+| `--viewport-max-height`       | `var(--viewport-max-height)` (none)                 |
+| `--viewport-width`            | `var(--viewport-width)` (none)                      |
+| `--viewport-height`           | `var(--viewport-height)` (none)                     |
+| `--viewport-speed-height`     | `var(--viewport-speed-height, var(--speed-md))`     |
+| `--viewport-speed-width`      | `var(--viewport-speed-width, var(--speed-md))`      |
+| `--viewport-speed-min-height` | `var(--viewport-speed-min-height, var(--speed-md))` |
+| `--viewport-speed-min-width`  | `var(--viewport-speed-min-width, var(--speed-md))`  |
+| `--viewport-speed-max-height` | `var(--viewport-speed-max-height, var(--speed-md))` |
+| `--viewport-speed-max-width`  | `var(--viewport-speed-max-width, var(--speed-md))`  |
 
 Notes:
 
 - In the `--expanded` modifier, the container sets `min-width` to `--viewport-max-width` and `min-height` to `--viewport-max-height`.
 - In the `--fixed` modifier, the container sets `width`/`height` and their corresponding min/max to `--viewport-width`/`--viewport-height`.
-- Animation durations for size transitions are governed by the theme token `--transition-speed-md` (not a component variable).
+- Size transition durations use component-scoped `--viewport-speed-*` variables with fallbacks to the global `--speed-md`.
 
 ### Accessibility (A11y)
 

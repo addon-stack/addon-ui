@@ -64,18 +64,20 @@ Only variables actually referenced in `src/components/Switch/switch.module.scss`
 | `--switch-height`           | `var(--switch-height, 22px)`                          |
 | `--switch-border-radius`    | `var(--switch-border-radius, 9999px)`                 |
 | `--switch-bg-color`         | `var(--switch-bg-color, #bbb)`                        |
-| `--transition-speed-sm`     | `var(--transition-speed-sm)` (none)                   |
 | `--switch-cheked-bg-color`  | `var(--switch-cheked-bg-color, var(--primary-color))` |
 | `--primary-color`           | `var(--primary-color)` (none)                         |
 | `--switch-disabled-opacity` | `var(--switch-disabled-opacity, 0.6)`                 |
 | `--switch-thumb-width`      | `var(--switch-thumb-width, 18px)`                     |
 | `--switch-thumb-height`     | `var(--switch-thumb-height, 18px)`                    |
 | `--switch-thumb-bg-color`   | `var(--switch-thumb-bg-color, white)`                 |
+| `--switch-speed-bg`         | `var(--switch-speed-bg, var(--speed-color))`          |
+| `--switch-speed-transform`  | `var(--switch-speed-transform, var(--speed-sm))`      |
 
 Notes:
 
 - The thumb transform distance is calculated from the width/height variables; adjusting `--switch-width`, `--switch-height`, `--switch-thumb-width`, and `--switch-thumb-height` will keep the motion consistent.
 - The variable name `--switch-cheked-bg-color` is intentionally spelled as in the stylesheet.
+- Transitions use component-scoped `--switch-speed-*` variables with fallbacks to global `--speed-*` tokens.
 
 ### Theming and global configuration
 

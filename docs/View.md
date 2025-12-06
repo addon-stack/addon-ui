@@ -56,6 +56,7 @@ Only variables actually referenced in `src/components/View/view.module.scss` are
 | `--view-header-title-font-family` | `var(--view-header-title-font-family, var(--font-family)), sans-serif`             |
 | `--view-header-separate-width`    | `var(--view-header-separate-width, 1px)`                                           |
 | `--view-header-separate-color`    | `var(--view-header-separate-color, var(--separator-color))`                        |
+| `--view-speed-border-color`       | `var(--view-speed-border-color, var(--speed-color))`                               |
 
 ### Theming and global configuration
 

@@ -112,8 +112,9 @@ From `src/components/View/view.module.scss`:
 | `--view-header-title-font-family` | `var(--view-header-title-font-family, var(--font-family)), sans-serif`             |
 | `--view-header-separate-width`    | `var(--view-header-separate-width, 1px)`                                           |
 | `--view-header-separate-color`    | `var(--view-header-separate-color, var(--separator-color))`                        |
+| `--view-speed-border-color`       | `var(--view-speed-border-color, var(--speed-color))`                               |
 
-Notes (View): The header’s separate line animates its border color using the theme transition speed token (`--transition-speed-sm`). Theme tokens like `--header-padding`, `--side-padding-sm`, `--text-primary-color`, `--font-family`, and `--separator-color` are fallbacks used by the component variables.
+Notes (View): The header’s separate line animates its border color using the component-scoped speed variable `--view-speed-border-color` (fallbacks to the global `--speed-color`). Theme tokens like `--header-padding`, `--side-padding-sm`, `--text-primary-color`, `--font-family`, and `--separator-color` are fallbacks used by the component variables.
 
 ### Theming and global configuration
 

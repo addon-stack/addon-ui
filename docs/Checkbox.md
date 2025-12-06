@@ -114,12 +114,14 @@ Only variables actually referenced in `src/components/Checkbox/checkbox.module.s
 | `--checkbox-size-lg`              | `var(--checkbox-size-lg, 22px)`                          |
 | `--checkbox-border-radius-sm`     | `var(--checkbox-border-radius-sm, 2px)`                  |
 | `--checkbox-border-radius-lg`     | `var(--checkbox-border-radius-lg, 6px)`                  |
+| `--checkbox-speed-bg`             | `var(--checkbox-speed-bg, var(--speed-color))`           |
+| `--checkbox-speed-color`          | `var(--checkbox-speed-color, var(--speed-color))`        |
 
 Notes:
 
 - `--checkbox-checked-bg-color` falls back to the theme color token `--primary-color`.
 - `--checkbox-soft-bg-color` falls back to `--secondary-color`.
-- `--transition-speed-sm` is expected from the theme (no local fallback).
+- Transitions use component-scoped `--checkbox-speed-*` variables with fallbacks to global `--speed-*` tokens.
 
 ### Theming and global configuration
 

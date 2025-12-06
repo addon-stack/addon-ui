@@ -79,15 +79,19 @@ https://www.radix-ui.com/primitives/docs/components/dialog
 
 Only variables actually referenced in `src/components/Dialog/dialog.module.scss` are listed, with their exact fallback chains. If a variable has no explicit fallback in the stylesheet, it is marked as “none (define in theme)”.
 
-| Variable                             | Fallback chain                                 |
-| ------------------------------------ | ---------------------------------------------- |
-| `--dialog-overlay-bg-color`          | `var(--dialog-overlay-bg-color, #111)`         |
-| `--dialog-animation-overlay-opacity` | `var(--dialog-animation-overlay-opacity, 0.9)` |
+| Variable                             | Fallback chain                                   |
+| ------------------------------------ | ------------------------------------------------ |
+| `--dialog-overlay-bg-color`          | `var(--dialog-overlay-bg-color, #111)`           |
+| `--dialog-animation-overlay-opacity` | `var(--dialog-animation-overlay-opacity, 0.9)`   |
+| `--dialog-speed-bg`                  | `var(--dialog-speed-bg, var(--speed-color))`     |
+| `--dialog-speed-transform`           | `var(--dialog-speed-transform, var(--speed-sm))` |
+| `--dialog-speed-opacity`             | `var(--dialog-speed-opacity, var(--speed-sm))`   |
+| `--dialog-speed-color`               | `var(--dialog-speed-color, var(--speed-color))`  |
 
 Notes:
 
 - `speed` prop controls inline `animation-duration` on overlay and content; it is not a CSS variable.
-- Transitions for the content use `--transition-speed-sm` from the theme.
+- Content transitions use component-scoped `--dialog-speed-*` variables with fallbacks to global `--speed-*` tokens.
 
 ### Theming and global configuration
 

@@ -48,13 +48,15 @@ Notes:
 
 Only variables actually referenced in `src/components/Truncate/truncate.module.scss` are listed, with their exact fallback chains.
 
-| Variable                  | Fallback chain                      |
-| ------------------------- | ----------------------------------- |
-| `--truncate-around-space` | `var(--truncate-around-space, 8px)` |
+| Variable                  | Fallback chain                                    |
+| ------------------------- | ------------------------------------------------- |
+| `--truncate-around-space` | `var(--truncate-around-space, 8px)`               |
+| `--truncate-speed-color`  | `var(--truncate-speed-color, var(--speed-color))` |
 
 Notes:
 
 - `--truncate-around-space` adds right (or left in RTL) inner padding when `middle` is enabled to ensure the separator remains visible.
+- Color transitions use the component-scoped `--truncate-speed-color` with a fallback to the global `--speed-color`.
 
 ---
 

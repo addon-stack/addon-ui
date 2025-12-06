@@ -94,6 +94,10 @@ Only variables actually referenced in `src/components/Modal/modal.module.scss` a
 | `--modal-border-radius-sm`        | Contextual defaults: `5px` (small), `15px` (medium), `20px` (large)   |
 | `--modal-close-offset`            | `var(--modal-close-offset, 5px)`                                      |
 | `--modal-animation-content-scale` | `var(--modal-animation-content-scale, 0.96)`                          |
+| `--modal-speed-bg`                | `var(--modal-speed-bg, var(--speed-color))`                           |
+| `--modal-speed-transform`         | `var(--modal-speed-transform, var(--speed-sm))`                       |
+| `--modal-speed-opacity`           | `var(--modal-speed-opacity, var(--speed-sm))`                         |
+| `--modal-speed-color`             | `var(--modal-speed-color, var(--speed-color))`                        |
 
 Notes:
 

@@ -81,6 +81,8 @@ Only variables actually referenced in `src/components/TruncateList/truncate-list
 | `--truncate-list-counter-padding`   | `var(--truncate-list-counter-padding, 0px 4px)`                    |
 | `--truncate-list-counter-color`     | `var(--truncate-list-counter-color, var(--text-secondary-color))`  |
 | `--truncate-list-counter-font-size` | `var(--truncate-list-counter-font-size, inherit)`                  |
+| `--truncate-list-speed-color`       | `var(--truncate-list-speed-color, var(--speed-color))`             |
+| `--truncate-list-speed-bg`          | `var(--truncate-list-speed-bg, var(--speed-color))`                |
 
 Notes:
 
