@@ -47,7 +47,8 @@
   &__secondary,
   &__left,
   &__right {
-    transition: color var(--list-item-speed-color, var(--speed-color)),
-    background var(--list-item-speed-bg, var(--speed-color));
+    transition:
+      color var(--list-item-speed-color, var(--speed-color)),
+      background var(--list-item-speed-bg, var(--speed-color));
   }
 }
