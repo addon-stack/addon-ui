@@ -1,5 +1,63 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.8.0 (2026-01-19)
+
+
+### ✨ Features
+
+* **Truncate:** add debounce functionality for improved performance on resize ([b7d7029](https://github.com/addon-stack/addon-ui/commit/b7d70291d16471ffccd02b4a5a0265bdfa37f0b6))
+
+
+* **Truncate:** add highlight functionality and improve layout in Truncate component ([ef550ab](https://github.com/addon-stack/addon-ui/commit/ef550ab9b032e7d50b695764ee6cb605bf7264ca))
+
+
+
+
+### 🐛 Bug Fixed
+
+* fix hooks usage and format code ([21fc601](https://github.com/addon-stack/addon-ui/commit/21fc6010791db3155dbc6c7262577e03436c1602))
+
+
+
+
+### 📝 Documentation
+
+* fix spacing inconsistencies in prop tables ([a121239](https://github.com/addon-stack/addon-ui/commit/a12123922cf19acf421f8aa852cfbb4c1528b737))
+
+
+
+
+### 🤖 CI
+
+* **release:** update `release-it` config and workflow for improved npm handling ([46ef514](https://github.com/addon-stack/addon-ui/commit/46ef51476a69830e1181419da3e56c55343b14ff))
+
+
+
+
+### 🧹 Chores
+
+* **deps:** update dependencies in `package.json` and `package-lock.json` ([7047c7f](https://github.com/addon-stack/addon-ui/commit/7047c7f59c26e4386ef3042a82b3888afc69fdcf))
+
+
+
+
+### 🛠️ Refactoring
+
+* **Highlight:** update class handling and extract highlight styles ([b1fbf25](https://github.com/addon-stack/addon-ui/commit/b1fbf256f85d3e06a4314f2221186ab35228c1ea))
+
+
+* improve styles for components - accordion, checkbox, modal, tabs ([305d4d7](https://github.com/addon-stack/addon-ui/commit/305d4d719e506b49bec22b8f2d407b1e27e8ab38))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 4
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 4
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 2
+
 ## 🚀 Release `addon-ui` v0.7.1 (2025-12-08)
 
 
