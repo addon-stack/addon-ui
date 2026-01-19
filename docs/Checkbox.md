@@ -52,7 +52,7 @@ Only the prop name, type, and default are listed below.
 | `size`               | `'small' \| 'medium' \| 'large'`                                                                                                        | —       |
 | `radius`             | `'small' \| 'large'`                                                                                                                    | —       |
 | `variant`            | `'classic' \| 'soft'`                                                                                                                   | —       |
-| `checkedIcon`        | `ReactElement`                                                                                                                          | `"✔"`  |
+| `checkedIcon`        | `ReactElement`                                                                                                                          | `"✔"`   |
 | `indeterminateIcon`  | `ReactElement`                                                                                                                          | `"―"`   |
 | Radix checkbox attrs | all `@radix-ui/react-checkbox` Root props (e.g., `checked`, `onCheckedChange`, `disabled`, `required`, `name`, `value`, `aria-*`, etc.) | —       |
 

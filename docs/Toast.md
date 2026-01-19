@@ -58,7 +58,7 @@ Only the prop name, type, and default are listed below.
 | `title`                | `ReactNode`                                                                                                                                   | —                |
 | `description`          | `ReactNode`                                                                                                                                   | —                |
 | `action`               | `ReactNode`                                                                                                                                   | —                |
-| `closeIcon`            | `ReactElement`                                                                                                                                | `'✖'`           |
+| `closeIcon`            | `ReactElement`                                                                                                                                | `'✖'`            |
 | `closeProps`           | `IconButtonProps`                                                                                                                             | —                |
 | `onClose`              | `() => void` (renders a close button when provided)                                                                                           | —                |
 | `fullWidth`            | `boolean`                                                                                                                                     | —                |

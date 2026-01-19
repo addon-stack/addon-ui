@@ -1,51 +1,55 @@
 $root: highlight;
 
 .#{$root} {
-  font-size: var(--highlight-font-size, inherit);
-  font-weight: var(--highlight-font-weight, inherit);
-  font-family: var(--highlight-font-family, inherit), sans-serif;
-  line-height: var(--highlight-line-height, var(--line-height, 1rem));
-  color: var(--highlight-color, #fff);
-  background-color: var(--highlight-bg-color, #ffd60a);
-  padding: var(--highlight-y-padding, 2px) var(--highlight-x-padding, 3px);
-  margin: 0 calc(-1 * var(--highlight-x-padding, 3px));
-  border-radius: var(--highlight-border-radius, 2px);
-  transition:
-    color var(--highlight-speed-color, var(--speed-color)),
-    background-color var(--highlight-speed-bg, var(--speed-color));
+  display: inline;
 
-  &--primary-color {
-    color: var(--highlight-primary-color, #fff);
-    background-color: var(--primary-color);
-  }
+  &-mark {
+    font-size: var(--highlight-font-size, inherit);
+    font-weight: var(--highlight-font-weight, inherit);
+    font-family: var(--highlight-font-family, inherit), sans-serif;
+    line-height: var(--highlight-line-height, var(--line-height, 1rem));
+    color: var(--highlight-color, #fff);
+    background-color: var(--highlight-bg-color, #ffd60a);
+    padding: var(--highlight-y-padding, 2px) var(--highlight-x-padding, 3px);
+    margin: 0 calc(-1 * var(--highlight-x-padding, 3px));
+    border-radius: var(--highlight-border-radius, 2px);
+    transition:
+      color var(--highlight-speed-color, var(--speed-color)),
+      background-color var(--highlight-speed-bg, var(--speed-color));
 
-  &--secondary-color {
-    color: var(--highlight-secondary-color, #fff);
-    background-color: var(--secondary-color);
-  }
-
-  &--accent-color {
-    color: var(--highlight-accent-color, #fff);
-    background-color: var(--accent-color);
-  }
-
-  &--active {
-    color: var(--highlight-active-color, var(--highlight-color, #fff));
-    background-color: var(--highlight-active-bg-color, #ff801f);
-
-    &.#{$root}--primary-color {
-      color: var(--highlight-active-primary-color, var(--highlight-primary-color, #fff));
-      background-color: color-mix(in srgb, black 40%, var(--primary-color));
+    .#{$root}--primary-color & {
+      color: var(--highlight-primary-color, #fff);
+      background-color: var(--primary-color);
     }
 
-    &.#{$root}--secondary-color {
-      color: var(--highlight-active-secondary-color, var(--highlight-secondary-color, #fff));
-      background-color: color-mix(in srgb, black 40%, var(--secondary-color));
+    .#{$root}--secondary-color & {
+      color: var(--highlight-secondary-color, #fff);
+      background-color: var(--secondary-color);
     }
 
-    &.#{$root}--accent-color {
-      color: var(--highlight-active-accent-color, var(--highlight-accent-color, #fff));
-      background-color: color-mix(in srgb, black 40%, var(--accent-color));
+    .#{$root}--accent-color & {
+      color: var(--highlight-accent-color, #fff);
+      background-color: var(--accent-color);
+    }
+
+    &--active {
+      color: var(--highlight-active-color, var(--highlight-color, #fff));
+      background-color: var(--highlight-active-bg-color, #ff801f);
+
+      .#{$root}--primary-color & {
+        color: var(--highlight-active-primary-color, var(--highlight-primary-color, #fff));
+        background-color: color-mix(in srgb, black 40%, var(--primary-color));
+      }
+
+      .#{$root}--secondary-color & {
+        color: var(--highlight-active-secondary-color, var(--highlight-secondary-color, #fff));
+        background-color: color-mix(in srgb, black 40%, var(--secondary-color));
+      }
+
+      .#{$root}--accent-color & {
+        color: var(--highlight-active-accent-color, var(--highlight-accent-color, #fff));
+        background-color: color-mix(in srgb, black 40%, var(--accent-color));
+      }
     }
   }
 }

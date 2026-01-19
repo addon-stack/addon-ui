@@ -39,7 +39,7 @@ export interface ComponentsProps {
     drawer?: DrawerProps;
     footer?: FooterProps;
     header?: Pick<HeaderProps, "alignCenter" | "before" | "after">;
-    highlight?: HighlightProps;
+    highlight?: Omit<HighlightProps, "textToHighlight">;
     icon?: Omit<IconProps, "name">;
     iconButton?: Pick<IconButtonProps, "variant" | "size" | "radius">;
     list?: ListProps;
