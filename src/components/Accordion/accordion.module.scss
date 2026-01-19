@@ -28,6 +28,7 @@ $root: accordion;
     background-color: var(--accordion-content-bg-color);
     will-change: background-color;
     transition: background-color var(--accordion-speed-bg, var(--speed-color));
+    overflow: hidden;
 
     &[data-state="open"] {
       animation: slideDown var(--accordion-speed-animation, var(--speed-sm)) ease-in-out;

@@ -1,12 +1,22 @@
 @use "../../styles/mixins" as theme;
 
 .truncate {
+  position: relative;
   display: block;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color var(--truncate-speed-color, var(--speed-color));
+
+  &__hidden {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   &--middle {
     text-overflow: clip;

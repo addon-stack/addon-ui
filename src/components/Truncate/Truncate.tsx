@@ -5,12 +5,16 @@ import React, {
     memo,
     useImperativeHandle,
     useLayoutEffect,
+    useMemo,
     useRef,
     useState,
 } from "react";
+import debounce from "debounce";
 import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
+
+import {Highlight, HighlightProps} from "../Highlight";
 
 import styles from "./truncate.module.scss";
 
@@ -18,6 +22,7 @@ export interface TruncateProps extends ComponentProps<"span"> {
     text?: string;
     middle?: boolean;
     separator?: string;
+    highlight?: Omit<HighlightProps, "textToHighlight">;
 }
 
 const trimMiddle = (el: HTMLElement, text: string, separator: string) => {
@@ -50,10 +55,21 @@ const trimMiddle = (el: HTMLElement, text: string, separator: string) => {
 };
 
 const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (props, ref) => {
-    const {text = "", middle, separator = "...", className, ...other} = {...useComponentProps("truncate"), ...props};
+    const {
+        text = "",
+        middle,
+        separator = "...",
+        className,
+        highlight,
+        ...other
+    } = {...useComponentProps("truncate"), ...props};
 
     const innerRef = useRef<HTMLSpanElement | null>(null);
     const [displayedText, setDisplayedText] = useState(text);
+
+    const finalText = useMemo(() => {
+        return middle ? displayedText : text;
+    }, [displayedText, text, middle]);
 
     useImperativeHandle(ref, () => innerRef.current!, []);
 
@@ -61,41 +77,26 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
         const el = innerRef.current;
         if (!el || !middle) return;
 
-        let animationFrameId: number;
         let observer: ResizeObserver | null = null;
 
-        const measureAndTrim = () => {
-            animationFrameId = requestAnimationFrame(() => {
-                const newText = trimMiddle(el, text, separator);
-                if (newText !== displayedText) {
-                    setDisplayedText(newText);
-                }
-            });
-        };
+        const measureAndTrim = debounce(() => {
+            setDisplayedText(trimMiddle(el, text, separator));
+        }, 150);
 
         measureAndTrim();
 
-        if ("ResizeObserver" in window) {
-            observer = new ResizeObserver(() => {
-                cancelAnimationFrame(animationFrameId);
-                measureAndTrim();
-            });
-            observer.observe(el);
-        }
+        observer = new ResizeObserver(() => measureAndTrim());
 
-        window.addEventListener("resize", measureAndTrim);
+        observer.observe(el);
 
         return () => {
-            window.removeEventListener("resize", measureAndTrim);
+            measureAndTrim.clear();
             observer?.disconnect();
-            cancelAnimationFrame(animationFrameId);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [text, separator, middle]);
 
     return (
         <span
-            ref={innerRef}
             className={classnames(
                 styles["truncate"],
                 {
@@ -105,7 +106,9 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
             )}
             {...other}
         >
-            {middle ? displayedText : text}
+            <span ref={innerRef} className={styles["truncate__hidden"]} />
+
+            {highlight ? <Highlight {...highlight} textToHighlight={finalText} /> : finalText}
         </span>
     );
 };
