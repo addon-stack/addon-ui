@@ -14,9 +14,20 @@ import {
 } from "./index";
 
 const items = [
-    {title: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern."},
-    {title: "Is it unstyled?", content: "Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern."},
-    {title: "Can it be animated?", content: "Yes! You can animate the Accordion with CSS. Yes. It adheres to the WAI-ARIA design pattern."},
+    {
+        title: "Is it accessible?",
+        content:
+            "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern.",
+    },
+    {
+        title: "Is it unstyled?",
+        content:
+            "Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern.",
+    },
+    {
+        title: "Can it be animated?",
+        content: "Yes! You can animate the Accordion with CSS. Yes. It adheres to the WAI-ARIA design pattern.",
+    },
 ];
 const meta: Meta<typeof AccordionComponent> = {
     title: "Components/Accordion",

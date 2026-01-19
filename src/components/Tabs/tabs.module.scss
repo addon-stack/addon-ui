@@ -20,8 +20,9 @@ $border-width: 1px;
     display: flex;
     justify-content: space-between;
     background-color: var(--tabs-list-bg-color);
-    transition: border-bottom-color var(--tabs-speed-border-color, var(--speed-color)),
-    background-color var(--tabs-speed-bg-list-color, var(--speed-color));
+    transition:
+      border-bottom-color var(--tabs-speed-border-color, var(--speed-color)),
+      background-color var(--tabs-speed-bg-list-color, var(--speed-color));
 
     @include theme.rtl() {
       & {

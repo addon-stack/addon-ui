@@ -21,7 +21,7 @@ export interface TruncateProps extends ComponentProps<"span"> {
     text?: string;
     middle?: boolean;
     separator?: string;
-    highlight?: Omit<HighlightProps, 'textToHighlight'>;
+    highlight?: Omit<HighlightProps, "textToHighlight">;
 }
 
 const trimMiddle = (el: HTMLElement, text: string, separator: string) => {
@@ -119,13 +119,9 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
             )}
             {...other}
         >
-            <span ref={innerRef} className={styles["truncate__hidden"]}/>
+            <span ref={innerRef} className={styles["truncate__hidden"]} />
 
-            {
-                highlight
-                    ? <Highlight {...highlight} textToHighlight={finalText}/>
-                    : finalText
-            }
+            {highlight ? <Highlight {...highlight} textToHighlight={finalText} /> : finalText}
         </span>
     );
 };
