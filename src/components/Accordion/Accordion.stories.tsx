@@ -14,9 +14,9 @@ import {
 } from "./index";
 
 const items = [
-    {title: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern."},
-    {title: "Is it unstyled?", content: "Yes. It's unstyled by default, giving you freedom over the look and feel."},
-    {title: "Can it be animated?", content: "Yes! You can animate the Accordion with CSS or JavaScript."},
+    {title: "Is it accessible?", content: "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern."},
+    {title: "Is it unstyled?", content: "Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern."},
+    {title: "Can it be animated?", content: "Yes! You can animate the Accordion with CSS. Yes. It adheres to the WAI-ARIA design pattern."},
 ];
 const meta: Meta<typeof AccordionComponent> = {
     title: "Components/Accordion",
@@ -54,10 +54,10 @@ export const Accordion: StoryObj<typeof AccordionComponent> = {
                 }}
             >
                 <Header title="Accordion Component" style={{paddingBottom: "10px"}} />
-                <AccordionComponent style={{marginBottom: "auto", overflow: "hidden"}} {...other}>
+                <AccordionComponent style={{flex: 1}} {...other}>
                     {items.map(({title, content}) => (
                         <AccordionItem key={title} value={title}>
-                            <AccordionHeader style={{justifyContent: "space-between"}}>
+                            <AccordionHeader>
                                 <AccordionTrigger>
                                     <div
                                         style={{

@@ -5,7 +5,7 @@ $root: checkbox;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 2px;
+  padding: var(--checkbox-padding, 2px);
   width: var(--checkbox-size, 18px);
   height: var(--checkbox-size, 18px);
   border-radius: var(--checkbox-border-radius, 4px);
