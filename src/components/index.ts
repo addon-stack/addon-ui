@@ -15,6 +15,7 @@ export * from "./ListItem";
 export * from "./Modal";
 export * from "./Odometer";
 export * from "./ScrollArea";
+export * from "./Select";
 export * from "./SvgSprite";
 export * from "./Switch";
 export * from "./Tabs";

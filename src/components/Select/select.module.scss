@@ -1,0 +1,150 @@
+@use "../../styles/mixins" as theme;
+
+$root: select;
+
+.#{$root} {
+  &__trigger {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: var(--select-trigger-color);
+    background-color: var(--select-trigger-bg-color, var(--bg-secondary-color));
+    box-shadow: var(--select-trigger-shadow-offset) var(--select-trigger-shadow-color);
+
+    border-width: var(--select-trigger-border-width, 1px);
+    border-style: var(--select-trigger-border-style, solid);
+    border-color: var(--select-trigger-border-color, var(--border-color));
+    border-radius: var(--select-trigger-border-radius, 10px);
+
+    font-size: var(--select-trigger-font-size, var(--select-font-size, 14px));
+    font-weight: var(--select-trigger-font-weight, 500);
+    padding: var(--select-trigger-padding, 8px 12px);
+    height: var(--select-trigger-height);
+    gap: var(--select-trigger-gap, 5px);
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--ellipsis > span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &:hover {
+      box-shadow: var(--select-trigger-shadow-offset-hover) var(--select-trigger-shadow-color);
+      border-width: var(--select-trigger-border-width-hover, var(--select-trigger-border-width, 1px));
+      border-color: var(--select-trigger-border-color-hover, var(--select-trigger-border-color, var(--border-color)));
+    }
+
+    &[data-disabled] {
+      color: var(--text-disabled-color);
+    }
+
+    &[data-placeholder] {
+      color: var(--text-disabled-color);
+    }
+
+    @include theme.rtl {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__content {
+    overflow: hidden;
+    background-color: var(--select-content-bg-color, var(--bg-primary-color));
+    border-radius: var(--select-content-border-radius, 8px);
+    box-shadow: var(--select-content-shadow-offset, 0 0 5px 0) var(--select-content-shadow-color, rgba(0, 0, 0, 0.25));
+    height: var(--select-content-height);
+    max-height: var(--select-content-max-height, var(--radix-select-content-available-height));
+
+    &--full-width {
+      width: var(--select-content-full-width, var(--radix-select-trigger-width));
+    }
+  }
+
+  &__viewport {
+    padding: var(--select-viewport-padding, 5px 0);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: var(--select-item-font-size, var(--select-font-size, 14px));
+    font-weight: var(--select-item-font-weight, 400);
+    color: var(--select-item-color, var(--text-primary-color));
+    background-color: var(--select-content-bg-color, --bg-primary-color);
+    border-radius: var(--select-item-border-radius);
+    height: var(--select-item-height);
+    padding: var(--select-item-padding, 10px);
+    user-select: none;
+
+    &__text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      @include theme.rtl {
+        text-align: end;
+      }
+    }
+
+    &__indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &[data-state="checked"] {
+      pointer-events: none;
+      font-weight: var(--select-item-checked-font-weight, 600);
+      color: var(--select-item-checked-color);
+      background-color: var(--select-item-checked-bg-color, var(--bg-secondary-color));
+    }
+
+    &[data-disabled] {
+      pointer-events: none;
+      opacity: var(--select-item-disabled-opacity, 0.7);
+      color: var(--select-item-disabled-color, var(--text-disabled-color));
+      background-color: var(--select-item-disabled-bg-color);
+    }
+
+    &[data-highlighted] {
+      outline: none;
+      color: var(--select-item-highlighted-color, var(--text-primary-color));
+      background-color: var(--select-item-highlighted-bg-color, var(--bg-secondary-color));
+    }
+
+    @include theme.rtl {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__scroll-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--select-scroll-btn-height, 25px);
+    color: var(--select-scroll-btn-color, var(--text-primary-color));
+    background-color: var(--select-scroll-btn-bg-color, var(--select-content-bg-color, var(--bg-primary-color)));
+    cursor: var(--select-scroll-btn-cursor, default);
+
+    &:hover {
+      background-color: var(--select-scroll-btn-hover-bg-color, var(--bg-secondary-color));
+    }
+  }
+}

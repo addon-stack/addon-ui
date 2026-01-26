@@ -14,6 +14,12 @@ import type {
     ModalProps,
     OdometerProps,
     ScrollAreaProps,
+    SelectProps,
+    SelectItemProps,
+    SelectIconProps,
+    SelectValueProps,
+    SelectContentProps,
+    SelectTriggerProps,
     SwitchProps,
     TabsProps,
     TabsContentProps,
@@ -47,6 +53,12 @@ export interface ComponentsProps {
     modal?: ModalProps;
     odometer?: Pick<OdometerProps, "auto" | "format" | "duration">;
     scrollArea?: ScrollAreaProps;
+    select?: SelectProps;
+    selectItem?: SelectItemProps;
+    selectIcon?: SelectIconProps;
+    selectValue?: SelectValueProps;
+    selectContent?: SelectContentProps;
+    selectTrigger?: SelectTriggerProps;
     switch?: SwitchProps;
     tabs?: TabsProps;
     tabsContent?: TabsContentProps;
