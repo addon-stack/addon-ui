@@ -1,5 +1,21 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.9.1 (2026-01-26)
+
+
+### 🤖 CI
+
+* **release:** specify npm registry in `release-it` configuration ([96d480e](https://github.com/addon-stack/addon-ui/commit/96d480e294171241256e9b8bbccb010d10f27583))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 1
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 1
+
 ## 🚀 Release `addon-ui` v0.9.0 (2026-01-26)
 
 
