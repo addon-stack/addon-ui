@@ -91,8 +91,8 @@ const TextField = forwardRef<TextFieldActions, TextFieldProps>((props, ref) => {
 
     const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
         event => {
-            onChange?.(event);
             setValue(event.currentTarget.value);
+            onChange?.(event);
         },
         [onChange]
     );

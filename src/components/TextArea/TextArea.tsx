@@ -59,8 +59,8 @@ const TextArea = forwardRef<TextAreaActions, TextAreaProps>((props, ref) => {
 
     const handleChange = useCallback<ChangeEventHandler<HTMLTextAreaElement>>(
         event => {
-            onChange?.(event);
             setValue(event.currentTarget.value);
+            onChange?.(event);
         },
         [onChange]
     );
