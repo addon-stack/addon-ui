@@ -1,5 +1,36 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.9.0 (2026-01-26)
+
+
+### ✨ Features
+
+* **Select:** add Select component and related subcomponents with styles ([edc98ef](https://github.com/addon-stack/addon-ui/commit/edc98ef66ba2ad1571c2d6d808f661082dee21f5))
+
+
+
+
+### 📝 Documentation
+
+* **Select:** add documentation for the Select component and its subcomponents ([eb4f35f](https://github.com/addon-stack/addon-ui/commit/eb4f35fb380cf92b31ce248148c9b0a269f3c12f))
+
+
+
+
+### 🧩 Other
+
+* fix(TextArea, TextField): ensure onChange is called after setting value ([e549319](https://github.com/addon-stack/addon-ui/commit/e54931977b530ec04d5cdd014a23242e56480a2e))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 2
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 2
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 1
+
 ## 🚀 Release `addon-ui` v0.8.0 (2026-01-19)
 
 
