@@ -8,7 +8,7 @@ import {useComponentProps} from "../../providers";
 
 import styles from "./select.module.scss";
 
-export {SelectValueProps};
+export {type SelectValueProps};
 
 const SelectValue: ForwardRefRenderFunction<HTMLSpanElement, SelectValueProps> = (props, ref) => {
     const {className, ...other} = {...useComponentProps("selectValue"), ...props};

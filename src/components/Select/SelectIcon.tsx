@@ -8,7 +8,7 @@ import {useComponentProps} from "../../providers";
 
 import styles from "./select.module.scss";
 
-export {SelectIconProps};
+export {type SelectIconProps};
 
 const SelectIcon: ForwardRefRenderFunction<HTMLSpanElement, SelectIconProps> = (props, ref) => {
     const {className, ...other} = {...useComponentProps("selectIcon"), ...props};

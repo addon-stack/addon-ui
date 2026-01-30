@@ -6,7 +6,7 @@ import {Root, SelectProps} from "@radix-ui/react-select";
 
 import {useComponentProps} from "../../providers";
 
-export {SelectProps};
+export {type SelectProps};
 
 const Select: FC<SelectProps> = props => {
     const {...other} = {...useComponentProps("select"), ...props};

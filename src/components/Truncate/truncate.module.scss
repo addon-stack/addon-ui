@@ -2,21 +2,15 @@
 
 .truncate {
   position: relative;
-  display: block;
-  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color var(--truncate-speed-color, var(--speed-color));
-
-  &__hidden {
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   &--middle {
     text-overflow: clip;
@@ -27,5 +21,17 @@
       padding-right: 0;
       padding-left: var(--truncate-around-space, 8px);
     }
+  }
+
+  &__hidden {
+    display: block;
+    height: 0;
+    visibility: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__content {
+    display: block;
   }
 }
