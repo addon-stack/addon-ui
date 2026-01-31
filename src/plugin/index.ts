@@ -1,6 +1,6 @@
 import path from "path";
 import {definePlugin} from "adnbn";
-import {Configuration as Rspack} from "@rspack/core";
+import {Configuration as Rspack, NormalModule} from "@rspack/core";
 import {RspackVirtualModulePlugin} from "rspack-plugin-virtual-module";
 
 import StyleBuilder from "./builder/StyleBuilder";
@@ -68,9 +68,9 @@ export default definePlugin((options: PluginOptions = {}) => {
                     splitChunks: {
                         cacheGroups: {
                             addonUI: {
-                                test: (module: any) => {
+                                test: module => {
                                     const resource =
-                                        module.resource ||
+                                        (module as NormalModule).resource ||
                                         (typeof module.nameForCondition === "function"
                                             ? module.nameForCondition()
                                             : "");
@@ -79,7 +79,6 @@ export default definePlugin((options: PluginOptions = {}) => {
                                         return false;
                                     }
 
-                                    // Обработка виртуальных модулей (конфиг и базовые стили)
                                     if (
                                         resource.includes("addon-ui-virtual") ||
                                         resource.includes("addon-ui-style.scss") ||
@@ -103,26 +102,49 @@ export default definePlugin((options: PluginOptions = {}) => {
                                         resource
                                     );
                                 },
-                                name(module: any) {
+                                name(module) {
                                     const resource =
-                                        module.resource ||
-                                        (typeof module.nameForCondition === "function"
+                                        (module as NormalModule).resource ||
+                                        ((typeof module.nameForCondition === "function"
                                             ? module.nameForCondition()
-                                            : "");
+                                            : "") as string);
+
+                                    const toKebabCase = (str: string) =>
+                                        str
+                                            .replace(/([a-z])([A-Z])/g, "$1-$2")
+                                            .replace(/[\s_]+/g, "-")
+                                            .toLowerCase();
+
+                                    const toUIChunk = (name: string) => `${toKebabCase(name)}.ui`;
 
                                     const extractName = (res: string) => {
-                                        if (!res) return null;
+                                        if (!res) {
+                                            return null;
+                                        }
 
                                         const match = res.match(/src[\\/]components[\\/]([^\\/]+)/);
 
                                         if (match && match[1] && !match[1].includes(".") && match[1] !== "index") {
-                                            const name = match[1].toLowerCase();
+                                            const componentName = match[1];
+                                            const normalized = componentName.toLowerCase();
 
-                                            if (["button", "basebutton", "iconbutton"].includes(name)) {
+                                            if (["button", "basebutton", "iconbutton"].includes(normalized)) {
                                                 return "button";
                                             }
 
-                                            return name;
+                                            if (["list", "listitem"].includes(normalized)) {
+                                                return "list";
+                                            }
+
+                                            if (["view", "viewdrawer", "viewmodal", "viewport"].includes(normalized)) {
+                                                return "view";
+                                            }
+
+                                            if (["svgsprite", "icon"].includes(normalized)) {
+                                                return "svg";
+                                            }
+
+                                            return componentName;
                                         }
 
                                         return null;
@@ -131,7 +153,7 @@ export default definePlugin((options: PluginOptions = {}) => {
                                     const directName = extractName(resource);
 
                                     if (directName) {
-                                        return `ui-${directName}`;
+                                        return toUIChunk(directName);
                                     }
 
                                     if (
@@ -140,7 +162,7 @@ export default definePlugin((options: PluginOptions = {}) => {
                                         resource.includes("addon-ui-config") ||
                                         /providers[\\/]ui[\\/]styles/.test(resource)
                                     ) {
-                                        return "ui-base";
+                                        return toUIChunk("common");
                                     }
 
                                     if (resource.includes("node_modules")) {
@@ -166,43 +188,44 @@ export default definePlugin((options: PluginOptions = {}) => {
                                                 ];
 
                                                 if (mainRadixComponents.includes(radixName)) {
-                                                    return `ui-${radixName.replace(/-/g, "")}`;
+                                                    return toUIChunk(radixName);
                                                 }
                                             }
 
-                                            return "ui-common";
+                                            return toUIChunk("common");
                                         }
 
                                         if (resource.includes("odometer")) {
-                                            return "ui-odometer";
+                                            return toUIChunk("odometer");
                                         }
 
                                         if (resource.includes("autosize")) {
-                                            return "ui-textarea";
+                                            return toUIChunk("text-area");
                                         }
 
                                         if (resource.includes("react-highlight-words")) {
-                                            return "ui-highlight";
+                                            return toUIChunk("highlight");
                                         }
 
                                         if (resource.includes("react-responsive-overflow-list")) {
-                                            return "ui-truncatelist";
+                                            return toUIChunk("truncate-list");
                                         }
                                     }
 
-                                    let issuer = module.issuer;
+                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                    let issuer = (module as any).issuer;
 
                                     while (issuer) {
                                         const nameFromIssuer = extractName(issuer.resource || "");
 
                                         if (nameFromIssuer) {
-                                            return `ui-${nameFromIssuer}`;
+                                            return toUIChunk(nameFromIssuer);
                                         }
 
                                         issuer = issuer.issuer;
                                     }
 
-                                    return "ui-common";
+                                    return toUIChunk("common");
                                 },
                                 chunks: "all",
                                 enforce: true,
