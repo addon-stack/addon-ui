@@ -79,6 +79,16 @@ export default definePlugin((options: PluginOptions = {}) => {
                                         return false;
                                     }
 
+                                    // Обработка виртуальных модулей (конфиг и базовые стили)
+                                    if (
+                                        resource.includes("addon-ui-virtual") ||
+                                        resource.includes("addon-ui-style.scss") ||
+                                        resource.includes("addon-ui-config") ||
+                                        /providers[\\/]ui[\\/]styles/.test(resource)
+                                    ) {
+                                        return true;
+                                    }
+
                                     const isComponent = /src[\\/]components[\\/]/.test(resource);
 
                                     if (isComponent) {
@@ -122,6 +132,15 @@ export default definePlugin((options: PluginOptions = {}) => {
 
                                     if (directName) {
                                         return `ui-${directName}`;
+                                    }
+
+                                    if (
+                                        resource.includes("addon-ui-virtual") ||
+                                        resource.includes("addon-ui-style.scss") ||
+                                        resource.includes("addon-ui-config") ||
+                                        /providers[\\/]ui[\\/]styles/.test(resource)
+                                    ) {
+                                        return "ui-base";
                                     }
 
                                     if (resource.includes("node_modules")) {
