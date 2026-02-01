@@ -2,6 +2,7 @@ import path from "path";
 import {definePlugin} from "adnbn";
 import {Configuration as Rspack, NormalModule} from "@rspack/core";
 import {RspackVirtualModulePlugin} from "rspack-plugin-virtual-module";
+import kebabCase from "lodash/kebabCase";
 
 import StyleBuilder from "./builder/StyleBuilder";
 import ConfigBuilder from "./builder/ConfigBuilder";
@@ -13,11 +14,42 @@ import ConfigFinder from "./finder/ConfigFinder";
 import type {BuilderContract} from "./types";
 
 export interface PluginOptions {
+    /**
+     * Directory path where plugin configuration and style files are located, relative to the project root.
+     * @default "."
+     */
     themeDir?: string;
+
+    /**
+     * Name of the configuration file.
+     * @default "config.ui"
+     */
     configName?: string;
+
+    /**
+     * Name of the style file.
+     * @default "style.ui"
+     */
     styleName?: string;
+
+    /**
+     * Whether to merge configuration files from different app directories.
+     * @default true
+     */
     mergeConfig?: boolean;
+
+    /**
+     * Whether to merge style files from different app directories.
+     * @default true
+     */
     mergeStyles?: boolean;
+
+    /**
+     * Configuration for splitting chunks.
+     * Can be a boolean to enable/disable or a callback to customize chunk names.
+     * @default true
+     */
+    splitChunks?: boolean | ((name: string) => string | undefined);
 }
 
 export default definePlugin((options: PluginOptions = {}) => {
@@ -27,6 +59,7 @@ export default definePlugin((options: PluginOptions = {}) => {
         styleName = "style.ui",
         mergeConfig = true,
         mergeStyles = true,
+        splitChunks = false,
     } = options;
 
     let configFinder: Finder;
@@ -54,7 +87,7 @@ export default definePlugin((options: PluginOptions = {}) => {
             styleBuilder = new StyleBuilder(styleFinder);
         },
         bundler: () => {
-            return {
+            const config: Rspack = {
                 plugins: [
                     new RspackVirtualModulePlugin(
                         {
@@ -64,7 +97,57 @@ export default definePlugin((options: PluginOptions = {}) => {
                         "addon-ui-virtual"
                     ),
                 ],
-                optimization: {
+            };
+
+            if (splitChunks) {
+                const splitChunksNameCallback = typeof splitChunks === "function" ? splitChunks : undefined;
+
+                const toUIChunk = (name: string) => {
+                    if (splitChunksNameCallback) {
+                        const finalName = splitChunksNameCallback(name);
+
+                        if (finalName) {
+                            return finalName;
+                        }
+                    }
+
+                    return `${kebabCase(name)}.ui`;
+                };
+
+                const extractName = (res: string): string | null => {
+                    if (!res) {
+                        return null;
+                    }
+
+                    const match = res.match(/src[\\/]components[\\/]([^\\/]+)/);
+
+                    if (match && match[1] && !match[1].includes(".") && match[1] !== "index") {
+                        const componentName = match[1];
+                        const normalized = componentName.toLowerCase();
+
+                        if (["button", "basebutton", "iconbutton"].includes(normalized)) {
+                            return "button";
+                        }
+
+                        if (["list", "listitem"].includes(normalized)) {
+                            return "list";
+                        }
+
+                        if (["view", "viewdrawer", "viewmodal", "viewport"].includes(normalized)) {
+                            return "view";
+                        }
+
+                        if (["svgsprite", "icon"].includes(normalized)) {
+                            return "svg";
+                        }
+
+                        return componentName;
+                    }
+
+                    return null;
+                };
+
+                config.optimization = {
                     splitChunks: {
                         cacheGroups: {
                             addonUI: {
@@ -108,47 +191,6 @@ export default definePlugin((options: PluginOptions = {}) => {
                                         ((typeof module.nameForCondition === "function"
                                             ? module.nameForCondition()
                                             : "") as string);
-
-                                    const toKebabCase = (str: string) =>
-                                        str
-                                            .replace(/([a-z])([A-Z])/g, "$1-$2")
-                                            .replace(/[\s_]+/g, "-")
-                                            .toLowerCase();
-
-                                    const toUIChunk = (name: string) => `${toKebabCase(name)}.ui`;
-
-                                    const extractName = (res: string) => {
-                                        if (!res) {
-                                            return null;
-                                        }
-
-                                        const match = res.match(/src[\\/]components[\\/]([^\\/]+)/);
-
-                                        if (match && match[1] && !match[1].includes(".") && match[1] !== "index") {
-                                            const componentName = match[1];
-                                            const normalized = componentName.toLowerCase();
-
-                                            if (["button", "basebutton", "iconbutton"].includes(normalized)) {
-                                                return "button";
-                                            }
-
-                                            if (["list", "listitem"].includes(normalized)) {
-                                                return "list";
-                                            }
-
-                                            if (["view", "viewdrawer", "viewmodal", "viewport"].includes(normalized)) {
-                                                return "view";
-                                            }
-
-                                            if (["svgsprite", "icon"].includes(normalized)) {
-                                                return "svg";
-                                            }
-
-                                            return componentName;
-                                        }
-
-                                        return null;
-                                    };
 
                                     const directName = extractName(resource);
 
@@ -233,8 +275,10 @@ export default definePlugin((options: PluginOptions = {}) => {
                             },
                         },
                     },
-                },
-            } satisfies Rspack;
+                };
+            }
+
+            return config satisfies Rspack;
         },
         manifest: ({manifest}) => {
             manifest.addPermission("storage");
