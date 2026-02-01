@@ -67,12 +67,12 @@ This library now ships with dedicated documentation files for each component in 
 - [IconButton](docs/IconButton.md)
 - [List](docs/List.md) (covers List and ListItem)
 - [Modal](docs/Modal.md)
-- [Odometer](docs/Odometer.md) (component + useOdometer hook)
+- [Odometer](docs/Odometer.md) (component + `useOdometer` hook)
 - [ScrollArea](docs/ScrollArea.md)
 - [Select](docs/Select.md)
 - [SvgSprite](docs/SvgSprite.md)
 - [Switch](docs/Switch.md)
-- [Tabs](docs/Tabs.md) (includes Tabs, TabsList, TabsTrigger, TabsContent)
+- [Tabs](docs/Tabs.md) (includes `Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`)
 - [Tag](docs/Tag.md)
 - [TextArea](docs/TextArea.md)
 - [TextField](docs/TextField.md)
@@ -83,7 +83,7 @@ This library now ships with dedicated documentation files for each component in 
 - [View](docs/View.md)
 - [ViewDrawer](docs/ViewDrawer.md)
 - [ViewModal](docs/ViewModal.md)
-- [Viewport](docs/Viewport.md) (ViewportProvider + useViewport)
+- [Viewport](docs/Viewport.md) (`ViewportProvider` + `useViewport`)
 
 Notes:
 
@@ -134,12 +134,37 @@ export default defineConfig({
     plugins: [
         ui({
             themeDir: "./theme", // Directory for theme files
-            configFileName: "ui.config", // Name of config files
-            styleFileName: "ui.style", // Name of style files
+            configName: "ui.config", // Name of config files
+            styleName: "ui.style", // Name of style files
             mergeConfig: true, // Merge configs from different directories
             mergeStyles: true, // Merge styles from different directories
+            splitChunks: true, // Enable automatic chunk splitting for components
         }),
     ],
+});
+```
+
+### Plugin Options
+
+| Option        | Type                                               | Default       | Description                                                                                            |
+| :------------ | :------------------------------------------------- | :------------ | :----------------------------------------------------------------------------------------------------- |
+| `themeDir`    | `string`                                           | `"."`         | Directory path where plugin configuration and style files are located.                                 |
+| `configName`  | `string`                                           | `"config.ui"` | Name of the configuration file.                                                                        |
+| `styleName`   | `string`                                           | `"style.ui"`  | Name of the SCSS style file.                                                                           |
+| `mergeConfig` | `boolean`                                          | `true`        | Whether to merge configuration files from different directories.                                       |
+| `mergeStyles` | `boolean`                                          | `true`        | Whether to merge style files from different directories.                                               |
+| `splitChunks` | `boolean \| (name: string) => string \| undefined` | `true`        | Enables automatic chunk splitting. If a function is provided, it can be used to customize chunk names. |
+
+#### Customizing Chunk Names
+
+You can pass a callback function to `splitChunks` to customize the generated chunk names:
+
+```ts
+ui({
+    splitChunks: name => {
+        if (name === "button") return "ui-core-button";
+        return `ui-${name}`;
+    },
 });
 ```
 
@@ -271,7 +296,7 @@ extensions with the same functionality but different visual appearances.
 
 ### Global Theme Customization
 
-You can customize the theme globally by passing props to the UIProvider:
+You can customize the theme globally by passing props to the `UIProvider`:
 
 ```jsx
 import {UIProvider} from "addon-ui";
@@ -289,12 +314,25 @@ const customTheme = {
     icons: {
         // Custom icons
     },
+    // Specify the DOM element to set theme/view/browser attributes on
+    container: "#app-root",
 };
 
 function App() {
     return <UIProvider {...customTheme}>{/* Your application */}</UIProvider>;
 }
 ```
+
+### UIProvider Props
+
+| Prop         | Type                           | Default     | Description                                               |
+| :----------- | :----------------------------- | :---------- | :-------------------------------------------------------- |
+| `components` | `ComponentsProps`              | `{}`        | Component-specific configuration overrides.               |
+| `icons`      | `Icons`                        | `{}`        | Custom SVG icons registration.                            |
+| `extra`      | `ExtraProps`                   | `{}`        | App-wide extra properties.                                |
+| `storage`    | `ThemeStorageContract \| true` | `undefined` | Persistence storage for theme settings.                   |
+| `container`  | `string \| Element \| false`   | `"html"`    | Target element for attributes. Set to `false` to disable. |
+| `view`       | `string`                       | `undefined` | Custom view identifier for specific styling.              |
 
 ### Using Extra Props
 
@@ -438,12 +476,13 @@ function App() {
 
 ## Theming and style reuse
 
-- Global theme tokens (colors, typography, spacing, transitions) live in your ui.style.scss. Components consume them
-  through fallbacks.
-- Each component also exposes its own `--component-*` variables. See the CSS variables tables in the docs to know
-  exactly what you can override.
-- Light/dark modes: use `@import "addon-ui/theme";` and the provided `@include light { ... }` / `@include dark { ... }`
-  mixins in your theme SCSS to scope tokens per color scheme.
+- Global theme tokens (colors, typography, spacing, transitions) live in your `ui.style.scss`.
+- Each component also exposes its own `--component-*` variables. See the CSS variables tables in the docs to know exactly what you can override.
+- **Theme Mixins**: Use `@import "addon-ui/theme";` to access `@include light { ... }` and `@include dark { ... }` mixins.
+- **Universal Targeting**: These mixins are container-agnostic. They work correctly whether the `theme` attribute is on a parent element or directly on the component itself.
+- **Context-Aware**:
+    - When used at the top level, they generate global selectors: `[theme="dark"] { ... }`.
+    - When used inside a component, they generate scoped selectors: `[theme="dark"] .my-comp, .my-comp[theme="dark"] { ... }`.
 
 ## Radix UI and third-party integrations
 
