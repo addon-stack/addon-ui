@@ -87,10 +87,10 @@ const TruncateStoryRender = (props: TruncateProps) => {
                     resize: "horizontal",
                 }}
             >
-                <Header title="Truncate with highlight" style={{paddingBottom: "10px"}}/>
+                <Header title="Truncate with highlight" style={{paddingBottom: "10px"}} />
 
                 <div style={{margin: "0 20px 10px"}}>
-                    <TextField value={searchWords} onChange={e => setSearchWords(e.target.value)}/>
+                    <TextField value={searchWords} onChange={e => setSearchWords(e.target.value)} />
                 </div>
 
                 <ScrollArea style={{borderTop: "1px solid #ccc"}}>
@@ -98,16 +98,16 @@ const TruncateStoryRender = (props: TruncateProps) => {
                         <div key={url} style={{borderBottom: "1px solid #ccc", padding: "10px"}}>
                             <TruncateComponent
                                 text={title}
-                                render={text => <Highlight textToHighlight={text} searchWords={[searchWords]}/>}
+                                render={text => <Highlight textToHighlight={text} searchWords={[searchWords]} />}
                                 {...props}
                             />
                             <div style={{display: "flex", alignItems: "center", minWidth: 0}}>
                                 <TruncateComponent
                                     text={url}
-                                    render={text => <Highlight textToHighlight={text} searchWords={[searchWords]}/>}
+                                    render={text => <Highlight textToHighlight={text} searchWords={[searchWords]} />}
                                     {...props}
                                 />
-                                <button style={{marginLeft: '10px'}}>Open</button>
+                                <button style={{marginLeft: "10px"}}>Open</button>
                             </div>
                         </div>
                     ))}
@@ -125,10 +125,10 @@ export const Inline: StoryObj<TruncateProps> = {
 
     render: props => (
         <div style={{display: "flex", flexDirection: "column"}}>
-            <Header title="Inline Truncate"/>
+            <Header title="Inline Truncate" />
             <div
                 style={{
-                    marginTop: '10px',
+                    marginTop: "10px",
                     resize: "horizontal",
                     overflow: "auto",
                     border: "1px solid #ccc",
@@ -139,10 +139,10 @@ export const Inline: StoryObj<TruncateProps> = {
                 <TruncateComponent {...props} />
             </div>
 
-            <Header title="Inline Truncate with Button (flex-start)"/>
+            <Header title="Inline Truncate with Button (flex-start)" />
             <div
                 style={{
-                    marginTop: '10px',
+                    marginTop: "10px",
                     resize: "horizontal",
                     overflow: "auto",
                     border: "1px solid #ccc",
@@ -152,7 +152,7 @@ export const Inline: StoryObj<TruncateProps> = {
                     alignItems: "center",
                 }}
             >
-                <TruncateComponent {...props}/>
+                <TruncateComponent {...props} />
                 <button style={{marginLeft: "10px"}}>Button</button>
             </div>
         </div>
