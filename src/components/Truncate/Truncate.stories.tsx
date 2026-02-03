@@ -59,55 +59,11 @@ export default meta;
 
 export const Truncate: StoryObj<TruncateProps> = {
     args: {
-        text: "https://www.figma.com/design/T7txseZ8nSmsnjglF5vTye/node-id=7719-343&p=f&t=6Tl4gAOTDaPxfsHE-0",
-        middle: false,
+        middle: true,
         separator: "...",
     },
 
     render: props => <TruncateStoryRender {...props} />,
-};
-
-export const Inline: StoryObj<TruncateProps> = {
-    args: {
-        text: "Very long text that should be truncated to fit in line with a button",
-        middle: true,
-    },
-
-    render: props => (
-        <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-            <Header title="Inline Truncate with Button (flex-start)" />
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                    width: "300px",
-                    resize: "horizontal",
-                    overflow: "auto",
-                }}
-            >
-                <TruncateComponent {...props} style={{flexShrink: 1}} />
-                <button style={{flexShrink: 0, marginLeft: "10px"}}>Button</button>
-            </div>
-
-            <Header title="Inline Truncate with Button (always follows)" />
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                    width: "400px",
-                    resize: "horizontal",
-                    overflow: "auto",
-                }}
-            >
-                <TruncateComponent {...props} style={{flexShrink: 1}} />
-                <button style={{flexShrink: 0, marginLeft: "10px"}}>Action</button>
-            </div>
-        </div>
-    ),
 };
 
 const TruncateStoryRender = (props: TruncateProps) => {
@@ -120,20 +76,6 @@ const TruncateStoryRender = (props: TruncateProps) => {
 
     return (
         <div style={{display: "flex", flexDirection: "column", gap: "20px", alignItems: "center"}}>
-            <div
-                style={{
-                    resize: "horizontal",
-                    overflow: "auto",
-                    border: "1px solid #ccc",
-                    padding: "15px 10px",
-                    minWidth: "0px",
-                    width: "400px",
-                    maxWidth: "800px",
-                }}
-            >
-                <TruncateComponent {...props} />
-            </div>
-
             <ViewportProvider
                 style={{
                     border: "1px solid black",
@@ -157,15 +99,15 @@ const TruncateStoryRender = (props: TruncateProps) => {
                             <TruncateComponent
                                 text={title}
                                 render={text => <Highlight textToHighlight={text} searchWords={[searchWords]} />}
+                                {...props}
                             />
                             <div style={{display: "flex", alignItems: "center", minWidth: 0}}>
                                 <TruncateComponent
                                     text={url}
                                     render={text => <Highlight textToHighlight={text} searchWords={[searchWords]} />}
-                                    middle
-                                    style={{flexShrink: 1}}
+                                    {...props}
                                 />
-                                <button style={{flexShrink: 0, marginLeft: "8px"}}>Button</button>
+                                <button style={{marginLeft: "10px"}}>Open</button>
                             </div>
                         </div>
                     ))}
@@ -173,4 +115,46 @@ const TruncateStoryRender = (props: TruncateProps) => {
             </ViewportProvider>
         </div>
     );
+};
+
+export const Inline: StoryObj<TruncateProps> = {
+    args: {
+        text: "Very long text that should be truncated to fit in line with a button",
+        middle: true,
+    },
+
+    render: props => (
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <Header title="Inline Truncate" />
+            <div
+                style={{
+                    marginTop: "10px",
+                    resize: "horizontal",
+                    overflow: "auto",
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                    width: "400px",
+                }}
+            >
+                <TruncateComponent {...props} />
+            </div>
+
+            <Header title="Inline Truncate with Button (flex-start)" />
+            <div
+                style={{
+                    marginTop: "10px",
+                    resize: "horizontal",
+                    overflow: "auto",
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                    width: "300px",
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
+                <TruncateComponent {...props} />
+                <button style={{marginLeft: "10px"}}>Button</button>
+            </div>
+        </div>
+    ),
 };
