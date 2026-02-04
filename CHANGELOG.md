@@ -1,5 +1,92 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.10.0 (2026-02-04)
+
+
+### ✨ Features
+
+* **plugin:** extend plugin options and improve splitChunks logic ([894a43c](https://github.com/addon-stack/addon-ui/commit/894a43c7639373ab2c1d985741522d74cdd56c2e))
+
+  - Added new plugin options: `themeDir`, `configName`, `styleName`, and `splitChunks`.
+  - Enhanced `splitChunks` logic with callback support and refined naming conventions.
+  - Replaced redundant `toKebabCase` logic with lodash's `kebabCase` for better consistency.
+  - Optimized chunk naming to support component groups like `button`, `list`, and `view`.
+
+* **TextField:** add strict number input mode with sanitization logic ([09e3a79](https://github.com/addon-stack/addon-ui/commit/09e3a791d241bb1d6dc474477dd2eef45d3e1382))
+
+
+* **Truncate:** improve text truncation logic, introduced `render` prop ([c5148a6](https://github.com/addon-stack/addon-ui/commit/c5148a6fa8ab6dc740f1e00511e801b7f5b1852e))
+
+
+
+
+### 🐛 Bug Fixed
+
+* **plugin:** correct spacing in conditional for resource.includes check ([1a8eaa1](https://github.com/addon-stack/addon-ui/commit/1a8eaa16affc69734196e0e025075cb6264f12ae))
+
+
+
+
+### 📝 Documentation
+
+* add `strict` prop to TextField and enhance Truncate functionality ([b117c2d](https://github.com/addon-stack/addon-ui/commit/b117c2d81f5515690c9164adce7470ab9cd517f3))
+
+
+* **README:** update documentation for components, plugin options, and theming ([dd7c2ee](https://github.com/addon-stack/addon-ui/commit/dd7c2eecf842e767071fdb500a5bf09957540153))
+
+
+
+
+### 🧩 Other
+
+* **Truncate:** enhance code readability and consistency with formatting adjustments ([bfe60ca](https://github.com/addon-stack/addon-ui/commit/bfe60ca8a7f0b70ace4a0fd4ce61f483f608c970))
+
+
+
+
+### 🧹 Chores
+
+* **deps:** update `adnbn` to v0.5.7 and simplify override configuration ([d6a0ba1](https://github.com/addon-stack/addon-ui/commit/d6a0ba121f52411c295afd43e2d02ba50c7f6730))
+
+
+
+
+### 🛠️ Refactoring
+
+* enhance theme handling and rename plugin options ([1cb3a58](https://github.com/addon-stack/addon-ui/commit/1cb3a58ad1bf02688fd5573e8574ae48a9319381))
+
+
+* **plugin:** enhance splitChunks logic with improved naming and module handling ([10206b7](https://github.com/addon-stack/addon-ui/commit/10206b7ebba1d16b15540c017526eb3d0eccfedd))
+
+
+* **plugin:** rename file-related options and add splitChunks optimization logic ([46ada1d](https://github.com/addon-stack/addon-ui/commit/46ada1d1712f7445835f72bee56f5c851aa70d82))
+
+
+* **Select:** add explicit `type` modifier to exported props ([3667446](https://github.com/addon-stack/addon-ui/commit/3667446a15cbf90d602e534aaa378b806dd25622))
+
+
+* **ThemeProvider:** add `container` and enhance `storage` prop flexibility ([563ad34](https://github.com/addon-stack/addon-ui/commit/563ad346d93111d5d6eea1fa31640de47b6ff485))
+
+  - Introduced `container` prop to customize DOM element for attribute handling.
+  - Enhanced `storage` prop for better persistence with custom and default options.
+  - Updated SCSS mixins for dynamic attribute context support.
+  - Synced `UIProvider` to pass `container` prop to `ThemeProvider`.
+
+* **Truncate:** extract `calculateMiddleTruncate` to a utility file and clean up styles and stories ([26c258a](https://github.com/addon-stack/addon-ui/commit/26c258a7dea3e64dca2c050e53784dcfdbfbb9ba))
+
+
+* **UIProvider:** add `container` prop for custom DOM element attribute handling ([2cebafc](https://github.com/addon-stack/addon-ui/commit/2cebafc33fb4d3496b578d43c6b0009c0c1afcfa))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 12
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 5
+- [Addon Stack](https://github.com/addon-stack) (@addon-stack) — commits: 2
+
 ## 🚀 Release `addon-ui` v0.9.2 (2026-01-26)
 
 
