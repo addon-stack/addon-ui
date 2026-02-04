@@ -106,7 +106,7 @@
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "adnbn": "^0.5.4",
+    "adnbn": "^0.5.7",
     "depcheck": "^1.4.7",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -141,12 +141,7 @@
   },
   "overrides": {
     "flat-cache": "^6.1.18",
-    "html-rspack-tags-plugin": {
-      "glob": "^10.4.5"
-    },
-    "test-exclude": {
-      "glob": "^10.4.5"
-    }
+    "glob": "^13.0.0"
   },
   "eslintConfig": {
     "extends": [
