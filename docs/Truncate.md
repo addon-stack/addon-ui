@@ -5,7 +5,7 @@ Single-line text truncation component. Supports classic end truncation via CSS a
 #### Import and basic usage
 
 ```tsx
-import {Truncate} from "addon-ui";
+import {Truncate, Highlight} from "addon-ui";
 
 export function Example() {
     return (
@@ -18,6 +18,13 @@ export function Example() {
 
             {/* Middle truncation with custom separator */}
             <Truncate text="0x5fC2e1A9B2C3D4E5F6A7B8C9D0abcdef12345678" middle separator=" ··· " />
+
+            {/* Middle truncation with highlighting */}
+            <Truncate
+                middle
+                text="search_term_in_the_middle_of_the_string"
+                render={text => <Highlight textToHighlight={text} searchWords={["search_term"]} />}
+            />
         </div>
     );
 }
@@ -29,12 +36,14 @@ export function Example() {
 
 Only the prop name, type, and default are listed below.
 
-| Prop            | Type                           | Default |
-| --------------- | ------------------------------ | ------- |
-| `text`          | `string`                       | `""`    |
-| `middle`        | `boolean`                      | —       |
-| `separator`     | `string`                       | `"..."` |
-| HTML span attrs | all standard `span` attributes | —       |
+| Prop               | Type                           | Default |
+| ------------------ | ------------------------------ | ------- |
+| `text`             | `string`                       | `""`    |
+| `middle`           | `boolean`                      | —       |
+| `separator`        | `string`                       | `"..."` |
+| `contentClassname` | `string`                       | —       |
+| `render`           | `(text: string) => ReactNode`  | —       |
+| HTML span attrs    | all standard `span` attributes | —       |
 
 Notes:
 
@@ -48,14 +57,12 @@ Notes:
 
 Only variables actually referenced in `src/components/Truncate/truncate.module.scss` are listed, with their exact fallback chains.
 
-| Variable                  | Fallback chain                                    |
-| ------------------------- | ------------------------------------------------- |
-| `--truncate-around-space` | `var(--truncate-around-space, 8px)`               |
-| `--truncate-speed-color`  | `var(--truncate-speed-color, var(--speed-color))` |
+| Variable                 | Fallback chain                                    |
+| ------------------------ | ------------------------------------------------- |
+| `--truncate-speed-color` | `var(--truncate-speed-color, var(--speed-color))` |
 
 Notes:
 
-- `--truncate-around-space` adds right (or left in RTL) inner padding when `middle` is enabled to ensure the separator remains visible.
 - Color transitions use the component-scoped `--truncate-speed-color` with a fallback to the global `--speed-color`.
 
 ---

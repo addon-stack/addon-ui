@@ -46,6 +46,9 @@ export function Example() {
             <TextField accent={TextFieldAccent.Success} placeholder="Success" />
             <TextField accent={TextFieldAccent.Error} placeholder="Error" />
 
+            {/* Strict numeric input */}
+            <TextField type="number" strict placeholder="Only numbers allowed" />
+
             {/* Full width and content slots */}
             <TextField fullWidth before={<span>+1</span>} after={<span>USD</span>} placeholder="With addons" />
 
@@ -80,6 +83,7 @@ Only the prop name, type, and default are listed below.
 | `afterClassName`  | `string`                                                                                                       | —           |
 | `beforeClassName` | `string`                                                                                                       | —           |
 | `type`            | `ComponentProps<'input'>['type']`                                                                              | `'text'`    |
+| `strict`          | `boolean`                                                                                                      | `false`     |
 | HTML input attrs  | all standard `input` attributes (e.g., `value`, `defaultValue`, `onChange`, `placeholder`, `name`, `id`, etc.) | —           |
 
 Note: Defaults may also be provided globally via theme/config (`UIProvider`, `ui.config.ts`). Local props take precedence over global config.
@@ -123,9 +127,14 @@ Only variables actually referenced in `src/components/TextField/text-field.modul
 | `--text-field-line-height`           | `var(--text-field-line-height, var(--line-height, 1 rem))`                                  |
 | `--text-field-padding`               | `var(--text-field-padding, 8px 12px)`                                                       |
 | `--text-field-border-radius`         | `var(--text-field-border-radius, 8px)`                                                      |
+| `--text-field-speed-border-color`    | `var(--text-field-speed-border-color, var(--speed-color))`                                  |
+| `--text-field-speed-box-shadow`      | `var(--text-field-speed-box-shadow, var(--speed-color))`                                    |
+| `--text-field-speed-bg`              | `var(--text-field-speed-bg, var(--speed-color))`                                            |
 | `--text-field-focus-border-color`    | `var(--text-field-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)))` |
 | `--text-field-focus-shadow`          | `var(--text-field-focus-shadow, 0 0 4px var(--primary-color))`                              |
 | `--text-field-disabled-opacity`      | `var(--text-field-disabled-opacity, 0.7)`                                                   |
+| `--text-field-speed-color`           | `var(--text-field-speed-color, var(--speed-color))`                                         |
+| `--text-field-placeholder-color`     | `var(--text-field-placeholder-color, var(--text-secondary-color))`                          |
 | `--text-field-regular-color`         | `var(--text-field-regular-color, var(--text-field-color, var(--text-primary-color)))`       |
 | `--text-field-color`                 | `var(--text-field-color)` (none)                                                            |
 | `--text-field-regular-bg-color`      | `var(--text-field-regular-bg-color, var(--text-field-bg-color, var(--bg-secondary-color)))` |
@@ -146,7 +155,9 @@ Only variables actually referenced in `src/components/TextField/text-field.modul
 | `--text-field-padding-sm`            | `var(--text-field-padding-sm, 6px 10px)`                                                    |
 | `--text-field-padding-md`            | `var(--text-field-padding-md, 10px 14px)`                                                   |
 | `--text-field-padding-lg`            | `var(--text-field-padding-lg, 12px 16px)`                                                   |
-| `--text-field-font-size-sm`          | Contextual defaults: `12px` (small), `16px` (medium), `18px` (large)                        |
+| `--text-field-font-size-sm`          | `var(--text-field-font-size-sm, 12px)`                                                      |
+| `--text-field-font-size-md`          | `var(--text-field-font-size-md, 16px)`                                                      |
+| `--text-field-font-size-lg`          | `var(--text-field-font-size-lg, 18px)`                                                      |
 | `--text-field-success-color`         | `var(--text-field-success-color, var(--success-color))`                                     |
 | `--text-field-accent-border-width`   | `var(--text-field-accent-border-width, 2px)`                                                |
 | `--text-field-error-color`           | `var(--text-field-error-color, var(--error-color))`                                         |
@@ -154,7 +165,7 @@ Only variables actually referenced in `src/components/TextField/text-field.modul
 Notes:
 
 - Accents add a stronger border (`--text-field-accent-border-width`) and shadow using success/error colors. If the component variables aren’t defined, they fall back to theme tokens like `--success-color` and `--error-color`.
-- The `--text-field-font-size-sm` variable is reused across all three size modifiers with contextual defaults. Define it once to override all sizes at once.
+- Size variants use their own font-size variables (`--text-field-font-size-sm`, `--text-field-font-size-md`, `--text-field-font-size-lg`) for more granular control.
 
 ### Theming and global configuration
 
@@ -206,3 +217,9 @@ import {UIProvider} from "addon-ui";
 - The component renders a native `<input>` inside a wrapper; provide a programmatic label. The `label` prop maps to `aria-label` on both wrapper and input.
 - For a visible label, associate a `<label htmlFor>` with the input by passing a matching `id` to TextField.
 - Ensure sufficient contrast for text and backgrounds, including disabled and error states.
+
+---
+
+### Usage notes
+
+- **Strict Numeric Input**: When `type="number"` and `strict` is enabled, the component uses a custom normalization logic to ensure only valid numeric characters are entered. It also sets `inputMode="decimal"` and uses `type="text"` internally to provide a more consistent experience across browsers and devices (avoiding some native number input bugs).
