@@ -14,13 +14,6 @@
 
   &--middle {
     text-overflow: clip;
-
-    padding-right: var(--truncate-around-space, 8px);
-
-    @include theme.rtl() {
-      padding-right: 0;
-      padding-left: var(--truncate-around-space, 8px);
-    }
   }
 
   &__hidden {

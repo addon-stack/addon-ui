@@ -44,7 +44,10 @@ const meta: Meta<typeof TextFieldComponent> = {
             options: accents,
             control: {type: "select"},
         },
-
+        type: {
+            options: ["text", "number", "password"],
+            control: {type: "select"},
+        },
         label: hideInTable,
         value: hideInTable,
         defaultValue: hideInTable,
@@ -61,6 +64,8 @@ export const TextField: StoryObj<typeof TextFieldComponent> = {
         placeholder: "Enter text",
         disabled: false,
         fullWidth: false,
+        strict: false,
+        type: "text",
         before: "🔍",
         after: "🔑",
     },
