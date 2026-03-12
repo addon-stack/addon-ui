@@ -33,7 +33,8 @@ const SelectContent: ForwardRefRenderFunction<HTMLDivElement, SelectContentProps
         arrow,
         arrowWidth,
         arrowHeight,
-        fullWidth,
+        fullWidth = true,
+        position = "popper",
         container,
         viewportProps,
         scrollUpButton,
@@ -54,6 +55,7 @@ const SelectContent: ForwardRefRenderFunction<HTMLDivElement, SelectContentProps
                     },
                     className
                 )}
+                position={position}
                 {...other}
             >
                 {scrollUpButton && (
@@ -75,7 +77,7 @@ const SelectContent: ForwardRefRenderFunction<HTMLDivElement, SelectContentProps
                     </SelectScrollDownButton>
                 )}
 
-                {arrow && <Arrow width={arrowWidth} height={arrowHeight} />}
+                {arrow && <Arrow className={styles["select__arrow"]} width={arrowWidth} height={arrowHeight} />}
             </Content>
         </Portal>
     );
