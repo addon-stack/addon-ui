@@ -59,11 +59,11 @@ export interface ComponentsProps {
     listItem?: ListItemProps;
     modal?: ModalProps;
     odometer?: Pick<OdometerProps, "auto" | "format" | "duration">;
-    popover: PopoverProps;
-    popoverClose: PopoverCloseProps;
-    popoverAnchor: PopoverAnchorProps;
-    popoverTrigger: PopoverTriggerProps;
-    popoverContent: PopoverContentProps;
+    popover?: PopoverProps;
+    popoverClose?: PopoverCloseProps;
+    popoverAnchor?: PopoverAnchorProps;
+    popoverTrigger?: PopoverTriggerProps;
+    popoverContent?: PopoverContentProps;
     scrollArea?: ScrollAreaProps;
     select?: SelectProps;
     selectItem?: SelectItemProps;
@@ -92,8 +92,8 @@ export interface ComponentsProps {
         | "radius"
         | "color"
     >;
-    toggleGroup: Omit<ToggleGroupProps, "type" | "value" | "defaultValue" | "onValueChange">;
-    toggleGroupItem: Omit<ToggleGroupItemProps, "value">;
+    toggleGroup?: Omit<ToggleGroupProps, "type" | "value" | "defaultValue" | "onValueChange">;
+    toggleGroupItem?: Omit<ToggleGroupItemProps, "value">;
     tooltip?: Omit<TooltipProps, "content">;
     truncate?: TruncateProps;
     truncateList?: TruncateListProps;
