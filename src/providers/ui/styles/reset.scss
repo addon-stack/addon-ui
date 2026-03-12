@@ -111,6 +111,7 @@ button:focus {
 }
 
 body {
+  overflow: hidden;
   background-color: var(--bg-primary-color);
   color: var(--text-primary-color);
   font-family: var(--font-family), "sans-serif";
