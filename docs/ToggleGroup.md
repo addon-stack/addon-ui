@@ -16,14 +16,12 @@ import {ToggleGroup, ToggleGroupItem, ToggleGroupIndicator} from "addon-ui";
 <ToggleGroup type="single" defaultValue="1">
     <ToggleGroupItem value="1">
         <Button>
-            Option 1
-            <ToggleGroupIndicator>✅</ToggleGroupIndicator>
+            Option 1<ToggleGroupIndicator>✅</ToggleGroupIndicator>
         </Button>
     </ToggleGroupItem>
     <ToggleGroupItem value="2">
         <Button>
-            Option 2
-            <ToggleGroupIndicator>✅</ToggleGroupIndicator>
+            Option 2<ToggleGroupIndicator>✅</ToggleGroupIndicator>
         </Button>
     </ToggleGroupItem>
 </ToggleGroup>
@@ -35,29 +33,29 @@ import {ToggleGroup, ToggleGroupItem, ToggleGroupIndicator} from "addon-ui";
 
 Only the prop name, type, and default are listed below.
 
-| Prop             | Type                                                               | Default |
-| ---------------- | ------------------------------------------------------------------ | ------- |
-| `type`           | `"single" \| "multiple"` (required)                                | —       |
-| `value`          | `string \| string[]`                                               | —       |
-| `defaultValue`   | `string \| string[]`                                               | —       |
-| `onValueChange`  | `(value: string \| string[]) => void`                              | —       |
-| `disabled`       | `boolean`                                                          | —       |
-| `rovingFocus`    | `boolean`                                                          | `true`  |
-| `orientation`    | `"horizontal" \| "vertical" \| undefined`                          | —       |
-| `dir`            | `"ltr" \| "rtl" \| undefined`                                      | —       |
-| `loop`           | `boolean`                                                          | `true`  |
-| Radix Root props | all `ToggleGroupSingleProps` or `ToggleGroupMultipleProps`         | —       |
+| Prop             | Type                                                       | Default |
+| ---------------- | ---------------------------------------------------------- | ------- |
+| `type`           | `"single" \| "multiple"` (required)                        | —       |
+| `value`          | `string \| string[]`                                       | —       |
+| `defaultValue`   | `string \| string[]`                                       | —       |
+| `onValueChange`  | `(value: string \| string[]) => void`                      | —       |
+| `disabled`       | `boolean`                                                  | —       |
+| `rovingFocus`    | `boolean`                                                  | `true`  |
+| `orientation`    | `"horizontal" \| "vertical" \| undefined`                  | —       |
+| `dir`            | `"ltr" \| "rtl" \| undefined`                              | —       |
+| `loop`           | `boolean`                                                  | `true`  |
+| Radix Root props | all `ToggleGroupSingleProps` or `ToggleGroupMultipleProps` | —       |
 
 Supports contextual props via the UI provider: `useComponentProps("toggleGroup")`.
 
 #### Props: ToggleGroupItem
 
-| Prop                | Type                       | Default |
-| ------------------- | -------------------------- | ------- |
-| `value`             | `string` (required)        | —       |
-| `disabled`          | `boolean`                  | —       |
-| `asChild`           | `boolean`                  | `true`  |
-| Radix Item props    | all `ToggleGroupItemProps` | —       |
+| Prop             | Type                       | Default |
+| ---------------- | -------------------------- | ------- |
+| `value`          | `string` (required)        | —       |
+| `disabled`       | `boolean`                  | —       |
+| `asChild`        | `boolean`                  | `true`  |
+| Radix Item props | all `ToggleGroupItemProps` | —       |
 
 Supports contextual props: `useComponentProps("toggleGroupItem")`.
 
@@ -65,10 +63,10 @@ Supports contextual props: `useComponentProps("toggleGroupItem")`.
 
 This component is a wrapper that displays its children only when its parent `ToggleGroupItem` is in the "on" state.
 
-| Prop | Type | Default |
-| :--- | :--- | :--- |
-| `children` | `ReactNode` | — |
-| — | all `HTMLDivElement` props | — |
+| Prop       | Type                       | Default |
+| :--------- | :------------------------- | :------ |
+| `children` | `ReactNode`                | —       |
+| —          | all `HTMLDivElement` props | —       |
 
 ---
 
@@ -76,15 +74,15 @@ This component is a wrapper that displays its children only when its parent `Tog
 
 Only variables actually referenced in `src/components/ToggleGroup/toggleGroup.module.scss` are listed, with their exact fallback chains.
 
-| Variable | Fallback chain |
-| :--- | :--- |
-| `--toggle-group-gap` | `var(--toggle-group-gap, 10px)` |
-| `--toggle-group-padding` | `var(--toggle-group-padding, 0)` |
-| `--toggle-group-speed-bg` | `var(--toggle-group-speed-bg, var(--speed-color))` |
-| `--toggle-group-item-speed-bg` | `var(--toggle-group-item-speed-bg, var(--speed-color))` |
-| `--toggle-group-item-speed-color` | `var(--toggle-group-item-speed-color, var(--speed-color))` |
-| `--toggle-group-item-checked-bg` | `var(--toggle-group-item-checked-bg, var(--primary-color))` |
-| `--toggle-group-item-checked-color` | none (define in theme) |
+| Variable                            | Fallback chain                                              |
+| :---------------------------------- | :---------------------------------------------------------- |
+| `--toggle-group-gap`                | `var(--toggle-group-gap, 10px)`                             |
+| `--toggle-group-padding`            | `var(--toggle-group-padding, 0)`                            |
+| `--toggle-group-speed-bg`           | `var(--toggle-group-speed-bg, var(--speed-color))`          |
+| `--toggle-group-item-speed-bg`      | `var(--toggle-group-item-speed-bg, var(--speed-color))`     |
+| `--toggle-group-item-speed-color`   | `var(--toggle-group-item-speed-color, var(--speed-color))`  |
+| `--toggle-group-item-checked-bg`    | `var(--toggle-group-item-checked-bg, var(--primary-color))` |
+| `--toggle-group-item-checked-color` | none (define in theme)                                      |
 
 ---
 
