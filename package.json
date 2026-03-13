@@ -141,10 +141,5 @@
   "overrides": {
     "flat-cache": "^6.1.18",
     "glob": "^13.0.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
   }
 }
