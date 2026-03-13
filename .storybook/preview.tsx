@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import type {Preview, StoryContext, StoryFn} from "@storybook/react";
+import type {Preview, StoryContext, StoryFn} from "storybook-react-rsbuild";
 import {ThemeProvider} from "../src/providers";
 import "../src/providers/ui/styles/default.scss";
 import "../src/providers/ui/styles/reset.scss";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import TruncateListComponent, {TruncateListProps} from "./TruncateList";
 import {Tag, TagColor, TagVariant} from "../Tag";
