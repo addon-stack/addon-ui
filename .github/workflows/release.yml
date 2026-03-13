@@ -50,11 +50,60 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Update npm
         run: |
           npm install -g npm@11.7.0
           npm -v
+
+      - name: Diagnostic info
+        run: |
+          echo "node=$(node -v)"
+          echo "npm=$(npm -v)"
+          if [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" ]; then
+            echo "oidc=available"
+          else
+            echo "oidc=missing"
+          fi
+
+      - name: Inspect OIDC claims
+        run: |
+          if [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" ] || [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL}" ]; then
+            echo "OIDC token request env vars are missing"
+            exit 1
+          fi
+
+          RESPONSE="$(curl -sSf -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=npm:registry.npmjs.org")"
+          OIDC_TOKEN="$(node -e 'const fs = require("fs"); const input = fs.readFileSync(0, "utf8"); process.stdout.write(JSON.parse(input).value);' <<< "$RESPONSE")"
+
+          node - <<'EOF' "$OIDC_TOKEN"
+          const token = process.argv[2];
+          const payload = token.split(".")[1];
+
+          if (!payload) {
+            throw new Error("Unable to decode OIDC token payload");
+          }
+
+          const claims = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+          const out = {
+            aud: claims.aud,
+            repository: claims.repository,
+            repository_owner: claims.repository_owner,
+            ref: claims.ref,
+            sha: claims.sha,
+            event_name: claims.event_name,
+            workflow: claims.workflow,
+            workflow_ref: claims.workflow_ref,
+            job_workflow_ref: claims.job_workflow_ref,
+            runner_environment: claims.runner_environment,
+            environment: claims.environment,
+            actor: claims.actor,
+            sub: claims.sub,
+          };
+
+          console.log(JSON.stringify(out, null, 2));
+          EOF
 
       - name: Install dependencies
         run: npm ci
