@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {hideInTable} from "../../utils";
 

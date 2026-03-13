@@ -1,5 +1,5 @@
 import path from "path";
-import merge from "webpack-merge";
+import {merge} from "webpack-merge";
 import type {StorybookConfig} from "storybook-react-rsbuild";
 
 const config: StorybookConfig = {

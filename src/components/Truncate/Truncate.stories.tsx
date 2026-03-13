@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import TruncateComponent, {TruncateProps} from "./Truncate";
 import {Header, Highlight, ScrollArea, TextField, ViewportProvider} from "../index";

@@ -1,5 +1,5 @@
 import React from "react";
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import ShiftComponent, {ShiftProps} from "./Shift";
 import {TextField} from "../index";
