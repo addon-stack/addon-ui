@@ -1,5 +1,97 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.11.0 (2026-03-13)
+
+
+### ✨ Features
+
+* **Popover:** add Popover component with subcomponents ([3077350](https://github.com/addon-stack/addon-ui/commit/307735071b1dfd831bbec300502e31b2e8ad5fe5))
+
+
+* **Shift:** add Shift component ([06712c6](https://github.com/addon-stack/addon-ui/commit/06712c63427cd2bda786aad6dd0690c13f3a4fe6))
+
+
+* **ToggleGroup:** add ToggleGroup component ([b724242](https://github.com/addon-stack/addon-ui/commit/b724242a6f371fcfcf02a9c184cfe9f0e0cd179d))
+
+
+
+
+### 📝 Documentation
+
+* **Popover:** add comprehensive documentation for Popover and its subcomponents ([1aa982c](https://github.com/addon-stack/addon-ui/commit/1aa982ca8bcab43ac5acf864d0e1ce2cd04ddfab))
+
+
+* **README:** update component list with Popover, Shift, and ToggleGroup links ([1795272](https://github.com/addon-stack/addon-ui/commit/1795272639c3353fb83f6be2b81398534e73c5b0))
+
+
+* **Select:** update documentation to include new subcomponents and enhanced props ([565ad7d](https://github.com/addon-stack/addon-ui/commit/565ad7d840b35c422dd432b6818624a30a6e27fd))
+
+
+* **Shift:** add comprehensive documentation for Shift component ([2281f71](https://github.com/addon-stack/addon-ui/commit/2281f71f05a36bd4bed87208b0563bef2869a40b))
+
+
+* **ToggleGroup:** add documentation for ToggleGroup and its subcomponents ([46094a6](https://github.com/addon-stack/addon-ui/commit/46094a6b6545d4daa7715a0dea03c9eff3c71f0f))
+
+
+* **ToggleGroup:** improve readability and update table formatting in documentation ([dfa9843](https://github.com/addon-stack/addon-ui/commit/dfa984378c816f096dcccd0d30a07b4f6037c30b))
+
+
+
+
+### 🤖 CI
+
+* **workflow:** add OIDC diagnostics and registry URL to release workflow ([897e12f](https://github.com/addon-stack/addon-ui/commit/897e12f46a66c559acc9bcfcd12efe3ba6e37cec))
+
+
+* **workflow:** add permissions and update npm in release workflow ([952bce1](https://github.com/addon-stack/addon-ui/commit/952bce1cec53804419522a3d15e155acfad0948a))
+
+
+* **workflow:** remove npm update step ([a96c99c](https://github.com/addon-stack/addon-ui/commit/a96c99cb962780130f45ecc1811cf918d561b6aa))
+
+
+
+
+### 🧩 Other
+
+* set `overflow: hidden` for body in reset styles ([b58c895](https://github.com/addon-stack/addon-ui/commit/b58c89563632cf8d577a8dac1001eac992b1961d))
+
+
+* update styles for Button, TextArea, TextField, Tooltip ([d71cc2c](https://github.com/addon-stack/addon-ui/commit/d71cc2c8ba0825a8d0416d923fb750f031fd9fa2))
+
+
+
+
+### 🛠️ Refactoring
+
+* **eslint:** remove deprecated Storybook eslint config and update ignore patterns ([89f5dbb](https://github.com/addon-stack/addon-ui/commit/89f5dbb5b9dd3f3907f9bf7e24b9cf67372c7a73))
+
+
+* migrate to `storybook-react-rsbuild` and update related peer dependencies ([d3a1506](https://github.com/addon-stack/addon-ui/commit/d3a1506195279615774cd60f6662521f00795f8e))
+
+  - Replaced `@storybook/react` with `storybook-react-rsbuild` in all components and configurations.
+  - Updated `storybook`, `storybook-react-rsbuild`, and their related plugins to the latest versions.
+  - Added missing peer dependencies, such as `eslint-plugin-storybook`.
+  - Adjusted `.gitignore` to include `storybook-static` folder.
+  - Updated `package.json` with updated author details and removed contributors property.
+  - Removed unused dependencies from `package-lock.json` for a cleaner build.
+
+* **Select:** improve Select component ([0113fab](https://github.com/addon-stack/addon-ui/commit/0113fabfeabdd1544ad67b6213f56f41478db5ac))
+
+
+* **Shift:** update type checks and improve style merging logic ([08519ec](https://github.com/addon-stack/addon-ui/commit/08519ecccbcf3fa0adcc1b28fbe6003c2f7cfee0))
+
+
+* **types:** make various component props optional ([db18054](https://github.com/addon-stack/addon-ui/commit/db1805400baec60313da3c688faee8ae03df3a73))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 16
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 8
+
 ## 🚀 Release `addon-ui` v0.10.0 (2026-02-04)
 
 
