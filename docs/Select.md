@@ -1,13 +1,22 @@
 ### Select
 
-Documentation for the Select component and its subcomponents: Select, SelectTrigger, SelectContent, SelectItem. The implementation is built on top of `@radix-ui/react-select` and adds visual features, support for localization (RTL), and global configuration.
+Documentation for the Select component and its subcomponents: Select, SelectTrigger, SelectContent, SelectItem, SelectItemText, SelectItemIndicator, SelectIcon, SelectValue. The implementation is built on top of `@radix-ui/react-select` and adds visual features, support for localization (RTL), and global configuration.
 
 See the official Radix documentation: https://www.radix-ui.com/primitives/docs/components/select
 
 #### Import
 
 ```ts
-import {Select, SelectTrigger, SelectContent, SelectItem} from "addon-ui";
+import {
+    Select,
+    SelectTrigger,
+    SelectContent,
+    SelectItem,
+    SelectItemText,
+    SelectItemIndicator,
+    SelectIcon,
+    SelectValue,
+} from "addon-ui";
 ```
 
 #### Basic usage
@@ -61,17 +70,18 @@ Supports contextual props: `useComponentProps("selectTrigger")`.
 
 #### Props: SelectContent
 
-| Prop                | Type                     | Default |
-| ------------------- | ------------------------ | ------- |
-| `arrow`             | `boolean`                | —       |
-| `arrowWidth`        | `number`                 | —       |
-| `arrowHeight`       | `number`                 | —       |
-| `fullWidth`         | `boolean`                | —       |
-| `viewportProps`     | `SelectViewportProps`    | —       |
-| `scrollUpButton`    | `ReactNode`              | —       |
-| `scrollDownButton`  | `ReactNode`              | —       |
-| `container`         | `HTMLElement`            | —       |
-| Radix Content props | all `SelectContentProps` | —       |
+| Prop                | Type                         | Default    |
+| ------------------- | ---------------------------- | ---------- |
+| `arrow`             | `boolean`                    | —          |
+| `arrowWidth`        | `number`                     | —          |
+| `arrowHeight`       | `number`                     | —          |
+| `fullWidth`         | `boolean`                    | `true`     |
+| `position`          | `"popper" \| "item-aligned"` | `"popper"` |
+| `viewportProps`     | `SelectViewportProps`        | —          |
+| `scrollUpButton`    | `ReactNode`                  | —          |
+| `scrollDownButton`  | `ReactNode`                  | —          |
+| `container`         | `HTMLElement`                | —          |
+| Radix Content props | all `SelectContentProps`     | —          |
 
 Supports contextual props: `useComponentProps("selectContent")`.
 
@@ -86,6 +96,14 @@ Supports contextual props: `useComponentProps("selectContent")`.
 | Radix Item props     | all `SelectItemProps` | —       |
 
 Supports contextual props: `useComponentProps("selectItem")`.
+
+#### Props: SelectItemText, SelectItemIndicator, SelectIcon, SelectValue
+
+These components are wrappers around Radix UI primitives and do not have additional custom props.
+
+| Prop        | Type                          | Default |
+| ----------- | ----------------------------- | ------- |
+| Radix props | all corresponding Radix props | —       |
 
 ---
 
@@ -108,6 +126,7 @@ Only variables actually referenced in `src/components/Select/select.module.scss`
 | `--select-trigger-padding`             | `var(--select-trigger-padding, 8px 12px)`                                                           |
 | `--select-trigger-height`              | none (define in theme)                                                                              |
 | `--select-trigger-gap`                 | `var(--select-trigger-gap, 5px)`                                                                    |
+| `--select-placeholder-color`           | `var(--select-placeholder-color, var(--placeholder-color))`                                         |
 | `--select-trigger-shadow-offset-hover` | none (define in theme)                                                                              |
 | `--select-trigger-border-width-hover`  | `var(--select-trigger-border-width-hover, var(--select-trigger-border-width, 1px))`                 |
 | `--select-trigger-border-color-hover`  | `var(--select-trigger-border-color-hover, var(--select-trigger-border-color, var(--border-color)))` |
@@ -138,6 +157,7 @@ Only variables actually referenced in `src/components/Select/select.module.scss`
 | `--select-scroll-btn-bg-color`         | `var(--select-scroll-btn-bg-color, var(--select-content-bg-color, var(--bg-primary-color)))`        |
 | `--select-scroll-btn-cursor`           | `var(--select-scroll-btn-cursor, default)`                                                          |
 | `--select-scroll-btn-hover-bg-color`   | `var(--select-scroll-btn-hover-bg-color, var(--bg-secondary-color))`                                |
+| `--select-arrow-bg-color`              | `var(--select-arrow-bg-color, var(--select-content-bg-color, var(--bg-primary-color)))`             |
 
 ---
 

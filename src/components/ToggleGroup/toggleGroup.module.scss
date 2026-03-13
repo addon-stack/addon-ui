@@ -1,0 +1,32 @@
+$root: toggle-group;
+
+.#{$root} {
+  display: flex;
+  gap: var(--toggle-group-gap, 10px);
+  padding: var(--toggle-group-padding, 0);
+  transition: background var(--toggle-group-speed-bg, var(--speed-color));
+
+  &[data-orientation="vertical"] {
+    flex-direction: column;
+  }
+
+  &__item {
+    color: var(--text-primary-color);
+    transition:
+      background var(--toggle-group-item-speed-bg, var(--speed-color)),
+      color var(--toggle-group-item-speed-color, var(--speed-color));
+
+    &[data-state="on"] {
+      background: var(--toggle-group-item-checked-bg, var(--primary-color));
+      color: var(--toggle-group-item-checked-color);
+    }
+  }
+
+  &__indicator {
+    display: none;
+
+    .#{$root}__item[data-state="on"] & {
+      display: inline-flex;
+    }
+  }
+}

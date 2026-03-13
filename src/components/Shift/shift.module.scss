@@ -1,0 +1,21 @@
+.shift {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: height var(--shift-speed-height, var(--speed-sm));
+
+  &-item {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    transition:
+      transform var(--shift-speed-transform, var(--speed-sm)),
+      opacity var(--shift-speed-opacity, var(--speed-sm));
+  }
+}

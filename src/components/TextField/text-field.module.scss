@@ -54,7 +54,7 @@ $root: text-field;
     }
 
     &::placeholder {
-      color: var(--text-field-placeholder-color, var(--text-secondary-color));
+      color: var(--text-field-placeholder-color, var(--placeholder-color));
       transition: color var(--text-field-speed-color, var(--speed-color));
     }
 

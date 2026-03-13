@@ -44,10 +44,13 @@
   --bg-secondary-color: #e9ecef;
 
   --text-default-color: #000;
+  --text-revers-color: #fff;
   --text-primary-color: #2e4453;
   --text-secondary-color: #25282b;
   --text-accent-color: var(--accent-color);
   --text-disabled-color: #333337;
+
+  --placeholder-color: #a3a3a3;
 
   --separator-color: #ccc;
 
@@ -76,6 +79,7 @@
   --bg-secondary-color: #3f404b;
 
   --text-default-color: #fff;
+  --text-revers-color: #000;
   --text-primary-color: #ededed;
   --text-secondary-color: #fbfbfb;
   --text-accent-color: var(--accent-color);

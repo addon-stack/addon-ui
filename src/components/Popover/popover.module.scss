@@ -1,0 +1,77 @@
+$root: popover;
+
+.#{$root} {
+  &__overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--popover-overlay-bg, var(--overlay-bg, rgba(0, 0, 0, 0.5)));
+  }
+
+  &__anchor {
+    height: 100%;
+  }
+
+  &__trigger {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    box-sizing: border-box;
+    color: var(--popover-trigger-color);
+    background: var(--popover-trigger-bg-color, var(--bg-secondary-color));
+    box-shadow: var(--popover-trigger-shadow-offset) var(--popover-trigger-shadow-color);
+
+    border-width: var(--popover-trigger-border-width, 1px);
+    border-style: var(--popover-trigger-border-style, solid);
+    border-color: var(--popover-trigger-border-color, var(--border-color));
+    border-radius: var(--popover-trigger-border-radius, 10px);
+
+    font-size: var(--popover-trigger-font-size, var(--popover-font-size, 14px));
+    font-weight: var(--popover-trigger-font-weight, 500);
+    padding: var(--popover-trigger-padding, 8px 12px);
+    height: var(--popover-trigger-height);
+    gap: var(--popover-trigger-gap, 5px);
+    transition:
+      color var(--popover-speed-color, var(--speed-color)),
+      background var(--popover-speed-background, var(--speed-color)),
+      box-shadow var(--popover-speed-shadow, var(--speed-color)),
+      border-color var(--popover-speed-border-color, var(--speed-color));
+
+    &--center {
+      justify-content: center;
+    }
+
+    &:hover {
+      box-shadow: var(--popover-trigger-shadow-offset-hover) var(--popover-trigger-shadow-color);
+      border-width: var(--popover-trigger-border-width-hover, var(--popover-trigger-border-width, 1px));
+      border-color: var(--popover-trigger-border-color-hover, var(--popover-trigger-border-color, var(--border-color)));
+    }
+  }
+
+  &__content {
+    overflow: hidden;
+    padding: var(--popover-content-padding, 16px);
+    background: var(--popover-content-bg-color, var(--bg-primary-color));
+    border-radius: var(--popover-content-border-radius, 8px);
+    box-shadow: var(--popover-content-shadow-offset, 0 0 5px 0) var(--popover-content-shadow-color, rgba(0, 0, 0, 0.25));
+    height: var(--popover-content-height);
+    max-height: var(--popover-content-max-height, var(--radix-popover-content-available-height));
+    transition:
+      background var(--popover-speed-background, var(--speed-color)),
+      box-shadow var(--popover-speed-shadow, var(--speed-color));
+
+    &--full-width {
+      width: var(--popover-content-full-width, var(--radix-popover-content-available-width));
+    }
+  }
+
+  &__arrow {
+    & > polygon {
+      fill: var(--popover-arrow-bg-color, var(--popover-content-bg-color, var(--bg-primary-color)));
+    }
+  }
+}

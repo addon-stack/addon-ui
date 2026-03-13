@@ -26,6 +26,11 @@ $root: text-area;
     cursor: not-allowed;
   }
 
+  &::placeholder {
+    color: var(--text-area-placeholder-color, var(--placeholder-color));
+    transition: color var(--text-area-speed-color, var(--speed-color));
+  }
+
   &--full-width {
     width: 100% !important;
   }

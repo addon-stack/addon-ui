@@ -46,7 +46,7 @@ $root: select;
     }
 
     &[data-placeholder] {
-      color: var(--text-disabled-color);
+      color: var(--select-placeholder-color, var(--placeholder-color));
     }
 
     @include theme.rtl {
@@ -145,6 +145,12 @@ $root: select;
 
     &:hover {
       background-color: var(--select-scroll-btn-hover-bg-color, var(--bg-secondary-color));
+    }
+  }
+
+  &__arrow {
+    & > polygon {
+      fill: var(--select-arrow-bg-color, var(--select-content-bg-color, var(--bg-primary-color)));
     }
   }
 }

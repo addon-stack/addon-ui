@@ -20,6 +20,7 @@ $root: tooltip;
     animation-duration: var(--tooltip-speed-animation, var(--speed-md));
     will-change: transform, opacity;
     box-shadow: var(--tooltip-box-shadow-offset, 0 0 5px 0) var(--tooltip-box-shadow-color, rgba(210, 208, 208, 0.47));
+    z-index: var(--tooltip-z-index, 10000);
     transition:
       border-color var(--tooltip-speed-border-color, var(--speed-color)),
       box-shadow var(--tooltip-speed-box-shadow, var(--speed-color)),

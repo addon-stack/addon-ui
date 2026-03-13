@@ -7,34 +7,41 @@ import type {
     FooterProps,
     HeaderProps,
     HighlightProps,
-    IconProps,
     IconButtonProps,
-    ListProps,
+    IconProps,
     ListItemProps,
+    ListProps,
     ModalProps,
     OdometerProps,
+    PopoverAnchorProps,
+    PopoverCloseProps,
+    PopoverContentProps,
+    PopoverProps,
+    PopoverTriggerProps,
     ScrollAreaProps,
-    SelectProps,
-    SelectItemProps,
-    SelectIconProps,
-    SelectValueProps,
     SelectContentProps,
+    SelectIconProps,
+    SelectItemProps,
+    SelectProps,
     SelectTriggerProps,
+    SelectValueProps,
     SwitchProps,
-    TabsProps,
     TabsContentProps,
     TabsListProps,
+    TabsProps,
     TabsTriggerProps,
     TagProps,
     TextAreaProps,
     TextFieldProps,
     ToastProps,
+    ToggleGroupItemProps,
+    ToggleGroupProps,
     TooltipProps,
-    TruncateProps,
     TruncateListProps,
-    ViewProps,
+    TruncateProps,
     ViewDrawerProps,
     ViewModalProps,
+    ViewProps,
 } from "../components";
 
 export interface ComponentsProps {
@@ -52,6 +59,11 @@ export interface ComponentsProps {
     listItem?: ListItemProps;
     modal?: ModalProps;
     odometer?: Pick<OdometerProps, "auto" | "format" | "duration">;
+    popover?: PopoverProps;
+    popoverClose?: PopoverCloseProps;
+    popoverAnchor?: PopoverAnchorProps;
+    popoverTrigger?: PopoverTriggerProps;
+    popoverContent?: PopoverContentProps;
     scrollArea?: ScrollAreaProps;
     select?: SelectProps;
     selectItem?: SelectItemProps;
@@ -80,6 +92,8 @@ export interface ComponentsProps {
         | "radius"
         | "color"
     >;
+    toggleGroup?: Omit<ToggleGroupProps, "type" | "value" | "defaultValue" | "onValueChange">;
+    toggleGroupItem?: Omit<ToggleGroupItemProps, "value">;
     tooltip?: Omit<TooltipProps, "content">;
     truncate?: TruncateProps;
     truncateList?: TruncateListProps;
