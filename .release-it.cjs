@@ -162,6 +162,7 @@ function whatBump(commits, currentVersion = pkg.version) {
     if (isBreaking) {
         const currentMajor = Number.parseInt(String(currentVersion).replace(/^v/i, "").split(".")[0], 10);
 
+        // Keep automatic breaking releases in 0.x until 1.0 is released explicitly.
         return {level: Number.isNaN(currentMajor) || currentMajor >= 1 ? 0 : 1};
     }
 
@@ -208,6 +209,8 @@ const createReleaseConfig = () => {
                 preset: "conventionalcommits",
 
                 parserOpts: {
+                    // The preset's breaking pattern is incompatible with our extra breaking capture.
+                    breakingHeaderPattern: null,
                     headerPattern: /^(\w+)(?:\(([^)]+)\))?(!)?:\s(.+?)(?:\s\(#\d+\))?$/,
                     headerCorrespondence: ["type", "scope", "breaking", "subject"],
                     noteKeywords: ["BREAKING CHANGE", "BREAKING-CHANGE"],
