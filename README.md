@@ -153,7 +153,6 @@ export default defineConfig({
             styleName: "ui.style", // Name of style files
             mergeConfig: true, // Merge configs from different directories
             mergeStyles: true, // Merge styles from different directories
-            splitChunks: true, // Enable automatic chunk splitting for components
         }),
     ],
 });
@@ -161,27 +160,13 @@ export default defineConfig({
 
 ### Plugin Options
 
-| Option        | Type                                               | Default       | Description                                                                                            |
-| :------------ | :------------------------------------------------- | :------------ | :----------------------------------------------------------------------------------------------------- |
-| `themeDir`    | `string`                                           | `"."`         | Directory path where plugin configuration and style files are located.                                 |
-| `configName`  | `string`                                           | `"ui.config"` | Name of the configuration file.                                                                        |
-| `styleName`   | `string`                                           | `"ui.style"`  | Name of the SCSS style file.                                                                           |
-| `mergeConfig` | `boolean`                                          | `true`        | Whether to merge configuration files from different directories.                                       |
-| `mergeStyles` | `boolean`                                          | `true`        | Whether to merge style files from different directories.                                               |
-| `splitChunks` | `boolean \| (name: string) => string \| undefined` | `false`       | Enables automatic chunk splitting. If a function is provided, it can be used to customize chunk names. |
-
-#### Customizing Chunk Names
-
-You can pass a callback function to `splitChunks` to customize the generated chunk names:
-
-```ts
-ui({
-    splitChunks: name => {
-        if (name === "button") return "ui-core-button";
-        return `ui-${name}`;
-    },
-});
-```
+| Option        | Type      | Default       | Description                                                            |
+| :------------ | :-------- | :------------ | :--------------------------------------------------------------------- |
+| `themeDir`    | `string`  | `"."`         | Directory path where plugin configuration and style files are located. |
+| `configName`  | `string`  | `"ui.config"` | Name of the configuration file.                                        |
+| `styleName`   | `string`  | `"ui.style"`  | Name of the SCSS style file.                                           |
+| `mergeConfig` | `boolean` | `true`        | Whether to merge configuration files from different directories.       |
+| `mergeStyles` | `boolean` | `true`        | Whether to merge style files from different directories.               |
 
 ### Configuration Files
 

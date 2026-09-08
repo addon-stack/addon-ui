@@ -104,7 +104,7 @@
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "adnbn": "^0.5.7",
+    "adnbn": "^0.10.0",
     "depcheck": "^1.4.7",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",

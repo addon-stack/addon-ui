@@ -1,0 +1,7 @@
+{
+  "extends": "./.adnbn/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx"
+  }
+}
