@@ -25,6 +25,17 @@
 - Preserve user callbacks, `preventDefault`, portal priority, ref lifecycles and existing browser behavior when refactoring. Run component tests, types and lint; run the Chrome/Firefox suite for focus, layer or navigation changes.
 - Automated tests and fixtures live in `tests/`. The ignored `addon/` directory is a private manual playground and must not be tracked or used by repository tests, scripts or documentation.
 
+## Tooling
+
+- Run `npm run format` for ESLint/Stylelint autofixes and `npm run lint` for checks without writes. Do not add Prettier.
+- Keep custom ESLint rules in `tools/eslint/` and their regression tests in `tests/tooling/`.
+- Separate imports into groups: React (`react`, `react-dom` and subpaths), Radix (`@radix-ui/*`, `radix-ui`), other external packages and Node built-ins, internal modules, current-directory imports (`./`, including subdirectories, and `.`), then assets/styles. Treat `addon-ui` and `addon-ui-config` as internal aliases; parent paths (`../`) stay in the internal group. Assets/styles always belong to the last group, regardless of path.
+- Merge named type and value imports from the same module, marking types inline (`import {type Props, Root} from "package"`). Type-only imports may use `import type`; keep namespace imports separate where syntax requires it.
+- Multiline imports and exports put the closing brace on its own line and use a trailing comma after the last specifier.
+- Component stories, conventional configuration names and existing PascalCase documentation URLs are naming exceptions.
+- Preserve side-effect stylesheet order, required React value imports and runtime behavior during formatting changes.
+- Pre-commit operates only on staged files through lint-staged; pre-push runs `npm run verify` without autofixing.
+
 <!-- codebase-memory-mcp:start -->
 
 # Codebase Knowledge Graph (codebase-memory-mcp)
