@@ -1,6 +1,6 @@
 const {execFileSync} = require("node:child_process");
 const path = require("node:path");
-const {whatBump} = require("../.release-it.cjs");
+const {whatBump} = require("../../.release-it.cjs");
 
 describe("release-it version policy", () => {
     describe("breaking changes", () => {
@@ -80,7 +80,7 @@ describe("release-it parsed commits", () => {
                     `,
                 ],
                 {
-                    cwd: path.resolve(__dirname, ".."),
+                    cwd: path.resolve(__dirname, "../.."),
                     encoding: "utf8",
                     input: JSON.stringify({message, currentVersion}),
                     timeout: 10_000,
@@ -104,7 +104,7 @@ describe("release-it parsed commits", () => {
 
     test("uses the package version when the bumper calls whatBump without a version", () => {
         const semver = require("semver");
-        const {version} = require("../package.json");
+        const {version} = require("../../package.json");
         const expected = semver.inc(version, semver.major(version) === 0 ? "minor" : "major");
 
         expect(renderRelease("refactor!: remove legacy API").version).toBe(expected);

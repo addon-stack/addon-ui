@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import CheckboxComponent, {CheckedState} from "./Checkbox";
 import {CheckboxRadius, CheckboxSize, CheckboxVariant} from "./types";
@@ -32,11 +32,11 @@ const meta: Meta<typeof CheckboxComponent> = {
             control: {type: "select"},
         },
 
-        checkedIcon: hideInTable,
-        indeterminateIcon: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
-        indicatorClassName: hideInTable,
+        checkedIcon: HideInTable,
+        indeterminateIcon: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        indicatorClassName: HideInTable,
     },
 };
 

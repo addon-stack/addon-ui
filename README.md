@@ -323,16 +323,19 @@ function App() {
 }
 ```
 
+For content scripts mounted in a ShadowRoot, pass its host as `container` and the ShadowRoot as `portal`. CSS delivery requires AddonBone isolated style routing. See the [Shadow DOM integration guide](./docs/ShadowDOM.md) and [automated test suites](./tests/README.md).
+
 ### UIProvider Props
 
-| Prop         | Type                           | Default     | Description                                               |
-| :----------- | :----------------------------- | :---------- | :-------------------------------------------------------- |
-| `components` | `ComponentsProps`              | `{}`        | Component-specific configuration overrides.               |
-| `icons`      | `Icons`                        | `{}`        | Custom SVG icons registration.                            |
-| `extra`      | `ExtraProps`                   | `{}`        | App-wide extra properties.                                |
-| `storage`    | `ThemeStorageContract \| true` | `undefined` | Persistence storage for theme settings.                   |
-| `container`  | `string \| Element \| false`   | `"html"`    | Target element for attributes. Set to `false` to disable. |
-| `view`       | `string`                       | `undefined` | Custom view identifier for specific styling.              |
+| Prop         | Type                                  | Default     | Description                                                    |
+| :----------- | :------------------------------------ | :---------- | :------------------------------------------------------------- |
+| `components` | `ComponentsProps`                     | `{}`        | Component-specific configuration overrides.                    |
+| `icons`      | `Icons`                               | `{}`        | Custom SVG icons registration.                                 |
+| `extra`      | `ExtraProps`                          | `{}`        | App-wide extra properties.                                     |
+| `storage`    | `ThemeStorageContract \| true`        | `undefined` | Persistence storage for theme settings.                        |
+| `container`  | `string \| Element \| false`          | `"html"`    | Target element for attributes. Set to `false` to disable.      |
+| `portal`     | `Element \| DocumentFragment \| null` | `undefined` | Default target for floating layers; `null` waits for a target. |
+| `view`       | `string`                              | `undefined` | Custom view identifier for specific styling.                   |
 
 ### Using Extra Props
 
@@ -479,7 +482,7 @@ function App() {
 - Global theme tokens (colors, typography, spacing, transitions) live in your `ui.style.scss`.
 - Each component also exposes its own `--component-*` variables. See the CSS variables tables in the docs to know exactly what you can override.
 - **Theme Mixins**: Use `@import "addon-ui/theme";` to access `@include light { ... }` and `@include dark { ... }` mixins.
-- **Universal Targeting**: These mixins are container-agnostic. They work correctly whether the `theme` attribute is on a parent element or directly on the component itself.
+- **Universal Targeting**: These mixins are container-agnostic. They work correctly whether the `theme` attribute is on a parent element, the component itself, or the shadow host.
 - **Context-Aware**:
     - When used at the top level, they generate global selectors: `[theme="dark"] { ... }`.
     - When used inside a component, they generate scoped selectors: `[theme="dark"] .my-comp, .my-comp[theme="dark"] { ... }`.

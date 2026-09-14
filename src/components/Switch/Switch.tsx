@@ -4,7 +4,7 @@ import {Root, SwitchProps as SwitchRootProps, Thumb} from "@radix-ui/react-switc
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./switch.module.scss";
+import styles from "./switch.module.scss?isolation";
 
 export interface SwitchProps extends SwitchRootProps {
     thumbClassName?: string;

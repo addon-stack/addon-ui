@@ -1,2 +1,2 @@
 export * from "./types";
-export {default as Modal, modalPropsKeys, type ModalProps} from "./Modal";
+export {default as Modal, ModalPropsKeys, type ModalProps} from "./Modal";

@@ -26,6 +26,7 @@ Only the prop name, type, and default are listed below.
 
 | Prop                      | Type                                                                         | Default |
 | ------------------------- | ---------------------------------------------------------------------------- | ------- |
+| `container`               | `Element \| DocumentFragment \| null`                                        | —       |
 | `content`                 | `ReactNode`                                                                  | —       |
 | `delayDuration`           | `number`                                                                     | `250`   |
 | `collisionPadding`        | `number \| { top?: number; right?: number; bottom?: number; left?: number }` | `8`     |
@@ -102,3 +103,7 @@ Radix accessibility guide: https://www.radix-ui.com/primitives/docs/components/t
 
 - Use `side`, `align`, and offsets to control placement; `avoidCollisions` helps keep the tooltip visible.
 - Arrow size is visual; adjust `sideOffset` if the arrow overlaps the trigger.
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

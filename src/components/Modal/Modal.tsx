@@ -4,12 +4,12 @@ import classnames from "classnames";
 import {useComponentProps} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
 
-import {Dialog, DialogProps, dialogPropsKeys} from "../Dialog";
+import {Dialog, DialogProps, DialogPropsKeys} from "../Dialog";
 import {IconButton, IconButtonProps} from "../IconButton";
 
 import {ModalRadius, ModalAnimation} from "./types";
 
-import styles from "./modal.module.scss";
+import styles from "./modal.module.scss?isolation";
 
 export interface ModalProps extends DialogProps {
     radius?: ModalRadius;
@@ -18,9 +18,10 @@ export interface ModalProps extends DialogProps {
     animation?: ModalAnimation;
 }
 
-export const modalPropsKeys = new Set<keyof ModalProps>(["radius", "closeButton", "onClose", ...dialogPropsKeys]);
+export const ModalPropsKeys = new Set<keyof ModalProps>(["radius", "closeButton", "onClose", ...DialogPropsKeys]);
 
 const Modal: ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (props, ref) => {
+    const config = useComponentProps("modal");
     const {
         radius,
         fullscreen = true,
@@ -32,8 +33,9 @@ const Modal: ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (props, ref)
         overlayClassName,
         childrenClassName,
         animation = ModalAnimation.FadeScale,
+        container = config?.container,
         ...other
-    } = {...useComponentProps("modal"), ...props};
+    } = {...config, ...props};
 
     const handleClose = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,6 +70,7 @@ const Modal: ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (props, ref)
         <Dialog
             ref={ref}
             {...other}
+            container={container}
             onOpenChange={onOpenChange}
             overlayClassName={classnames(styles["modal-overlay"], overlayClassName)}
             className={classnames(

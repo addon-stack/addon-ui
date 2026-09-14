@@ -21,7 +21,7 @@ import {useComponentProps} from "../../providers";
 import {normalizeNumberInput} from "./utils";
 import {TextFieldAccent, TextFieldRadius, TextFieldSize, TextFieldVariant} from "./types";
 
-import styles from "./text-field.module.scss";
+import styles from "./text-field.module.scss?isolation";
 
 export interface TextFieldActions {
     select(): void;

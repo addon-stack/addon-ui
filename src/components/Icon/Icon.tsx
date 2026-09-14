@@ -2,7 +2,7 @@ import React, {memo, useEffect, ComponentProps, forwardRef, ForwardRefRenderFunc
 import classnames from "classnames";
 import {useComponentProps, useIcons} from "../../providers";
 
-import styles from "./icon.module.scss";
+import styles from "./icon.module.scss?isolation";
 
 export interface IconProps extends ComponentProps<"svg"> {
     name: string;

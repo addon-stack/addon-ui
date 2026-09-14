@@ -1,7 +1,7 @@
 import React, {FC, PropsWithChildren, useCallback, useMemo, useState} from "react";
 
 import {IconsContext} from "./context";
-import {SvgSprite} from "../../components";
+import {SvgSprite} from "../../components/SvgSprite";
 
 import {Config, Icons} from "../../types/config";
 

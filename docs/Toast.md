@@ -193,3 +193,7 @@ import {UIProvider} from "addon-ui";
 - Provide meaningful `title` and, where helpful, `description` for context.
 - Ensure the close button (when `onClose` is provided) has an accessible name (`aria-label="Close"` is applied by default on the internal IconButton).
 - Avoid conveying critical information by color alone; pair with text.
+
+### Shadow DOM
+
+See [Toast in Shadow DOM](./ShadowDOM.md#toast) for keyboard navigation, F8 arbitration, timer pause and focus restoration, including `forceMount` and removal of the entire component.

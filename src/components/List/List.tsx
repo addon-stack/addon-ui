@@ -5,7 +5,7 @@ import {useComponentProps} from "../../providers";
 
 import {ListItemProps} from "../ListItem";
 
-import styles from "./list.module.scss";
+import styles from "./list.module.scss?isolation";
 
 export interface ListProps extends Omit<ComponentProps<"ul">, "children"> {
     children: ReactElement<ListItemProps> | ReactElement<ListItemProps>[];

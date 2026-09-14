@@ -6,7 +6,7 @@ import {Root, ToggleGroupMultipleProps, ToggleGroupSingleProps} from "@radix-ui/
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./toggleGroup.module.scss";
+import styles from "./toggleGroup.module.scss?isolation";
 
 export type {ToggleGroupSingleProps, ToggleGroupMultipleProps};
 

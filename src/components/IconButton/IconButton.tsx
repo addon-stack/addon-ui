@@ -8,7 +8,7 @@ import {useComponentProps} from "../../providers";
 
 import {IconButtonVariant, IconButtonSize, IconButtonRadius} from "./types";
 
-import styles from "./icon-button.module.scss";
+import styles from "./icon-button.module.scss?isolation";
 
 export interface IconButtonProps extends BaseButtonProps {
     size?: IconButtonSize;

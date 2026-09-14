@@ -1,1 +1,1 @@
-export {default as View, viewPropsKeys, type ViewProps} from "./View";
+export {default as View, ViewPropsKeys, type ViewProps} from "./View";

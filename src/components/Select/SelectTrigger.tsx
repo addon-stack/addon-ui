@@ -13,7 +13,7 @@ import {
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./select.module.scss";
+import styles from "./select.module.scss?isolation";
 
 export interface SelectTriggerProps extends SelectTriggerRadixProps {
     center?: boolean;

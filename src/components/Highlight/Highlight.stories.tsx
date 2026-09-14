@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import HighlightComponent from "./Highlight";
 import {HighlightColor} from "./types";
@@ -38,9 +38,9 @@ const meta: Meta<typeof HighlightComponent> = {
             description: "Text to highlight matches in",
         },
 
-        style: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
+        style: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
     },
     decorators: [
         Story => (

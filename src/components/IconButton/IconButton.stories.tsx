@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import IconButtonComponent from "./IconButton";
 import {IconButtonRadius, IconButtonSize, IconButtonVariant} from "./types";
@@ -43,12 +43,12 @@ const meta: Meta<typeof IconButtonComponent> = {
             control: {type: "select"},
         },
 
-        after: hideInTable,
-        before: hideInTable,
-        children: hideInTable,
-        afterClassName: hideInTable,
-        beforeClassName: hideInTable,
-        childrenClassName: hideInTable,
+        after: HideInTable,
+        before: HideInTable,
+        children: HideInTable,
+        afterClassName: HideInTable,
+        beforeClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 

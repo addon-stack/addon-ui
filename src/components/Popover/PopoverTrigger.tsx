@@ -6,7 +6,7 @@ import {PopoverTriggerProps as PopoverTriggerRadixProps, Trigger} from "@radix-u
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./popover.module.scss";
+import styles from "./popover.module.scss?isolation";
 
 export interface PopoverTriggerProps extends PopoverTriggerRadixProps {
     center?: boolean;

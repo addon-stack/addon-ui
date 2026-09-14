@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest", "node", "chrome"],
+    "noEmit": true
+  },
+  "include": [
+    "components/**/*.tsx",
+    "support/components/**/*.ts",
+    "../src/declaration.d.ts",
+    "../src/types/vendors/odometer.d.ts"
+  ],
+  "exclude": []
+}

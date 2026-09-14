@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 import {ItemIndicator, SelectItemIndicatorProps} from "@radix-ui/react-select";
 
-import styles from "./select.module.scss";
+import styles from "./select.module.scss?isolation";
 
 export {type SelectItemIndicatorProps};
 

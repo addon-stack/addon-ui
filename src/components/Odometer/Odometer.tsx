@@ -4,9 +4,9 @@ import classNames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import useOdometer, {OdometerOptions} from "./hooks/useOdometer";
+import useOdometer, {OdometerOptions} from "./hooks/use-odometer";
 
-import styles from "./odometer.module.scss";
+import styles from "./odometer.module.scss?isolation";
 
 export interface OdometerProps extends OdometerOptions {
     value: number;

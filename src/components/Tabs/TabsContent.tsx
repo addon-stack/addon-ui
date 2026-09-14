@@ -4,7 +4,7 @@ import classnames from "classnames";
 import {Content, TabsContentProps as TabsContentRadixProps} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss";
+import styles from "./tabs.module.scss?isolation";
 
 export type TabsContentProps = TabsContentRadixProps;
 

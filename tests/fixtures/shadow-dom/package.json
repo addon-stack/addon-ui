@@ -1,0 +1,17 @@
+{
+  "name": "addon-ui-shadow-integration",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "adnbn build -b chrome",
+    "build:firefox": "adnbn build -b firefox",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "adnbn": "^0.11.0",
+    "addon-ui": "file:../../..",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}

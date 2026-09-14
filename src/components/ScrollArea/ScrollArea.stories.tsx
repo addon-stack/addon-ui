@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import ScrollAreaComponent from "./ScrollArea";
 
@@ -26,12 +26,12 @@ const meta: Meta<typeof ScrollAreaComponent> = {
             control: {type: "select"},
         },
 
-        style: hideInTable,
-        className: hideInTable,
-        thumbClassName: hideInTable,
-        cornerClassName: hideInTable,
-        viewportClassName: hideInTable,
-        scrollbarClassName: hideInTable,
+        style: HideInTable,
+        className: HideInTable,
+        thumbClassName: HideInTable,
+        cornerClassName: HideInTable,
+        viewportClassName: HideInTable,
+        scrollbarClassName: HideInTable,
     },
 };
 

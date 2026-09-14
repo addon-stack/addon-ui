@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import {Button} from "../index";
 
@@ -54,9 +54,9 @@ const meta: Meta<typeof TooltipComponent> = {
             description: "Whether to set the content width equal to the trigger width",
         },
 
-        arrowClassName: hideInTable,
-        contentClassName: hideInTable,
-        children: hideInTable,
+        arrowClassName: HideInTable,
+        contentClassName: HideInTable,
+        children: HideInTable,
     },
 };
 

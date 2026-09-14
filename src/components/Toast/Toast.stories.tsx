@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import {Button, ButtonColor, ButtonVariant} from "../index";
 
@@ -65,16 +65,16 @@ const meta: Meta<typeof ToastComponent> = {
             control: {type: "select"},
         },
 
-        action: hideInTable,
-        closeIcon: hideInTable,
-        closeProps: hideInTable,
-        onClose: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
-        titleClassName: hideInTable,
-        actionClassName: hideInTable,
-        viewportClassName: hideInTable,
-        descriptionClassName: hideInTable,
+        action: HideInTable,
+        closeIcon: HideInTable,
+        closeProps: HideInTable,
+        onClose: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        titleClassName: HideInTable,
+        actionClassName: HideInTable,
+        viewportClassName: HideInTable,
+        descriptionClassName: HideInTable,
     },
 };
 

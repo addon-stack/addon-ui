@@ -1,0 +1,6 @@
+node_modules/
+.adnbn/
+build/
+artifacts/
+test-results/
+dist/

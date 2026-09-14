@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import ButtonComponent from "./Button";
 import {ButtonColor, ButtonRadius, ButtonSize, ButtonVariant} from "./types";
@@ -46,11 +46,11 @@ const meta: Meta<typeof ButtonComponent> = {
             control: {type: "select"},
         },
 
-        after: hideInTable,
-        before: hideInTable,
-        afterClassName: hideInTable,
-        beforeClassName: hideInTable,
-        childrenClassName: hideInTable,
+        after: HideInTable,
+        before: HideInTable,
+        afterClassName: HideInTable,
+        beforeClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 

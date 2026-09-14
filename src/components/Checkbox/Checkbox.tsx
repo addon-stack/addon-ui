@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import {CheckboxVariant, CheckboxSize, CheckboxRadius} from "./types";
 
-import styles from "./checkbox.module.scss";
+import styles from "./checkbox.module.scss?isolation";
 
 export type {CheckedState} from "@radix-ui/react-checkbox";
 

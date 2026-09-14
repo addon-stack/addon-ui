@@ -4,7 +4,7 @@ import {OverflowList, OverflowListProps} from "react-responsive-overflow-list";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./truncate-list.module.scss";
+import styles from "./truncate-list.module.scss?isolation";
 import {Tag} from "../Tag";
 
 export type TruncateListProps<T = unknown> = OverflowListProps<T> & {

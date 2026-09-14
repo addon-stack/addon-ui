@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import {AccordionMultipleProps, AccordionSingleProps, Root} from "@radix-ui/react-accordion";
 
-import styles from "./accordion.module.scss";
+import styles from "./accordion.module.scss?isolation";
 
 export type AccordionProps = AccordionMultipleProps | AccordionSingleProps;
 

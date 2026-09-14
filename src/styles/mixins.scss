@@ -1,11 +1,20 @@
+@mixin root {
+  :root,
+  :host {
+    @content;
+  }
+}
+
 @mixin _attribute-context($attr, $value) {
   @if & {
     [#{$attr}="#{$value}"] &,
+    :host(:where([#{$attr}="#{$value}"])) &,
     &[#{$attr}="#{$value}"] {
       @content;
     }
   } @else {
-    [#{$attr}="#{$value}"] {
+    [#{$attr}="#{$value}"],
+    :host(:where([#{$attr}="#{$value}"])) {
       @content;
     }
   }

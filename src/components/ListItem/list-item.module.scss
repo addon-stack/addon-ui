@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as theme;
+
 .list-item {
   display: flex;
   flex-direction: row;
@@ -8,7 +10,7 @@
   line-height: var(--list-item-line-height, var(--line-height, 1rem));
   transition: background-color var(--list-item-speed-bg, var(--speed-color));
 
-  [dir="rtl"] & {
+  @include theme.rtl {
     flex-direction: row-reverse;
   }
 

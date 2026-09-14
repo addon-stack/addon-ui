@@ -7,15 +7,19 @@ import {
     Provider,
     Root,
     TooltipContentProps,
+    TooltipPortalProps,
     TooltipProps as TooltipRootProps,
     Trigger,
 } from "@radix-ui/react-tooltip";
 
-import {useComponentProps} from "../../providers";
+import {useComponentProps, usePortalContainer} from "../../providers";
 
-import styles from "./tooltip.module.scss";
+import {useFloatingLayer} from "../../hooks/floating";
 
-export interface TooltipProps extends TooltipRootProps, Omit<TooltipContentProps, "content"> {
+import styles from "./tooltip.module.scss?isolation";
+
+export interface TooltipProps
+    extends TooltipRootProps, Omit<TooltipContentProps, "content">, Pick<TooltipPortalProps, "container"> {
     content: ReactNode;
     arrowWidth?: number;
     arrowHeight?: number;
@@ -25,6 +29,9 @@ export interface TooltipProps extends TooltipRootProps, Omit<TooltipContentProps
 }
 
 const Tooltip: ForwardRefRenderFunction<HTMLDivElement, TooltipProps> = (props, ref) => {
+    const layer = useFloatingLayer({ref});
+    const config = useComponentProps("tooltip");
+    const container = usePortalContainer(props.container, config?.container);
     const {
         open,
         defaultOpen,
@@ -37,11 +44,13 @@ const Tooltip: ForwardRefRenderFunction<HTMLDivElement, TooltipProps> = (props, 
         collisionPadding = 8,
         matchTriggerWidth,
         content,
+        className,
         arrowClassName,
         contentClassName,
         children,
+        container: _container,
         ...other
-    } = {...useComponentProps("tooltip"), ...props};
+    } = {...config, ...props};
 
     return (
         <Provider>
@@ -53,27 +62,31 @@ const Tooltip: ForwardRefRenderFunction<HTMLDivElement, TooltipProps> = (props, 
                 delayDuration={delayDuration}
             >
                 <Trigger asChild>{children}</Trigger>
-                <Portal>
-                    <Content
-                        ref={ref}
-                        className={classnames(
-                            styles["tooltip-content"],
-                            {
-                                [styles["tooltip-content--trigger-width"]]: matchTriggerWidth,
-                            },
-                            contentClassName
-                        )}
-                        collisionPadding={collisionPadding}
-                        {...other}
-                    >
-                        {content}
-                        <Arrow
-                            width={arrowWidth}
-                            height={arrowHeight}
-                            className={classnames(styles["tooltip-arrow"], arrowClassName)}
-                        />
-                    </Content>
-                </Portal>
+                {container !== null && (
+                    <Portal container={container}>
+                        <Content
+                            ref={layer.ref}
+                            className={classnames(
+                                styles["tooltip-content"],
+                                {
+                                    [styles["tooltip-content--trigger-width"]]: matchTriggerWidth,
+                                },
+                                className,
+                                contentClassName
+                            )}
+                            collisionPadding={collisionPadding}
+                            {...other}
+                            style={{zIndex: layer.zIndex, ...other.style}}
+                        >
+                            {content}
+                            <Arrow
+                                width={arrowWidth}
+                                height={arrowHeight}
+                                className={classnames(styles["tooltip-arrow"], arrowClassName)}
+                            />
+                        </Content>
+                    </Portal>
+                )}
             </Root>
         </Provider>
     );

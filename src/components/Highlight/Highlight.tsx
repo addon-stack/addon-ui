@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import {HighlightColor} from "./types";
 
-import styles from "./highlight.module.scss";
+import styles from "./highlight.module.scss?isolation";
 
 export interface HighlightProps extends Omit<HighlighterProps, "searchWords"> {
     color?: HighlightColor;

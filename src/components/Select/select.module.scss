@@ -84,6 +84,7 @@ $root: select;
   &__item {
     display: flex;
     align-items: center;
+    gap: var(--select-item-gap, 8px);
     position: relative;
     overflow: hidden;
     white-space: nowrap;

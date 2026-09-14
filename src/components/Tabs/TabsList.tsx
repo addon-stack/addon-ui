@@ -14,7 +14,7 @@ import _debounce from "lodash/debounce";
 import {List, TabsListProps as TabsListRadixProps} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss";
+import styles from "./tabs.module.scss?isolation";
 
 export interface TabsListProps extends TabsListRadixProps {
     separator?: boolean;

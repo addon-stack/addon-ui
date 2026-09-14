@@ -6,7 +6,7 @@ import {Close, PopoverCloseProps} from "@radix-ui/react-popover";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./popover.module.scss";
+import styles from "./popover.module.scss?isolation";
 
 export type {PopoverCloseProps};
 

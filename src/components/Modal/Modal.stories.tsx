@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Meta} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import {Button, Header} from "../index";
 
@@ -38,12 +38,12 @@ const meta: Meta<typeof ModalComponent> = {
         speed: {
             type: "number",
         },
-        onClose: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
-        description: hideInTable,
-        overlayClassName: hideInTable,
-        childrenClassName: hideInTable,
+        onClose: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        description: HideInTable,
+        overlayClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 

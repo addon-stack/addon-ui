@@ -11,7 +11,7 @@ import {
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./scroll-area.module.scss";
+import styles from "./scroll-area.module.scss?isolation";
 
 export interface ScrollAreaProps extends ScrollAreaRootProps {
     xOffset?: number;

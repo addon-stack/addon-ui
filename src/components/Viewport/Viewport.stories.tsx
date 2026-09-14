@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Meta} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import {
     Button,
@@ -21,7 +21,7 @@ const meta: Meta<typeof ViewportProvider> = {
     component: ViewportProvider,
     tags: ["autodocs"],
     argTypes: {
-        children: hideInTable,
+        children: HideInTable,
     },
 };
 

@@ -43,6 +43,7 @@ Only the prop name, type, and default are listed below. Modal also supports all 
 
 | Prop          | Type                                                                                                                                                                               | Default       |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `container`   | `Element \| DocumentFragment \| null`                                                                                                                                              | —             |
 | `radius`      | `'none' \| 'small' \| 'medium' \| 'large'`                                                                                                                                         | —             |
 | `closeButton` | `boolean \| IconButtonProps \| ReactElement`                                                                                                                                       | `true`        |
 | `onClose`     | `() => void`                                                                                                                                                                       | —             |
@@ -151,3 +152,7 @@ import {UIProvider} from "addon-ui";
 - Provide meaningful `title` and optional `description` for assistive technologies (Modal renders them via Dialog in a visually hidden region).
 - Focus is managed and background content is inert when `modal` is true (handled by Radix UI Dialog).
 - Ensure close controls are keyboard accessible; Esc key handling can be controlled via Radix content props.
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

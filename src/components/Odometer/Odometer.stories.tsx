@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import OdometerComponent from "./Odometer";
 
@@ -22,8 +22,8 @@ const meta: Meta<typeof OdometerComponent> = {
             description: "Animation duration in milliseconds.",
             control: {type: "number"},
         },
-        auto: hideInTable,
-        className: hideInTable,
+        auto: HideInTable,
+        className: HideInTable,
     },
 };
 

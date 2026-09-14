@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import TextFieldComponent from "./TextField";
 import {TextFieldAccent, TextFieldRadius, TextFieldSize, TextFieldVariant} from "./types";
@@ -48,12 +48,12 @@ const meta: Meta<typeof TextFieldComponent> = {
             options: ["text", "number", "password"],
             control: {type: "select"},
         },
-        label: hideInTable,
-        value: hideInTable,
-        defaultValue: hideInTable,
-        inputClassName: hideInTable,
-        afterClassName: hideInTable,
-        beforeClassName: hideInTable,
+        label: HideInTable,
+        value: HideInTable,
+        defaultValue: HideInTable,
+        inputClassName: HideInTable,
+        afterClassName: HideInTable,
+        beforeClassName: HideInTable,
     },
 };
 

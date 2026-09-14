@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import {ButtonColor, ButtonRadius, ButtonSize, ButtonVariant} from "./types";
 
-import styles from "./button.module.scss";
+import styles from "./button.module.scss?isolation";
 
 export interface ButtonProps extends BaseButtonProps {
     variant?: ButtonVariant;

@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import SwitchComponent from "./Switch";
 
@@ -9,9 +9,9 @@ const meta: Meta<typeof SwitchComponent> = {
     component: SwitchComponent,
     tags: ["autodocs"],
     argTypes: {
-        children: hideInTable,
-        className: hideInTable,
-        thumbClassName: hideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        thumbClassName: HideInTable,
     },
 };
 

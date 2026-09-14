@@ -4,7 +4,7 @@ import classnames from "classnames";
 import {cloneOrCreateElement} from "../../utils";
 import {useComponentProps} from "../../providers";
 
-import styles from "./header.module.scss";
+import styles from "./header.module.scss?isolation";
 
 export interface HeaderProps extends Omit<ComponentProps<"header">, "title"> {
     title?: ReactNode;

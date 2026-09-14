@@ -15,7 +15,9 @@ export default tseslint.config(
             "dist",
             "dist-types",
             "addon",
-            ".adnbn",
+            "**/.adnbn/**",
+            "tests/fixtures/shadow-dom/artifacts/**",
+            "test-results",
             "build",
             "node_modules",
             "coverage",
@@ -24,6 +26,17 @@ export default tseslint.config(
             "*.config.js",
             "storybook-static",
         ],
+    },
+    {
+        ...js.configs.recommended,
+        files: ["tests/**/*.mjs", "playwright.config.mjs"],
+        languageOptions: {
+            globals: {...globals.node, ...globals.browser},
+        },
+        rules: {
+            ...js.configs.recommended.rules,
+            "no-empty-pattern": ["error", {allowObjectPatternsAsParameters: true}],
+        },
     },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -39,6 +52,7 @@ export default tseslint.config(
         rules: {
             ...reactHooks.configs.recommended.rules,
             "react-refresh/only-export-components": "off",
+            "@typescript-eslint/no-unused-vars": ["error", {ignoreRestSiblings: true}],
         },
     },
     storybook.configs["flat/recommended"]

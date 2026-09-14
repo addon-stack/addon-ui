@@ -9,9 +9,13 @@ import {ThemeProvider, ThemeProviderProps} from "../theme";
 
 import {ComponentsProps, Config, ExtraProps, Icons} from "../../types/config";
 
-import "./styles/default.scss";
-import "./styles/reset.scss";
-import "addon-ui-style.scss";
+import "./styles/default.scss?isolation";
+import "./styles/reset.scss?isolation";
+import "./styles/base.scss?isolation";
+import "./styles/document.scss?isolation";
+import "addon-ui-style.scss?isolation";
+
+import {PortalContext, PortalContainer} from "./context";
 
 import config from "addon-ui-config";
 
@@ -38,10 +42,14 @@ export interface UIProviderProps extends Partial<Config>, Pick<ThemeProviderProp
      * ```
      */
     view?: string;
+    /**
+     * Target for floating layers. Null waits without falling back to document.body.
+     */
+    portal?: PortalContainer;
 }
 
 const UIProvider: FC<PropsWithChildren<UIProviderProps>> = props => {
-    const {children, components = {}, extra = {}, icons = {}, storage, view, container = "html"} = props;
+    const {children, components = {}, extra = {}, icons = {}, storage, view, container = "html", portal} = props;
 
     const componentsProps = useMemo<ComponentsProps>(() => merge(config.components || {}, components), [components]);
 
@@ -73,7 +81,9 @@ const UIProvider: FC<PropsWithChildren<UIProviderProps>> = props => {
     return (
         <ThemeProvider components={componentsProps} storage={storage} container={container}>
             <ExtraProvider extra={extraProps}>
-                <IconsProvider icons={svgIcons}>{children}</IconsProvider>
+                <PortalContext.Provider value={portal}>
+                    <IconsProvider icons={svgIcons}>{children}</IconsProvider>
+                </PortalContext.Provider>
             </ExtraProvider>
         </ThemeProvider>
     );

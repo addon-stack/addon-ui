@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import AvatarComponent from "./Avatar";
 import {AvatarRadius, AvatarSize} from "./types";
@@ -28,9 +28,9 @@ const meta: Meta<typeof AvatarComponent> = {
             options: radius,
             control: {type: "select"},
         },
-        fallbackClassName: hideInTable,
-        imageClassName: hideInTable,
-        children: hideInTable,
+        fallbackClassName: HideInTable,
+        imageClassName: HideInTable,
+        children: HideInTable,
     },
 };
 

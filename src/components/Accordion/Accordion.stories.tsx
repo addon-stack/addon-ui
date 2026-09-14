@@ -1,7 +1,7 @@
 import React from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import {Footer, Header, ViewportProvider} from "../index";
 
@@ -42,7 +42,7 @@ const meta: Meta<typeof AccordionComponent> = {
             control: {type: "boolean"},
         },
 
-        children: hideInTable,
+        children: HideInTable,
     },
 };
 

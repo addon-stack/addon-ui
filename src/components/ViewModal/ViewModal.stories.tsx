@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Meta} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import {HideInTable} from "../../utils";
 
 import {Button} from "../index";
 
@@ -30,16 +30,16 @@ const meta: Meta<typeof ViewModalComponent> = {
         speed: {
             type: "number",
         },
-        children: hideInTable,
-        className: hideInTable,
-        wrapClassName: hideInTable,
-        titleClassName: hideInTable,
-        bodyClassName: hideInTable,
-        headerClassName: hideInTable,
-        beforeClassName: hideInTable,
-        afterClassName: hideInTable,
-        subtitleClassName: hideInTable,
-        childrenClassName: hideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        wrapClassName: HideInTable,
+        titleClassName: HideInTable,
+        bodyClassName: HideInTable,
+        headerClassName: HideInTable,
+        beforeClassName: HideInTable,
+        afterClassName: HideInTable,
+        subtitleClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 

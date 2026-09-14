@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const hideInTable = {table: {disable: true}};
+export const HideInTable = {table: {disable: true}};
 
 export const capitalizeFirstLetter = (text: string) => {
     if (text.length < 2) return text;

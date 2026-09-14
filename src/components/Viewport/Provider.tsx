@@ -13,7 +13,7 @@ import {ViewportContext, ViewportMode, ViewportSizes} from "./context";
 
 import classnames from "classnames";
 
-import styles from "./viewport.module.scss";
+import styles from "./viewport.module.scss?isolation";
 
 export type ViewportProps = ComponentProps<"div"> & {
     mode?: ViewportMode;

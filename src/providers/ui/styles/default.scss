@@ -1,6 +1,6 @@
 @use "../../../styles/mixins" as theme;
 
-:root {
+@include theme.root {
   --viewport-height: var(--viewport-min-height);
   --viewport-width: var(--viewport-min-width);
 

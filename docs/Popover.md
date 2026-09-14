@@ -49,18 +49,18 @@ Supports contextual props: `useComponentProps("popoverTrigger")`.
 
 #### Props: PopoverContent
 
-| Prop                | Type                      | Default |
-| ------------------- | ------------------------- | ------- |
-| `maxWidth`          | `number`                  | —       |
-| `minWidth`          | `number`                  | —       |
-| `fullWidth`         | `boolean`                 | —       |
-| `arrow`             | `boolean`                 | —       |
-| `arrowWidth`        | `number`                  | —       |
-| `arrowHeight`       | `number`                  | —       |
-| `overlay`           | `boolean`                 | —       |
-| `overlayClassname`  | `string`                  | —       |
-| `container`         | `HTMLElement`             | —       |
-| Radix Content props | all `PopoverContentProps` | —       |
+| Prop                | Type                                  | Default |
+| ------------------- | ------------------------------------- | ------- |
+| `maxWidth`          | `number`                              | —       |
+| `minWidth`          | `number`                              | —       |
+| `fullWidth`         | `boolean`                             | —       |
+| `arrow`             | `boolean`                             | —       |
+| `arrowWidth`        | `number`                              | —       |
+| `arrowHeight`       | `number`                              | —       |
+| `overlay`           | `boolean`                             | —       |
+| `overlayClassname`  | `string`                              | —       |
+| `container`         | `Element \| DocumentFragment \| null` | —       |
+| Radix Content props | all `PopoverContentProps`             | —       |
 
 Supports contextual props: `useComponentProps("popoverContent")`.
 
@@ -134,3 +134,7 @@ Useful: https://www.radix-ui.com/primitives/docs/components/popover
 - The component supports global configuration via `ui.config.ts`.
 - `PopoverContent` can be customized with `arrow`, `fullWidth`, and `overlay` props.
 - `PopoverTrigger` supports `center` alignment.
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. Set this prop on `PopoverContent`. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

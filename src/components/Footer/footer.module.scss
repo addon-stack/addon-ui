@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as theme;
+
 $root: footer;
 
 .#{$root} {
@@ -13,7 +15,7 @@ $root: footer;
     background-color var(--footer-speed-bg, var(--speed-color)),
     box-shadow var(--footer-speed-box-shadow, var(--speed-color));
 
-  [dir="rtl"] & {
+  @include theme.rtl {
     flex-direction: row-reverse;
   }
 
@@ -24,7 +26,7 @@ $root: footer;
   &--reverse {
     flex-direction: row-reverse;
 
-    [dir="rtl"] & {
+    @include theme.rtl {
       flex-direction: row;
     }
   }
@@ -34,14 +36,14 @@ $root: footer;
     display: flex;
     justify-content: space-between;
 
-    [dir="rtl"] & {
+    @include theme.rtl {
       flex-direction: row-reverse;
     }
 
     .#{$root}--reverse & {
       flex-direction: row-reverse;
 
-      [dir="rtl"] & {
+      @include theme.rtl {
         flex-direction: row;
       }
     }
@@ -52,7 +54,7 @@ $root: footer;
     align-items: center;
     gap: var(--footer-left-gap, var(--footer-gap, 15px));
 
-    [dir="rtl"] & {
+    @include theme.rtl {
       flex-direction: row-reverse;
     }
   }
@@ -62,7 +64,7 @@ $root: footer;
     align-items: center;
     gap: var(--footer-right-gap, var(--footer-gap, 15px));
 
-    [dir="rtl"] & {
+    @include theme.rtl {
       flex-direction: row-reverse;
     }
   }

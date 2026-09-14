@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import {AvatarRadius, AvatarSize} from "./types";
 
-import styles from "./avatar.module.scss";
+import styles from "./avatar.module.scss?isolation";
 
 export interface AvatarProps extends AvatarImageProps, Pick<AvatarFallbackProps, "delayMs"> {
     imageClassName?: string;

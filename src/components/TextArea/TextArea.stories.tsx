@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import TextAreaComponent from "./TextArea";
 import {TextAreaRadius, TextAreaSize, TextAreaVariant} from "./types";
@@ -34,8 +34,8 @@ const meta: Meta<typeof TextAreaComponent> = {
             control: {type: "select"},
         },
 
-        label: hideInTable,
-        children: hideInTable,
+        label: HideInTable,
+        children: HideInTable,
     },
 };
 

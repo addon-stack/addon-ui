@@ -3,7 +3,7 @@ import classnames from "classnames";
 
 import {AccordionItemProps as AccordionItemRadixProps, Item} from "@radix-ui/react-accordion";
 
-import styles from "./accordion.module.scss";
+import styles from "./accordion.module.scss?isolation";
 
 export type AccordionItemProps = AccordionItemRadixProps;
 

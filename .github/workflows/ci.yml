@@ -28,11 +28,11 @@ jobs:
       - id: set
         run: |
           if [[ "${{ inputs.full }}" == "true" ]]; then
-            echo 'matrix={"os":["ubuntu-latest"],"node":[22]}' >> $GITHUB_OUTPUT
-            echo 'name_suffix=(full matrix)' >> $GITHUB_OUTPUT
+            echo 'matrix={"os":["ubuntu-latest"],"node":[22]}' >> "$GITHUB_OUTPUT"
+            echo 'name_suffix=(full matrix)' >> "$GITHUB_OUTPUT"
           else
-            echo 'matrix={"os":["ubuntu-latest"],"node":[22]}' >> $GITHUB_OUTPUT
-            echo 'name_suffix=' >> $GITHUB_OUTPUT
+            echo 'matrix={"os":["ubuntu-latest"],"node":[22]}' >> "$GITHUB_OUTPUT"
+            echo 'name_suffix=' >> "$GITHUB_OUTPUT"
           fi
 
   testing:
@@ -69,6 +69,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Typecheck component tests
+        run: npm run typecheck:tests
+
       - name: Test
         run: npm run test:ci
 
@@ -81,3 +84,42 @@ jobs:
         with:
           name: coverage-${{ matrix.os }}-node${{ matrix.node }}
           path: coverage
+
+  browser:
+    name: Extension integration and browsers
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tests/fixtures/shadow-dom/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install fixture dependencies
+        run: npm run test:install
+
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium firefox
+
+      - name: Test extension builds and browser behavior
+        run: npm run test:e2e
+
+      - name: Upload browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-results
+          path: test-results
+          retention-days: 14
