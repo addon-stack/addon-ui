@@ -1,5 +1,12 @@
 node_modules/
 dist/
+dist-types/
 build/
+coverage/
+storybook-static/
+**/.adnbn/
+/addon/
 .github/workflows/*.yml
 CHANGELOG.md
+test-results/
+tests/fixtures/shadow-dom/artifacts/
