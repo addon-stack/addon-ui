@@ -1,5 +1,3 @@
-@use "../../styles/mixins" as theme;
-
 .list-item {
   display: flex;
   flex-direction: row;
@@ -9,10 +7,6 @@
   box-sizing: border-box;
   line-height: var(--list-item-line-height, var(--line-height, 1rem));
   transition: background-color var(--list-item-speed-bg, var(--speed-color));
-
-  @include theme.rtl {
-    flex-direction: row-reverse;
-  }
 
   &__center {
     flex-grow: 1;

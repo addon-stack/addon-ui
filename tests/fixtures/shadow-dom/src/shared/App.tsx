@@ -19,6 +19,7 @@ import {
 } from "addon-ui";
 
 const LazyPanel = lazy(() => import("./LazyPanel"));
+const RtlLayout = lazy(() => import("./RtlLayout"));
 
 const icons = {
     sample: () => <rect x="2" y="3" width="17" height="13" />,
@@ -35,6 +36,7 @@ function Controls() {
     const [toastForceMount, setToastForceMount] = useState(false);
     const [lazy, setLazy] = useState(false);
     const [empty, setEmpty] = useState(false);
+    const [rtlLayout, setRtlLayout] = useState(false);
 
     const selector = (
         <Select defaultValue="b">
@@ -213,6 +215,14 @@ function Controls() {
                 <Suspense fallback="Loading">
                     <LazyPanel />
                     <Icon name="later" data-testid="late-icon" />
+                </Suspense>
+            )}
+            <button data-testid="rtl-layout-open" onClick={() => setRtlLayout(true)}>
+                Direction layout
+            </button>
+            {rtlLayout && (
+                <Suspense fallback="Loading layout">
+                    <RtlLayout />
                 </Suspense>
             )}
         </div>

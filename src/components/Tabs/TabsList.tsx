@@ -59,7 +59,13 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
 
         const listRect = list.getBoundingClientRect();
         const triggerRect = activeTrigger.getBoundingClientRect();
-        indicator.style.left = `${triggerRect.left - listRect.left + list.scrollLeft}px`;
+        const rtl = list.ownerDocument.defaultView?.getComputedStyle(list).direction === "rtl";
+
+        const offset = rtl
+            ? listRect.right - triggerRect.right - list.scrollLeft
+            : triggerRect.left - listRect.left + list.scrollLeft;
+
+        indicator.style.insetInlineStart = `${offset}px`;
         indicator.style.width = `${triggerRect.width}px`;
 
         setModificators({

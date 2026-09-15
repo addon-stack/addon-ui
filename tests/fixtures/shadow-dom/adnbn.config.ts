@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import {createRequire} from "node:module";
 import path from "node:path";
-import type {RspackPluginInstance} from "@rspack/core";
+import {LightningCssMinimizerRspackPlugin, type RspackPluginInstance, SwcJsMinimizerRspackPlugin} from "@rspack/core";
 import {defineConfig, Workspace} from "adnbn";
 
 import ui from "addon-ui/plugin";
@@ -56,6 +56,17 @@ export default defineConfig({
     version: "0.0.0",
     plugins: [ui()],
     bundler: () => ({
+        optimization: {
+            minimizer: [
+                new SwcJsMinimizerRspackPlugin(),
+                new LightningCssMinimizerRspackPlugin({
+                    minimizerOptions: {
+                        // Preserve direction-based CSS when dir changes without changing lang.
+                        exclude: {logicalProperties: true, dirSelector: true},
+                    },
+                }),
+            ],
+        },
         resolve: {
             alias: {
                 ...frameworkAliases,
