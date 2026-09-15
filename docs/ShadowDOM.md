@@ -7,30 +7,33 @@ Mount the complete `UIProvider` tree inside each ShadowRoot. The provider still 
 
 The application explicitly supplies both targets. `UIProvider` does not inspect the content-script environment or discover a ShadowRoot to choose them. Omitting the targets keeps the ordinary `"html"` and `document.body` defaults, even when the provider is mounted inside a ShadowRoot.
 
+With **AddonBone 0.12.0 or newer**, use the injected React render props directly:
+
 ```tsx
-import React, {useCallback, useState} from "react";
+import React from "react";
+import {defineContentScript} from "adnbn";
 import {UIProvider} from "addon-ui";
 
-export function ContentApp() {
-    const [root, setRoot] = useState<ShadowRoot | null>(null);
-    const ref = useCallback((element: HTMLDivElement | null) => {
-        if (element) {
-            const tree = element.getRootNode();
-            if (tree instanceof ShadowRoot) setRoot(tree);
-        }
-    }, []);
-
-    return (
-        <div ref={ref}>
-            <UIProvider container={root?.host ?? false} portal={root}>
-                <App />
-            </UIProvider>
-        </div>
-    );
-}
+export default defineContentScript({
+    matches: ["<all_urls>"],
+    isolation: "shadow",
+    render: ({container, boundary}) => (
+        <UIProvider container={container} portal={boundary}>
+            <App />
+        </UIProvider>
+    ),
+});
 ```
 
-This component must already be rendered by the application's Shadow DOM adapter. It does not create a shadow tree. The current AddonBone React adapter supplies `anchor`; derive the root through the mounted ref. A direct host/target API in that adapter is a follow-up.
+The framework creates the boundary and target before invoking the render component:
+
+- `container` is the mounted outer element, which is the shadow host with `isolation: "shadow"`.
+- `target` is the element where the framework mounts React. Keep portals outside this element.
+- `boundary` is the actual ShadowRoot with `isolation: "shadow"`; pass it as `UIProvider.portal`.
+
+Pass a component function to `render` to receive these props; an existing React element does not receive them automatically. No ref, root discovery or waiting state is needed for this integration. The optional `target` setting customizes the React mount element. The optional `boundary` callback in the content-script definition runs setup before rendering and can return cleanup; it is distinct from the DOM node supplied as a render prop.
+
+This mapping is specific to Shadow DOM isolation. Without isolation, `boundary` is `undefined`; with iframe isolation it is an iframe element, not a portal destination inside its document. For other mounting adapters that do not supply ready targets, derive the host and ShadowRoot through a mounted ref and `getRootNode()`, passing `container={false}` and `portal={null}` until they are available.
 
 ## Portal resolution
 
@@ -40,7 +43,7 @@ The provider's `container` is not a portal target. Changing `portal` does not mo
 
 ## CSS delivery with AddonBone
 
-CSS delivery belongs to AddonBone. Shadow DOM integration requires **AddonBone 0.11.0 or newer** and a content script configured with Shadow DOM isolation. All addon-ui stylesheet imports carry `?isolation`, including component CSS Modules, provider base styles and the virtual `#addon-ui/style.scss` overrides. The framework delivers them into the content script's ShadowRoot; popup styles are linked to the popup document as usual. No custom CSS rule or stylesheet loader is needed in the application.
+CSS delivery belongs to AddonBone. Shadow DOM integration requires **AddonBone 0.12.0 or newer** and a content script configured with Shadow DOM isolation. All addon-ui stylesheet imports carry `?isolation`, including component CSS Modules, provider base styles and the virtual `#addon-ui/style.scss` overrides. The framework delivers them into the content script's ShadowRoot; popup styles are linked to the popup document as usual. No custom CSS rule or stylesheet loader is needed in the application.
 
 Mark the application's own stylesheet imports with `?isolation` too:
 
@@ -50,7 +53,7 @@ import styles from "./panel.module.scss?isolation";
 
 The marker applies to that stylesheet and the Sass sources compiled into it. It does not mark separate CSS imports inside third-party components. The virtual module remains named `#addon-ui/style.scss`; only its import carries the query. Styles from `ui.style.scss` already participate through that virtual import.
 
-The automated [integration fixture](../tests/fixtures/shadow-dom/README.md) installs the published `adnbn@0.11.0` from npm and links the current addon-ui source through `file:`. It uses the framework's standard CSS rules, chunk separation, manifest/WAR generation and isolated-styles runtime. A general mechanism for registering unmarked third-party library styles remains a possible follow-up in AddonBone.
+The automated [integration fixture](../tests/fixtures/shadow-dom/README.md) installs the published `adnbn@0.12.0` from npm and links the current addon-ui source through `file:`. It uses the framework's standard CSS rules, chunk separation, manifest/WAR generation and isolated-styles runtime. A general mechanism for registering unmarked third-party library styles remains a possible follow-up in AddonBone.
 
 A ShadowRoot stylesheet cannot select the outer page's `:root`. The library declares tokens for `:root, :host`; only the relevant selector matches in each tree. Tag reset rules affect elements inside that tree. Typography and text color apply to `body, :host`; document background and `overflow: hidden` apply to `body` only. Virtual user overrides are imported after all library base styles. No `all: initial` reset is used.
 
@@ -81,7 +84,7 @@ Modal and Drawer retain Radix's background scroll lock. Their content stops `whe
 
 Select handles arrow keys, Home/End and typeahead within the shadow tree, skipping disabled options. Escape, selection and return to the trigger retain their Radix behavior. Nested shadow layers receive a stacking order above their parent; an explicit content `style.zIndex` still takes precedence.
 
-Radix's Dialog title diagnostic looks up the title with `document.getElementById`, so it can warn about a valid title inside ShadowRoot. This diagnostic is also present in the installed Radix production bundle. The actual Title and Description remain in the dialog's tree; the wrappers do not patch or silence Radix.
+The installed Radix Dialog registers Title and Description through React context. Browser checks verify accessible names and descriptions inside ShadowRoot without suppressing runtime warnings.
 
 ## Toast
 

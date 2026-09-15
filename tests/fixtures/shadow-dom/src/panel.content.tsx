@@ -1,6 +1,6 @@
 import React from "react";
 
-import {ContentScriptIsolation, type ContentScriptProps, defineContentScript} from "adnbn";
+import {type ContentScriptContainerProps, ContentScriptIsolation, defineContentScript} from "adnbn";
 
 import App from "./shared/App";
 
@@ -9,7 +9,7 @@ export default defineContentScript({
     runAt: "document_end",
     anchor: ".ui-anchor",
     isolation: ContentScriptIsolation.Shadow,
-    container: ({anchor}: ContentScriptProps) => {
+    container: ({anchor}: ContentScriptContainerProps) => {
         const host = document.createElement("aside");
         host.className = "addon-ui-host";
 
@@ -22,5 +22,6 @@ export default defineContentScript({
 
         return host;
     },
-    render: () => <App shadow />,
+    target: {tagName: "div", className: "addon-ui-target"},
+    render: ({container, boundary}) => <App container={container} portal={boundary} />,
 });

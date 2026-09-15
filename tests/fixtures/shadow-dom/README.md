@@ -1,6 +1,8 @@
 # Shadow DOM extension fixture
 
-This private npm package is an input to the repository's automated integration and browser suites. It links addon-ui through `file:../../..` and installs published **AddonBone 0.11.0** from npm. No framework snapshot or preparation script is needed. Install and run tests from the repository root using the [test commands](../../README.md).
+This private npm package is an input to the repository's automated integration and browser suites. It links addon-ui through `file:../../..` and installs published **AddonBone 0.12.0** from npm. No framework snapshot or preparation script is needed. Install and run tests from the repository root using the [test commands](../../README.md).
+
+The content script passes the framework-injected `container` and `boundary` directly to `UIProvider`. Its custom `target` is the React mount element; browser checks verify that modal portals stay in the same ShadowRoot outside that target.
 
 The extension includes an ordinary popup, two independent ShadowRoots, shared UI components and a lazy module. Its English locale catalogue satisfies Select's framework locale dependency. Explicit runtime and TypeScript aliases keep the linked library on the fixture's framework installation.
 

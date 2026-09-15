@@ -107,3 +107,26 @@ Both popup documents open in extension tabs, so the browser toolbar surface is o
 - `npm run verify` passes: 60 tooling checks, 100 Jest tests, lint, source/test types and declarations.
   Storybook also builds successfully.
 - These checks ran locally on macOS. The browser suite's popup and input limitations above still apply.
+
+## AddonBone boundary integration — 2026-09-15
+
+- Updated the root development dependency and automated fixture to published `adnbn@0.12.0`, including both
+  lockfiles. The library's minimum framework peer version is now `>=0.12.0`, matching the documented
+  boundary integration and excluding AddonBone 0.11.x.
+- Reviewed the installed package's React render resolver, mounting lifecycle, isolation setup and target resolver.
+  Render functions receive ready `container`, `target` and `boundary` values. The fixture now passes container
+  and boundary directly to UIProvider, removing the ref/state/getRootNode handoff. Container factories use
+  `ContentScriptContainerProps`, which describes the earlier lifecycle phase before these elements exist.
+- A browser assertion verifies that the panel mounts in the framework's custom target, provider attributes reach
+  the host, and the modal portal remains in the same ShadowRoot outside the React target.
+- `npm run verify` passes: lint, source/test types, 60 tooling checks, 100 Jest tests and declarations.
+  Fixture types and Storybook also pass. The complete build/Chrome/Firefox matrix passes all 26 checks in
+  30.0 seconds, with no skips or retries and no suppressed browser runtime warnings.
+- Both builds verify one framework installation for CLI/types/runtime and standard CSS isolation, WAR assets,
+  lazy styles and shared popup CSS. No library runtime changes or custom stylesheet routing were required.
+- Validation ran locally on macOS; the popup and input limitations recorded above still apply. Iframe isolation
+  and closed ShadowRoot mode were not added to the browser matrix in this update.
+
+- Pre-commit revalidation after the RTL commit: `npm run verify` passes again; the expanded browser matrix
+  reports 29 passed and one existing Firefox document RTL skip in 34.1 seconds. The Shadow DOM RTL cases
+  pass in both browsers. No additional skips or retries were introduced for the framework upgrade.

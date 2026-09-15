@@ -29,7 +29,10 @@
   "bugs": {
     "url": "https://github.com/addon-stack/addon-ui/issues"
   },
-  "types": "./dist-types/index.d.ts",
+  "imports": {
+    "#addon-ui/config": "./src/virtual/config.ts",
+    "#addon-ui/style.scss": "./src/virtual/style.scss"
+  },
   "exports": {
     ".": {
       "types": "./dist-types/index.d.ts",
@@ -45,6 +48,7 @@
     },
     "./theme": "./src/styles/mixins.scss"
   },
+  "types": "./dist-types/index.d.ts",
   "sideEffects": [
     "*.css",
     "*.scss"
@@ -132,7 +136,7 @@
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "adnbn": "^0.11.0",
+    "adnbn": "^0.12.0",
     "depcheck": "^1.4.7",
     "eslint": "^10.9.1",
     "eslint-plugin-import-x": "^4.17.1",
@@ -157,7 +161,7 @@
   "peerDependencies": {
     "@types/react": "*",
     "@types/react-dom": "*",
-    "adnbn": ">=0.11.0",
+    "adnbn": ">=0.12.0",
     "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc",
     "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
   },
@@ -173,9 +177,5 @@
     "flat-cache": "^6.1.18",
     "glob": "^13.0.0",
     "test-exclude": "^8.0.0"
-  },
-  "imports": {
-    "#addon-ui/config": "./src/virtual/config.ts",
-    "#addon-ui/style.scss": "./src/virtual/style.scss"
   }
 }

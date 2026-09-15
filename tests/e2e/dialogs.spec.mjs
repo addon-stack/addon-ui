@@ -4,6 +4,20 @@ test("traps modal focus and yields to nested Popover and Modal", async ({page, h
     await host.getByTestId("open-modal").click();
     await expect(host.getByTestId("modal")).toHaveAccessibleName("Modal");
     await expect(host.getByTestId("modal")).toHaveAccessibleDescription("Focus and scrolling");
+
+    // The framework mounts React into target; the provider portals into the injected boundary.
+    expect(await host.getByTestId("modal").evaluate(element => {
+        const root = element.getRootNode();
+        const target = root.querySelector(".addon-ui-target");
+
+        return {
+            shadow: root instanceof ShadowRoot,
+            hostTheme: root.host.getAttribute("theme"),
+            panelInTarget: !!target?.querySelector('[data-testid="panel"]'),
+            modalInTarget: target?.contains(element),
+        };
+    })).toEqual({shadow: true, hostTheme: "light", panelInTarget: true, modalInTarget: false});
+
     await expect.poll(active).toBe("first");
     await host.getByTestId("last").focus();
     await page.keyboard.press("Tab");

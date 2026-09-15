@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useCallback, useState} from "react";
+import React, {lazy, Suspense, useState} from "react";
 
 import {
     Button,
@@ -15,6 +15,7 @@ import {
     Toast,
     Tooltip,
     UIProvider,
+    type UIProviderProps,
     useTheme,
 } from "addon-ui";
 
@@ -229,31 +230,15 @@ function Controls() {
     );
 }
 
-export default function App({shadow = false}: {shadow?: boolean}) {
-    const [root, setRoot] = useState<ShadowRoot | null>(null);
-
-    const ref = useCallback((element: HTMLDivElement | null) => {
-        if (element) {
-            const target = element.getRootNode();
-
-            if (target instanceof ShadowRoot) {
-                setRoot(target);
-            }
-        }
-    }, []);
-
+export default function App({container, portal}: Pick<UIProviderProps, "container" | "portal">) {
     const rootIcons =
-        root && (root.host as HTMLElement).style.left === "390px"
+        typeof container === "object" && (container as HTMLElement).style.left === "390px"
             ? {...icons, sample: () => <rect x="2" y="3" width="9" height="13" />}
             : icons;
 
     return (
-        <div ref={ref}>
-            <UIProvider
-                container={shadow ? (root?.host ?? false) : "html"}
-                portal={shadow ? root : undefined}
-                icons={rootIcons}
-            >
+        <div>
+            <UIProvider container={container} portal={portal} icons={rootIcons}>
                 <Controls />
             </UIProvider>
         </div>

@@ -172,7 +172,7 @@ Names without a supported extension (such as `ui.config` or `ui.style`) use exte
 priority: `.tsx` before `.ts`, and `.scss` before `.css`. An explicit supported extension
 selects that exact file; a missing `.ts` or `.css` file is not replaced by another extension.
 
-The plugin requires AddonBone 0.11.0 or newer. It generates the internal modules
+The plugin requires AddonBone 0.12.0 or newer. It generates the internal modules
 `#addon-ui/config` and `#addon-ui/style.scss` using the current Rspack compiler.
 During development it watches configuration/style files and their search directories,
 including directories that do not exist yet. Creating, editing or deleting these files
