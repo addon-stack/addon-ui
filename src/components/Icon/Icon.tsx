@@ -30,8 +30,8 @@ const Icon: ForwardRefRenderFunction<SVGSVGElement, IconProps> = (props, ref) =>
 
         return (
             <span
-                className={styles["icon--default"]}
-                style={{fontSize: `${width}px`, lineHeight: `${width}px`, width, height}}
+                className={classnames(styles["icon--default"], className)}
+                style={{fontSize: `${width}px`, lineHeight: `${width}px`, width, height, ...other.style}}
             >
                 ⁇
             </span>
