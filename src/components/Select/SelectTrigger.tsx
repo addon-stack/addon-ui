@@ -1,17 +1,20 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, useContext} from "react";
 
-import classnames from "classnames";
-
+import {useComposedRefs} from "@radix-ui/react-compose-refs";
 import {
     Icon,
-    SelectIconProps,
-    SelectTriggerProps as SelectTriggerRadixProps,
-    SelectValueProps,
+    type SelectIconProps,
+    type SelectTriggerProps as SelectTriggerRadixProps,
+    type SelectValueProps,
     Trigger,
     Value,
 } from "@radix-ui/react-select";
 
+import classnames from "classnames";
+
 import {useComponentProps} from "../../providers";
+
+import {SelectPortalContext} from "./context";
 
 import styles from "./select.module.scss?isolation";
 
@@ -25,6 +28,9 @@ export interface SelectTriggerProps extends SelectTriggerRadixProps {
 }
 
 const SelectTrigger: ForwardRefRenderFunction<HTMLButtonElement, SelectTriggerProps> = (props, ref) => {
+    const {setTrigger} = useContext(SelectPortalContext);
+    const triggerRef = useComposedRefs(ref, setTrigger);
+
     const {
         center,
         ellipsis = true,
@@ -39,7 +45,7 @@ const SelectTrigger: ForwardRefRenderFunction<HTMLButtonElement, SelectTriggerPr
 
     return (
         <Trigger
-            ref={ref}
+            ref={triggerRef}
             className={classnames(
                 styles["select__trigger"],
                 {
