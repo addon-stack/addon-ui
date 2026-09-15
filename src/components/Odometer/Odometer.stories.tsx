@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {HideInTable} from "../../utils";
 
@@ -42,7 +43,7 @@ export const OdometerCount = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setValue(prev => ++prev);
+            setValue(prev => prev + 1);
         }, 1000);
 
         return () => clearInterval(interval);

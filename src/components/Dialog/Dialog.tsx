@@ -1,11 +1,11 @@
-import React, {memo, useState, forwardRef, ForwardRefRenderFunction} from "react";
-import classnames from "classnames";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, useState} from "react";
+
 import {
     Content,
     Description,
-    DialogContentProps,
-    DialogPortalProps,
-    DialogProps as DialogRootProps,
+    type DialogContentProps,
+    type DialogPortalProps,
+    type DialogProps as DialogRootProps,
     Overlay,
     Portal,
     Root,
@@ -13,10 +13,11 @@ import {
 } from "@radix-ui/react-dialog";
 import {VisuallyHidden} from "radix-ui";
 
+import classnames from "classnames";
+
+import {FloatingLayerContext, useFloatingFocus, useFloatingLayer} from "../../hooks/floating";
 import {useComponentProps, usePortalContainer} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
-
-import {FloatingLayerContext, useFloatingLayer, useFloatingFocus} from "../../hooks/floating";
 import {getShadowRoot} from "../../utils/dom/shadow";
 
 import styles from "./dialog.module.scss?isolation";
@@ -51,6 +52,7 @@ export const DialogPropsKeys = new Set<keyof DialogProps>([
 const Dialog: ForwardRefRenderFunction<HTMLDivElement, DialogProps> = (props, ref) => {
     const config = useComponentProps("dialog");
     const container = usePortalContainer(props.container, config?.container);
+
     const {
         speed = 200,
         open,
@@ -114,11 +116,17 @@ const Dialog: ForwardRefRenderFunction<HTMLDivElement, DialogProps> = (props, re
                         }}
                         onWheel={event => {
                             onWheel?.(event);
-                            if (getShadowRoot(event.currentTarget)) event.stopPropagation();
+
+                            if (getShadowRoot(event.currentTarget)) {
+                                event.stopPropagation();
+                            }
                         }}
                         onTouchMove={event => {
                             onTouchMove?.(event);
-                            if (getShadowRoot(event.currentTarget)) event.stopPropagation();
+
+                            if (getShadowRoot(event.currentTarget)) {
+                                event.stopPropagation();
+                            }
                         }}
                     >
                         <VisuallyHidden.Root>

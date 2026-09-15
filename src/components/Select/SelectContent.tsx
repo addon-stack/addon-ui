@@ -1,24 +1,24 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo, useContext, useLayoutEffect} from "react";
-
-import classnames from "classnames";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, useContext, useLayoutEffect} from "react";
 
 import {
     Arrow,
     Content,
     Portal,
-    SelectContentProps as SelectContentRadixProps,
-    SelectPortalProps,
+    type SelectContentProps as SelectContentRadixProps,
+    type SelectPortalProps,
     SelectScrollDownButton,
     SelectScrollUpButton,
-    SelectViewportProps,
+    type SelectViewportProps,
     Viewport,
 } from "@radix-ui/react-select";
 
-import {useComponentProps, usePortalContainer} from "../../providers";
+import classnames from "classnames";
 
 import {FloatingLayerContext, useFloatingLayer} from "../../hooks/floating";
-import {useSelectNavigation} from "./hooks/use-select-navigation";
+import {useComponentProps, usePortalContainer} from "../../providers";
+
 import {SelectPortalContext, SelectTypeaheadContext} from "./context";
+import {useSelectNavigation} from "./hooks/use-select-navigation";
 
 import styles from "./select.module.scss?isolation";
 
@@ -38,9 +38,11 @@ const SelectContent: ForwardRefRenderFunction<HTMLDivElement, SelectContentProps
     const {open, setReady} = useContext(SelectPortalContext);
     const layer = useFloatingLayer({ref, active: open});
     const navigation = useSelectNavigation(open);
+
     useLayoutEffect(() => {
         setReady(container !== null);
     }, [container, setReady]);
+
     const {
         arrow,
         arrowWidth,
@@ -103,8 +105,12 @@ const SelectContent: ForwardRefRenderFunction<HTMLDivElement, SelectContentProps
             {arrow && <Arrow className={styles["select__arrow"]} width={arrowWidth} height={arrowHeight} />}
         </Content>
     );
+
     // Closed Content registers items in Radix's detached fragment. Never mount open Content inline.
-    if (container === null) return open ? null : content;
+    if (container === null) {
+        return open ? null : content;
+    }
+
     return <Portal container={container}>{content}</Portal>;
 };
 

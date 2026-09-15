@@ -1,5 +1,6 @@
 import React, {Fragment} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
@@ -7,12 +8,14 @@ import TextFieldComponent from "./TextField";
 import {TextFieldAccent, TextFieldRadius, TextFieldSize, TextFieldVariant} from "./types";
 
 const variants: TextFieldVariant[] = [TextFieldVariant.Regular, TextFieldVariant.Outlined, TextFieldVariant.Filled];
+
 const sizes: (TextFieldSize | "default")[] = [
     TextFieldSize.Small,
     "default",
     TextFieldSize.Medium,
     TextFieldSize.Large,
 ];
+
 const radius: (TextFieldRadius | "default")[] = [
     TextFieldRadius.None,
     TextFieldRadius.Small,
@@ -21,6 +24,7 @@ const radius: (TextFieldRadius | "default")[] = [
     TextFieldRadius.Large,
     TextFieldRadius.Full,
 ];
+
 const accents: (TextFieldAccent | "default")[] = ["default", TextFieldAccent.Success, TextFieldAccent.Error];
 
 const meta: Meta<typeof TextFieldComponent> = {

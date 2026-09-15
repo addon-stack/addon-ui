@@ -1,9 +1,9 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {HideInTable} from "../../utils";
-
-import {ListItem, Button, ButtonSize, ButtonVariant, Avatar, AvatarSize} from "../index";
+import {Avatar, AvatarSize, Button, ButtonSize, ButtonVariant, ListItem} from "../index";
 
 import ListComponent from "./List";
 

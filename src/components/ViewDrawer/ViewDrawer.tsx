@@ -1,10 +1,9 @@
-import React, {FC, memo} from "react";
+import React, {type FC, memo} from "react";
 
-import {splitProps} from "../../utils";
 import {useComponentProps} from "../../providers";
-
-import {Drawer, DrawerProps, DrawerPropsKeys} from "../Drawer";
-import {View, ViewProps, ViewPropsKeys} from "../View";
+import {splitProps} from "../../utils";
+import {Drawer, type DrawerProps, DrawerPropsKeys} from "../Drawer";
+import {View, type ViewProps, ViewPropsKeys} from "../View";
 
 export type ViewDrawerProps = Omit<DrawerProps, "title"> & ViewProps;
 

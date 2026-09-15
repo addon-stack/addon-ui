@@ -1,23 +1,31 @@
-import React, {memo, ReactElement, ReactNode, forwardRef, ForwardRefRenderFunction, useState} from "react";
-import classnames from "classnames";
+import React, {
+    forwardRef,
+    type ForwardRefRenderFunction,
+    memo,
+    type ReactElement,
+    type ReactNode,
+    useState,
+} from "react";
+
 import {
     Description,
     Provider,
     Root,
     Title,
-    ToastProps as ToastRootProps,
-    ToastProviderProps,
+    type ToastProps as ToastRootProps,
+    type ToastProviderProps,
     Viewport,
 } from "@radix-ui/react-toast";
 
-import {IconButton, IconButtonProps} from "../IconButton";
-import {cloneOrCreateElement} from "../../utils";
+import classnames from "classnames";
+
 import {useComponentProps} from "../../providers";
+import {cloneOrCreateElement} from "../../utils";
+import {IconButton, type IconButtonProps} from "../IconButton";
 
-import {ToastSide, ToastRadius, ToastColor, ToastAnimation} from "./types";
-
-import {ToastFocusRestore} from "./ToastFocusRestore";
 import {useShadowViewport} from "./hooks/use-shadow-viewport";
+import {ToastFocusRestore} from "./ToastFocusRestore";
+import {ToastAnimation, type ToastColor, type ToastRadius, ToastSide} from "./types";
 
 import styles from "./toast.module.scss?isolation";
 
@@ -54,6 +62,7 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
     const viewport = useShadowViewport();
     const defaultProps = useComponentProps("toast");
     const mergedProps = {...defaultProps, ...props};
+
     const {
         side = ToastSide.BottomRight,
         color,
@@ -92,6 +101,7 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
     const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? true);
     const isOpen = open ?? uncontrolledOpen;
     const {className: closeClassName, ...otherCloseProps} = closeProps || {};
+
     return (
         <Provider label={label} duration={duration} swipeDirection={swipeDirection} swipeThreshold={swipeThreshold}>
             {children}
@@ -120,6 +130,7 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
                 onKeyDown={onKeyDown}
                 onKeyDownCapture={event => {
                     onKeyDownCapture?.(event);
+
                     if (viewport.handlesKey(event)) {
                         onKeyDown?.(event);
                         viewport.onKeyDown(event);

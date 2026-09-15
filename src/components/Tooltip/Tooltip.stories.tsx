@@ -1,8 +1,8 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {HideInTable} from "../../utils";
-
 import {Button} from "../index";
 
 import TooltipComponent from "./Tooltip";
@@ -22,7 +22,8 @@ const meta: Meta<typeof TooltipComponent> = {
             options: ["top", "right", "bottom", "left"],
             control: "select",
             description:
-                "The preferred side of the trigger to render against when open. Will be reversed when collisions occur and avoidCollisions is enabled.",
+                "The preferred side of the trigger to render against when open. Will be " +
+                    "reversed when collisions occur and avoidCollisions is enabled.",
         },
         align: {
             options: ["start", "center", "end"],
@@ -41,7 +42,8 @@ const meta: Meta<typeof TooltipComponent> = {
         },
         arrowPadding: {
             description:
-                "The padding between the arrow and the edges of the content. If your content has border-radius, this will prevent it from overflowing the corners.",
+                "The padding between the arrow and the edges of the content. If your content " +
+                    "has border-radius, this will prevent it from overflowing the corners.",
         },
         alignOffset: {
             description: 'An offset in pixels from the "start" or "end" alignment options.',

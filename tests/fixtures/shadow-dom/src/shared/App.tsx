@@ -1,27 +1,30 @@
 import React, {lazy, Suspense, useCallback, useState} from "react";
+
 import {
-    UIProvider,
     Button,
-    Modal,
     Drawer,
+    Icon,
+    Modal,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
     Select,
-    SelectTrigger,
     SelectContent,
     SelectItem,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    Tooltip,
+    SelectTrigger,
     Toast,
-    Icon,
+    Tooltip,
+    UIProvider,
     useTheme,
 } from "addon-ui";
 
 const LazyPanel = lazy(() => import("./LazyPanel"));
+
 const icons = {
     sample: () => <rect x="2" y="3" width="17" height="13" />,
     later: () => <circle cx="12" cy="12" r="9" />,
 };
+
 function Controls() {
     const {toggleTheme} = useTheme();
     const [modal, setModal] = useState(false);
@@ -32,6 +35,7 @@ function Controls() {
     const [toastForceMount, setToastForceMount] = useState(false);
     const [lazy, setLazy] = useState(false);
     const [empty, setEmpty] = useState(false);
+
     const selector = (
         <Select defaultValue="b">
             <SelectTrigger data-testid="select" placeholder="Choose" />
@@ -45,6 +49,7 @@ function Controls() {
             </SelectContent>
         </Select>
     );
+
     const popover = (
         <Popover>
             <PopoverTrigger asChild>
@@ -57,6 +62,7 @@ function Controls() {
             </PopoverContent>
         </Popover>
     );
+
     return (
         <div style={{width: 340, padding: 16, background: "var(--bg-primary-color)"}} data-testid="panel">
             <button
@@ -212,18 +218,25 @@ function Controls() {
         </div>
     );
 }
+
 export default function App({shadow = false}: {shadow?: boolean}) {
     const [root, setRoot] = useState<ShadowRoot | null>(null);
+
     const ref = useCallback((element: HTMLDivElement | null) => {
         if (element) {
             const target = element.getRootNode();
-            if (target instanceof ShadowRoot) setRoot(target);
+
+            if (target instanceof ShadowRoot) {
+                setRoot(target);
+            }
         }
     }, []);
+
     const rootIcons =
         root && (root.host as HTMLElement).style.left === "390px"
             ? {...icons, sample: () => <rect x="2" y="3" width="9" height="13" />}
             : icons;
+
     return (
         <div ref={ref}>
             <UIProvider

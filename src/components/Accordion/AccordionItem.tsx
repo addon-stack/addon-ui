@@ -1,7 +1,8 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
-import classnames from "classnames";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
 
-import {AccordionItemProps as AccordionItemRadixProps, Item} from "@radix-ui/react-accordion";
+import {type AccordionItemProps as AccordionItemRadixProps, Item} from "@radix-ui/react-accordion";
+
+import classnames from "classnames";
 
 import styles from "./accordion.module.scss?isolation";
 

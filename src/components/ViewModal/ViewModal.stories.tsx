@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {Meta} from "storybook-react-rsbuild";
+
+import type {Meta} from "storybook-react-rsbuild";
 
 import {HideInTable} from "../../utils";
-
 import {Button} from "../index";
 
-import ViewModalComponent, {ViewModalProps} from "./ViewModal";
+import ViewModalComponent, {type ViewModalProps} from "./ViewModal";
 
 const meta: Meta<typeof ViewModalComponent> = {
     title: "Components/ViewModal",
@@ -47,6 +47,7 @@ export default meta;
 
 export const ViewModal = (props: ViewModalProps) => {
     const [open, setOpen] = useState(false);
+
     return (
         <div>
             <Button onClick={() => setOpen(true)}>Open</Button>

@@ -1,1 +1,1 @@
-export {default as Dialog, DialogPropsKeys, type DialogProps} from "./Dialog";
+export {default as Dialog, type DialogProps, DialogPropsKeys} from "./Dialog";

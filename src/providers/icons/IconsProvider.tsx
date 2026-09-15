@@ -1,9 +1,9 @@
-import React, {FC, PropsWithChildren, useCallback, useMemo, useState} from "react";
+import React, {type FC, type PropsWithChildren, useCallback, useMemo, useState} from "react";
+
+import {SvgSprite} from "../../components/SvgSprite";
+import type {Config, Icons} from "../../types/config";
 
 import {IconsContext} from "./context";
-import {SvgSprite} from "../../components/SvgSprite";
-
-import {Config, Icons} from "../../types/config";
 
 const IconsProvider: FC<PropsWithChildren<Pick<Config, "icons">>> = ({children, icons}) => {
     const [registeredIconNames, setRegisteredIconNames] = useState<string[]>([]);

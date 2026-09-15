@@ -1,6 +1,9 @@
 import React, {useEffect} from "react";
+
 import type {Preview, StoryContext, StoryFn} from "storybook-react-rsbuild";
+
 import {ThemeProvider} from "../src/providers";
+
 import "../src/providers/ui/styles/default.scss?isolation";
 import "../src/providers/ui/styles/reset.scss?isolation";
 import "../src/providers/ui/styles/base.scss?isolation";
@@ -15,6 +18,7 @@ const ThemeDecorator = (Story: StoryFn, context: StoryContext) => {
 
     useEffect(() => {
         document.documentElement.setAttribute("dir", dir);
+
         return () => {
             document.documentElement.removeAttribute("dir");
         };
@@ -22,13 +26,17 @@ const ThemeDecorator = (Story: StoryFn, context: StoryContext) => {
 
     useEffect(() => {
         document.documentElement.setAttribute("theme", theme);
+
         return () => {
             document.documentElement.removeAttribute("theme");
         };
     }, [theme]);
 
     useEffect(() => {
-        cssVariables === "custom" && document.body.setAttribute("custom", "");
+        if (cssVariables === "custom") {
+            document.body.setAttribute("custom", "");
+        }
+
         return () => {
             document.body.removeAttribute("custom");
         };

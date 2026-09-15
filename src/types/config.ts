@@ -1,5 +1,5 @@
-import {SvgSpriteProps} from "../components";
-import {ComponentsProps} from "../components/types";
+import type {SvgSpriteProps} from "../components";
+import type {ComponentsProps} from "../components/types";
 
 export type {ComponentsProps};
 

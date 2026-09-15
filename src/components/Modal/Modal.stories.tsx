@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {Meta} from "storybook-react-rsbuild";
+
+import type {Meta} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter, HideInTable} from "../../utils";
-
 import {Button, Header} from "../index";
 
-import ModalComponent, {ModalProps} from "./Modal";
+import ModalComponent, {type ModalProps} from "./Modal";
 import {ModalRadius} from "./types";
 
 const radius: (ModalRadius | "default")[] = [
@@ -27,7 +27,9 @@ const meta: Meta<typeof ModalComponent> = {
         },
         modal: {
             description:
-                "The modality of the dialog. When set to true, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+                "The modality of the dialog. When set to true, interaction with outside " +
+                    "elements will be disabled and only dialog content will be visible to screen " +
+                    "readers.",
             control: {type: "boolean"},
             type: "boolean",
         },
@@ -52,6 +54,7 @@ export default meta;
 export const Modal = (props: ModalProps & {label?: string}) => {
     const [open, setOpen] = useState(false);
     const {label = "Open Modal", ...other} = props;
+
     return (
         <div>
             <Button onClick={() => setOpen(true)}>{label}</Button>
@@ -67,7 +70,8 @@ export const Modal = (props: ModalProps & {label?: string}) => {
                 >
                     <Header
                         title="Volume Up Plus"
-                        subtitle="Adjust the current tab's volume with the slider. Switch to any audio tab in one click."
+                        subtitle={"Adjust the current tab's volume with the slider. Switch to any audio tab in " +
+                            "one click."}
                         before="❤️"
                     />
                     <Button style={{margin: "50px auto", maxWidth: "max-content"}} onClick={() => setOpen(false)}>

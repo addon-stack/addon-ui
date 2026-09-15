@@ -1,12 +1,12 @@
-import React, {memo, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
 import classnames from "classnames";
 
-import {Tooltip, TooltipProps} from "../Tooltip";
-import {BaseButton, BaseButtonProps} from "../BaseButton";
-
 import {useComponentProps} from "../../providers";
+import {BaseButton, type BaseButtonProps} from "../BaseButton";
+import {Tooltip, type TooltipProps} from "../Tooltip";
 
-import {IconButtonVariant, IconButtonSize, IconButtonRadius} from "./types";
+import type {IconButtonRadius, IconButtonSize, IconButtonVariant} from "./types";
 
 import styles from "./icon-button.module.scss?isolation";
 
@@ -40,6 +40,7 @@ const IconButton: ForwardRefRenderFunction<HTMLButtonElement, IconButtonProps> =
             {children}
         </BaseButton>
     );
+
     if (tooltip) {
         return <Tooltip {...tooltip}>{iconButton}</Tooltip>;
     }

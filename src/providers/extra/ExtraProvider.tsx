@@ -1,8 +1,8 @@
-import React, {FC, PropsWithChildren} from "react";
+import React, {type FC, type PropsWithChildren} from "react";
+
+import type {Config} from "../../types/config";
 
 import {ExtraContext} from "./context";
-
-import {Config} from "../../types/config";
 
 const ExtraProvider: FC<PropsWithChildren<Pick<Config, "extra">>> = ({children, extra}) => {
     return <ExtraContext.Provider value={{extra}}>{children}</ExtraContext.Provider>;

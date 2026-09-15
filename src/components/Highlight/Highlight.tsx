@@ -1,10 +1,11 @@
-import React, {FC, memo, useMemo} from "react";
+import React, {type FC, memo, useMemo} from "react";
+
 import classnames from "classnames";
-import Highlighter, {HighlighterProps} from "react-highlight-words";
+import Highlighter, {type HighlighterProps} from "react-highlight-words";
 
 import {useComponentProps} from "../../providers";
 
-import {HighlightColor} from "./types";
+import type {HighlightColor} from "./types";
 
 import styles from "./highlight.module.scss?isolation";
 

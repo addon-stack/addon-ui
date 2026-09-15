@@ -1,4 +1,5 @@
-import {RefObject, useEffect, useRef} from "react";
+import {type RefObject, useEffect, useRef} from "react";
+
 import Odometer from "odometer";
 
 export interface OdometerOptions {
@@ -7,11 +8,13 @@ export interface OdometerOptions {
     duration?: number;
 }
 
-export default (ref: RefObject<HTMLElement | null>, value: number, options: OdometerOptions = {}) => {
+export default function useOdometer(ref: RefObject<HTMLElement | null>, value: number, options: OdometerOptions = {}) {
     const od = useRef<Odometer | null>(null);
 
     useEffect(() => {
-        if (ref.current === null) return;
+        if (ref.current === null) {
+            return;
+        }
 
         od.current = new Odometer({...options, el: ref.current, value});
     }, [ref, options, value]);
@@ -21,4 +24,4 @@ export default (ref: RefObject<HTMLElement | null>, value: number, options: Odom
     }, [value]);
 
     return od.current;
-};
+}

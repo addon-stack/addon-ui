@@ -1,5 +1,6 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
@@ -7,6 +8,7 @@ import AvatarComponent from "./Avatar";
 import {AvatarRadius, AvatarSize} from "./types";
 
 const sizes: (AvatarSize | "default")[] = [AvatarSize.Small, "default", AvatarSize.Medium, AvatarSize.Large];
+
 const radius: (AvatarRadius | "default")[] = [
     AvatarRadius.None,
     AvatarRadius.Small,

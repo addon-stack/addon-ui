@@ -1,20 +1,21 @@
-import React, {memo, ReactNode, forwardRef, ForwardRefRenderFunction} from "react";
-import classnames from "classnames";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, type ReactNode} from "react";
+
 import {
     Arrow,
     Content,
     Portal,
     Provider,
     Root,
-    TooltipContentProps,
-    TooltipPortalProps,
-    TooltipProps as TooltipRootProps,
+    type TooltipContentProps,
+    type TooltipPortalProps,
+    type TooltipProps as TooltipRootProps,
     Trigger,
 } from "@radix-ui/react-tooltip";
 
-import {useComponentProps, usePortalContainer} from "../../providers";
+import classnames from "classnames";
 
 import {useFloatingLayer} from "../../hooks/floating";
+import {useComponentProps, usePortalContainer} from "../../providers";
 
 import styles from "./tooltip.module.scss?isolation";
 
@@ -32,6 +33,7 @@ const Tooltip: ForwardRefRenderFunction<HTMLDivElement, TooltipProps> = (props, 
     const layer = useFloatingLayer({ref});
     const config = useComponentProps("tooltip");
     const container = usePortalContainer(props.container, config?.container);
+
     const {
         open,
         defaultOpen,

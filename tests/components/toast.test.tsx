@@ -1,20 +1,24 @@
 import React, {act, StrictMode, useState} from "react";
-import {createRoot, Root} from "react-dom/client";
-import Toast, {ToastProps} from "../../src/components/Toast/Toast";
+import {createRoot, type Root} from "react-dom/client";
+
+import Toast, {type ToastProps} from "../../src/components/Toast/Toast";
 
 let root: Root;
 let shadow: ShadowRoot;
 let outside: HTMLButtonElement;
+
 beforeEach(() => {
     const host = document.body.appendChild(document.createElement("div"));
     shadow = host.attachShadow({mode: "open"});
     root = createRoot(shadow.appendChild(document.createElement("div")));
     outside = document.body.appendChild(document.createElement("button"));
 });
+
 afterEach(async () => {
     await act(async () => root.unmount());
     document.body.replaceChildren();
 });
+
 const render = async (props: ToastProps = {}) => {
     await act(async () =>
         root.render(
@@ -35,11 +39,13 @@ const render = async (props: ToastProps = {}) => {
         )
     );
 };
+
 const viewport = () => shadow.querySelector<HTMLOListElement>("ol")!;
 const toast = () => viewport().querySelector<HTMLLIElement>("li")!;
 const action = () => toast().querySelector<HTMLButtonElement>("[data-action]")!;
 const close = () => toast().querySelector<HTMLButtonElement>('[aria-label="Close"]')!;
 const focus = async (element: HTMLElement) => act(async () => element.focus());
+
 const key = async (value: string, shiftKey = false) => {
     const event = new KeyboardEvent("keydown", {
         key: value,
@@ -49,7 +55,9 @@ const key = async (value: string, shiftKey = false) => {
         composed: true,
         cancelable: true,
     });
+
     await act(async () => shadow.activeElement!.dispatchEvent(event));
+
     return event;
 };
 
@@ -92,8 +100,12 @@ test.each([undefined, true] as const)("controlled closing restores focus with fo
     await focus(action());
     await render({open: false, forceMount});
     expect(shadow.activeElement).toBe(viewport());
-    if (forceMount) expect(toast().dataset.state).toBe("closed");
-    else expect(toast()).toBeNull();
+
+    if (forceMount) {
+        expect(toast().dataset.state).toBe("closed");
+    } else {
+        expect(toast()).toBeNull();
+    }
 });
 
 test("forceMount also restores focus after an uncontrolled Escape", async () => {
@@ -107,8 +119,10 @@ test("forceMount also restores focus after an uncontrolled Escape", async () => 
 test("the library's close button restores viewport focus", async () => {
     function Example() {
         const [open, setOpen] = useState(true);
+
         return <Toast open={open} duration={Infinity} title="Notice" onClose={() => setOpen(false)} />;
     }
+
     await act(async () => root.render(<Example />));
     await focus(close());
     await act(async () => close().click());
@@ -154,6 +168,7 @@ test("StrictMode cleanup and ordinary updates preserve focus in an open toast", 
             />
         </StrictMode>
     );
+
     await act(async () => root.render(example("First")));
     expect(shadow.activeElement).toBe(action());
     await act(async () => root.render(example("Updated")));
@@ -175,10 +190,12 @@ test("ordinary DOM keeps Radix Escape focus restoration", async () => {
     await act(async () => root.render(<Toast duration={Infinity} action={<button>Action</button>} />));
     const target = mount.querySelector("ol")!;
     const action = target.querySelector("button")!;
+
     await act(async () => {
         action.focus();
         action.dispatchEvent(new KeyboardEvent("keydown", {key: "Escape", bubbles: true, cancelable: true}));
     });
+
     expect(target.querySelector("li")).toBeNull();
     expect(document.activeElement).toBe(target);
 });

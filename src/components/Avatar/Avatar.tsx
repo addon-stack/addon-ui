@@ -1,10 +1,12 @@
-import React, {memo, ReactNode, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, type ReactNode} from "react";
+
+import {type AvatarFallbackProps, type AvatarImageProps, Fallback, Image, Root} from "@radix-ui/react-avatar";
+
 import classnames from "classnames";
-import {AvatarFallbackProps, AvatarImageProps, Fallback, Image, Root} from "@radix-ui/react-avatar";
 
 import {useComponentProps} from "../../providers";
 
-import {AvatarRadius, AvatarSize} from "./types";
+import type {AvatarRadius, AvatarSize} from "./types";
 
 import styles from "./avatar.module.scss?isolation";
 

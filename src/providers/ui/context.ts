@@ -7,5 +7,6 @@ export const PortalContext = createContext<PortalContainer | undefined>(undefine
 /** Undefined inherits the next level; null deliberately waits for a target. */
 export function usePortalContainer(prop: PortalContainer | undefined, config: PortalContainer | undefined) {
     const portal = useContext(PortalContext);
+
     return prop !== undefined ? prop : config !== undefined ? config : portal;
 }

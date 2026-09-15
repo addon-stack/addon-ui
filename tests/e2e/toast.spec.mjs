@@ -1,4 +1,4 @@
-import {test, expect} from "../support/browser/fixtures.mjs";
+import {expect, test} from "../support/browser/fixtures.mjs";
 
 test("Toast: enters through both focus proxies and pauses the close timer while focused", async ({
     page,

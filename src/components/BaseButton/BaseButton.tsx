@@ -1,4 +1,5 @@
-import React, {ComponentProps, memo, ReactNode, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, memo, type ReactNode} from "react";
+
 import classnames from "classnames";
 
 import {cloneOrCreateElement} from "../../utils";

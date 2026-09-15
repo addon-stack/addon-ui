@@ -1,7 +1,9 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {Root, type TabsProps as TabsRadixProps} from "@radix-ui/react-tabs";
+
 import classnames from "classnames";
 
-import {Root, TabsProps as TabsRadixProps} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
 import styles from "./tabs.module.scss?isolation";
@@ -9,6 +11,7 @@ import styles from "./tabs.module.scss?isolation";
 export interface TabsProps extends Omit<TabsRadixProps, "orientation"> {
     reverse?: boolean;
 }
+
 const Tabs: ForwardRefRenderFunction<HTMLDivElement, TabsProps> = (props, ref) => {
     const {reverse, className, children, ...other} = {...useComponentProps("tabs"), ...props};
 

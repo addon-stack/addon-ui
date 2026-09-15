@@ -1,14 +1,15 @@
 import React, {useState} from "react";
-import {Meta} from "storybook-react-rsbuild";
+
+import type {Meta} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter, HideInTable} from "../../utils";
-
 import {Button, List, ListItem} from "../index";
 
-import DrawerComponent, {DrawerProps} from "./Drawer";
+import DrawerComponent, {type DrawerProps} from "./Drawer";
 import {DrawerSide} from "./types";
 
 const sides: DrawerSide[] = [DrawerSide.Left, DrawerSide.Top, DrawerSide.Bottom, DrawerSide.Right];
+
 const items = [
     {title: "Profile", icon: "👤"},
     {title: "Messages", icon: "✉️"},
@@ -29,7 +30,9 @@ const meta: Meta<typeof DrawerComponent> = {
         },
         modal: {
             description:
-                "The modality of the dialog. When set to true, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+                "The modality of the dialog. When set to true, interaction with outside " +
+                    "elements will be disabled and only dialog content will be visible to screen " +
+                    "readers.",
             control: {type: "boolean"},
             type: "boolean",
         },
@@ -48,6 +51,7 @@ export default meta;
 export const Drawer = (props: DrawerProps & {label?: string}) => {
     const [open, setOpen] = useState(false);
     const {label = "Open Drawer", ...other} = props;
+
     return (
         <div>
             <Button onClick={() => setOpen(true)}>{label}</Button>

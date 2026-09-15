@@ -1,13 +1,14 @@
 import React, {
-    ComponentProps,
+    type ComponentProps,
     forwardRef,
-    ForwardRefRenderFunction,
+    type ForwardRefRenderFunction,
     memo,
     useImperativeHandle,
     useLayoutEffect,
     useRef,
     useState,
 } from "react";
+
 import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
@@ -45,12 +46,16 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
 
         if (!middle || !el) {
             setDisplayedText(text);
+
             return;
         }
 
         const observer = new ResizeObserver(entries => {
             const entry = entries[0];
-            if (!entry) return;
+
+            if (!entry) {
+                return;
+            }
 
             const maxWidth = entry.contentRect.width;
             const {fontWeight, fontSize, fontFamily, letterSpacing} = window.getComputedStyle(el);
@@ -63,6 +68,7 @@ const Truncate: ForwardRefRenderFunction<HTMLSpanElement, TruncateProps> = (prop
         });
 
         observer.observe(el);
+
         return () => observer.disconnect();
     }, [text, middle, separator]);
 

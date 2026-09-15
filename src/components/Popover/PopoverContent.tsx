@@ -1,18 +1,17 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
-
-import classnames from "classnames";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
 
 import {
     Arrow,
     Content,
-    PopoverContentProps as PopoverContentRadixProps,
-    PopoverPortalProps,
+    type PopoverContentProps as PopoverContentRadixProps,
+    type PopoverPortalProps,
     Portal,
 } from "@radix-ui/react-popover";
 
-import {useComponentProps, usePortalContainer} from "../../providers";
+import classnames from "classnames";
 
-import {FloatingLayerContext, useFloatingLayer, useFloatingFocus} from "../../hooks/floating";
+import {FloatingLayerContext, useFloatingFocus, useFloatingLayer} from "../../hooks/floating";
+import {useComponentProps, usePortalContainer} from "../../providers";
 
 import styles from "./popover.module.scss?isolation";
 
@@ -32,6 +31,7 @@ const PopoverContent: ForwardRefRenderFunction<HTMLDivElement, PopoverContentPro
     const container = usePortalContainer(props.container, config?.container);
     const layer = useFloatingLayer({ref});
     const focus = useFloatingFocus(layer);
+
     const {
         maxWidth,
         minWidth,
@@ -49,7 +49,10 @@ const PopoverContent: ForwardRefRenderFunction<HTMLDivElement, PopoverContentPro
         container: _container,
         ...other
     } = {...config, ...props};
-    if (container === null) return null;
+
+    if (container === null) {
+        return null;
+    }
 
     return (
         <Portal container={container}>

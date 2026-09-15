@@ -1,5 +1,6 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
@@ -12,12 +13,14 @@ const variants: (IconButtonVariant | "default")[] = [
     IconButtonVariant.Outlined,
     IconButtonVariant.Ghost,
 ];
+
 const sizes: (IconButtonSize | "default")[] = [
     IconButtonSize.Small,
     "default",
     IconButtonSize.Medium,
     IconButtonSize.Large,
 ];
+
 const radius: (IconButtonRadius | "default")[] = [
     IconButtonRadius.Small,
     IconButtonRadius.Medium,
@@ -57,7 +60,9 @@ export default meta;
 const icon = (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
-            d="M12.0002 2L15.1037 8.72839L22.4618 9.60081L17.0218 14.6316L18.4658 21.8992L12.0002 18.28L5.53456 21.8992L6.97862 14.6316L1.53857 9.60081L8.89669 8.72839L12.0002 2Z"
+            d={"M12.0002 2L15.1037 8.72839L22.4618 9.60081L17.0218 14.6316L18.4658 " +
+                "21.8992L12.0002 18.28L5.53456 21.8992L6.97862 14.6316L1.53857 " +
+                "9.60081L8.89669 8.72839L12.0002 2Z"}
             stroke="currentColor"
             strokeWidth="2.4"
             strokeLinejoin="round"

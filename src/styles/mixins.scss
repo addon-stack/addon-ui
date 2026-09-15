@@ -12,7 +12,8 @@
     &[#{$attr}="#{$value}"] {
       @content;
     }
-  } @else {
+  }
+  @else {
     [#{$attr}="#{$value}"],
     :host(:where([#{$attr}="#{$value}"])) {
       @content;

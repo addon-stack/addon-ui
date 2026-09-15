@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {HideInTable} from "../../utils";
 

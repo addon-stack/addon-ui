@@ -1,18 +1,16 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo, useContext} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, useContext} from "react";
+
+import {Item, type SelectItemProps as SelectItemRadixProps} from "@radix-ui/react-select";
 
 import classnames from "classnames";
 
-import {Item, SelectItemProps as SelectItemRadixProps} from "@radix-ui/react-select";
-
 import {useComponentProps} from "../../providers";
-
-import SelectItemIndicator from "./SelectItemIndicator";
-import SelectItemText from "./SelectItemText";
-
 import {focusElement, getActiveElement} from "../../utils/dom/focus";
 import {getShadowRoot} from "../../utils/dom/shadow";
 
 import {SelectTypeaheadContext} from "./context";
+import SelectItemIndicator from "./SelectItemIndicator";
+import SelectItemText from "./SelectItemText";
 
 import styles from "./select.module.scss?isolation";
 
@@ -23,6 +21,7 @@ export interface SelectItemProps extends SelectItemRadixProps {
 
 const SelectItem: ForwardRefRenderFunction<HTMLDivElement, SelectItemProps> = (props, ref) => {
     const typeaheadSpace = useContext(SelectTypeaheadContext);
+
     const {textValue, indicator, indicatorClassname, className, children, onPointerLeave, onKeyDown, ...other} = {
         ...useComponentProps("selectItem"),
         ...props,
@@ -41,6 +40,7 @@ const SelectItem: ForwardRefRenderFunction<HTMLDivElement, SelectItemProps> = (p
             }}
             onPointerLeave={event => {
                 onPointerLeave?.(event);
+
                 if (
                     !event.defaultPrevented &&
                     getShadowRoot(event.currentTarget) &&

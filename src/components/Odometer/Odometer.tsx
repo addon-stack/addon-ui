@@ -1,10 +1,10 @@
-import React, {FC, memo, useRef} from "react";
+import React, {type FC, memo, useRef} from "react";
 
 import classNames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import useOdometer, {OdometerOptions} from "./hooks/use-odometer";
+import useOdometer, {type OdometerOptions} from "./hooks/use-odometer";
 
 import styles from "./odometer.module.scss?isolation";
 

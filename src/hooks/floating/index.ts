@@ -1,3 +1,3 @@
-export {useFloatingLayer, type FloatingLayerHandle} from "./use-floating-layer";
+export {type FloatingLayer, FloatingLayerContext} from "./context";
 export {useFloatingFocus} from "./use-floating-focus";
-export {FloatingLayerContext, type FloatingLayer} from "./context";
+export {type FloatingLayerHandle, useFloatingLayer} from "./use-floating-layer";

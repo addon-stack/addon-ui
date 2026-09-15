@@ -1,17 +1,20 @@
-import {test, expect} from "../support/browser/fixtures.mjs";
 import {checkFirefoxPopup} from "../support/browser/firefox-popup.mjs";
+import {expect, test} from "../support/browser/fixtures.mjs";
 
 test("popup document retains styles, portals, focus and lazy imports", async ({host, extension, engine}, testInfo) => {
     if (engine === "firefox") {
         await host.getByTestId("popup-open").click();
         const result = await checkFirefoxPopup(extension.debugPort);
         await testInfo.attach("firefox-popup", {body: JSON.stringify(result), contentType: "application/json"});
+
         return;
     }
+
     const [popup] = await Promise.all([
         extension.context.waitForEvent("page", {timeout: 8000}),
         host.getByTestId("popup-open").click(),
     ]);
+
     popup.setDefaultTimeout(8000);
     await expect(popup.getByTestId("panel")).toBeVisible();
     await expect(popup.locator("html")).toHaveAttribute("theme", "light");

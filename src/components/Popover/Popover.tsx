@@ -1,6 +1,6 @@
-import React, {FC, memo} from "react";
+import React, {type FC, memo} from "react";
 
-import {PopoverProps, Root} from "@radix-ui/react-popover";
+import {type PopoverProps, Root} from "@radix-ui/react-popover";
 
 import {useComponentProps} from "../../providers";
 

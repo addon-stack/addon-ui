@@ -1,17 +1,17 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {TextArea, TextField} from "../index";
 
 import {
     Popover as PopoverComponent,
     PopoverAnchor,
     PopoverContent,
-    PopoverContentProps,
-    PopoverProps,
-    PopoverTrigger,
-    PopoverTriggerProps,
+    type PopoverContentProps,
+    type PopoverProps,
+    PopoverTrigger, type PopoverTriggerProps,
 } from "./index";
-
-import {TextArea, TextField} from "../index";
 
 type Props = PopoverProps &
     PopoverContentProps &

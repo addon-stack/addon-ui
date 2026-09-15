@@ -1,7 +1,9 @@
-import {test, expect} from "../support/browser/fixtures.mjs";
+import {expect, test} from "../support/browser/fixtures.mjs";
 
 test("traps modal focus and yields to nested Popover and Modal", async ({page, host, active}) => {
     await host.getByTestId("open-modal").click();
+    await expect(host.getByTestId("modal")).toHaveAccessibleName("Modal");
+    await expect(host.getByTestId("modal")).toHaveAccessibleDescription("Focus and scrolling");
     await expect.poll(active).toBe("first");
     await host.getByTestId("last").focus();
     await page.keyboard.press("Tab");
@@ -16,6 +18,8 @@ test("traps modal focus and yields to nested Popover and Modal", async ({page, h
     await page.keyboard.press("Escape");
     await expect(host.getByTestId("popover-content")).toHaveCount(0);
     await host.getByTestId("nested").click();
+    await expect(host.getByTestId("nested-modal")).toHaveAccessibleName("Nested");
+    await expect(host.getByTestId("nested-modal")).toHaveAccessibleDescription("Child layer");
     await expect.poll(active).toBe("nested-first");
     await host.getByTestId("nested-close").click();
     await expect(host.getByTestId("nested-modal")).toHaveCount(0);
@@ -38,40 +42,53 @@ test("scrolls modal contents, preserves callbacks and touch defaults", async ({
     await page.mouse.wheel(0, 350);
     await expect.poll(() => host.getByTestId("scroll").evaluate(el => el.scrollTop)).toBeGreaterThan(0);
     expect(Number(await host.getByTestId("modal").getAttribute("data-wheels"))).toBeGreaterThan(0);
+
     const touch = await host.getByTestId("scroll").evaluate(element => {
         let reachedDocument = false;
+
         const listener = () => {
             reachedDocument = true;
         };
+
         element.ownerDocument.addEventListener("touchmove", listener);
         const event = new Event("touchmove", {bubbles: true, composed: true, cancelable: true});
         element.dispatchEvent(event);
         element.ownerDocument.removeEventListener("touchmove", listener);
+
         return {reachedDocument, defaultPrevented: event.defaultPrevented};
     });
+
     expect(touch).toEqual({reachedDocument: false, defaultPrevented: false});
     expect(Number(await host.getByTestId("modal").getAttribute("data-touches"))).toBeGreaterThan(0);
+
     if (engine === "chrome") {
         const cdp = await extension.context.newCDPSession(page);
         const box = await host.getByTestId("scroll").boundingBox();
         const before = await host.getByTestId("scroll").evaluate(element => element.scrollTop);
         await cdp.send("Emulation.setTouchEmulationEnabled", {enabled: true, maxTouchPoints: 1});
+
         await cdp.send("Input.dispatchTouchEvent", {
             type: "touchStart",
             touchPoints: [{x: box.x + box.width / 2, y: box.y + 130, id: 1}],
         });
-        for (const dy of [100, 70, 40, 20])
+
+        for (const dy of [100, 70, 40, 20]) {
             await cdp.send("Input.dispatchTouchEvent", {
                 type: "touchMove",
                 touchPoints: [{x: box.x + box.width / 2, y: box.y + dy, id: 1}],
             });
+        }
+
         await cdp.send("Input.dispatchTouchEvent", {type: "touchEnd", touchPoints: []});
+
         await expect
             .poll(() => host.getByTestId("scroll").evaluate(element => element.scrollTop))
             .toBeGreaterThan(before);
+
         await cdp.send("Emulation.setTouchEmulationEnabled", {enabled: false});
         await cdp.detach();
     }
+
     await page.keyboard.press("Escape");
     await expect(host.getByTestId("modal")).toHaveCount(0);
     await expect.poll(active).toBe("open-modal");
@@ -80,14 +97,18 @@ test("scrolls modal contents, preserves callbacks and touch defaults", async ({
 test("locks the website while scrolling a Drawer and restores focus", async ({page, host, active}) => {
     // Scroll lock and restoration on the second dialog composition.
     await host.getByTestId("open-drawer").click();
+    await expect(host.getByTestId("drawer")).toHaveAccessibleName("Drawer");
+    await expect(host.getByTestId("drawer")).toHaveAccessibleDescription("Scrollable drawer");
     await expect.poll(active).toBe("drawer-first");
     await host.getByTestId("drawer-scroll").hover();
     await page.mouse.wheel(0, 300);
     await expect.poll(() => host.getByTestId("drawer-scroll").evaluate(el => el.scrollTop)).toBeGreaterThan(0);
+
     const locked = await page.evaluate(() => ({
         lock: document.body.hasAttribute("data-scroll-locked"),
         top: window.scrollY,
     }));
+
     expect(locked.lock).toBe(true);
     await page.mouse.move(1050, 700);
     await page.mouse.wheel(0, 300);

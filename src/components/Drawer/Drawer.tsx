@@ -1,10 +1,10 @@
-import React, {memo, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
 import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
-
-import {Dialog, DialogProps, DialogPropsKeys} from "../Dialog";
+import {Dialog, type DialogProps, DialogPropsKeys} from "../Dialog";
 
 import {DrawerSide} from "./types";
 
@@ -18,6 +18,7 @@ export const DrawerPropsKeys = new Set<keyof DrawerProps>(["side", ...DialogProp
 
 const Drawer: ForwardRefRenderFunction<HTMLDivElement, DrawerProps> = (props, ref) => {
     const config = useComponentProps("drawer");
+
     const {
         side = DrawerSide.Left,
         fullscreen,

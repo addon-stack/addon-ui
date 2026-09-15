@@ -1,8 +1,8 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {type PopoverTriggerProps as PopoverTriggerRadixProps, Trigger} from "@radix-ui/react-popover";
 
 import classnames from "classnames";
-
-import {PopoverTriggerProps as PopoverTriggerRadixProps, Trigger} from "@radix-ui/react-popover";
 
 import {useComponentProps} from "../../providers";
 

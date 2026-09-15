@@ -1,10 +1,11 @@
-import React, {memo, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
 import classnames from "classnames";
-import {BaseButton, BaseButtonProps} from "../BaseButton";
 
 import {useComponentProps} from "../../providers";
+import {BaseButton, type BaseButtonProps} from "../BaseButton";
 
-import {ButtonColor, ButtonRadius, ButtonSize, ButtonVariant} from "./types";
+import {type ButtonColor, type ButtonRadius, type ButtonSize, ButtonVariant} from "./types";
 
 import styles from "./button.module.scss?isolation";
 

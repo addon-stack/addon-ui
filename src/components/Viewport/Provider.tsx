@@ -1,17 +1,17 @@
 import React, {
-    ComponentProps,
-    CSSProperties,
+    type ComponentProps,
+    type CSSProperties,
     forwardRef,
-    ForwardRefRenderFunction,
-    PropsWithChildren,
+    type ForwardRefRenderFunction,
+    type PropsWithChildren,
     useCallback,
     useMemo,
     useState,
 } from "react";
 
-import {ViewportContext, ViewportMode, ViewportSizes} from "./context";
-
 import classnames from "classnames";
+
+import {ViewportContext, ViewportMode, type ViewportSizes} from "./context";
 
 import styles from "./viewport.module.scss?isolation";
 
@@ -55,7 +55,9 @@ const Provider: ForwardRefRenderFunction<HTMLDivElement, PropsWithChildren<Viewp
     );
 
     const computedStyles: CSSProperties = useMemo(() => {
-        if (!sizes) return {...style};
+        if (!sizes) {
+            return {...style};
+        }
 
         const {width, height} = sizes;
 

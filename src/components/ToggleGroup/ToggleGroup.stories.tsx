@@ -1,8 +1,15 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {Button} from "../index";
-import {ToggleGroup as ToggleGroupComponent, ToggleGroupItem, ToggleGroupIndicator, ToggleGroupProps} from "./index";
+
+import {
+    ToggleGroup as ToggleGroupComponent,
+    ToggleGroupIndicator,
+    ToggleGroupItem,
+    type ToggleGroupProps,
+} from "./index";
 
 type Props = ToggleGroupProps;
 

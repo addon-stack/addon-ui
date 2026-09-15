@@ -1,8 +1,8 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {type SelectValueProps, Value} from "@radix-ui/react-select";
 
 import classnames from "classnames";
-
-import {SelectValueProps, Value} from "@radix-ui/react-select";
 
 import {useComponentProps} from "../../providers";
 

@@ -1,6 +1,6 @@
 import React, {
     forwardRef,
-    ForwardRefRenderFunction,
+    type ForwardRefRenderFunction,
     memo,
     useCallback,
     useImperativeHandle,
@@ -8,10 +8,12 @@ import React, {
     useRef,
     useState,
 } from "react";
+
+import {List, type TabsListProps as TabsListRadixProps} from "@radix-ui/react-tabs";
+
 import classnames from "classnames";
 import _debounce from "lodash/debounce";
 
-import {List, TabsListProps as TabsListRadixProps} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
 import styles from "./tabs.module.scss?isolation";
@@ -47,7 +49,9 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
         const indicator = indicatorRef.current;
         const activeTrigger = list?.querySelector("[data-state='active']") as HTMLElement | null;
 
-        if (!list || !indicator || !activeTrigger) return;
+        if (!list || !indicator || !activeTrigger) {
+            return;
+        }
 
         const triggers = Array.from(list.querySelectorAll("[data-state]")) as HTMLElement[];
         const first = triggers[0];

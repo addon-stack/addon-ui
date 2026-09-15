@@ -1,13 +1,20 @@
-import React, {isValidElement, memo, ReactElement, useCallback, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {
+    forwardRef,
+    type ForwardRefRenderFunction,
+    isValidElement,
+    memo,
+    type ReactElement,
+    useCallback,
+} from "react";
+
 import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
+import {Dialog, type DialogProps, DialogPropsKeys} from "../Dialog";
+import {IconButton, type IconButtonProps} from "../IconButton";
 
-import {Dialog, DialogProps, DialogPropsKeys} from "../Dialog";
-import {IconButton, IconButtonProps} from "../IconButton";
-
-import {ModalRadius, ModalAnimation} from "./types";
+import {ModalAnimation, type ModalRadius} from "./types";
 
 import styles from "./modal.module.scss?isolation";
 
@@ -22,6 +29,7 @@ export const ModalPropsKeys = new Set<keyof ModalProps>(["radius", "closeButton"
 
 const Modal: ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (props, ref) => {
     const config = useComponentProps("modal");
+
     const {
         radius,
         fullscreen = true,
@@ -41,6 +49,7 @@ const Modal: ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (props, ref)
         (event: React.MouseEvent<HTMLButtonElement>) => {
             onClose?.();
             onOpenChange?.(false);
+
             if (typeof closeButton === "object" && !isValidElement(closeButton)) {
                 closeButton?.onClick?.(event);
             }
@@ -49,9 +58,13 @@ const Modal: ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (props, ref)
     );
 
     const renderCloseButton = useCallback(() => {
-        if (!closeButton) return null;
+        if (!closeButton) {
+            return null;
+        }
 
-        if (isValidElement(closeButton)) return closeButton;
+        if (isValidElement(closeButton)) {
+            return closeButton;
+        }
 
         const closeButtonProps = typeof closeButton === "object" ? closeButton : {};
 

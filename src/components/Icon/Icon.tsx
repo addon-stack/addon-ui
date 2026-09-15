@@ -1,5 +1,7 @@
-import React, {memo, useEffect, ComponentProps, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, memo, useEffect} from "react";
+
 import classnames from "classnames";
+
 import {useComponentProps, useIcons} from "../../providers";
 
 import styles from "./icon.module.scss?isolation";

@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
-import CheckboxComponent, {CheckedState} from "./Checkbox";
+import CheckboxComponent, {type CheckedState} from "./Checkbox";
 import {CheckboxRadius, CheckboxSize, CheckboxVariant} from "./types";
 
 const variants: (CheckboxVariant | "default")[] = ["default", CheckboxVariant.Classic, CheckboxVariant.Soft];

@@ -1,10 +1,9 @@
-import React, {FC, memo} from "react";
+import React, {type FC, memo} from "react";
 
-import {splitProps} from "../../utils";
 import {useComponentProps} from "../../providers";
-
-import {Modal, ModalProps, ModalPropsKeys} from "../Modal";
-import {View, ViewProps, ViewPropsKeys} from "../View";
+import {splitProps} from "../../utils";
+import {Modal, type ModalProps, ModalPropsKeys} from "../Modal";
+import {View, type ViewProps, ViewPropsKeys} from "../View";
 
 export type ViewModalProps = Omit<ModalProps, "title"> & ViewProps;
 

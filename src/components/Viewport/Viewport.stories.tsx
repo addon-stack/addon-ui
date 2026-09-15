@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {Meta} from "storybook-react-rsbuild";
+
+import type {Meta} from "storybook-react-rsbuild";
 
 import {HideInTable} from "../../utils";
-
 import {
     Button,
     Footer,
@@ -14,7 +14,7 @@ import {
     ViewportMode,
 } from "../index";
 
-import {ViewportProvider, useViewport} from "./index";
+import {useViewport, ViewportProvider} from "./index";
 
 const meta: Meta<typeof ViewportProvider> = {
     title: "Components/Viewport",
@@ -86,7 +86,7 @@ const App = () => {
                             key={index}
                             style={{padding: "10px 20px", textAlign: "center", color: "var(--text-secondary-color)"}}
                         >
-                            Item {++index}
+                            Item {index + 1}
                         </div>
                     ))}
                 </div>

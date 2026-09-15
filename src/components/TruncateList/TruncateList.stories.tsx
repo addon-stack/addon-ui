@@ -1,9 +1,10 @@
 import React from "react";
 
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import TruncateListComponent, {TruncateListProps} from "./TruncateList";
 import {Tag, TagColor, TagVariant} from "../Tag";
+
+import TruncateListComponent, {type TruncateListProps} from "./TruncateList";
 
 const meta: Meta<TruncateListProps> = {
     title: "Components/TruncateList",

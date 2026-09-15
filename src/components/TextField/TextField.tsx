@@ -1,10 +1,10 @@
 import React, {
-    ChangeEvent,
-    ComponentProps,
+    type ChangeEvent,
+    type ComponentProps,
     forwardRef,
-    KeyboardEvent,
+    type KeyboardEvent,
     memo,
-    ReactNode,
+    type ReactNode,
     useCallback,
     useEffect,
     useImperativeHandle,
@@ -15,11 +15,11 @@ import React, {
 
 import classnames from "classnames";
 
-import {cloneOrCreateElement} from "../../utils";
 import {useComponentProps} from "../../providers";
+import {cloneOrCreateElement} from "../../utils";
 
+import {type TextFieldAccent, type TextFieldRadius, type TextFieldSize, TextFieldVariant} from "./types";
 import {normalizeNumberInput} from "./utils";
-import {TextFieldAccent, TextFieldRadius, TextFieldSize, TextFieldVariant} from "./types";
 
 import styles from "./text-field.module.scss?isolation";
 
@@ -74,8 +74,14 @@ const TextField = forwardRef<TextFieldActions, TextFieldProps>((props, ref) => {
     } = {...useComponentProps("textField"), ...props};
 
     const [value, setValue] = useState<string>(() => {
-        if (propValue != null) return String(propValue);
-        if (defaultValue != null) return String(defaultValue);
+        if (propValue != null) {
+            return String(propValue);
+        }
+
+        if (defaultValue != null) {
+            return String(defaultValue);
+        }
+
         return "";
     });
 

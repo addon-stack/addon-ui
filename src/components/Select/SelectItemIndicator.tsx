@@ -1,8 +1,8 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {ItemIndicator, type SelectItemIndicatorProps} from "@radix-ui/react-select";
 
 import classnames from "classnames";
-
-import {ItemIndicator, SelectItemIndicatorProps} from "@radix-ui/react-select";
 
 import styles from "./select.module.scss?isolation";
 

@@ -1,17 +1,11 @@
-import React, {FC, PropsWithChildren, useCallback, useEffect, useMemo, useState} from "react";
+import React, {type FC, type PropsWithChildren, useCallback, useEffect, useMemo, useState} from "react";
+
+import type {Config} from "../../types/config";
+import {Theme, type ThemeStorageContract} from "../../types/theme";
 
 import {ThemeContext} from "./context";
-
-import {Theme, ThemeStorageContract} from "../../types/theme";
-import {Config} from "../../types/config";
-
+import {isDarkMedia, isValid} from "./theme-utils";
 import ThemeStorage from "./ThemeStorage";
-
-const isDarkMedia = () => window?.matchMedia("(prefers-color-scheme: dark)")?.matches;
-
-const isValid = (theme: Theme | undefined): theme is Theme => {
-    return !!theme && [Theme.Light, Theme.Dark].includes(theme);
-};
 
 export interface ThemeProviderProps extends Pick<Config, "components"> {
     /**
@@ -122,7 +116,6 @@ const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = props => {
         return storage;
     }, [storage]);
 
-    // prettier-ignore
     const changeTheme = useCallback((theme: Theme) => {
         setTheme(theme);
 
@@ -138,7 +131,9 @@ const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = props => {
     }, [theme, changeTheme]);
 
     useEffect(() => {
-        if (!currentStorage) return;
+        if (!currentStorage) {
+            return;
+        }
 
         currentStorage
             .get()

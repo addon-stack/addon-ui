@@ -5,7 +5,9 @@
  * - Supports decimals and scientific notation
  */
 export const normalizeNumberInput = (raw: string): string => {
-    if (!raw) return "";
+    if (!raw) {
+        return "";
+    }
 
     const filtered = raw.replace(/[^0-9eE+\-.]/g, "");
 
@@ -29,6 +31,7 @@ export const normalizeNumberInput = (raw: string): string => {
                 result += ch;
                 hasDot = true;
             }
+
             continue;
         }
 
@@ -41,6 +44,7 @@ export const normalizeNumberInput = (raw: string): string => {
                     canUseSign = true;
                 }
             }
+
             continue;
         }
 
