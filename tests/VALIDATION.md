@@ -86,6 +86,15 @@ Both popup documents open in extension tabs, so the browser toolbar surface is o
   source/test types and declarations. Storybook builds successfully.
 - The subsequent complete Chrome/Firefox matrix passes all 26 checks in 41.4 seconds, with no skips or retries.
 
+## Radix dependency update — 2026-09-15
+
+- Revalidated the final source with `radix-ui@1.6.7` and its updated Radix/Floating UI dependencies.
+- `npm run verify` passes: 100 Jest tests, 60 tooling checks, lint, source/test types and declarations.
+- Storybook builds. The complete Chrome/Firefox matrix passes all 26 checks in 29.4 seconds,
+  including Select closing/navigation, nested modal focus, Toast and isolated CSS resources.
+- The npm manifest and both lockfiles retain the published framework dependency and the local automated
+  fixture link. The private `addon/` playground remains ignored and is excluded from commits.
+
 ## Radix upgrade — 2026-09-15
 
 - npm's stable `latest` tag resolves to `radix-ui 1.6.7`; the installed Dialog is `1.1.23` and Select is `2.3.7`.
