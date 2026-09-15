@@ -1,5 +1,143 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.12.0 (2026-09-15)
+
+### 💥 Breaking Changes
+
+* AddonBone 0.12.0 or newer is now required.
+
+* The plugin now requires AddonBone 0.11.0 or newer.
+
+* Rename dialogPropsKeys, modalPropsKeys, drawerPropsKeys
+and viewPropsKeys to DialogPropsKeys, ModalPropsKeys, DrawerPropsKeys and
+ViewPropsKeys. Rename the shared hideInTable constant to HideInTable.
+Update imports and usages to the PascalCase exports.
+
+* the plugin no longer supports the splitChunks option.
+Configure chunk splitting in the application's bundler when needed.
+
+
+### ✨ Features
+
+* **integration:** adopt AddonBone 0.12 boundaries ([09dfab4](https://github.com/addon-stack/addon-ui/commit/09dfab4cf2edc0ba28b77d8ea690d92f4a17346d))
+
+  Use framework-injected container and boundary props in the Shadow DOM
+  fixture and verify portals stay outside its React mount target.
+  Update dependency locks and document direct provider integration.
+
+* **plugin:** generate virtual sources with Sass-aware composition ([19f7f51](https://github.com/addon-stack/addon-ui/commit/19f7f51ca964ea9a8a67738c9fc92deb6dcbebe0))
+
+  Provide package-import fallbacks and compiler-local virtual config and
+  stylesheet modules, with watched inputs and recoverable generation errors.
+
+  Compose Sass through an AST, resolve source-relative imports and assets,
+  and restore nested partial URLs through source maps. Add real compiler,
+  watch, packed-package and browser resource coverage.
+
+* support Shadow DOM providers and floating components ([37f7f58](https://github.com/addon-stack/addon-ui/commit/37f7f5822a04c7c9721fdcedd440c8d4bce89cf9))
+
+  Add explicit provider portal targets with config precedence and pending
+  container support. Scope base styles, theme mixins and CSS isolation to
+  Shadow DOM while retaining ordinary popup rendering.
+
+  Handle modal focus and scrolling, Select navigation and Toast focus in
+  shadow trees. Organize shared DOM utilities and floating hooks behind
+  module entrypoints, and document naming and dependency boundaries.
+
+  Add independent component, extension build and Chrome/Firefox tests using
+  the published AddonBone 0.11.0 package. Preserve the release tooling tests
+  and run the automated suites in CI.
+
+  Validation: 65 Jest tests, 24 build/browser checks, lint, TypeScript,
+  declarations, Storybook, formatting, actionlint and npm package inspection.
+
+
+
+### 🐛 Bug Fixed
+
+* **icon:** preserve fallback className and inline styles ([847929a](https://github.com/addon-stack/addon-ui/commit/847929a05d92e3d96cc06c7d91019a416a8d92eb))
+
+
+* **release:** align breaking commit parsing and verify pre-1.0 bumps ([a6552a3](https://github.com/addon-stack/addon-ui/commit/a6552a333a02c044191d4ed43407a1527082580f))
+
+
+* **select:** scope unchanged resize suppression to event dispatch ([5506849](https://github.com/addon-stack/addon-ui/commit/55068497975d5050249673c1b6771610916c82a5))
+
+  Ignore only the close request issued during an unchanged resize event.
+  Preserve later keyboard, pointer and blur closes, and trigger ref cleanup.
+
+  Cover unconsumed resize guards with a component regression test. Use a
+  locator click in the browser scenario so the outside click cannot precede
+  Radix's deferred pointer listener.
+
+* **ui:** respect RTL direction in component layouts ([253afa0](https://github.com/addon-stack/addon-ui/commit/253afa0958b67ce4ba4d018e0ccff0c1ac625b29))
+
+
+
+
+### 🧩 Other
+
+* adjust styles in Button, Modal, and Switch components for consistency and naming accuracy ([678bfc7](https://github.com/addon-stack/addon-ui/commit/678bfc7890eb25552f595387f84b9fc1c397cb6b))
+
+
+* adjust styles in Modal, Tag, TextArea and Toast components for consistency and naming accuracy ([95f7d01](https://github.com/addon-stack/addon-ui/commit/95f7d018ffc81792c3aaaf6645e0219b8c48dbec))
+
+
+
+
+### 🧪 Tests
+
+* wait for lazy SVG registration in both shadow roots ([673902b](https://github.com/addon-stack/addon-ui/commit/673902b75abcac5b4e34ef434fe572b388daa55d))
+
+
+
+
+### 🧹 Chores
+
+* configure linting and formatting tools ([245dbd8](https://github.com/addon-stack/addon-ui/commit/245dbd89626af2f48978f015d20e4603d4e50992))
+
+  Replace Prettier with ESLint/Stylistic and Stylelint. Enforce naming, module boundaries,
+  grouped imports and inline types; add staged-file hooks and tooling regression tests.
+
+  Validation: all 60 tooling tests and lint on tooling files pass from the staged
+  snapshot. Source formatting remains a separate change required for full-tree lint.
+
+* **deps:** update Radix UI to 1.6.7 ([ee6e346](https://github.com/addon-stack/addon-ui/commit/ee6e3461d94274d0840dff2188ed578f6046b951))
+
+  Update Radix and Floating UI resolutions and the integration fixture's
+  local package metadata. Record validation of the updated dependency set.
+
+* keep the manual playground local and remove mailmap ([b38a492](https://github.com/addon-stack/addon-ui/commit/b38a492249176bd2858578c7bc0d4ba7bffb18c2))
+
+  Remove the tracked addon playground while preserving its local files.
+  Ignore the manual workspace and generated artifacts during formatting.
+  Remove .mailmap.
+
+
+
+### 🛠️ Refactoring
+
+* apply formatting and module naming conventions ([8f82cec](https://github.com/addon-stack/addon-ui/commit/8f82cecd76f5ef219bd5641fbd7e068755f5f3b3))
+
+  Normalize imports, type annotations and control-flow formatting across
+  components, hooks and tests. Extract theme utilities and rename the
+  ToggleGroup stylesheet to match repository conventions.
+
+* simplify plugin and add local playground ([e5e0b50](https://github.com/addon-stack/addon-ui/commit/e5e0b50aa89ad4ef92a5ab192d798021977d20a3))
+
+  Remove component chunk splitting from the plugin and its documentation.
+  Update the development framework to Addon Bone 0.10.0.
+  Add a minimal local addon linked with file:.. and load theme variables
+  through the plugin's SCSS configuration.
+
+
+
+
+### 🙌 Contributors
+
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 15
+- [Rostyslav Nihrutsa](https://github.com/RostyslavNihrutsa) (@RostyslavNihrutsa) — commits: 2
+
 ## 🚀 Release `addon-ui` v0.11.1 (2026-08-10)
 
 
