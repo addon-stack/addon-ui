@@ -61,27 +61,20 @@ test("loads lazy CSS and registers SVG independently in both roots", async ({pag
     await second.getByTestId("lazy-open").click();
     await expect(second.getByTestId("lazy")).toHaveCSS("border-top-width", "7px");
 
-    expect(
-        await second
-            .getByTestId("late-icon")
-            .locator("use")
-            .evaluate(el => el.getBBox().width)
-    ).toBeGreaterThan(0);
-
-    const svg = await page.evaluate(() =>
+    // Icon registers its symbol in an effect; loaded CSS does not imply SVG readiness.
+    await expect.poll(() => page.evaluate(() =>
         [...document.querySelectorAll(".addon-ui-host")].map(host => {
             const root = host.shadowRoot;
             const use = root.querySelector('[data-testid="icon"] use');
 
             return {
-                width: use.getBBox().width,
+                width: use?.getBBox().width,
                 symbol: !!root.querySelector("#sample"),
-                late: root.querySelector('[data-testid="late-icon"] use')?.getBBox().width,
+                lateRendered: (root.querySelector('[data-testid="late-icon"] use')?.getBBox().width ?? 0) > 0,
             };
         })
-    );
-
-    expect(svg.map(item => item.width)).toEqual([17, 9]);
-    expect(svg.every(item => item.symbol)).toBe(true);
-    expect(svg[0].late).toBeGreaterThan(0);
+    )).toEqual([
+        {width: 17, symbol: true, lateRendered: true},
+        {width: 9, symbol: true, lateRendered: true},
+    ]);
 });
