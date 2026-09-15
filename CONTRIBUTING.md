@@ -51,7 +51,7 @@ Code uses four spaces, double quotes, semicolons, LF and a 120-character line li
 use two spaces. Imports are grouped with blank lines in this order: React (`react`, `react-dom` and their subpaths),
 Radix (`@radix-ui/*`, `radix-ui`), other external packages and Node built-ins, internal modules, imports from the
 current directory, then assets and styles. Internal modules include parent paths (`../`) and the `addon-ui` /
-`addon-ui-config` aliases. Current-directory imports (`./`, including subdirectories, and `.`) form their own group.
+`#addon-ui/config` aliases. Current-directory imports (`./`, including subdirectories, and `.`) form their own group.
 Assets and styles always stay in the last group, regardless of their path. Exports are sorted too.
 Multiline imports and exports place the closing brace on its own line, with a trailing comma after the last specifier.
 Imports from the same module are merged, with inline `type` markers for named types, using
@@ -77,3 +77,9 @@ dependencies, lockfiles and the private `addon/` playground are excluded from fo
 - Update Storybook stories when a visual component change needs review.
 - Before opening a pull request, run the relevant checks: `npm run lint`, `npm run typecheck`, `npm test`, and
   `npm run build:types`.
+
+Plugin generation and package fallback checks live in `tests/plugin/` and run with
+`npm run test:plugin`. They compile real JavaScript/SCSS, exercise watch
+creation/edit/deletion and error recovery, and resolve fallbacks from an npm archive.
+Watch fixtures use polling to avoid platform-specific native watcher limits; assertions
+wait for compilation results rather than fixed delays.

@@ -29,7 +29,7 @@
 
 - Run `npm run format` for ESLint/Stylelint autofixes and `npm run lint` for checks without writes. Do not add Prettier.
 - Keep custom ESLint rules in `tools/eslint/` and their regression tests in `tests/tooling/`.
-- Separate imports into groups: React (`react`, `react-dom` and subpaths), Radix (`@radix-ui/*`, `radix-ui`), other external packages and Node built-ins, internal modules, current-directory imports (`./`, including subdirectories, and `.`), then assets/styles. Treat `addon-ui` and `addon-ui-config` as internal aliases; parent paths (`../`) stay in the internal group. Assets/styles always belong to the last group, regardless of path.
+- Separate imports into groups: React (`react`, `react-dom` and subpaths), Radix (`@radix-ui/*`, `radix-ui`), other external packages and Node built-ins, internal modules, current-directory imports (`./`, including subdirectories, and `.`), then assets/styles. Treat `addon-ui` and `#addon-ui/config` as internal aliases; parent paths (`../`) stay in the internal group. Assets/styles always belong to the last group, regardless of path.
 - Merge named type and value imports from the same module, marking types inline (`import {type Props, Root} from "package"`). Type-only imports may use `import type`; keep namespace imports separate where syntax requires it.
 - Multiline imports and exports put the closing brace on its own line and use a trailing comma after the last specifier.
 - Component stories, conventional configuration names and existing PascalCase documentation URLs are naming exceptions.

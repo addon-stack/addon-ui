@@ -1,39 +1,46 @@
-import React, {act, ReactNode} from "react";
-import {createRoot, Root} from "react-dom/client";
-import {UIProvider} from "../../src/providers";
-import Modal from "../../src/components/Modal/Modal";
-import Drawer from "../../src/components/Drawer/Drawer";
+import React, {act, type ReactNode} from "react";
+import {createRoot, type Root} from "react-dom/client";
+
 import Dialog from "../../src/components/Dialog/Dialog";
-import Tooltip from "../../src/components/Tooltip/Tooltip";
+import Drawer from "../../src/components/Drawer/Drawer";
 import Footer from "../../src/components/Footer/Footer";
+import Modal from "../../src/components/Modal/Modal";
 import Popover from "../../src/components/Popover/Popover";
 import PopoverContent from "../../src/components/Popover/PopoverContent";
 import Select from "../../src/components/Select/Select";
 import SelectContent from "../../src/components/Select/SelectContent";
-import SelectTrigger from "../../src/components/Select/SelectTrigger";
 import SelectItem from "../../src/components/Select/SelectItem";
-import config from "../../src/config/default";
+import SelectTrigger from "../../src/components/Select/SelectTrigger";
+import Tooltip from "../../src/components/Tooltip/Tooltip";
+import {UIProvider} from "../../src/providers";
 import type {ComponentsProps} from "../../src/types/config";
+import config from "../../src/virtual/config";
 
 let root: Root;
 let mount: HTMLDivElement;
 let provider: HTMLDivElement;
 let configured: HTMLDivElement;
 let explicit: HTMLDivElement;
+
 beforeEach(() => {
     [mount, provider, configured, explicit] = Array.from({length: 4}, () =>
         document.body.appendChild(document.createElement("div"))
     );
+
     root = createRoot(mount);
 });
+
 afterEach(async () => {
     await act(async () => root.unmount());
+
     await act(async () => {
         await new Promise(resolve => setTimeout(resolve, 5));
     });
+
     document.body.replaceChildren();
     config.components = {};
 });
+
 const render = async (
     children: ReactNode,
     portal?: Element | DocumentFragment | null,
@@ -47,6 +54,7 @@ const render = async (
         )
     );
 };
+
 const fixtures = [
     [
         "dialog",
@@ -105,6 +113,7 @@ const fixtures = [
 
 describe.each(fixtures)("%s portal", (key, component) => {
     const settings = (container: Element | DocumentFragment | null): ComponentsProps => ({[key]: {container}});
+
     test("props, merged config, provider, then body; undefined inherits", async () => {
         config.components = settings(configured);
         await render(component(explicit), provider);
@@ -120,6 +129,7 @@ describe.each(fixtures)("%s portal", (key, component) => {
         expect(document.body.querySelector("[data-probe]")).not.toBeNull();
         expect(mount.querySelector("[data-probe]")).toBeNull();
     });
+
     test("null stops at each level without leaking to body", async () => {
         await render(component(null), provider, settings(configured));
         expect(document.body.querySelector("[data-probe]")).toBeNull();
@@ -128,6 +138,7 @@ describe.each(fixtures)("%s portal", (key, component) => {
         await render(component(), null);
         expect(document.body.querySelector("[data-probe]")).toBeNull();
     });
+
     test("moves to a new ShadowRoot and waits again", async () => {
         const shadow = explicit.attachShadow({mode: "open"});
         await render(component(), null);
@@ -159,7 +170,9 @@ test("Tooltip preserves content classes when Footer adds its slot class", async 
         />,
         provider
     );
+
     const content = provider.querySelector('[data-testid="tooltip-content"]')!;
+
     expect([...content.classList]).toEqual(
         expect.arrayContaining(["custom-tooltip", "tooltip-surface", "footer-slot"])
     );
@@ -180,6 +193,7 @@ test("shadow dialog keeps tab order and its original opener across rerenders", a
     const shadow = provider.attachShadow({mode: "open"});
     const opener = document.body.appendChild(document.createElement("button"));
     opener.focus();
+
     const dialog = (open: boolean, title: string) => (
         <Dialog open={open} title={title} description="Focus">
             <div>
@@ -188,22 +202,28 @@ test("shadow dialog keeps tab order and its original opener across rerenders", a
             </div>
         </Dialog>
     );
+
     await render(dialog(true, "Initial"), shadow);
     expect(shadow.activeElement).toBe(shadow.querySelector("[data-first]"));
     await render(dialog(true, "Updated"), shadow);
+
     await act(async () => {
         (shadow.querySelector("[data-last]") as HTMLElement).focus();
+
         shadow.activeElement!.dispatchEvent(
             new KeyboardEvent("keydown", {key: "Tab", bubbles: true, composed: true, cancelable: true})
         );
     });
+
     expect(shadow.activeElement).toBe(shadow.querySelector("[data-first]"));
     await act(async () => opener.focus());
     expect(shadow.activeElement).toBe(shadow.querySelector("[data-first]"));
     await render(dialog(false, "Closed"), shadow);
+
     await act(async () => {
         await new Promise(resolve => setTimeout(resolve, 5));
     });
+
     expect(document.activeElement).toBe(opener);
 });
 
@@ -213,10 +233,12 @@ test("user callbacks can cancel modal autofocus and choose return focus", async 
     const destination = document.body.appendChild(document.createElement("button"));
     opener.focus();
     const onOpenAutoFocus = jest.fn((event: Event) => event.preventDefault());
+
     const onCloseAutoFocus = jest.fn((event: Event) => {
         event.preventDefault();
         destination.focus();
     });
+
     const dialog = (open: boolean) => (
         <Dialog
             open={open}
@@ -228,13 +250,16 @@ test("user callbacks can cancel modal autofocus and choose return focus", async 
             <button>Inside</button>
         </Dialog>
     );
+
     await render(dialog(true), shadow);
     expect(onOpenAutoFocus).toHaveBeenCalledTimes(1);
     expect(document.activeElement).toBe(opener);
     await render(dialog(false), shadow);
+
     await act(async () => {
         await new Promise(resolve => setTimeout(resolve, 5));
     });
+
     expect(onCloseAutoFocus).toHaveBeenCalledTimes(1);
     expect(document.activeElement).toBe(destination);
 });
@@ -248,6 +273,7 @@ test("Select preserves an uncontrolled open request while the provider waits", a
             </SelectContent>
         </Select>
     );
+
     await render(select, null);
     expect(mount.querySelector('[role="combobox"]')?.textContent).toBe("Alpha");
     expect(mount.querySelector('[role="combobox"]')?.getAttribute("aria-expanded")).toBe("false");

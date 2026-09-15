@@ -1,11 +1,13 @@
-import path from "node:path";
 import fs from "node:fs";
 import {createRequire} from "node:module";
-import {defineConfig, Workspace} from "adnbn";
-import ui from "addon-ui/plugin";
+import path from "node:path";
 import type {RspackPluginInstance} from "@rspack/core";
+import {defineConfig, Workspace} from "adnbn";
+
+import ui from "addon-ui/plugin";
 
 const fixtureRequire = createRequire(path.resolve("package.json"));
+
 const frameworkAliases = Object.fromEntries(
     [
         "adnbn",
@@ -18,10 +20,12 @@ const frameworkAliases = Object.fromEntries(
         "adnbn/locale/react",
     ].map(name => [name + "$", fixtureRequire.resolve(name)])
 );
+
 const buildStats: RspackPluginInstance = {
     apply(compiler) {
         compiler.hooks.done.tap("verify-framework-modules", stats => {
             fs.mkdirSync("artifacts", {recursive: true});
+
             fs.writeFileSync(
                 `artifacts/stats-${path.basename(compiler.options.output.path!)}.json`,
                 JSON.stringify(

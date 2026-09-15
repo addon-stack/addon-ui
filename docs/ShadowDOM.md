@@ -40,7 +40,7 @@ The provider's `container` is not a portal target. Changing `portal` does not mo
 
 ## CSS delivery with AddonBone
 
-CSS delivery belongs to AddonBone. Shadow DOM integration requires **AddonBone 0.11.0 or newer** and a content script configured with Shadow DOM isolation. All addon-ui stylesheet imports carry `?isolation`, including component CSS Modules, provider base styles and the virtual `addon-ui-style.scss` overrides. The framework delivers them into the content script's ShadowRoot; popup styles are linked to the popup document as usual. No custom CSS rule or stylesheet loader is needed in the application.
+CSS delivery belongs to AddonBone. Shadow DOM integration requires **AddonBone 0.11.0 or newer** and a content script configured with Shadow DOM isolation. All addon-ui stylesheet imports carry `?isolation`, including component CSS Modules, provider base styles and the virtual `#addon-ui/style.scss` overrides. The framework delivers them into the content script's ShadowRoot; popup styles are linked to the popup document as usual. No custom CSS rule or stylesheet loader is needed in the application.
 
 Mark the application's own stylesheet imports with `?isolation` too:
 
@@ -48,7 +48,7 @@ Mark the application's own stylesheet imports with `?isolation` too:
 import styles from "./panel.module.scss?isolation";
 ```
 
-The marker applies to that stylesheet and the Sass sources compiled into it. It does not mark separate CSS imports inside third-party components. The virtual module remains named `addon-ui-style.scss`; only its import carries the query. Styles from `ui.style.scss` already participate through that virtual import.
+The marker applies to that stylesheet and the Sass sources compiled into it. It does not mark separate CSS imports inside third-party components. The virtual module remains named `#addon-ui/style.scss`; only its import carries the query. Styles from `ui.style.scss` already participate through that virtual import.
 
 The automated [integration fixture](../tests/fixtures/shadow-dom/README.md) installs the published `adnbn@0.11.0` from npm and links the current addon-ui source through `file:`. It uses the framework's standard CSS rules, chunk separation, manifest/WAR generation and isolated-styles runtime. A general mechanism for registering unmarked third-party library styles remains a possible follow-up in AddonBone.
 

@@ -7,9 +7,12 @@
     "outDir": "dist-types",
     "composite": false,
     "noEmit": false,
-    "checkJs": false
+    "checkJs": false,
+    "rootDir": "src"
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "exclude": [
     "**/*.test.ts",
     "**/*.test.tsx",

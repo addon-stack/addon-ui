@@ -2,6 +2,14 @@ module.exports = {
     maxWorkers: 2,
     projects: [
         {
+            displayName: "plugin",
+            testEnvironment: "node",
+            testMatch: ["<rootDir>/tests/plugin/**/*.test.ts"],
+            transform: {
+                "^.+\\.tsx?$": ["@swc/jest", {jsc: {parser: {syntax: "typescript", tsx: true}}}],
+            },
+        },
+        {
             displayName: "unit",
             testEnvironment: "node",
             testMatch: ["<rootDir>/tests/unit/**/*.test.cjs"],
@@ -22,7 +30,6 @@ module.exports = {
             },
             moduleNameMapper: {
                 "\\.(css|scss)(\\?isolation)?$": "<rootDir>/tests/support/components/style.cjs",
-                "^addon-ui-config$": "<rootDir>/src/config/default.ts",
                 "^@addon-core/storage$": "<rootDir>/tests/support/components/storage.cjs",
                 "^adnbn$": "<rootDir>/tests/support/components/adnbn.cjs",
                 "^adnbn/locale/react$": "<rootDir>/tests/support/components/locale.cjs",

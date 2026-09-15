@@ -1,8 +1,8 @@
 import type {ReadonlyConfig} from "adnbn";
 
-import Finder from "./Finder";
-
 import type {FileImportInfo} from "../types";
+
+import Finder from "./Finder";
 
 export default class StyleFinder extends Finder {
     protected getAllowedExtensions(): string[] {
@@ -16,8 +16,10 @@ export default class StyleFinder extends Finder {
     protected getFile(dirPath: string): FileImportInfo | undefined {
         const filePath = this.resolveFileWithExtensions(dirPath, this.fileName);
 
-        if (!filePath) return;
+        if (!filePath) {
+            return;
+        }
 
-        return {name: "", import: this.toImportPath(filePath, true)};
+        return {import: this.toImportPath(filePath)};
     }
 }

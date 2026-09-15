@@ -168,6 +168,45 @@ export default defineConfig({
 | `mergeConfig` | `boolean` | `true`        | Whether to merge configuration files from different directories.       |
 | `mergeStyles` | `boolean` | `true`        | Whether to merge style files from different directories.               |
 
+Names without a supported extension (such as `ui.config` or `ui.style`) use extension
+priority: `.tsx` before `.ts`, and `.scss` before `.css`. An explicit supported extension
+selects that exact file; a missing `.ts` or `.css` file is not replaced by another extension.
+
+The plugin requires AddonBone 0.11.0 or newer. It generates the internal modules
+`#addon-ui/config` and `#addon-ui/style.scss` using the current Rspack compiler.
+During development it watches configuration/style files and their search directories,
+including directories that do not exist yet. Creating, editing or deleting these files
+updates the next build. Invalid TypeScript or SCSS produces a build error; correcting
+it allows watch mode to recover.
+
+Shared files are composed before application files. With `mergeConfig: false` or
+`mergeStyles: false`, only the highest-priority matching file is used. SCSS is parsed
+as a syntax tree. Leading `@use`/`@forward` directives and their configuration variables
+are composed before the shared and application bodies, followed by leading CSS imports
+and layer declarations. Multiline directives and comments remain intact. Both bodies
+share one Sass scope; this does not turn each source into an independent Sass module.
+Application prelude variables therefore also affect the shared body. Keep body-specific
+values in separate variables or explicitly configured modules.
+
+Only identical, unconfigured module directives repeated across sources are deduplicated.
+Variables, CSS rules and configured loads are retained; incompatible namespaces or module
+configurations produce Sass errors. A late `@use` or `@forward` in an original source
+produces an error with its filename and location instead of being silently moved.
+
+Local `@use`, `@forward`, `@import` and literal relative `url(...)` paths are resolved
+from their source file. Nested Sass partials retain their own resource base through
+Sass source maps and `resolve-url-loader`, applied only to the generated stylesheet.
+Built-in Sass modules, package imports and external/root-relative URLs keep their normal
+resolution. Watch builds track imported partials and assets through the loaders.
+User overrides remain after the library's base styles, and their import keeps `?isolation`
+for Shadow DOM delivery; CSS extraction and web-accessible resources remain owned by AddonBone.
+
+Without `ui()`, the package resolves these internal imports to a configuration with
+empty `components`, `extra` and `icons`, and an empty override stylesheet. Storybook
+and other compatible bundlers therefore need no aliases for these modules. They still
+need the normal TypeScript, React and SCSS support required by addon-ui. Private
+`#addon-ui/...` imports and the Rspack implementation are not public package APIs.
+
 ### Configuration Files
 
 The `addon-ui` configuration is designed to retrieve configuration from each extension separately, allowing for

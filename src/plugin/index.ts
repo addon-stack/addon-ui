@@ -1,16 +1,14 @@
-import path from "path";
-import {definePlugin} from "adnbn";
 import type {Configuration as Rspack} from "@rspack/core";
-import {RspackVirtualModulePlugin} from "rspack-plugin-virtual-module";
+import {definePlugin} from "adnbn";
+import path from "path";
 
-import StyleBuilder from "./builder/StyleBuilder";
-import ConfigBuilder from "./builder/ConfigBuilder";
+import {ConfigBuilder, StyleBuilder} from "./builder";
+import {StyleResourcesPlugin, VirtualSourcePlugin} from "./bundler";
+import {ConfigFinder, StyleFinder} from "./finder";
 
-import Finder from "./finder/Finder";
-import StyleFinder from "./finder/StyleFinder";
-import ConfigFinder from "./finder/ConfigFinder";
-
-import type {BuilderContract} from "./types";
+const PluginName = "addon-ui";
+const ConfigModuleName = `#${PluginName}/config`;
+const StyleModuleName = `#${PluginName}/style.scss`;
 
 export interface PluginOptions {
     /**
@@ -53,15 +51,9 @@ export default definePlugin((options: PluginOptions = {}) => {
         mergeStyles = true,
     } = options;
 
-    let configFinder: Finder;
-    let styleFinder: Finder;
-
-    let configBuilder: BuilderContract;
-    let styleBuilder: BuilderContract;
-
     return {
-        name: "addon-ui",
-        startup: ({config}) => {
+        name: PluginName,
+        bundler: ({config}) => {
             const {srcDir, appsDir, sharedDir, app, appSrcDir} = config;
             const normalizeThemeDir = path.normalize(themeDir).split(path.sep);
 
@@ -71,22 +63,29 @@ export default definePlugin((options: PluginOptions = {}) => {
                 path.join(srcDir, sharedDir, ...normalizeThemeDir),
             ];
 
-            configFinder = new ConfigFinder(configName, config).setCanMerge(mergeConfig).setSearchDirs(searchDirs);
-            styleFinder = new StyleFinder(styleName, config).setCanMerge(mergeStyles).setSearchDirs(searchDirs);
+            const configFinder = new ConfigFinder(configName, config)
+                .setCanMerge(mergeConfig)
+                .setSearchDirs(searchDirs);
 
-            configBuilder = new ConfigBuilder(configFinder);
-            styleBuilder = new StyleBuilder(styleFinder);
-        },
-        bundler: () => {
+            const styleFinder = new StyleFinder(styleName, config).setCanMerge(mergeStyles).setSearchDirs(searchDirs);
+
+            const configBuilder = new ConfigBuilder(configFinder);
+            const styleBuilder = new StyleBuilder(styleFinder);
+
             return {
                 plugins: [
-                    new RspackVirtualModulePlugin(
-                        {
-                            "addon-ui-config": configBuilder.build(),
-                            "addon-ui-style.scss": styleBuilder.build(),
-                        },
-                        "addon-ui-virtual"
-                    ),
+                    new VirtualSourcePlugin({
+                        modules: [ConfigModuleName, StyleModuleName],
+                        generate: () => ({
+                            [ConfigModuleName]: configBuilder.build(),
+                            [StyleModuleName]: styleBuilder.build(),
+                        }),
+                        dependencies: () => ({
+                            files: [...configFinder.getFiles(), ...styleFinder.getFiles()].map(file => file.import),
+                            directories: [...configFinder.getDirectories(), ...styleFinder.getDirectories()],
+                        }),
+                    }),
+                    new StyleResourcesPlugin(StyleModuleName),
                 ],
             } satisfies Rspack;
         },

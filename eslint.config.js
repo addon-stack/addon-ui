@@ -19,7 +19,7 @@ const importGroups = [
     ["^\\u0000?react(?:-dom)?(?:/|\\u0000?$)"],
     ["^\\u0000?@radix-ui/", "^\\u0000?radix-ui(?:/|\\u0000?$)"],
     ["^\\u0000?node:", "^\\u0000?@?\\w"],
-    ["^", "^\\u0000?\\.\\.(?:/|\\u0000?$)", "^\\u0000?addon-ui(?:-config|/|\\u0000?$)"],
+    ["^", "^\\u0000?\\.\\.(?:/|\\u0000?$)", "^\\u0000?addon-ui(?:/|\\u0000?$)"],
     ["^\\u0000?\\.(?:/|\\u0000?$)"],
     [
         "^\\u0000?.*\\.(?:avif|bmp|eot|gif|ico|jpe?g|mp3|mp4|ogg|otf|png|svg|ttf|wav|wasm|webm|webp|woff2?)" +

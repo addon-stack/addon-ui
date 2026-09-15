@@ -11,9 +11,6 @@
       "addon-ui": [
         "../../../src/index.ts"
       ],
-      "addon-ui-config": [
-        "../../../src/config/default.ts"
-      ],
       "adnbn": [
         "./node_modules/adnbn/dist/index.d.ts"
       ],

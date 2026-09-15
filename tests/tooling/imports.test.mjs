@@ -34,7 +34,7 @@ test("imports use React, Radix, external, internal, same-directory and asset gro
         ['import classnames from "classnames";', 'import path from "node:path";',
             'import Highlight from "react-highlight-words";', 'import "external-polyfill";',
             'import {Plugin} from "adnbn";', 'import {Storage} from "@addon-core/storage";'],
-        ['import {helper} from "../helpers";', 'import config from "addon-ui-config";',
+        ['import {helper} from "../helpers";', 'import config from "#addon-ui/config";',
             'import {Button} from "addon-ui";', 'import {defineConfig} from "addon-ui/config";',
             'import {parent} from "..";', 'import {shared} from "../../shared";'],
         ['import {local} from "./local";', 'import {barrel} from ".";',

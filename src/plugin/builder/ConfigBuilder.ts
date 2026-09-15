@@ -1,32 +1,20 @@
-import fs from "fs";
-import path from "path";
-import Finder from "../finder/Finder";
+import {createRequire} from "node:module";
 
+import type {Finder} from "../finder";
 import type {BuilderContract} from "../types";
 
 export default class ConfigBuilder implements BuilderContract {
-    protected template: string;
-
-    public constructor(protected finder: Finder) {
-        this.template = fs.readFileSync(path.resolve(__dirname, "virtual.config.ts"), "utf8");
-    }
+    public constructor(protected finder: Finder) {}
 
     public build(): string {
-        const files = this.finder.getFiles();
+        const files = this.finder.getFiles().reverse();
+        const imports = files.map((file, index) => `import config${index} from ${JSON.stringify(file.import)};`);
+        const configs = ["{components: {}, extra: {}, icons: {}}", ...files.map((_, index) => `config${index}`)];
 
-        const imports = files.map(file => {
-            return file.name ? `import ${file.name} from "${file.import}"` : `import "${file.import}"`;
-        });
-
-        // Elements must be reversed for correct merging of configs by priority
-        const names = files
-            .map(file => file.name)
-            .filter(Boolean)
-            .reverse();
-
-        // prettier-ignore
-        return this.template
-            .replace("//configs imports", imports.join("\n"))
-            .replace("{}", names.join(", "));
+        return [
+            `import {merge} from ${JSON.stringify(createRequire(import.meta.url).resolve("ts-deepmerge"))};`,
+            ...imports,
+            `export default merge(${configs.join(", ")});`,
+        ].join("\n");
     }
 }

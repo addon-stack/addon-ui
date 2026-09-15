@@ -7,6 +7,7 @@ All automated checks and their inputs live in this directory. The fixture is a p
 | Directory              | Responsibility                                                                                | Runner                                     |
 | ---------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | `unit/`                | Release tooling in Node                                                                       | Jest `unit` project                        |
+| `plugin/` | Virtual sources, Sass composition/resources, watch lifecycle and packed fallbacks | Jest `plugin` project |
 | `components/`          | Real React/Radix wrappers: portal resolution, pending containers and focus lifecycle          | Jest `components` project, jsdom           |
 | `integration/`         | Extension builds, dependency resolution, isolated CSS, WAR and declarations                   | Playwright `build` project                 |
 | `e2e/`                 | Styles, dialogs, Select, Toast and popup behavior in installed extensions                     | Playwright `chrome` and `firefox` projects |
@@ -14,7 +15,7 @@ All automated checks and their inputs live in this directory. The fixture is a p
 | `fixtures/sites/`      | External website documents used by browser tests                                              | Local HTTP server                          |
 | `support/`             | Shared environment setup, build verification and browser fixtures                             | Imported by tests                          |
 
-Keep assertions in the suite that owns the behavior. Shared helpers provide setup and teardown; they do not replace real components with simplified implementations. Name Jest tests `*.test.cjs` or `*.test.tsx` in their respective directories, and build/browser tests `*.spec.mjs`.
+Keep assertions in the suite that owns the behavior. Shared helpers provide setup and teardown; they do not replace real components with simplified implementations. Name Jest tests `*.test.cjs`, `*.test.ts` or `*.test.tsx` in their respective directories, and build/browser tests `*.spec.mjs`.
 
 ## Setup
 
@@ -32,11 +33,12 @@ The fixture installation is needed only for integration/browser checks. On Linux
 
 | Command                    | Checks                                                        |
 | -------------------------- | ------------------------------------------------------------- |
-| `npm test`                 | Both Jest projects                                            |
+| `npm test`                 | All Jest projects and tooling checks                                            |
 | `npm run test:unit`        | Node tests only                                               |
+| `npm run test:plugin` | Rspack generation, watch and package fallback tests |
 | `npm run test:components`  | jsdom component tests only                                    |
-| `npm run test:ci`          | Both Jest projects with coverage                              |
-| `npm run typecheck:tests`  | Component test and setup types                                |
+| `npm run test:ci`          | All Jest projects with coverage                              |
+| `npm run typecheck:tests`  | Component/plugin test and setup types                                |
 | `npm run test:integration` | Both extension builds and their assertions; no browser launch |
 | `npm run test:e2e`         | Build dependencies, then all Chrome and Firefox scenarios     |
 | `npm run test:all`         | Jest, integration and browser checks                          |
@@ -65,4 +67,4 @@ jsdom tests exercise the real wrappers and Radix, while stubbing stylesheet impo
 
 Both browser projects install and run the actual emitted extension. Chrome uses native Playwright input, including in the popup document. Firefox content-script tests also use native input. Playwright does not expose Firefox extension documents, so the Firefox popup helper uses its local debugging protocol and DOM events. Both popup documents open in extension tabs; these checks do not exercise the browser toolbar surface. Native touch scrolling is checked in Chrome; Firefox checks composed touch-event propagation only.
 
-The known Radix ShadowRoot title lookup diagnostic is permitted in browser logs; any other console error or page error fails the scenario. See [the fixture](./fixtures/shadow-dom/README.md) for CSS delivery details and [recorded validation](./VALIDATION.md) for the latest local results.
+Console errors, console warnings and page errors fail the scenario without Radix-specific exceptions. Dialog tests also verify accessible names and descriptions inside ShadowRoot. See [the fixture](./fixtures/shadow-dom/README.md) for CSS delivery details and [recorded validation](./VALIDATION.md) for the latest local results.
