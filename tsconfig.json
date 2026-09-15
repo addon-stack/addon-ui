@@ -8,12 +8,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "addon-ui-config": [
-        "./src/config/default.ts"
-      ]
-    }
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "./src/**/*",

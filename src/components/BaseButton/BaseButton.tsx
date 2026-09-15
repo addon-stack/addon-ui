@@ -1,9 +1,10 @@
-import React, {ComponentProps, memo, ReactNode, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, memo, type ReactNode} from "react";
+
 import classnames from "classnames";
 
 import {cloneOrCreateElement} from "../../utils";
 
-import styles from "./base-button.module.scss";
+import styles from "./base-button.module.scss?isolation";
 
 export interface BaseButtonProps extends ComponentProps<"button"> {
     after?: ReactNode;

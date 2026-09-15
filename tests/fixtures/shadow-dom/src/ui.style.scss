@@ -1,0 +1,28 @@
+@use "addon-ui/theme" as theme;
+@use "./styles/resources";
+@include theme.root {
+  --integration-token: 73px;
+  --font-size: 15px;
+}
+@include theme.dark {
+  [data-testid="specificity"] {
+    color: rgb(4, 5, 6);
+  }
+}
+@include theme.rtl {
+  [data-testid="panel"] {
+    --integration-rtl: yes;
+  }
+}
+[data-testid="specificity"]:hover {
+  color: rgb(1, 2, 3);
+}
+
+[data-testid="specificity"] {
+  background-image: url("./assets/style-root.svg");
+}
+
+// With forceMount, the application controls visibility of the retained closed node.
+[data-testid="toast"][data-forced][data-state="closed"] {
+  display: none;
+}

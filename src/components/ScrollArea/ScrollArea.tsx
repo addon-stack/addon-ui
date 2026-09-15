@@ -1,17 +1,19 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo, useImperativeHandle} from "react";
-import classnames from "classnames";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, useImperativeHandle} from "react";
+
 import {
     Corner,
     Root,
-    ScrollAreaProps as ScrollAreaRootProps,
+    type ScrollAreaProps as ScrollAreaRootProps,
     Scrollbar,
     Thumb,
     Viewport,
 } from "@radix-ui/react-scroll-area";
 
+import classnames from "classnames";
+
 import {useComponentProps} from "../../providers";
 
-import styles from "./scroll-area.module.scss";
+import styles from "./scroll-area.module.scss?isolation";
 
 export interface ScrollAreaProps extends ScrollAreaRootProps {
     xOffset?: number;
@@ -37,6 +39,7 @@ const ScrollArea: ForwardRefRenderFunction<HTMLDivElement, ScrollAreaProps> = (p
         scrollbarClassName,
         ...other
     } = {...useComponentProps("scrollArea"), ...props};
+
     const rootRef = React.useRef<HTMLDivElement | null>(null);
     const viewportRef = React.useRef<HTMLDivElement | null>(null);
 

@@ -13,20 +13,12 @@ $root: footer;
     background-color var(--footer-speed-bg, var(--speed-color)),
     box-shadow var(--footer-speed-box-shadow, var(--speed-color));
 
-  [dir="rtl"] & {
-    flex-direction: row-reverse;
-  }
-
   &--shadow {
     box-shadow: var(--footer-box-shadow, 0px -4px 4px 0px rgba(0, 0, 0, 0.03));
   }
 
   &--reverse {
     flex-direction: row-reverse;
-
-    [dir="rtl"] & {
-      flex-direction: row;
-    }
   }
 
   &-children {
@@ -34,16 +26,8 @@ $root: footer;
     display: flex;
     justify-content: space-between;
 
-    [dir="rtl"] & {
-      flex-direction: row-reverse;
-    }
-
     .#{$root}--reverse & {
       flex-direction: row-reverse;
-
-      [dir="rtl"] & {
-        flex-direction: row;
-      }
     }
   }
 
@@ -51,19 +35,11 @@ $root: footer;
     display: flex;
     align-items: center;
     gap: var(--footer-left-gap, var(--footer-gap, 15px));
-
-    [dir="rtl"] & {
-      flex-direction: row-reverse;
-    }
   }
 
   &-right {
     display: flex;
     align-items: center;
     gap: var(--footer-right-gap, var(--footer-gap, 15px));
-
-    [dir="rtl"] & {
-      flex-direction: row-reverse;
-    }
   }
 }

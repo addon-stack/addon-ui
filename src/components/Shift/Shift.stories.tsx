@@ -1,8 +1,10 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import ShiftComponent, {ShiftProps} from "./Shift";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
 import {TextField} from "../index";
+
+import ShiftComponent, {type ShiftProps} from "./Shift";
 
 type Props = ShiftProps & {
     height?: number;

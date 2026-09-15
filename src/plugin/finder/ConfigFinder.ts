@@ -1,8 +1,8 @@
-import path from "path";
-import Finder from "./Finder";
-
 import type {ReadonlyConfig} from "adnbn";
+
 import type {FileImportInfo} from "../types";
+
+import Finder from "./Finder";
 
 export default class ConfigFinder extends Finder {
     protected getAllowedExtensions(): string[] {
@@ -16,10 +16,11 @@ export default class ConfigFinder extends Finder {
     protected getFile(dirPath: string): FileImportInfo | undefined {
         const filePath = this.resolveFileWithExtensions(dirPath, this.fileName);
 
-        if (!filePath) return;
+        if (!filePath) {
+            return;
+        }
 
         return {
-            name: dirPath.replaceAll(path.sep, "").replaceAll("-", ""),
             import: this.toImportPath(filePath),
         };
     }

@@ -1,10 +1,11 @@
-import React, {ComponentProps, forwardRef, JSX, memo, ReactNode} from "react";
+import React, {type ComponentProps, forwardRef, type JSX, memo, type ReactNode} from "react";
+
 import classnames from "classnames";
 
-import {cloneOrCreateElement} from "../../utils";
 import {useComponentProps} from "../../providers";
+import {cloneOrCreateElement} from "../../utils";
 
-import styles from "./list-item.module.scss";
+import styles from "./list-item.module.scss?isolation";
 
 type TagType = keyof JSX.IntrinsicElements;
 export type ListItemType = HTMLLIElement;

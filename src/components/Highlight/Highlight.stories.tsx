@@ -1,7 +1,8 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import HighlightComponent from "./Highlight";
 import {HighlightColor} from "./types";
@@ -12,6 +13,7 @@ const colors: (HighlightColor | "default")[] = [
     HighlightColor.Secondary,
     HighlightColor.Accent,
 ];
+
 const searchWords = ["Adjust", "volume", "switch", "audio"];
 const textToHighlight = "Adjust the current tab's volume with the slider. Switch to any audio tab in one click";
 
@@ -26,7 +28,8 @@ const meta: Meta<typeof HighlightComponent> = {
         },
         searchWords: {
             description:
-                "Array of search words. String search terms are automatically cast to RegExps unless autoEscape is true.",
+                "Array of search words. String search terms are automatically cast to RegExps " +
+                    "unless autoEscape is true.",
         },
         activeIndex: {
             description: "Specify the match index that should be actively highlighted. Use along with activeClassName",
@@ -38,9 +41,9 @@ const meta: Meta<typeof HighlightComponent> = {
             description: "Text to highlight matches in",
         },
 
-        style: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
+        style: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
     },
     decorators: [
         Story => (

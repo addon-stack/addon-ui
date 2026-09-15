@@ -1,4 +1,4 @@
-import React, {ComponentProps, FC, memo} from "react";
+import React, {type ComponentProps, type FC, memo} from "react";
 
 export interface SvgSpriteProps {
     icons: Record<string, FC<ComponentProps<"svg">>>;

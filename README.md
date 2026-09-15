@@ -153,7 +153,6 @@ export default defineConfig({
             styleName: "ui.style", // Name of style files
             mergeConfig: true, // Merge configs from different directories
             mergeStyles: true, // Merge styles from different directories
-            splitChunks: true, // Enable automatic chunk splitting for components
         }),
     ],
 });
@@ -161,27 +160,52 @@ export default defineConfig({
 
 ### Plugin Options
 
-| Option        | Type                                               | Default       | Description                                                                                            |
-| :------------ | :------------------------------------------------- | :------------ | :----------------------------------------------------------------------------------------------------- |
-| `themeDir`    | `string`                                           | `"."`         | Directory path where plugin configuration and style files are located.                                 |
-| `configName`  | `string`                                           | `"ui.config"` | Name of the configuration file.                                                                        |
-| `styleName`   | `string`                                           | `"ui.style"`  | Name of the SCSS style file.                                                                           |
-| `mergeConfig` | `boolean`                                          | `true`        | Whether to merge configuration files from different directories.                                       |
-| `mergeStyles` | `boolean`                                          | `true`        | Whether to merge style files from different directories.                                               |
-| `splitChunks` | `boolean \| (name: string) => string \| undefined` | `false`       | Enables automatic chunk splitting. If a function is provided, it can be used to customize chunk names. |
+| Option        | Type      | Default       | Description                                                            |
+| :------------ | :-------- | :------------ | :--------------------------------------------------------------------- |
+| `themeDir`    | `string`  | `"."`         | Directory path where plugin configuration and style files are located. |
+| `configName`  | `string`  | `"ui.config"` | Name of the configuration file.                                        |
+| `styleName`   | `string`  | `"ui.style"`  | Name of the SCSS style file.                                           |
+| `mergeConfig` | `boolean` | `true`        | Whether to merge configuration files from different directories.       |
+| `mergeStyles` | `boolean` | `true`        | Whether to merge style files from different directories.               |
 
-#### Customizing Chunk Names
+Names without a supported extension (such as `ui.config` or `ui.style`) use extension
+priority: `.tsx` before `.ts`, and `.scss` before `.css`. An explicit supported extension
+selects that exact file; a missing `.ts` or `.css` file is not replaced by another extension.
 
-You can pass a callback function to `splitChunks` to customize the generated chunk names:
+The plugin requires AddonBone 0.12.0 or newer. It generates the internal modules
+`#addon-ui/config` and `#addon-ui/style.scss` using the current Rspack compiler.
+During development it watches configuration/style files and their search directories,
+including directories that do not exist yet. Creating, editing or deleting these files
+updates the next build. Invalid TypeScript or SCSS produces a build error; correcting
+it allows watch mode to recover.
 
-```ts
-ui({
-    splitChunks: name => {
-        if (name === "button") return "ui-core-button";
-        return `ui-${name}`;
-    },
-});
-```
+Shared files are composed before application files. With `mergeConfig: false` or
+`mergeStyles: false`, only the highest-priority matching file is used. SCSS is parsed
+as a syntax tree. Leading `@use`/`@forward` directives and their configuration variables
+are composed before the shared and application bodies, followed by leading CSS imports
+and layer declarations. Multiline directives and comments remain intact. Both bodies
+share one Sass scope; this does not turn each source into an independent Sass module.
+Application prelude variables therefore also affect the shared body. Keep body-specific
+values in separate variables or explicitly configured modules.
+
+Only identical, unconfigured module directives repeated across sources are deduplicated.
+Variables, CSS rules and configured loads are retained; incompatible namespaces or module
+configurations produce Sass errors. A late `@use` or `@forward` in an original source
+produces an error with its filename and location instead of being silently moved.
+
+Local `@use`, `@forward`, `@import` and literal relative `url(...)` paths are resolved
+from their source file. Nested Sass partials retain their own resource base through
+Sass source maps and `resolve-url-loader`, applied only to the generated stylesheet.
+Built-in Sass modules, package imports and external/root-relative URLs keep their normal
+resolution. Watch builds track imported partials and assets through the loaders.
+User overrides remain after the library's base styles, and their import keeps `?isolation`
+for Shadow DOM delivery; CSS extraction and web-accessible resources remain owned by AddonBone.
+
+Without `ui()`, the package resolves these internal imports to a configuration with
+empty `components`, `extra` and `icons`, and an empty override stylesheet. Storybook
+and other compatible bundlers therefore need no aliases for these modules. They still
+need the normal TypeScript, React and SCSS support required by addon-ui. Private
+`#addon-ui/...` imports and the Rspack implementation are not public package APIs.
 
 ### Configuration Files
 
@@ -338,16 +362,19 @@ function App() {
 }
 ```
 
+For content scripts mounted in a ShadowRoot, pass its host as `container` and the ShadowRoot as `portal`. CSS delivery requires AddonBone isolated style routing. See the [Shadow DOM integration guide](./docs/ShadowDOM.md) and [automated test suites](./tests/README.md).
+
 ### UIProvider Props
 
-| Prop         | Type                           | Default     | Description                                               |
-| :----------- | :----------------------------- | :---------- | :-------------------------------------------------------- |
-| `components` | `ComponentsProps`              | `{}`        | Component-specific configuration overrides.               |
-| `icons`      | `Icons`                        | `{}`        | Custom SVG icons registration.                            |
-| `extra`      | `ExtraProps`                   | `{}`        | App-wide extra properties.                                |
-| `storage`    | `ThemeStorageContract \| true` | `undefined` | Persistence storage for theme settings.                   |
-| `container`  | `string \| Element \| false`   | `"html"`    | Target element for attributes. Set to `false` to disable. |
-| `view`       | `string`                       | `undefined` | Custom view identifier for specific styling.              |
+| Prop         | Type                                  | Default     | Description                                                    |
+| :----------- | :------------------------------------ | :---------- | :------------------------------------------------------------- |
+| `components` | `ComponentsProps`                     | `{}`        | Component-specific configuration overrides.                    |
+| `icons`      | `Icons`                               | `{}`        | Custom SVG icons registration.                                 |
+| `extra`      | `ExtraProps`                          | `{}`        | App-wide extra properties.                                     |
+| `storage`    | `ThemeStorageContract \| true`        | `undefined` | Persistence storage for theme settings.                        |
+| `container`  | `string \| Element \| false`          | `"html"`    | Target element for attributes. Set to `false` to disable.      |
+| `portal`     | `Element \| DocumentFragment \| null` | `undefined` | Default target for floating layers; `null` waits for a target. |
+| `view`       | `string`                              | `undefined` | Custom view identifier for specific styling.                   |
 
 ### Using Extra Props
 
@@ -494,7 +521,7 @@ function App() {
 - Global theme tokens (colors, typography, spacing, transitions) live in your `ui.style.scss`.
 - Each component also exposes its own `--component-*` variables. See the CSS variables tables in the docs to know exactly what you can override.
 - **Theme Mixins**: Use `@import "addon-ui/theme";` to access `@include light { ... }` and `@include dark { ... }` mixins.
-- **Universal Targeting**: These mixins are container-agnostic. They work correctly whether the `theme` attribute is on a parent element or directly on the component itself.
+- **Universal Targeting**: These mixins are container-agnostic. They work correctly whether the `theme` attribute is on a parent element, the component itself, or the shadow host.
 - **Context-Aware**:
     - When used at the top level, they generate global selectors: `[theme="dark"] { ... }`.
     - When used inside a component, they generate scoped selectors: `[theme="dark"] .my-comp, .my-comp[theme="dark"] { ... }`.

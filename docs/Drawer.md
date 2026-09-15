@@ -49,6 +49,7 @@ Only the prop name, type, and default are listed below. Drawer supports all Dial
 
 | Prop         | Type                                                                                                                                                                                | Default  |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `container`  | `Element \| DocumentFragment \| null`                                                                                                                                               | —        |
 | `side`       | `'left' \| 'right' \| 'top' \| 'bottom'`                                                                                                                                            | `'left'` |
 | Dialog props | All props from `Dialog` (`speed`, `fullscreen`, `open`, `defaultOpen`, `onOpenChange`, `modal`, `container`, `title`, `description`, `overlayClassName`, `childrenClassName`, etc.) | —        |
 
@@ -139,3 +140,7 @@ import {UIProvider} from "addon-ui";
 - Drawer content is presented using Radix Dialog semantics: focus is trapped while open, background content is inert.
 - Provide meaningful `title` and optional `description` (used by the underlying Dialog for screen readers).
 - Ensure that closing controls are keyboard accessible and that Esc key behavior (if enabled via Radix) aligns with your UX.
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

@@ -1,12 +1,12 @@
-import React, {FC, useState} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+import React, {type FC, useState} from "react";
 
-import {hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
+import {HideInTable} from "../../utils";
 import {Button, ButtonColor, ButtonVariant} from "../index";
 
-import ToastComponent, {ToastProps} from "./Toast";
-import {ToastColor, ToastRadius, ToastSide, ToastAnimation} from "./types";
+import ToastComponent, {type ToastProps} from "./Toast";
+import {ToastAnimation, ToastColor, ToastRadius, ToastSide} from "./types";
 
 const sides: ToastSide[] = [
     ToastSide.TopLeft,
@@ -16,7 +16,9 @@ const sides: ToastSide[] = [
     ToastSide.BottomCenter,
     ToastSide.BottomLeft,
 ];
+
 const colors: (ToastColor | "default")[] = ["default", ToastColor.Success, ToastColor.Error];
+
 const radius: (ToastRadius | "default")[] = [
     ToastRadius.None,
     ToastRadius.Small,
@@ -65,16 +67,16 @@ const meta: Meta<typeof ToastComponent> = {
             control: {type: "select"},
         },
 
-        action: hideInTable,
-        closeIcon: hideInTable,
-        closeProps: hideInTable,
-        onClose: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
-        titleClassName: hideInTable,
-        actionClassName: hideInTable,
-        viewportClassName: hideInTable,
-        descriptionClassName: hideInTable,
+        action: HideInTable,
+        closeIcon: HideInTable,
+        closeProps: HideInTable,
+        onClose: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        titleClassName: HideInTable,
+        actionClassName: HideInTable,
+        viewportClassName: HideInTable,
+        descriptionClassName: HideInTable,
     },
 };
 

@@ -95,18 +95,18 @@ $root: tag;
 
   // Sizes
   &--small-size {
-    padding: var(--tag-padding, 3px 6px);
+    padding: var(--tag-padding-sm, 3px 6px);
     font-size: var(--tag-font-size-sm, 12px);
   }
 
   &--medium-size {
-    padding: var(--tag-padding, 5px 10px);
-    font-size: var(--tag-font-size-sm, 14px);
+    padding: var(--tag-padding-md, 5px 10px);
+    font-size: var(--tag-font-size-md, 14px);
   }
 
   &--large-size {
-    padding: var(--tag-padding, 6px 12px);
-    font-size: var(--tag-font-size-sm, 16px);
+    padding: var(--tag-padding-lg, 6px 12px);
+    font-size: var(--tag-font-size-lg, 16px);
   }
 
   //Radius

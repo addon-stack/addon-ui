@@ -44,7 +44,7 @@ $root: modal;
         }
 
         &--fadeScale-animation {
-          animation-name: fadeScaleIn;
+          animation-name: fadeScaleOut;
         }
       }
     }
@@ -66,11 +66,11 @@ $root: modal;
     }
 
     &--medium-radius {
-      border-radius: var(--modal-border-radius-sm, 15px);
+      border-radius: var(--modal-border-radius-md, 15px);
     }
 
     &--large-radius {
-      border-radius: var(--modal-border-radius-sm, 20px);
+      border-radius: var(--modal-border-radius-lg, 20px);
     }
   }
 

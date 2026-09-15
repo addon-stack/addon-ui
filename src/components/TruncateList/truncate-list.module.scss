@@ -1,11 +1,5 @@
-@use "../../styles/mixins" as theme;
-
 .truncate-list {
   gap: var(--truncate-list-gap, 8px);
-
-  @include theme.rtl() {
-    flex-direction: row-reverse;
-  }
 
   &__counter {
     display: flex;

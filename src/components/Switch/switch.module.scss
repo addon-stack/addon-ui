@@ -33,7 +33,7 @@ $root: switch;
   transition: background var(--switch-speed-bg, var(--speed-color));
 
   &[data-state="checked"] {
-    background-color: var(--switch-cheked-bg-color, var(--primary-color));
+    background: var(--switch-checked-bg-color, var(--primary-color));
   }
 
   &:disabled {
@@ -48,7 +48,7 @@ $root: switch;
     height: switch-thumb-height();
     transform: translateX(calc((#{switch-height()} - #{switch-thumb-height()}) / 2));
     background-color: var(--switch-thumb-bg-color, white);
-    border-radius: var(--switch-border-radius, 9999px);
+    border-radius: var(--switch-thumb-border-radius, var(--switch-border-radius, 9999px));
     will-change: transform;
     transition:
       transform var(--switch-speed-transform, var(--speed-sm)) ease-in-out,

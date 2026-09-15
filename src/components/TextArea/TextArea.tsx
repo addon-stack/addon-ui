@@ -1,6 +1,6 @@
 import React, {
-    ChangeEventHandler,
-    ComponentProps,
+    type ChangeEventHandler,
+    type ComponentProps,
     forwardRef,
     memo,
     useCallback,
@@ -10,14 +10,14 @@ import React, {
     useState,
 } from "react";
 
-import classnames from "classnames";
 import autosize from "autosize";
+import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import {TextAreaVariant, TextAreaSize, TextAreaRadius} from "./types";
+import {type TextAreaRadius, type TextAreaSize, TextAreaVariant} from "./types";
 
-import styles from "./text-area.module.scss";
+import styles from "./text-area.module.scss?isolation";
 
 export interface TextAreaActions {
     select(): void;

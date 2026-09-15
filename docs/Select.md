@@ -69,18 +69,18 @@ Supports contextual props: `useComponentProps("selectTrigger")`.
 
 #### Props: SelectContent
 
-| Prop                | Type                         | Default    |
-| ------------------- | ---------------------------- | ---------- |
-| `arrow`             | `boolean`                    | —          |
-| `arrowWidth`        | `number`                     | —          |
-| `arrowHeight`       | `number`                     | —          |
-| `fullWidth`         | `boolean`                    | `true`     |
-| `position`          | `"popper" \| "item-aligned"` | `"popper"` |
-| `viewportProps`     | `SelectViewportProps`        | —          |
-| `scrollUpButton`    | `ReactNode`                  | —          |
-| `scrollDownButton`  | `ReactNode`                  | —          |
-| `container`         | `HTMLElement`                | —          |
-| Radix Content props | all `SelectContentProps`     | —          |
+| Prop                | Type                                  | Default    |
+| ------------------- | ------------------------------------- | ---------- |
+| `arrow`             | `boolean`                             | —          |
+| `arrowWidth`        | `number`                              | —          |
+| `arrowHeight`       | `number`                              | —          |
+| `fullWidth`         | `boolean`                             | `true`     |
+| `position`          | `"popper" \| "item-aligned"`          | `"popper"` |
+| `viewportProps`     | `SelectViewportProps`                 | —          |
+| `scrollUpButton`    | `ReactNode`                           | —          |
+| `scrollDownButton`  | `ReactNode`                           | —          |
+| `container`         | `Element \| DocumentFragment \| null` | —          |
+| Radix Content props | all `SelectContentProps`              | —          |
 
 Supports contextual props: `useComponentProps("selectContent")`.
 
@@ -146,6 +146,7 @@ Only variables actually referenced in `src/components/Select/select.module.scss`
 | `--select-item-border-radius`          | none (define in theme)                                                                              |
 | `--select-item-height`                 | none (define in theme)                                                                              |
 | `--select-item-padding`                | `var(--select-item-padding, 10px)`                                                                  |
+| `--select-item-gap`                    | `var(--select-item-gap, 8px)`                                                                       |
 | `--select-item-checked-font-weight`    | `var(--select-item-checked-font-weight, 600)`                                                       |
 | `--select-item-checked-color`          | none (define in theme)                                                                              |
 | `--select-item-checked-bg-color`       | `var(--select-item-checked-bg-color, var(--bg-secondary-color))`                                    |
@@ -176,3 +177,7 @@ Useful: https://www.radix-ui.com/primitives/docs/components/select
 - The component supports global configuration via `ui.config.ts`.
 - `SelectContent` can be customized with `arrow` and `fullWidth` props.
 - `SelectTrigger` supports `ellipsis` for long text and `center` alignment.
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. Set this prop on `SelectContent`. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

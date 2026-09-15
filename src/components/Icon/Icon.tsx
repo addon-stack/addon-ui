@@ -1,8 +1,10 @@
-import React, {memo, useEffect, ComponentProps, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, memo, useEffect} from "react";
+
 import classnames from "classnames";
+
 import {useComponentProps, useIcons} from "../../providers";
 
-import styles from "./icon.module.scss";
+import styles from "./icon.module.scss?isolation";
 
 export interface IconProps extends ComponentProps<"svg"> {
     name: string;
@@ -28,8 +30,8 @@ const Icon: ForwardRefRenderFunction<SVGSVGElement, IconProps> = (props, ref) =>
 
         return (
             <span
-                className={styles["icon--default"]}
-                style={{fontSize: `${width}px`, lineHeight: `${width}px`, width, height}}
+                className={classnames(styles["icon--default"], className)}
+                style={{fontSize: `${width}px`, lineHeight: `${width}px`, width, height, ...other.style}}
             >
                 ⁇
             </span>

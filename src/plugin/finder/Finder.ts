@@ -1,7 +1,6 @@
+import type {ReadonlyConfig} from "adnbn";
 import fs from "fs";
 import path from "path";
-
-import type {ReadonlyConfig} from "adnbn";
 
 import type {FileImportInfo} from "../types";
 
@@ -26,51 +25,66 @@ export default abstract class Finder {
 
     public setCanMerge(canMerge: boolean): this {
         this.canMerge = canMerge;
+
         return this;
     }
 
     public setSearchDirs(searchDirs: string[]): this {
-        this.searchDirs = searchDirs;
+        this.searchDirs = [...new Set(searchDirs.map(dir => path.resolve(this.config.rootDir, dir)))];
+
         return this;
     }
 
     public getFiles(): FileImportInfo[] {
         const files: FileImportInfo[] = [];
 
-        let isFound = false;
-
-        this.searchDirs.forEach(dirPath => {
+        for (const dirPath of this.searchDirs) {
             const file = this.getFile(dirPath);
 
-            if (file && (this.canMerge || !isFound)) {
+            if (file) {
                 files.push(file);
-                isFound = true;
+
+                if (!this.canMerge) {
+                    break;
+                }
             }
-        });
+        }
 
         return files;
     }
 
     protected resolveFileWithExtensions(basePath: string, fileName: string): string | undefined {
-        const extname = path.extname(fileName);
+        const extensions = this.getAllowedExtensions();
 
-        const baseName = this.getAllowedExtensions().includes(extname.slice(1))
-            ? path.basename(fileName, extname)
-            : fileName;
+        // Names such as "ui.config" are basenames; a supported extension selects one exact file.
+        const candidates = extensions.includes(path.extname(fileName).slice(1))
+            ? [fileName]
+            : extensions.map(extension => `${fileName}.${extension}`);
 
-        for (const ext of this.getAllowedExtensions()) {
-            const fullPath = path.resolve(basePath, `${baseName}.${ext}`);
-            if (fs.existsSync(fullPath)) {
-                return fullPath;
+        for (const candidate of candidates) {
+            const fullPath = path.resolve(basePath, candidate);
+
+            try {
+                if (fs.statSync(fullPath).isFile()) {
+                    return fullPath;
+                }
+            } catch (error) {
+                const {code} = error as NodeJS.ErrnoException;
+
+                if (code !== "ENOENT" && code !== "ENOTDIR") {
+                    throw error;
+                }
             }
         }
 
         return undefined;
     }
 
-    protected toImportPath(fullPath: string, withExt: boolean = false): string {
-        const importPath = path.relative(this.config.rootDir, fullPath).split(path.sep).join("/");
+    public getDirectories(): readonly string[] {
+        return this.searchDirs;
+    }
 
-        return withExt ? importPath : importPath.replace(path.extname(importPath), "");
+    protected toImportPath(fullPath: string): string {
+        return fullPath.split(path.sep).join("/");
     }
 }

@@ -1,17 +1,14 @@
-import path from "path";
+import type {Configuration as Rspack} from "@rspack/core";
 import {definePlugin} from "adnbn";
-import {Configuration as Rspack, NormalModule} from "@rspack/core";
-import {RspackVirtualModulePlugin} from "rspack-plugin-virtual-module";
-import kebabCase from "lodash/kebabCase";
+import path from "path";
 
-import StyleBuilder from "./builder/StyleBuilder";
-import ConfigBuilder from "./builder/ConfigBuilder";
+import {ConfigBuilder, StyleBuilder} from "./builder";
+import {StyleResourcesPlugin, VirtualSourcePlugin} from "./bundler";
+import {ConfigFinder, StyleFinder} from "./finder";
 
-import Finder from "./finder/Finder";
-import StyleFinder from "./finder/StyleFinder";
-import ConfigFinder from "./finder/ConfigFinder";
-
-import type {BuilderContract} from "./types";
+const PluginName = "addon-ui";
+const ConfigModuleName = `#${PluginName}/config`;
+const StyleModuleName = `#${PluginName}/style.scss`;
 
 export interface PluginOptions {
     /**
@@ -43,13 +40,6 @@ export interface PluginOptions {
      * @default true
      */
     mergeStyles?: boolean;
-
-    /**
-     * Configuration for splitting chunks.
-     * Can be a boolean to enable/disable or a callback to customize chunk names.
-     * @default false
-     */
-    splitChunks?: boolean | ((name: string) => string | undefined);
 }
 
 export default definePlugin((options: PluginOptions = {}) => {
@@ -59,18 +49,11 @@ export default definePlugin((options: PluginOptions = {}) => {
         styleName = "ui.style",
         mergeConfig = true,
         mergeStyles = true,
-        splitChunks = false,
     } = options;
 
-    let configFinder: Finder;
-    let styleFinder: Finder;
-
-    let configBuilder: BuilderContract;
-    let styleBuilder: BuilderContract;
-
     return {
-        name: "addon-ui",
-        startup: ({config}) => {
+        name: PluginName,
+        bundler: ({config}) => {
             const {srcDir, appsDir, sharedDir, app, appSrcDir} = config;
             const normalizeThemeDir = path.normalize(themeDir).split(path.sep);
 
@@ -80,205 +63,31 @@ export default definePlugin((options: PluginOptions = {}) => {
                 path.join(srcDir, sharedDir, ...normalizeThemeDir),
             ];
 
-            configFinder = new ConfigFinder(configName, config).setCanMerge(mergeConfig).setSearchDirs(searchDirs);
-            styleFinder = new StyleFinder(styleName, config).setCanMerge(mergeStyles).setSearchDirs(searchDirs);
+            const configFinder = new ConfigFinder(configName, config)
+                .setCanMerge(mergeConfig)
+                .setSearchDirs(searchDirs);
 
-            configBuilder = new ConfigBuilder(configFinder);
-            styleBuilder = new StyleBuilder(styleFinder);
-        },
-        bundler: () => {
-            const config: Rspack = {
+            const styleFinder = new StyleFinder(styleName, config).setCanMerge(mergeStyles).setSearchDirs(searchDirs);
+
+            const configBuilder = new ConfigBuilder(configFinder);
+            const styleBuilder = new StyleBuilder(styleFinder);
+
+            return {
                 plugins: [
-                    new RspackVirtualModulePlugin(
-                        {
-                            "addon-ui-config": configBuilder.build(),
-                            "addon-ui-style.scss": styleBuilder.build(),
-                        },
-                        "addon-ui-virtual"
-                    ),
+                    new VirtualSourcePlugin({
+                        modules: [ConfigModuleName, StyleModuleName],
+                        generate: () => ({
+                            [ConfigModuleName]: configBuilder.build(),
+                            [StyleModuleName]: styleBuilder.build(),
+                        }),
+                        dependencies: () => ({
+                            files: [...configFinder.getFiles(), ...styleFinder.getFiles()].map(file => file.import),
+                            directories: [...configFinder.getDirectories(), ...styleFinder.getDirectories()],
+                        }),
+                    }),
+                    new StyleResourcesPlugin(StyleModuleName),
                 ],
-            };
-
-            if (splitChunks) {
-                const splitChunksNameCallback = typeof splitChunks === "function" ? splitChunks : undefined;
-
-                const toUIChunk = (name: string) => {
-                    if (splitChunksNameCallback) {
-                        const finalName = splitChunksNameCallback(name);
-
-                        if (finalName) {
-                            return finalName;
-                        }
-                    }
-
-                    return `${kebabCase(name)}.ui`;
-                };
-
-                const extractName = (res: string): string | null => {
-                    if (!res) {
-                        return null;
-                    }
-
-                    const match = res.match(/src[\\/]components[\\/]([^\\/]+)/);
-
-                    if (match && match[1] && !match[1].includes(".") && match[1] !== "index") {
-                        const componentName = match[1];
-                        const normalized = componentName.toLowerCase();
-
-                        if (["button", "basebutton", "iconbutton"].includes(normalized)) {
-                            return "button";
-                        }
-
-                        if (["list", "listitem"].includes(normalized)) {
-                            return "list";
-                        }
-
-                        if (["view", "viewdrawer", "viewmodal", "viewport"].includes(normalized)) {
-                            return "view";
-                        }
-
-                        if (["svgsprite", "icon"].includes(normalized)) {
-                            return "svg";
-                        }
-
-                        return componentName;
-                    }
-
-                    return null;
-                };
-
-                config.optimization = {
-                    splitChunks: {
-                        cacheGroups: {
-                            addonUI: {
-                                test: module => {
-                                    const resource =
-                                        (module as NormalModule).resource ||
-                                        (typeof module.nameForCondition === "function"
-                                            ? module.nameForCondition()
-                                            : "");
-
-                                    if (!resource) {
-                                        return false;
-                                    }
-
-                                    if (
-                                        resource.includes("addon-ui-virtual") ||
-                                        resource.includes("addon-ui-style.scss") ||
-                                        resource.includes("addon-ui-config") ||
-                                        /providers[\\/]ui[\\/]styles/.test(resource)
-                                    ) {
-                                        return true;
-                                    }
-
-                                    const isComponent = /src[\\/]components[\\/]/.test(resource);
-
-                                    if (isComponent) {
-                                        if (resource.includes("node_modules")) {
-                                            return resource.includes("addon-ui");
-                                        }
-
-                                        return true;
-                                    }
-
-                                    return /node_modules[\\/](@radix-ui|radix-ui|autosize|odometer|react-highlight-words|react-responsive-overflow-list)/.test(
-                                        resource
-                                    );
-                                },
-                                name(module) {
-                                    const resource =
-                                        (module as NormalModule).resource ||
-                                        ((typeof module.nameForCondition === "function"
-                                            ? module.nameForCondition()
-                                            : "") as string);
-
-                                    const directName = extractName(resource);
-
-                                    if (directName) {
-                                        return toUIChunk(directName);
-                                    }
-
-                                    if (
-                                        resource.includes("addon-ui-virtual") ||
-                                        resource.includes("addon-ui-style.scss") ||
-                                        resource.includes("addon-ui-config") ||
-                                        /providers[\\/]ui[\\/]styles/.test(resource)
-                                    ) {
-                                        return toUIChunk("common");
-                                    }
-
-                                    if (resource.includes("node_modules")) {
-                                        if (resource.includes("radix-ui")) {
-                                            const match = resource.match(/@radix-ui[\\/]react-([^\\/]+)/);
-
-                                            if (match) {
-                                                const radixName = match[1];
-
-                                                const mainRadixComponents = [
-                                                    "accordion",
-                                                    "avatar",
-                                                    "checkbox",
-                                                    "dialog",
-                                                    "dropdown-menu",
-                                                    "popover",
-                                                    "scroll-area",
-                                                    "select",
-                                                    "switch",
-                                                    "tabs",
-                                                    "toast",
-                                                    "tooltip",
-                                                ];
-
-                                                if (mainRadixComponents.includes(radixName)) {
-                                                    return toUIChunk(radixName);
-                                                }
-                                            }
-
-                                            return toUIChunk("common");
-                                        }
-
-                                        if (resource.includes("odometer")) {
-                                            return toUIChunk("odometer");
-                                        }
-
-                                        if (resource.includes("autosize")) {
-                                            return toUIChunk("text-area");
-                                        }
-
-                                        if (resource.includes("react-highlight-words")) {
-                                            return toUIChunk("highlight");
-                                        }
-
-                                        if (resource.includes("react-responsive-overflow-list")) {
-                                            return toUIChunk("truncate-list");
-                                        }
-                                    }
-
-                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                    let issuer = (module as any).issuer;
-
-                                    while (issuer) {
-                                        const nameFromIssuer = extractName(issuer.resource || "");
-
-                                        if (nameFromIssuer) {
-                                            return toUIChunk(nameFromIssuer);
-                                        }
-
-                                        issuer = issuer.issuer;
-                                    }
-
-                                    return toUIChunk("common");
-                                },
-                                chunks: "all",
-                                enforce: true,
-                                priority: 30,
-                            },
-                        },
-                    },
-                };
-            }
-
-            return config satisfies Rspack;
+            } satisfies Rspack;
         },
         manifest: ({manifest}) => {
             manifest.addPermission("storage");

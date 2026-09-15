@@ -1,18 +1,21 @@
 import React, {Fragment} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import TextFieldComponent from "./TextField";
 import {TextFieldAccent, TextFieldRadius, TextFieldSize, TextFieldVariant} from "./types";
 
 const variants: TextFieldVariant[] = [TextFieldVariant.Regular, TextFieldVariant.Outlined, TextFieldVariant.Filled];
+
 const sizes: (TextFieldSize | "default")[] = [
     TextFieldSize.Small,
     "default",
     TextFieldSize.Medium,
     TextFieldSize.Large,
 ];
+
 const radius: (TextFieldRadius | "default")[] = [
     TextFieldRadius.None,
     TextFieldRadius.Small,
@@ -21,6 +24,7 @@ const radius: (TextFieldRadius | "default")[] = [
     TextFieldRadius.Large,
     TextFieldRadius.Full,
 ];
+
 const accents: (TextFieldAccent | "default")[] = ["default", TextFieldAccent.Success, TextFieldAccent.Error];
 
 const meta: Meta<typeof TextFieldComponent> = {
@@ -48,12 +52,12 @@ const meta: Meta<typeof TextFieldComponent> = {
             options: ["text", "number", "password"],
             control: {type: "select"},
         },
-        label: hideInTable,
-        value: hideInTable,
-        defaultValue: hideInTable,
-        inputClassName: hideInTable,
-        afterClassName: hideInTable,
-        beforeClassName: hideInTable,
+        label: HideInTable,
+        value: HideInTable,
+        defaultValue: HideInTable,
+        inputClassName: HideInTable,
+        afterClassName: HideInTable,
+        beforeClassName: HideInTable,
     },
 };
 

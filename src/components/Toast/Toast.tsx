@@ -1,22 +1,33 @@
-import React, {memo, ReactElement, ReactNode, forwardRef, ForwardRefRenderFunction} from "react";
-import classnames from "classnames";
+import React, {
+    forwardRef,
+    type ForwardRefRenderFunction,
+    memo,
+    type ReactElement,
+    type ReactNode,
+    useState,
+} from "react";
+
 import {
     Description,
     Provider,
     Root,
     Title,
-    ToastProps as ToastRootProps,
-    ToastProviderProps,
+    type ToastProps as ToastRootProps,
+    type ToastProviderProps,
     Viewport,
 } from "@radix-ui/react-toast";
 
-import {IconButton, IconButtonProps} from "../IconButton";
-import {cloneOrCreateElement} from "../../utils";
+import classnames from "classnames";
+
 import {useComponentProps} from "../../providers";
+import {cloneOrCreateElement} from "../../utils";
+import {IconButton, type IconButtonProps} from "../IconButton";
 
-import {ToastSide, ToastRadius, ToastColor, ToastAnimation} from "./types";
+import {useShadowViewport} from "./hooks/use-shadow-viewport";
+import {ToastFocusRestore} from "./ToastFocusRestore";
+import {ToastAnimation, type ToastColor, type ToastRadius, ToastSide} from "./types";
 
-import styles from "./toast.module.scss";
+import styles from "./toast.module.scss?isolation";
 
 const toastSideBySwipeDirectionMap = {
     [ToastSide.TopLeft]: "left",
@@ -48,8 +59,10 @@ export interface ToastProps extends Omit<ToastRootProps, "title">, Omit<ToastPro
 }
 
 const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) => {
+    const viewport = useShadowViewport();
     const defaultProps = useComponentProps("toast");
     const mergedProps = {...defaultProps, ...props};
+
     const {
         side = ToastSide.BottomRight,
         color,
@@ -76,15 +89,30 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
         descriptionClassName,
         children,
         onClose,
+        onKeyDown,
+        onKeyDownCapture,
+        open,
+        defaultOpen,
+        onOpenChange,
+        forceMount,
         ...other
     } = mergedProps;
 
+    const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? true);
+    const isOpen = open ?? uncontrolledOpen;
     const {className: closeClassName, ...otherCloseProps} = closeProps || {};
+
     return (
         <Provider label={label} duration={duration} swipeDirection={swipeDirection} swipeThreshold={swipeThreshold}>
             {children}
             <Root
                 ref={ref}
+                open={isOpen}
+                forceMount={forceMount}
+                onOpenChange={value => {
+                    setUncontrolledOpen(value);
+                    onOpenChange?.(value);
+                }}
                 className={classnames(
                     styles["toast"],
                     {
@@ -99,7 +127,17 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
                     className
                 )}
                 {...other}
+                onKeyDown={onKeyDown}
+                onKeyDownCapture={event => {
+                    onKeyDownCapture?.(event);
+
+                    if (viewport.handlesKey(event)) {
+                        onKeyDown?.(event);
+                        viewport.onKeyDown(event);
+                    }
+                }}
             >
+                {(!forceMount || isOpen) && <ToastFocusRestore viewport={viewport.node} />}
                 {title && <Title className={classnames(styles["toast__title"], titleClassName)}>{title}</Title>}
 
                 {description && (
@@ -122,7 +160,11 @@ const Toast: ForwardRefRenderFunction<HTMLLIElement, ToastProps> = (props, ref) 
                 )}
             </Root>
 
-            <Viewport className={classnames(styles["toast__viewport"], viewportClassName)} />
+            <Viewport
+                ref={viewport.ref}
+                onKeyDownCapture={viewport.onKeyDownCapture}
+                className={classnames(styles["toast__viewport"], viewportClassName)}
+            />
         </Provider>
     );
 };

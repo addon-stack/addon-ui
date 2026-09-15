@@ -1,11 +1,11 @@
-import React, {ComponentProps, forwardRef, memo, ReactElement} from "react";
+import React, {type ComponentProps, forwardRef, memo, type ReactElement} from "react";
+
 import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
+import type {ListItemProps} from "../ListItem";
 
-import {ListItemProps} from "../ListItem";
-
-import styles from "./list.module.scss";
+import styles from "./list.module.scss?isolation";
 
 export interface ListProps extends Omit<ComponentProps<"ul">, "children"> {
     children: ReactElement<ListItemProps> | ReactElement<ListItemProps>[];

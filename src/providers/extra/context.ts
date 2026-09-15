@@ -1,5 +1,6 @@
 import {createContext, useContext} from "react";
-import {ExtraProps} from "../../types/config";
+
+import type {ExtraProps} from "../../types/config";
 
 export interface ExtraContract {
     extra: ExtraProps;

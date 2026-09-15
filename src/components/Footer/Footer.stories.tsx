@@ -1,8 +1,8 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
+import {HideInTable} from "../../utils";
 import {IconButton, IconButtonSize, IconButtonVariant} from "../index";
 
 import FooterComponent from "./Footer";
@@ -12,14 +12,14 @@ const meta: Meta<typeof FooterComponent> = {
     component: FooterComponent,
     tags: ["autodocs"],
     argTypes: {
-        left: hideInTable,
-        right: hideInTable,
-        style: hideInTable,
-        children: hideInTable,
-        className: hideInTable,
-        leftClassName: hideInTable,
-        rightClassName: hideInTable,
-        childrenClassName: hideInTable,
+        left: HideInTable,
+        right: HideInTable,
+        style: HideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        leftClassName: HideInTable,
+        rightClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
     decorators: [
         Story => (

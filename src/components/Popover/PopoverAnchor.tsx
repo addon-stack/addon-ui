@@ -1,12 +1,12 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {Anchor, type PopoverAnchorProps} from "@radix-ui/react-popover";
 
 import classnames from "classnames";
 
-import {Anchor, PopoverAnchorProps} from "@radix-ui/react-popover";
-
 import {useComponentProps} from "../../providers";
 
-import styles from "./popover.module.scss";
+import styles from "./popover.module.scss?isolation";
 
 export type {PopoverAnchorProps};
 

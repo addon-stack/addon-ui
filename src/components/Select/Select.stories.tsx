@@ -1,15 +1,15 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {
     Select as SelectComponent,
     SelectContent,
-    SelectContentProps,
+    type SelectContentProps,
     SelectItem,
-    SelectItemProps,
-    SelectProps,
-    SelectTrigger,
-    SelectTriggerProps,
+    type SelectItemProps,
+    type SelectProps,
+    SelectTrigger, type SelectTriggerProps,
 } from "./index";
 
 type Props = SelectProps &

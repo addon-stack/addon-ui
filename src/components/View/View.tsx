@@ -1,10 +1,11 @@
-import React, {FC, memo} from "react";
+import React, {type FC, memo} from "react";
+
 import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
-import {Header, HeaderProps} from "../Header";
+import {Header, type HeaderProps} from "../Header";
 
-import styles from "./view.module.scss";
+import styles from "./view.module.scss?isolation";
 
 export interface ViewProps extends HeaderProps {
     center?: boolean;
@@ -13,7 +14,7 @@ export interface ViewProps extends HeaderProps {
     headerClassName?: string;
 }
 
-export const viewPropsKeys = new Set<keyof ViewProps>([
+export const ViewPropsKeys = new Set<keyof ViewProps>([
     // View keys
     "center",
     "showSeparate",

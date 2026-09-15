@@ -1,8 +1,8 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
+import {HideInTable} from "../../utils";
 import {Footer, Header, ViewportProvider} from "../index";
 
 import {
@@ -17,18 +17,25 @@ const items = [
     {
         title: "Is it accessible?",
         content:
-            "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern.",
+            "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the " +
+                "WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern. " +
+                "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the " +
+                "WAI-ARIA design pattern.",
     },
     {
         title: "Is it unstyled?",
         content:
-            "Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It's unstyled by default, giving you freedom over the look and feel. Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the WAI-ARIA design pattern.",
+            "Yes. It's unstyled by default, giving you freedom over the look and feel. " +
+                "Yes. It's unstyled by default, giving you freedom over the look and feel. " +
+                "Yes. It adheres to the WAI-ARIA design pattern. Yes. It adheres to the " +
+                "WAI-ARIA design pattern.",
     },
     {
         title: "Can it be animated?",
         content: "Yes! You can animate the Accordion with CSS. Yes. It adheres to the WAI-ARIA design pattern.",
     },
 ];
+
 const meta: Meta<typeof AccordionComponent> = {
     title: "Components/Accordion",
     component: AccordionComponent,
@@ -42,7 +49,7 @@ const meta: Meta<typeof AccordionComponent> = {
             control: {type: "boolean"},
         },
 
-        children: hideInTable,
+        children: HideInTable,
     },
 };
 
@@ -55,6 +62,7 @@ export const Accordion: StoryObj<typeof AccordionComponent> = {
 
     render: args => {
         const {...other} = args;
+
         return (
             <ViewportProvider
                 style={{

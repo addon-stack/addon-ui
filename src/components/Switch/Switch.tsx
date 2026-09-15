@@ -1,10 +1,12 @@
-import React, {memo, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {Root, type SwitchProps as SwitchRootProps, Thumb} from "@radix-ui/react-switch";
+
 import classnames from "classnames";
-import {Root, SwitchProps as SwitchRootProps, Thumb} from "@radix-ui/react-switch";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./switch.module.scss";
+import styles from "./switch.module.scss?isolation";
 
 export interface SwitchProps extends SwitchRootProps {
     thumbClassName?: string;

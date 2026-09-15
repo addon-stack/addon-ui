@@ -1,9 +1,9 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {ListItem, Button, ButtonSize, ButtonVariant, Avatar, AvatarSize} from "../index";
+import {HideInTable} from "../../utils";
+import {Avatar, AvatarSize, Button, ButtonSize, ButtonVariant, ListItem} from "../index";
 
 import ListComponent from "./List";
 
@@ -50,9 +50,9 @@ const meta: Meta<typeof ListComponent> = {
     component: ListComponent,
     tags: ["autodocs"],
     argTypes: {
-        children: hideInTable,
-        className: hideInTable,
-        style: hideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        style: HideInTable,
     },
 };
 

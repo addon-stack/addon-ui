@@ -1,5 +1,3 @@
-@use "../../styles/mixins" as theme;
-
 $root: tabs;
 $radius: var(--tabs-indicator-radius, 10px);
 $border-width: 1px;
@@ -23,12 +21,6 @@ $border-width: 1px;
     transition:
       border-bottom-color var(--tabs-speed-border-color, var(--speed-color)),
       background-color var(--tabs-speed-bg-list-color, var(--speed-color));
-
-    @include theme.rtl() {
-      & {
-        flex-direction: row-reverse;
-      }
-    }
 
     &--separator {
       border-bottom: var(--tabs-list-border-width, #{$border-width}) solid
@@ -108,10 +100,10 @@ $border-width: 1px;
     height: var(--tabs-indicator-size, 4px);
     background-color: var(--tabs-indicator-color, var(--primary-color));
     border-radius: #{$radius} #{$radius} 0 0;
-    will-change: opacity, left, width;
+    will-change: opacity, inset-inline-start, width;
     transition:
       opacity var(--tabs-speed-opacity, var(--speed-sm)) ease,
-      left var(--tabs-speed-left, var(--speed-sm)) ease,
+      inset-inline-start var(--tabs-speed-left, var(--speed-sm)) ease,
       width var(--tabs-speed-width, var(--speed-sm)) ease,
       background-color var(--tabs-speed-bg, var(--speed-color)) ease;
 
@@ -126,34 +118,16 @@ $border-width: 1px;
     }
 
     &--first {
-      @include theme.ltr() {
-        &:not(.#{$root}__indicator--rounded_edges) {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-        }
-      }
-
-      @include theme.rtl() {
-        &:not(.#{$root}__indicator--rounded_edges) {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
+      &:not(.#{$root}__indicator--rounded_edges) {
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
       }
     }
 
     &--last {
-      @include theme.ltr() {
-        &:not(.#{$root}__indicator--rounded_edges) {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-      }
-
-      @include theme.rtl() {
-        &:not(.#{$root}__indicator--rounded_edges) {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-        }
+      &:not(.#{$root}__indicator--rounded_edges) {
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
       }
     }
   }

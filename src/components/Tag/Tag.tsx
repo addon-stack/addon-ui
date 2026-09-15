@@ -1,10 +1,12 @@
-import React, {ComponentProps, memo, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
 import classnames from "classnames";
+
 import {useComponentProps} from "../../providers";
 
-import {TagVariant, TagColor, TagSize, TagRadius} from "./types";
+import {type TagColor, type TagRadius, type TagSize, TagVariant} from "./types";
 
-import styles from "./tag.module.scss";
+import styles from "./tag.module.scss?isolation";
 
 export interface TagProps extends ComponentProps<"span"> {
     size?: TagSize;

@@ -1,0 +1,40 @@
+const formatting = {
+    "string-quotes": "double",
+    "no-eol-whitespace": true,
+    "no-missing-end-of-source-newline": true,
+    "max-empty-lines": 1,
+    "block-opening-brace-space-before": "always",
+    "block-opening-brace-newline-after": "always",
+    "block-closing-brace-newline-before": "always",
+    "block-closing-brace-newline-after": "always",
+    "declaration-colon-space-before": "never",
+    "declaration-colon-space-after": "always-single-line",
+    "declaration-block-semicolon-space-before": "never",
+    "declaration-block-semicolon-newline-after": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "selector-list-comma-newline-after": "always-multi-line",
+    "selector-list-comma-space-before": "never",
+    "selector-list-comma-space-after": "always-single-line",
+    "function-comma-space-after": "always-single-line",
+    "function-comma-space-before": "never",
+    "number-leading-zero": "always",
+    indentation: 2,
+};
+
+export default {
+    plugins: ["@stylistic/stylelint-plugin"],
+    customSyntax: "postcss-scss",
+    ignoreFiles: [
+        "**/node_modules/**", "addon/**", "**/.adnbn/**", "**/dist/**", "**/dist-types/**",
+        "**/build/**", "coverage/**", "storybook-static/**", "test-results/**",
+        "tests/fixtures/shadow-dom/artifacts/**", "public/**",
+    ],
+    rules: {
+        "color-no-invalid-hex": true,
+        "declaration-block-no-duplicate-properties": [true, {ignore: ["consecutive-duplicates-with-different-values"]}],
+        "declaration-block-no-shorthand-property-overrides": true,
+        "string-no-newline": true,
+        "unit-no-unknown": true,
+        ...Object.fromEntries(Object.entries(formatting).map(([rule, value]) => [`@stylistic/${rule}`, value])),
+    },
+};

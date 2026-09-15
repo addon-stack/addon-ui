@@ -1,14 +1,15 @@
-import React, {PropsWithChildren} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+import React, {type PropsWithChildren} from "react";
 
-import {Header} from "../Header";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
 import {Footer} from "../Footer";
+import {Header} from "../Header";
 import {ViewportProvider} from "../Viewport";
 
-import TabsComponent, {TabsProps} from "./Tabs";
-import TabsList, {TabsListProps} from "./TabsList";
-import TabsTrigger, {TabsTriggerProps} from "./TabsTrigger";
+import TabsComponent, {type TabsProps} from "./Tabs";
 import TabsContent from "./TabsContent";
+import TabsList, {type TabsListProps} from "./TabsList";
+import TabsTrigger, {type TabsTriggerProps} from "./TabsTrigger";
 
 type Props = TabsProps & TabsListProps & TabsTriggerProps;
 
@@ -83,6 +84,7 @@ export const Tabs: StoryObj<Props> = {
 
     render: args => {
         const {defaultValue, separator, indicator, loop, roundedEdges, reverse} = args;
+
         return (
             <ViewportProvider style={{border: "1px solid black", borderRadius: "10px"}}>
                 <Header title="Tabs Component" style={{paddingBottom: "10px"}} />

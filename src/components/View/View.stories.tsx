@@ -1,7 +1,8 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {HideInTable} from "../../utils";
 
 import ViewComponent from "./View";
 
@@ -10,17 +11,17 @@ const meta: Meta<typeof ViewComponent> = {
     component: ViewComponent,
     tags: ["autodocs"],
     argTypes: {
-        before: hideInTable,
-        after: hideInTable,
-        className: hideInTable,
-        wrapClassName: hideInTable,
-        titleClassName: hideInTable,
-        bodyClassName: hideInTable,
-        headerClassName: hideInTable,
-        beforeClassName: hideInTable,
-        afterClassName: hideInTable,
-        subtitleClassName: hideInTable,
-        childrenClassName: hideInTable,
+        before: HideInTable,
+        after: HideInTable,
+        className: HideInTable,
+        wrapClassName: HideInTable,
+        titleClassName: HideInTable,
+        bodyClassName: HideInTable,
+        headerClassName: HideInTable,
+        beforeClassName: HideInTable,
+        afterClassName: HideInTable,
+        subtitleClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
     decorators: [
         Story => (

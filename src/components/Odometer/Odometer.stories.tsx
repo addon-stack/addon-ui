@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {HideInTable} from "../../utils";
 
 import OdometerComponent from "./Odometer";
 
@@ -22,8 +23,8 @@ const meta: Meta<typeof OdometerComponent> = {
             description: "Animation duration in milliseconds.",
             control: {type: "number"},
         },
-        auto: hideInTable,
-        className: hideInTable,
+        auto: HideInTable,
+        className: HideInTable,
     },
 };
 
@@ -42,7 +43,7 @@ export const OdometerCount = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setValue(prev => ++prev);
+            setValue(prev => prev + 1);
         }, 1000);
 
         return () => clearInterval(interval);

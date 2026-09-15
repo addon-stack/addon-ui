@@ -70,13 +70,16 @@ function getContributors() {
 
             if (existing) {
                 existing.count += count;
+
                 if (!existing.login && gh.login) {
                     existing.login = gh.login;
                     existing.url = gh.url;
                 }
+
                 if (!existing.name && displayName) {
                     existing.name = displayName;
                 }
+
                 if (!existing.email && displayEmail) {
                     existing.email = displayEmail;
                 }
@@ -162,11 +165,17 @@ function whatBump(commits, currentVersion = pkg.version) {
     if (isBreaking) {
         const currentMajor = Number.parseInt(String(currentVersion).replace(/^v/i, "").split(".")[0], 10);
 
+        // Keep automatic breaking releases in 0.x until 1.0 is released explicitly.
         return {level: Number.isNaN(currentMajor) || currentMajor >= 1 ? 0 : 1};
     }
 
-    if (isMinor) return {level: 1};
-    if (isPatch) return {level: 2};
+    if (isMinor) {
+        return {level: 1};
+    }
+
+    if (isPatch) {
+        return {level: 2};
+    }
 
     return null;
 }
@@ -208,6 +217,8 @@ const createReleaseConfig = () => {
                 preset: "conventionalcommits",
 
                 parserOpts: {
+                    // The preset's breaking pattern is incompatible with our extra breaking capture.
+                    breakingHeaderPattern: null,
                     headerPattern: /^(\w+)(?:\(([^)]+)\))?(!)?:\s(.+?)(?:\s\(#\d+\))?$/,
                     headerCorrespondence: ["type", "scope", "breaking", "subject"],
                     noteKeywords: ["BREAKING CHANGE", "BREAKING-CHANGE"],
@@ -227,16 +238,25 @@ const createReleaseConfig = () => {
                 whatBump,
                 writerOpts: {
                     headerPartial:
-                        "## 🚀 Release {{#if name}}`{{name}}` {{else}}{{#if @root.pkg}}`{{@root.pkg.name}}` {{/if}}{{/if}}v{{version}} ({{date}})\n\n",
-                    footerPartial: `{{#if @root.contributors.length}}\n### 🙌 Contributors\n\n{{#each @root.contributors}}- {{#if url}}{{#if name}}[{{name}}]({{url}}){{#if login}} (@{{login}}){{/if}}{{else}}[@{{login}}]({{url}}){{/if}}{{else}}{{#if email}}{{#if name}}[{{name}}](mailto:{{email}}){{else}}{{email}}{{/if}}{{else}}{{name}}{{/if}}{{/if}} — commits: {{count}}\n{{/each}}{{/if}}`,
+                        "## 🚀 Release {{#if name}}`{{name}}` {{else}}{{#if " +
+                            "@root.pkg}}`{{@root.pkg.name}}` {{/if}}{{/if}}v{{version}} ({{date}})\n\n",
+                    footerPartial: "{{#if @root.contributors.length}}\n### 🙌 Contributors\n\n{{#each " +
+                        "@root.contributors}}- {{#if url}}{{#if name}}[{{name}}]({{url}}){{#if " +
+                        "login}} (@{{login}}){{/if}}{{else}}[@{{login}}]({{url}}){{/if}}{{else}}{{#if " +
+                        "email}}{{#if name}}[{{name}}](mailto:{{email}}){{else}}{{email}}{{/if}}{{els" +
+                        "e}}{{name}}{{/if}}{{/if}} — commits: {{count}}\n{{/each}}{{/if}}",
                     mainTemplate:
                         "{{> header}}\n" +
-                        "{{#if noteGroups}}\n### 💥 Breaking Changes\n\n{{#each noteGroups}}{{#each notes}}* {{{text}}}\n\n{{/each}}{{/each}}{{/if}}" +
-                        "{{#each commitGroups}}\n### {{title}}\n\n{{#each commits}}{{> commit root=@root}}\n{{/each}}\n\n{{/each}}" +
+                        "{{#if noteGroups}}\n### 💥 Breaking Changes\n\n{{#each noteGroups}}{{#each " +
+                            "notes}}* {{{text}}}\n\n{{/each}}{{/each}}{{/if}}" +
+                        "{{#each commitGroups}}\n### {{title}}\n\n{{#each commits}}{{> commit " +
+                            "root=@root}}\n{{/each}}\n\n{{/each}}" +
                         "{{#unless commitGroups}}\n{{#each commits}}{{> commit root=@root}}\n{{/each}}{{/unless}}\n\n" +
                         "{{> footer}}",
                     commitPartial:
-                        "{{#if type}}* {{#if scope}}**{{scope}}:** {{/if}}{{#if subject}}{{subject}}{{else}}{{header}}{{/if}}{{#if href}} ([{{shorthash}}]({{href}})){{/if}}\n\n{{#if body}}{{{body}}}\n{{/if}}{{/if}}",
+                        "{{#if type}}* {{#if scope}}**{{scope}}:** {{/if}}{{#if " +
+                            "subject}}{{subject}}{{else}}{{header}}{{/if}}{{#if href}} " +
+                            "([{{shorthash}}]({{href}})){{/if}}\n\n{{#if body}}{{{body}}}\n{{/if}}{{/if}}",
                     groupBy: "type",
                     commitGroupsSort: "title",
                     commitsSort: ["scope", "subject"],

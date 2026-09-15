@@ -1,4 +1,5 @@
-import {cloneElement, createElement, isValidElement, JSX, ReactNode} from "react";
+import {cloneElement, createElement, isValidElement, type JSX, type ReactNode} from "react";
+
 import classnames from "classnames";
 
 export const cloneOrCreateElement = <T extends keyof JSX.IntrinsicElements>(

@@ -135,13 +135,13 @@ $root: button;
 
   &--medium-size {
     height: var(--button-height-md, 44px);
-    font-size: var(--button-font-size-sm, 16px);
+    font-size: var(--button-font-size-md, 16px);
   }
 
   &--large-size {
     height: var(--button-height-lg, 54px);
     min-width: 95px;
-    font-size: var(--button-font-size-sm, 18px);
+    font-size: var(--button-font-size-lg, 18px);
   }
 
   //Radius

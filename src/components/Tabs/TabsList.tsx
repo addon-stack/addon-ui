@@ -1,6 +1,6 @@
 import React, {
     forwardRef,
-    ForwardRefRenderFunction,
+    type ForwardRefRenderFunction,
     memo,
     useCallback,
     useImperativeHandle,
@@ -8,13 +8,15 @@ import React, {
     useRef,
     useState,
 } from "react";
+
+import {List, type TabsListProps as TabsListRadixProps} from "@radix-ui/react-tabs";
+
 import classnames from "classnames";
 import _debounce from "lodash/debounce";
 
-import {List, TabsListProps as TabsListRadixProps} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss";
+import styles from "./tabs.module.scss?isolation";
 
 export interface TabsListProps extends TabsListRadixProps {
     separator?: boolean;
@@ -47,7 +49,9 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
         const indicator = indicatorRef.current;
         const activeTrigger = list?.querySelector("[data-state='active']") as HTMLElement | null;
 
-        if (!list || !indicator || !activeTrigger) return;
+        if (!list || !indicator || !activeTrigger) {
+            return;
+        }
 
         const triggers = Array.from(list.querySelectorAll("[data-state]")) as HTMLElement[];
         const first = triggers[0];
@@ -55,7 +59,13 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsListProps> = (props
 
         const listRect = list.getBoundingClientRect();
         const triggerRect = activeTrigger.getBoundingClientRect();
-        indicator.style.left = `${triggerRect.left - listRect.left + list.scrollLeft}px`;
+        const rtl = list.ownerDocument.defaultView?.getComputedStyle(list).direction === "rtl";
+
+        const offset = rtl
+            ? listRect.right - triggerRect.right - list.scrollLeft
+            : triggerRect.left - listRect.left + list.scrollLeft;
+
+        indicator.style.insetInlineStart = `${offset}px`;
         indicator.style.width = `${triggerRect.width}px`;
 
         setModificators({

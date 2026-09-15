@@ -58,7 +58,7 @@ Only the prop name, type, and default are listed below.
 | `defaultOpen`       | `boolean`                                              | —       |
 | `onOpenChange`      | `(open: boolean) => void`                              | —       |
 | `modal`             | `boolean`                                              | —       |
-| `container`         | `HTMLElement`                                          | —       |
+| `container`         | `Element \| DocumentFragment \| null`                  | —       |
 | `title`             | `string`                                               | —       |
 | Radix dialog attrs  | All `@radix-ui/react-dialog` Root/Portal/Content props | —       |
 
@@ -135,3 +135,7 @@ import {UIProvider} from "addon-ui";
 - Title and Description are rendered inside a visually hidden container for screen readers. Provide meaningful `title` and `description`.
 - When `modal` is true, background content is inert and focus is trapped by Radix.
 - Ensure actions inside the dialog are reachable by keyboard and that initial focus is set appropriately (Radix manages this by default).
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

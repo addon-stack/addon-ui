@@ -1,0 +1,9 @@
+body {
+  overflow: hidden;
+  background-color: var(--bg-primary-color);
+  will-change: background-color, color;
+  transition:
+    color var(--body-speed-color, var(--speed-color)),
+    background-color var(--body-speed-bg, var(--speed-color)),
+    border-color var(--body-speed-border-color, var(--speed-color));
+}

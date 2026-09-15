@@ -1,14 +1,16 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {Content, type TabsContentProps as TabsContentRadixProps} from "@radix-ui/react-tabs";
+
 import classnames from "classnames";
 
-import {Content, TabsContentProps as TabsContentRadixProps} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss";
+import styles from "./tabs.module.scss?isolation";
 
 export type TabsContentProps = TabsContentRadixProps;
 
-const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsContentProps> = (props, ref) => {
+const TabsContent: ForwardRefRenderFunction<HTMLDivElement, TabsContentProps> = (props, ref) => {
     const {className, children, ...other} = {...useComponentProps("tabsContent"), ...props};
 
     return (
@@ -18,4 +20,4 @@ const TabsList: ForwardRefRenderFunction<HTMLDivElement, TabsContentProps> = (pr
     );
 };
 
-export default memo(forwardRef(TabsList));
+export default memo(forwardRef(TabsContent));

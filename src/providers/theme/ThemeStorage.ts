@@ -1,10 +1,10 @@
-import {Storage, StorageProvider} from "@addon-core/storage";
+import {Storage, type StorageProvider} from "@addon-core/storage";
 
-import {Theme, ThemeStorageContract} from "../../types/theme";
+import {Theme, type ThemeStorageContract} from "../../types/theme";
 
 export type ThemeStorageState = Record<string, Theme>;
 
-export default class implements ThemeStorageContract {
+export default class ThemeStorage implements ThemeStorageContract {
     protected storage: StorageProvider<ThemeStorageState> = new Storage<ThemeStorageState>({
         area: "local",
         namespace: "addon-ui",

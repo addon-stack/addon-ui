@@ -1,8 +1,8 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo, ComponentProps} from "react";
+import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, memo} from "react";
 
 import classnames from "classnames";
 
-import styles from "./toggleGroup.module.scss";
+import styles from "./toggle-group.module.scss?isolation";
 
 const ToggleGroupIndicator: ForwardRefRenderFunction<HTMLDivElement, ComponentProps<"div">> = (props, ref) => {
     const {children, className, ...other} = props;

@@ -8,10 +8,6 @@
   line-height: var(--list-item-line-height, var(--line-height, 1rem));
   transition: background-color var(--list-item-speed-bg, var(--speed-color));
 
-  [dir="rtl"] & {
-    flex-direction: row-reverse;
-  }
-
   &__center {
     flex-grow: 1;
     display: flex;

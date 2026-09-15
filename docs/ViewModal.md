@@ -50,7 +50,7 @@ Only the prop name, type, and default are listed below. ViewModal accepts all Vi
 | `defaultOpen`       | `boolean`                                                                                                                                          | —                     |
 | `onOpenChange`      | `(open: boolean) => void`                                                                                                                          | —                     |
 | `modal`             | `boolean`                                                                                                                                          | —                     |
-| `container`         | `HTMLElement`                                                                                                                                      | —                     |
+| `container`         | `Element \| DocumentFragment \| null`                                                                                                              | —                     |
 | `description`       | `string`                                                                                                                                           | —                     |
 | View header props   | `title`, `subtitle`, `before`, `after`, `wrapClassName`, `titleClassName`, `beforeClassName`, `afterClassName`, `subtitleClassName`, `alignCenter` | [see View](./View.md) |
 | View layout props   | `center`, `showSeparate`, `bodyClassName`, `headerClassName`, `children`                                                                           | —                     |
@@ -176,3 +176,7 @@ import {UIProvider} from "addon-ui";
 - Semantics and focus management are provided by Radix Dialog via Modal. While open, focus is trapped and background content is inert (when `modal` is true).
 - Provide meaningful `title` and optional `subtitle` via View props; they are rendered semantically in the header and assist screen reader users.
 - Ensure close actions inside the modal are keyboard accessible; Esc key behavior can be managed via Dialog props.
+
+#### Portal container
+
+`container?: Element | DocumentFragment | null` resolves from the explicit prop, then component configuration (`ui.config.ts` merged with `UIProvider.components`), then `UIProvider.portal`, and finally `document.body`. `undefined` skips a level; `null` waits without rendering a portal. See [Shadow DOM](./ShadowDOM.md) for CSS delivery, host attributes and examples.

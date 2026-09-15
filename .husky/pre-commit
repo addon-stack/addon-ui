@@ -1,6 +1,4 @@
 #!/usr/bin/env sh
 
-# Husky pre-commit hook: format and run related tests on staged files
-
-npm run test:related
-npm run format
+# lint-staged restores unstaged hunks and stages only successful fixes.
+npm run lint:staged

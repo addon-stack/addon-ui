@@ -101,15 +101,15 @@ $root: toast;
   }
 
   &--small-radius {
-    border-radius: var(--toast-border-radius, 6px);
+    border-radius: var(--toast-border-radius-sm, 6px);
   }
 
   &--medium-radius {
-    border-radius: var(--toast-border-radius, 15px);
+    border-radius: var(--toast-border-radius-md, 15px);
   }
 
   &--large-radius {
-    border-radius: var(--toast-border-radius, 20px);
+    border-radius: var(--toast-border-radius-lg, 20px);
   }
 
   &--error-color {

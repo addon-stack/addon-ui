@@ -1,7 +1,4 @@
 #!/usr/bin/env sh
 
-# Husky pre-push hook: typecheck, run full tests, and build
-
-npm run typecheck || exit 1
-npm run lint || exit 1
-npm run build:types || exit 1
+# Validate without changing files.
+npm run verify

@@ -1,10 +1,12 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {type TabsTriggerProps as TabsTriggerRadixProps, Trigger} from "@radix-ui/react-tabs";
+
 import classnames from "classnames";
 
-import {TabsTriggerProps as TabsTriggerRadixProps, Trigger} from "@radix-ui/react-tabs";
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss";
+import styles from "./tabs.module.scss?isolation";
 
 export interface TabsTriggerProps extends TabsTriggerRadixProps {
     before?: number | string;

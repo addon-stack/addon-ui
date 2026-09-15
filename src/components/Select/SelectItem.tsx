@@ -1,15 +1,18 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, useContext} from "react";
+
+import {Item, type SelectItemProps as SelectItemRadixProps} from "@radix-ui/react-select";
 
 import classnames from "classnames";
 
-import {Item, SelectItemProps as SelectItemRadixProps} from "@radix-ui/react-select";
-
 import {useComponentProps} from "../../providers";
+import {focusElement, getActiveElement} from "../../utils/dom/focus";
+import {getShadowRoot} from "../../utils/dom/shadow";
 
+import {SelectTypeaheadContext} from "./context";
 import SelectItemIndicator from "./SelectItemIndicator";
 import SelectItemText from "./SelectItemText";
 
-import styles from "./select.module.scss";
+import styles from "./select.module.scss?isolation";
 
 export interface SelectItemProps extends SelectItemRadixProps {
     indicator?: React.ReactNode;
@@ -17,13 +20,36 @@ export interface SelectItemProps extends SelectItemRadixProps {
 }
 
 const SelectItem: ForwardRefRenderFunction<HTMLDivElement, SelectItemProps> = (props, ref) => {
-    const {textValue, indicator, indicatorClassname, className, children, ...other} = {
+    const typeaheadSpace = useContext(SelectTypeaheadContext);
+
+    const {textValue, indicator, indicatorClassname, className, children, onPointerLeave, onKeyDown, ...other} = {
         ...useComponentProps("selectItem"),
         ...props,
     };
 
     return (
-        <Item ref={ref} textValue={textValue} className={classnames(styles["select__item"], className)} {...other}>
+        <Item
+            ref={ref}
+            textValue={textValue}
+            className={classnames(styles["select__item"], className)}
+            {...other}
+            data-addon-ui-text={textValue}
+            onKeyDown={event => {
+                onKeyDown?.(event);
+                typeaheadSpace?.(event);
+            }}
+            onPointerLeave={event => {
+                onPointerLeave?.(event);
+
+                if (
+                    !event.defaultPrevented &&
+                    getShadowRoot(event.currentTarget) &&
+                    getActiveElement(event.currentTarget) === event.currentTarget
+                ) {
+                    focusElement(event.currentTarget.closest('[role="listbox"]'));
+                }
+            }}
+        >
             {children && children}
 
             {!children && (

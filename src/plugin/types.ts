@@ -1,5 +1,4 @@
 export interface FileImportInfo {
-    name: string;
     import: string;
 }
 

@@ -1,11 +1,11 @@
 import React, {
     Children,
     cloneElement,
-    ComponentProps,
+    type ComponentProps,
     createElement,
-    CSSProperties,
+    type CSSProperties,
     forwardRef,
-    ForwardRefRenderFunction,
+    type ForwardRefRenderFunction,
     isValidElement,
     memo,
     useImperativeHandle,
@@ -16,7 +16,7 @@ import React, {
 
 import classnames from "classnames";
 
-import styles from "./shift.module.scss";
+import styles from "./shift.module.scss?isolation";
 
 export interface ShiftProps extends ComponentProps<"div"> {
     active?: number;

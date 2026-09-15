@@ -1,11 +1,12 @@
 import React, {forwardRef, memo, useCallback} from "react";
+
 import classnames from "classnames";
-import {OverflowList, OverflowListProps} from "react-responsive-overflow-list";
+import {OverflowList, type OverflowListProps} from "react-responsive-overflow-list";
 
 import {useComponentProps} from "../../providers";
-
-import styles from "./truncate-list.module.scss";
 import {Tag} from "../Tag";
+
+import styles from "./truncate-list.module.scss?isolation";
 
 export type TruncateListProps<T = unknown> = OverflowListProps<T> & {
     counterClassName?: string;
@@ -16,7 +17,9 @@ function TruncateListBase<T>(props: TruncateListProps<T>, ref: React.Ref<HTMLDiv
 
     const RenderOverflow = useCallback(
         (hiddenItems: T[]) => {
-            if (renderOverflow) return renderOverflow(hiddenItems);
+            if (renderOverflow) {
+                return renderOverflow(hiddenItems);
+            }
 
             return (
                 <Tag className={classnames(styles["truncate-list__counter"], counterClassName)}>

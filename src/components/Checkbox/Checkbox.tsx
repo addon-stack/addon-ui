@@ -1,12 +1,14 @@
-import React, {memo, ReactElement, forwardRef, ForwardRefRenderFunction} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo, type ReactElement} from "react";
+
+import {type CheckboxProps as CheckboxRootProps, Indicator, Root} from "@radix-ui/react-checkbox";
+
 import classnames from "classnames";
-import {CheckboxProps as CheckboxRootProps, Indicator, Root} from "@radix-ui/react-checkbox";
 
 import {useComponentProps} from "../../providers";
 
-import {CheckboxVariant, CheckboxSize, CheckboxRadius} from "./types";
+import type {CheckboxRadius, CheckboxSize, CheckboxVariant} from "./types";
 
-import styles from "./checkbox.module.scss";
+import styles from "./checkbox.module.scss?isolation";
 
 export type {CheckedState} from "@radix-ui/react-checkbox";
 

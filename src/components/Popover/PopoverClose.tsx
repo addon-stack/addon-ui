@@ -1,12 +1,12 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {Close, type PopoverCloseProps} from "@radix-ui/react-popover";
 
 import classnames from "classnames";
 
-import {Close, PopoverCloseProps} from "@radix-ui/react-popover";
-
 import {useComponentProps} from "../../providers";
 
-import styles from "./popover.module.scss";
+import styles from "./popover.module.scss?isolation";
 
 export type {PopoverCloseProps};
 

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "paths": {
+      "addon-ui": [
+        "../../../src/index.ts"
+      ],
+      "adnbn": [
+        "./node_modules/adnbn/dist/index.d.ts"
+      ],
+      "@rspack/core": [
+        "./node_modules/@rspack/core/dist/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "adnbn.config.ts",
+    "../../../src/declaration.d.ts",
+    "../../../src/types/vendors/odometer.d.ts"
+  ]
+}

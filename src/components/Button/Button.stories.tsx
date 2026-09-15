@@ -1,12 +1,14 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import ButtonComponent from "./Button";
 import {ButtonColor, ButtonRadius, ButtonSize, ButtonVariant} from "./types";
 
 const variants: ButtonVariant[] = [ButtonVariant.Contained, ButtonVariant.Outlined, ButtonVariant.Text];
+
 const colors: (ButtonColor | "default")[] = [
     "default",
     ButtonColor.Primary,
@@ -15,7 +17,9 @@ const colors: (ButtonColor | "default")[] = [
     ButtonColor.Error,
     ButtonColor.Success,
 ];
+
 const sizes: (ButtonSize | "default")[] = [ButtonSize.Small, "default", ButtonSize.Medium, ButtonSize.Large];
+
 const radius: (ButtonRadius | "default")[] = [
     ButtonRadius.Small,
     "default",
@@ -46,11 +50,11 @@ const meta: Meta<typeof ButtonComponent> = {
             control: {type: "select"},
         },
 
-        after: hideInTable,
-        before: hideInTable,
-        afterClassName: hideInTable,
-        beforeClassName: hideInTable,
-        childrenClassName: hideInTable,
+        after: HideInTable,
+        before: HideInTable,
+        afterClassName: HideInTable,
+        beforeClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 

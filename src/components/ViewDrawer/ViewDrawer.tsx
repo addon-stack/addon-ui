@@ -1,21 +1,21 @@
-import React, {FC, memo} from "react";
+import React, {type FC, memo} from "react";
 
-import {splitProps} from "../../utils";
 import {useComponentProps} from "../../providers";
-
-import {Drawer, DrawerProps, drawerPropsKeys} from "../Drawer";
-import {View, ViewProps, viewPropsKeys} from "../View";
+import {splitProps} from "../../utils";
+import {Drawer, type DrawerProps, DrawerPropsKeys} from "../Drawer";
+import {View, type ViewProps, ViewPropsKeys} from "../View";
 
 export type ViewDrawerProps = Omit<DrawerProps, "title"> & ViewProps;
 
 const ViewDrawer: FC<ViewDrawerProps> = props => {
-    const mergedProps = {...useComponentProps("viewDrawer"), ...props};
+    const config = useComponentProps("viewDrawer");
+    const {container = config?.container, ...other} = {...config, ...props};
 
-    const drawerProps = splitProps<DrawerProps>(mergedProps, drawerPropsKeys);
-    const viewProps = splitProps<ViewProps>(mergedProps, viewPropsKeys);
+    const drawerProps = splitProps<DrawerProps>(other, DrawerPropsKeys);
+    const viewProps = splitProps<ViewProps>(other, ViewPropsKeys);
 
     return (
-        <Drawer {...drawerProps}>
+        <Drawer {...drawerProps} container={container}>
             <View {...viewProps} />
         </Drawer>
     );

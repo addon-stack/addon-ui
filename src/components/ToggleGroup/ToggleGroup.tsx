@@ -1,14 +1,14 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {Root, type ToggleGroupMultipleProps, type ToggleGroupSingleProps} from "@radix-ui/react-toggle-group";
 
 import classnames from "classnames";
 
-import {Root, ToggleGroupMultipleProps, ToggleGroupSingleProps} from "@radix-ui/react-toggle-group";
-
 import {useComponentProps} from "../../providers";
 
-import styles from "./toggleGroup.module.scss";
+import styles from "./toggle-group.module.scss?isolation";
 
-export type {ToggleGroupSingleProps, ToggleGroupMultipleProps};
+export type {ToggleGroupMultipleProps, ToggleGroupSingleProps};
 
 export type ToggleGroupProps = React.ComponentProps<typeof Root>;
 

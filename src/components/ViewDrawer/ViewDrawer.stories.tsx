@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {Meta} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta} from "storybook-react-rsbuild";
 
+import {HideInTable} from "../../utils";
 import {Button, DrawerSide} from "../index";
 
-import ViewDrawerComponent, {ViewDrawerProps} from "./ViewDrawer";
+import ViewDrawerComponent, {type ViewDrawerProps} from "./ViewDrawer";
 
 const sides: DrawerSide[] = [DrawerSide.Left, DrawerSide.Top, DrawerSide.Bottom, DrawerSide.Right];
 
@@ -36,16 +36,16 @@ const meta: Meta<typeof ViewDrawerComponent> = {
         speed: {
             type: "number",
         },
-        children: hideInTable,
-        className: hideInTable,
-        wrapClassName: hideInTable,
-        titleClassName: hideInTable,
-        bodyClassName: hideInTable,
-        headerClassName: hideInTable,
-        beforeClassName: hideInTable,
-        afterClassName: hideInTable,
-        subtitleClassName: hideInTable,
-        childrenClassName: hideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        wrapClassName: HideInTable,
+        titleClassName: HideInTable,
+        bodyClassName: HideInTable,
+        headerClassName: HideInTable,
+        beforeClassName: HideInTable,
+        afterClassName: HideInTable,
+        subtitleClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 
@@ -53,6 +53,7 @@ export default meta;
 
 export const ViewDrawer = (props: ViewDrawerProps) => {
     const [open, setOpen] = useState(false);
+
     return (
         <div>
             <Button onClick={() => setOpen(true)}>Open</Button>

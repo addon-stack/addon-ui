@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import TruncateComponent, {TruncateProps} from "./Truncate";
 import {Header, Highlight, ScrollArea, TextField, ViewportProvider} from "../index";
+
+import TruncateComponent, {type TruncateProps} from "./Truncate";
 
 const list = [
     {
@@ -71,6 +72,7 @@ const TruncateStoryRender = (props: TruncateProps) => {
 
     const filteredItems = list.filter(({title, url}) => {
         const value = searchWords.toLowerCase();
+
         return title.toLowerCase().includes(value) || url.toLowerCase().includes(value);
     });
 

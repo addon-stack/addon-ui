@@ -1,13 +1,15 @@
 import React, {Fragment} from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
 
-import {capitalizeFirstLetter, hideInTable} from "../../utils";
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import {capitalizeFirstLetter, HideInTable} from "../../utils";
 
 import TextAreaComponent from "./TextArea";
 import {TextAreaRadius, TextAreaSize, TextAreaVariant} from "./types";
 
 const variants: TextAreaVariant[] = [TextAreaVariant.Regular, TextAreaVariant.Outlined, TextAreaVariant.Filled];
 const sizes: (TextAreaSize | "default")[] = [TextAreaSize.Small, "default", TextAreaSize.Medium, TextAreaSize.Large];
+
 const radius: (TextAreaRadius | "default")[] = [
     TextAreaRadius.None,
     TextAreaRadius.Small,
@@ -34,8 +36,8 @@ const meta: Meta<typeof TextAreaComponent> = {
             control: {type: "select"},
         },
 
-        label: hideInTable,
-        children: hideInTable,
+        label: HideInTable,
+        children: HideInTable,
     },
 };
 

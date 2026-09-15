@@ -1,5 +1,6 @@
 import React from "react";
-import {Meta, StoryObj} from "storybook-react-rsbuild";
+
+import type {Meta, StoryObj} from "storybook-react-rsbuild";
 
 import {capitalizeFirstLetter} from "../../utils";
 

@@ -1,9 +1,10 @@
-import React, {forwardRef, ForwardRefRenderFunction, memo} from "react";
+import React, {forwardRef, type ForwardRefRenderFunction, memo} from "react";
+
+import {type AccordionContentProps as AccordionContentRadixProps, Content} from "@radix-ui/react-accordion";
+
 import classnames from "classnames";
 
-import {AccordionContentProps as AccordionContentRadixProps, Content} from "@radix-ui/react-accordion";
-
-import styles from "./accordion.module.scss";
+import styles from "./accordion.module.scss?isolation";
 
 export type AccordionContentProps = AccordionContentRadixProps;
 

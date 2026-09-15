@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {Meta} from "storybook-react-rsbuild";
 
-import {hideInTable} from "../../utils";
+import type {Meta} from "storybook-react-rsbuild";
 
+import {HideInTable} from "../../utils";
 import {Button} from "../index";
 
-import ViewModalComponent, {ViewModalProps} from "./ViewModal";
+import ViewModalComponent, {type ViewModalProps} from "./ViewModal";
 
 const meta: Meta<typeof ViewModalComponent> = {
     title: "Components/ViewModal",
@@ -30,16 +30,16 @@ const meta: Meta<typeof ViewModalComponent> = {
         speed: {
             type: "number",
         },
-        children: hideInTable,
-        className: hideInTable,
-        wrapClassName: hideInTable,
-        titleClassName: hideInTable,
-        bodyClassName: hideInTable,
-        headerClassName: hideInTable,
-        beforeClassName: hideInTable,
-        afterClassName: hideInTable,
-        subtitleClassName: hideInTable,
-        childrenClassName: hideInTable,
+        children: HideInTable,
+        className: HideInTable,
+        wrapClassName: HideInTable,
+        titleClassName: HideInTable,
+        bodyClassName: HideInTable,
+        headerClassName: HideInTable,
+        beforeClassName: HideInTable,
+        afterClassName: HideInTable,
+        subtitleClassName: HideInTable,
+        childrenClassName: HideInTable,
     },
 };
 
@@ -47,6 +47,7 @@ export default meta;
 
 export const ViewModal = (props: ViewModalProps) => {
     const [open, setOpen] = useState(false);
+
     return (
         <div>
             <Button onClick={() => setOpen(true)}>Open</Button>

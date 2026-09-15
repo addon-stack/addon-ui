@@ -1,6 +1,5 @@
-import path from "path";
-import {merge} from "webpack-merge";
 import type {StorybookConfig} from "storybook-react-rsbuild";
+import {merge} from "webpack-merge";
 
 const config: StorybookConfig = {
     stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -10,12 +9,6 @@ const config: StorybookConfig = {
 
         return merge(config, {
             plugins: [pluginSass()],
-            resolve: {
-                alias: {
-                    "addon-ui-config": path.resolve("src", "config", "default.ts"),
-                    "addon-ui-style.scss": path.resolve("src", "providers", "ui", "styles", "default.scss"),
-                },
-            },
         });
     },
 };
