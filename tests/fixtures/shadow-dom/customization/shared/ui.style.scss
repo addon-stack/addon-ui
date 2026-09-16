@@ -1,0 +1,9 @@
+@use "addon-ui/theme" as theme;
+
+@include theme.root {
+  --shared-token: 73px;
+  --primary-color: #aabbcc;
+  --font-size: 15px;
+  --text-field-focus-border-color: rgb(11, 22, 33);
+  --error-color: rgb(180, 20, 30);
+}

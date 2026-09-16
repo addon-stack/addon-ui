@@ -22,6 +22,8 @@
   "include": [
     "src",
     "adnbn.config.ts",
+    "customization",
+    "customization.config.ts",
     "../../../src/declaration.d.ts",
     "../../../src/types/vendors/odometer.d.ts"
   ]

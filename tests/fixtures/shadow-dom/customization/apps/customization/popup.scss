@@ -1,0 +1,20 @@
+.tabs {
+  &__trigger {
+    z-index: 2;
+    color: #0f172a;
+    font-weight: 600;
+
+    &[data-state="inactive"] {
+      color: #6a6a6c;
+    }
+
+    &[data-state="active"] {
+      --active-bg-color: var(--primary-color);
+    }
+  }
+}
+
+// The app must win over the same selector in shared.
+.custom {
+  font-weight: 700;
+}

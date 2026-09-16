@@ -4,7 +4,7 @@ import {withFirefoxClient} from "./firefox-addon.mjs";
 
 // Playwright's Firefox JugglerFrameChild explicitly skips moz-extension://.
 // Use Firefox's console actor for the real extension page, without changing its URL or APIs.
-export async function checkFirefoxPopup(port) {
+export async function withFirefoxPopup(port, run) {
     return withFirefoxClient(port, async ({request, receive}) => {
         const poll = async (read, predicate, description) => {
             const deadline = Date.now() + 8000;
@@ -33,9 +33,9 @@ export async function checkFirefoxPopup(port) {
 
         const {frame} = await request(tab.actor, "getTarget");
 
-        const evaluate = async fn => {
+        const evaluate = async (fn, argument) => {
             const {resultID} = await request(frame.consoleActor, "evaluateJSAsync", {
-                text: `JSON.stringify((${fn.toString()})())`,
+                text: `JSON.stringify((${fn.toString()})(${JSON.stringify(argument) ?? "undefined"}))`,
             });
 
             const result = await receive(packet => packet.type === "evaluationResult" && packet.resultID === resultID);
@@ -46,6 +46,12 @@ export async function checkFirefoxPopup(port) {
                 : JSON.parse(result.result);
         };
 
+        return run({evaluate, poll, tab});
+    });
+}
+
+export async function checkFirefoxPopup(port) {
+    return withFirefoxPopup(port, async ({evaluate, poll, tab}) => {
         await poll(
             () => evaluate(() => !!document.querySelector('[data-testid="panel"]')),
             Boolean,

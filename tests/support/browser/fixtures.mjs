@@ -10,10 +10,11 @@ import {freeDebugPort, installFirefoxAddon} from "./firefox-addon.mjs";
 
 export const test = base.extend({
     engine: ["chrome", {scope: "worker", option: true}],
+    app: ["shadow-ui", {scope: "worker", option: true}],
     extension: [
-        async ({engine, siteURL}, use) => {
+        async ({engine, app, siteURL}, use) => {
             const root = fixtureRoot;
-            const directory = buildDirectory(root, engine);
+            const directory = buildDirectory(root, engine, app);
             const profile = await fs.mkdtemp(path.join(os.tmpdir(), "addon-ui-e2e-"));
             let context;
 

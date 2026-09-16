@@ -1,0 +1,5 @@
+@use "addon-ui/theme" as theme;
+
+@include theme.root {
+  --primary-color: #123456;
+}
