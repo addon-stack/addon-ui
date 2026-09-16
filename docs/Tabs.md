@@ -72,6 +72,11 @@ Supports contextual props: `useComponentProps("tabsList")`.
 
 Supports contextual props: `useComponentProps("tabsTrigger")`.
 
+Use `className` to override trigger styles, including `[data-state="active"]` and
+`[data-state="inactive"]`. With the default `asChild={true}`, the trigger and its
+content wrapper share one element, so the class also controls the wrapper's gap and
+flex direction. See the [shared/app styling example](customization.md#shared-and-application-styles).
+
 #### Props: TabsContent
 
 | Prop                | Type                   | Default |

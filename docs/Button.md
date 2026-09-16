@@ -2,6 +2,10 @@
 
 The Button component is a customizable button with style variants, colors, sizes, and corner radii. It supports theming via CSS variables and default props via `UIProvider`/`ui.config.ts`.
 
+Use `className` for the button and `childrenClassName`, `beforeClassName` or
+`afterClassName` for its inner slots. See the [custom button example](customization.md#a-custom-button)
+for CSS variables and ordinary class overrides of the library's cascade layers.
+
 #### Import and basic usage
 
 ```tsx

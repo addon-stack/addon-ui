@@ -130,3 +130,27 @@ Both popup documents open in extension tabs, so the browser toolbar surface is o
 - Pre-commit revalidation after the RTL commit: `npm run verify` passes again; the expanded browser matrix
   reports 29 passed and one existing Firefox document RTL skip in 34.1 seconds. The Shadow DOM RTL cases
   pass in both browsers. No additional skips or retries were introduced for the framework upgrade.
+
+## Customization and cascade layers — 2026-09-16
+
+- Library reset, tokens, base and component rules use the `addon-ui` sublayers. Application theme mixins
+  remain unlayered. The document's body font family/size retain the documented Chrome compatibility
+  exception. ScrollArea's measured content display retains one `!important`, configurable through
+  `--scroll-area-content-display`.
+- The automated fixture now builds both Single and Multi applications against published AddonBone 0.12.0.
+  All four Chrome/Firefox build checks pass, including fixture types, emitted layers, unlayered application
+  tokens and the separate lazy Tag stylesheet.
+- Seven new customization scenarios pass in each browser: 14 new browser checks. They cover the reported
+  shared/app TabsTrigger case, library CSS moved last, variables, application classes/layers, variants and
+  states, representative former important overrides, lazy component CSS and both existing ShadowRoots.
+- The complete browser rerun passes 41 scenarios in 30.5 seconds. One existing Firefox document RTL case
+  remains skipped because Playwright Juggler does not expose extension documents. There are no new skips
+  or retries; all customization popup cases run in Firefox through RDP.
+- Final `npm run verify` passes: lint, source/test types, 60 tooling checks, 100 Jest tests in nine suites
+  and declaration generation. `git diff --check` passes. The subsequent documentation changes do not
+  alter library or fixture runtime code; the browser results above are from the step-five implementation.
+- `npm pack --dry-run --ignore-scripts` lists 365 files, includes `src/styles/layers.scss`, and excludes
+  automated tests and the private manual extension. No package was published.
+- These are local macOS results. Popup pages run in extension tabs, and the customization probes use DOM
+  events and native computed styles. Firefox popup evaluation exceptions are checked through RDP; those
+  pages do not have Playwright console monitoring. No remote CI run or toolbar-popup test is claimed.

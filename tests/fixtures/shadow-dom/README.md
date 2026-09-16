@@ -11,3 +11,22 @@ All tested stylesheet imports use AddonBone's standard `?isolation` routing, inc
 The build suite checks that CLI, declarations and runtime resolve to the same published package, that library styles stay out of the website's content-script CSS list, and that initial/lazy CSS is available through WAR. It also checks the isolated loader identity and shared popup stylesheet. The browser suite verifies that these assets actually load and style the components.
 
 Generated `.adnbn/`, `dist/`, `artifacts/` and `node_modules/` are ignored. The fixture itself is committed so clean clones and CI use the same inputs. It is excluded from the published addon-ui package.
+
+## Multi-app customization fixture
+
+`customization.config.ts` reuses the dependency aliases and build settings with
+`Workspace.Multi`, `srcDir: "customization"` and `app: "customization"`. It uses the
+same installed dependencies as the Single application, with no additional npm package.
+
+- `customization/shared/popup.scss` contains shared component overrides.
+- `customization/apps/customization/popup.scss` adds app overrides at the matching path.
+- Shared and app `ui.style.scss` files exercise theme composition through the UI plugin.
+- `LazyTag.tsx` imports a component whose library stylesheet loads in a separate chunk.
+
+The build suite emits `dist/customization-chrome-mv3` and `dist/customization-firefox-mv3`
+alongside the original `shadow-ui` builds. Browser fixtures choose the app explicitly.
+The customization popup's test background closes previous popup tabs before acknowledging
+creation, so Firefox RDP always selects a fresh extension document.
+
+The same `?isolation` mechanism delivers styles to the popup and both existing ShadowRoots.
+This fixture tests customization without changing framework isolation behavior.

@@ -198,8 +198,10 @@ from their source file. Nested Sass partials retain their own resource base thro
 Sass source maps and `resolve-url-loader`, applied only to the generated stylesheet.
 Built-in Sass modules, package imports and external/root-relative URLs keep their normal
 resolution. Watch builds track imported partials and assets through the loaders.
-User overrides remain after the library's base styles, and their import keeps `?isolation`
-for Shadow DOM delivery; CSS extraction and web-accessible resources remain owned by AddonBone.
+Application theme rules remain outside the library's cascade layers unless you explicitly
+put them in a layer. Their import keeps `?isolation` for Shadow DOM delivery; CSS extraction
+and web-accessible resources remain owned by AddonBone. See the
+[customization guide](docs/customization.md) for CSS precedence and application layer ordering.
 
 Without `ui()`, the package resolves these internal imports to a configuration with
 empty `components`, `extra` and `icons`, and an empty override stylesheet. Storybook
@@ -329,9 +331,19 @@ directories to be combined when enabled.
 
 ## Customization
 
-The `addon-ui` library allows for extensive customization to create different designs for different extensions without
-changing code. This is particularly useful in the Addon Bone framework where you might need to maintain multiple browser
-extensions with the same functionality but different visual appearances.
+Components include their default styles automatically. CSS variables in `ui.style.scss`
+are the primary theming API; use `className` and supported slot classes for additional changes.
+Existing theme mixins and `@include` overrides continue to work without changes.
+
+Library styles use the `addon-ui.reset`, `addon-ui.tokens`, `addon-ui.base` and
+`addon-ui.components` cascade layers. Normal application rules outside layers override
+component defaults, including variants and states, even when library CSS loads later.
+Applications with their own layers should declare an initial order such as
+`@layer addon-ui, application;`.
+
+See [Customizing styles](docs/customization.md) for complete Button and shared/app
+Tabs examples, layer ordering, slot targeting, and the document typography and
+ScrollArea exceptions.
 
 ### Global Theme Customization
 
