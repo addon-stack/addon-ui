@@ -25,6 +25,16 @@
 - Preserve user callbacks, `preventDefault`, portal priority, ref lifecycles and existing browser behavior when refactoring. Run component tests, types and lint; run the Chrome/Firefox suite for focus, layer or navigation changes.
 - Automated tests and fixtures live in `tests/`. The ignored `addon/` directory is a private manual playground and must not be tracked or used by repository tests, scripts or documentation.
 
+## Customization contract
+
+- Maximum customization is a core library requirement. Treat the library's visual styles as overridable defaults and preserve the public component options, callbacks, refs and styling hooks that applications use to customize behavior and appearance.
+- CSS custom properties are the primary theming API. Preserve their inheritance, documented names and fallback behavior, including application-wide themes and per-component overrides.
+- Application styles supplied through `className` and supported slot class names must be able to override the library's visual defaults without requiring `!important`, duplicated selectors or knowledge of generated CSS Module names. Do not rely on class order in the HTML attribute to establish CSS precedence.
+- Keep library defaults and application overrides distinct when composing styles. The plugin must preserve application theme precedence; shared theme defaults must precede app-specific overrides. Verify the resulting cascade across initial and lazy-loaded CSS, rather than assuming JavaScript import order guarantees it.
+- Avoid `!important`, unnecessarily specific selectors and non-overridable inline presentation styles. Where runtime positioning, measurement or a third-party primitive requires a constraint, keep it narrowly scoped and provide an explicit supported customization path where feasible.
+- Customization must work in extension pages and isolated content-script UIs. Application overrides and library styles must reach the same document or ShadowRoot; CSS variables must be applied to the appropriate root or host.
+- Changes to style composition, specificity or delivery require representative browser checks for CSS-variable overrides, custom classes, variants and states, and lazy-loaded components. Preserve default appearance while making application overrides predictable.
+
 ## Tooling
 
 - Run `npm run format` for ESLint/Stylelint autofixes and `npm run lint` for checks without writes. Do not add Prettier.

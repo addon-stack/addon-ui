@@ -1,17 +1,21 @@
-.icon {
-  color: var(--icon-color);
-  transition:
-    transform var(--icon-speed-transform, var(--speed-sm)),
-    color var(--icon-speed-color, var(--speed-color));
+@use "../../styles/layers";
 
-  &:hover {
-    color: var(--icon-color-hover);
-    transform: scale(var(--icon-scale, 1));
-  }
+@layer addon-ui.components {
+  .icon {
+    color: var(--icon-color);
+    transition:
+      transform var(--icon-speed-transform, var(--speed-sm)),
+      color var(--icon-speed-color, var(--speed-color));
 
-  &--default {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    &:hover {
+      color: var(--icon-color-hover);
+      transform: scale(var(--icon-scale, 1));
+    }
+
+    &--default {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

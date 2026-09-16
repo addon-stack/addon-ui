@@ -1,57 +1,61 @@
+@use "../../styles/layers";
+
 $root: header;
 
-.#{$root} {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
-  gap: var(--header-gap, 10px);
-  padding: var(--header-padding, var(--side-padding-sm));
-  padding-bottom: 0;
-  transition: background var(--header-speed-bg, var(--speed-color));
-
-  &__wrap {
+@layer addon-ui.components {
+  .#{$root} {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    white-space: nowrap;
-    gap: var(--header-wrap-gap, 10px);
-  }
+    width: 100%;
+    box-sizing: border-box;
+    gap: var(--header-gap, 10px);
+    padding: var(--header-padding, var(--side-padding-sm));
+    padding-bottom: 0;
+    transition: background var(--header-speed-bg, var(--speed-color));
 
-  &__title,
-  &__subtitle {
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: color var(--header-speed-color, var(--speed-color));
-  }
-
-  &__title {
-    display: flex;
-    align-items: center;
-    gap: var(--header-title-gap, 12px);
-    color: var(--header-title-color, var(--text-primary-color));
-    font-size: var(--header-title-font-size, 25px);
-    font-family: var(--header-title-font-family, var(--font-family)), "sans-serif";
-    font-weight: var(--header-title-font-weight, 700);
-    line-height: var(--header-title-line-height, 120%);
-    will-change: color;
-
-    .#{$root}--center & {
-      justify-content: center;
+    &__wrap {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      white-space: nowrap;
+      gap: var(--header-wrap-gap, 10px);
     }
-  }
 
-  &__subtitle {
-    color: var(--header-subtitle-color, var(--text-secondary-color));
-    font-size: var(--header-subtitle-font-size, 14px);
-    font-family: var(--header-subtitle-font-family, var(--font-family)), "sans-serif";
-    font-weight: var(--header-subtitle-font-weight, 400);
-    line-height: var(--header-subtitle-line-height, 120%);
-    white-space: wrap;
+    &__title,
+    &__subtitle {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color var(--header-speed-color, var(--speed-color));
+    }
 
-    .#{$root}--center & {
-      text-align: center;
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: var(--header-title-gap, 12px);
+      color: var(--header-title-color, var(--text-primary-color));
+      font-size: var(--header-title-font-size, 25px);
+      font-family: var(--header-title-font-family, var(--font-family)), "sans-serif";
+      font-weight: var(--header-title-font-weight, 700);
+      line-height: var(--header-title-line-height, 120%);
+      will-change: color;
+
+      .#{$root}--center & {
+        justify-content: center;
+      }
+    }
+
+    &__subtitle {
+      color: var(--header-subtitle-color, var(--text-secondary-color));
+      font-size: var(--header-subtitle-font-size, 14px);
+      font-family: var(--header-subtitle-font-family, var(--font-family)), "sans-serif";
+      font-weight: var(--header-subtitle-font-weight, 400);
+      line-height: var(--header-subtitle-line-height, 120%);
+      white-space: wrap;
+
+      .#{$root}--center & {
+        text-align: center;
+      }
     }
   }
 }

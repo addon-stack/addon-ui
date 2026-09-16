@@ -1,82 +1,86 @@
+@use "../../styles/layers";
+
 $root: checkbox;
 
-.#{$root} {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: var(--checkbox-padding, 2px);
-  width: var(--checkbox-size, 18px);
-  height: var(--checkbox-size, 18px);
-  border-radius: var(--checkbox-border-radius, 4px);
-  color: var(--checkbox-color, #333);
-  border: var(--checkbox-border-width, 1px) solid var(--checkbox-border-color, #999);
-  will-change: background, color;
-  transition:
-    background var(--checkbox-speed-bg, var(--speed-color)),
-    color var(--checkbox-speed-color, var(--speed-color));
-
-  &:disabled {
-    opacity: var(--checkbox-disabled-opacity, 0.6);
-    cursor: default;
-  }
-
-  &:active:not(:disabled) {
-    transform: scale(var(--checkbox-scale, 0.98));
-  }
-
-  //Variants
-  &--classic {
-    color: var(--checkbox-classic-color, white);
-    background: var(--checkbox-classic-bg-color);
-    border: var(--checkbox-classic-border-width, 1px) solid var(--checkbox-classic-border-color, #999);
-
-    &[data-state="checked"],
-    &[data-state="indeterminate"] {
-      background: var(--checkbox-checked-bg-color, var(--primary-color));
-      border: none;
-    }
-  }
-
-  &--soft {
-    color: var(--checkbox-soft-color, white);
-    background: var(--checkbox-soft-bg-color, var(--secondary-color));
-    border: none;
-  }
-
-  //sizes
-  &--small-size {
-    width: var(--checkbox-size-sm, 16px);
-    height: var(--checkbox-size-sm, 16px);
-  }
-
-  &--medium-size {
-    width: var(--checkbox-size-md, 20px);
-    height: var(--checkbox-size-md, 20px);
-  }
-
-  &--large-size {
-    width: var(--checkbox-size-lg, 22px);
-    height: var(--checkbox-size-lg, 22px);
-  }
-
-  //Radius
-  &--small-radius {
-    border-radius: var(--checkbox-border-radius-sm, 2px);
-  }
-
-  &--large-radius {
-    border-radius: var(--checkbox-border-radius-lg, 6px);
-  }
-
-  &__indicator {
+@layer addon-ui.components {
+  .#{$root} {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    padding: var(--checkbox-padding, 2px);
+    width: var(--checkbox-size, 18px);
+    height: var(--checkbox-size, 18px);
+    border-radius: var(--checkbox-border-radius, 4px);
+    color: var(--checkbox-color, #333);
+    border: var(--checkbox-border-width, 1px) solid var(--checkbox-border-color, #999);
+    will-change: background, color;
+    transition:
+      background var(--checkbox-speed-bg, var(--speed-color)),
+      color var(--checkbox-speed-color, var(--speed-color));
 
-    & svg {
-      width: 100%;
-      height: 100%;
+    &:disabled {
+      opacity: var(--checkbox-disabled-opacity, 0.6);
+      cursor: default;
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(var(--checkbox-scale, 0.98));
+    }
+
+    //Variants
+    &--classic {
+      color: var(--checkbox-classic-color, white);
+      background: var(--checkbox-classic-bg-color);
+      border: var(--checkbox-classic-border-width, 1px) solid var(--checkbox-classic-border-color, #999);
+
+      &[data-state="checked"],
+      &[data-state="indeterminate"] {
+        background: var(--checkbox-checked-bg-color, var(--primary-color));
+        border: none;
+      }
+    }
+
+    &--soft {
+      color: var(--checkbox-soft-color, white);
+      background: var(--checkbox-soft-bg-color, var(--secondary-color));
+      border: none;
+    }
+
+    //sizes
+    &--small-size {
+      width: var(--checkbox-size-sm, 16px);
+      height: var(--checkbox-size-sm, 16px);
+    }
+
+    &--medium-size {
+      width: var(--checkbox-size-md, 20px);
+      height: var(--checkbox-size-md, 20px);
+    }
+
+    &--large-size {
+      width: var(--checkbox-size-lg, 22px);
+      height: var(--checkbox-size-lg, 22px);
+    }
+
+    //Radius
+    &--small-radius {
+      border-radius: var(--checkbox-border-radius-sm, 2px);
+    }
+
+    &--large-radius {
+      border-radius: var(--checkbox-border-radius-lg, 6px);
+    }
+
+    &__indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & svg {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

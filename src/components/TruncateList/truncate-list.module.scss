@@ -1,17 +1,21 @@
-.truncate-list {
-  gap: var(--truncate-list-gap, 8px);
+@use "../../styles/layers";
 
-  &__counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--truncate-list-counter-br-radius, 9999px);
-    background: var(--truncate-list-counter-bg-color, var(--bg-secondary-color));
-    padding: var(--truncate-list-counter-padding, 0px 4px);
-    color: var(--truncate-list-counter-color, var(--text-secondary-color));
-    font-size: var(--truncate-list-counter-font-size, inherit);
-    transition:
-      color var(--truncate-list-speed-color, var(--speed-color)),
-      background var(--truncate-list-speed-bg, var(--speed-color));
+@layer addon-ui.components {
+  .truncate-list {
+    gap: var(--truncate-list-gap, 8px);
+
+    &__counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--truncate-list-counter-br-radius, 9999px);
+      background: var(--truncate-list-counter-bg-color, var(--bg-secondary-color));
+      padding: var(--truncate-list-counter-padding, 0px 4px);
+      color: var(--truncate-list-counter-color, var(--text-secondary-color));
+      font-size: var(--truncate-list-counter-font-size, inherit);
+      transition:
+        color var(--truncate-list-speed-color, var(--speed-color)),
+        background var(--truncate-list-speed-bg, var(--speed-color));
+    }
   }
 }

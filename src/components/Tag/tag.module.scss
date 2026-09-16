@@ -1,124 +1,128 @@
+@use "../../styles/layers";
+
 $root: tag;
 
-.#{$root} {
-  cursor: default;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--tag-font-size, 13px);
-  font-weight: var(--tag-font-weight, 500);
-  line-height: var(--tag-line-height, var(--line-height, 1 rem));
-  letter-spacing: var(--tag-letter-spacing, 0.5px);
-  padding: var(--tag-padding, 4px 8px);
-  border-radius: var(--tag-border-radius, 999px);
-  color: var(--tag-color, var(--text-secondary-color));
-  background: var(--tag-bg-color, var(--bg-secondary-color));
-  transition:
-    background var(--tag-speed-bg, var(--speed-color)),
-    color var(--tag-speed-color, var(--speed-color));
+@layer addon-ui.components {
+  .#{$root} {
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--tag-font-size, 13px);
+    font-weight: var(--tag-font-weight, 500);
+    line-height: var(--tag-line-height, var(--line-height, 1 rem));
+    letter-spacing: var(--tag-letter-spacing, 0.5px);
+    padding: var(--tag-padding, 4px 8px);
+    border-radius: var(--tag-border-radius, 999px);
+    color: var(--tag-color, var(--text-secondary-color));
+    background: var(--tag-bg-color, var(--bg-secondary-color));
+    transition:
+      background var(--tag-speed-bg, var(--speed-color)),
+      color var(--tag-speed-color, var(--speed-color));
 
-  &--clickable {
-    cursor: pointer;
+    &--clickable {
+      cursor: pointer;
 
-    &:active {
-      transform: scale(var(--tag-scale, 0.98));
-      user-select: none;
-    }
-  }
-
-  // Variants
-  &--contained {
-    color: var(--tag-contained-color, var(--tag-color, var(--text-secondary-color)));
-    background: var(--tag-contained-bg-color, var(--tag-bg-color, var(--bg-secondary-color)));
-    border: none;
-
-    &.#{$root}--primary-color {
-      color: var(--tag-contained-primary-color, #fff);
-      background: var(--primary-color);
+      &:active {
+        transform: scale(var(--tag-scale, 0.98));
+        user-select: none;
+      }
     }
 
-    &.#{$root}--secondary-color {
-      color: var(--tag-contained-secondary-color, #fff);
-      background: var(--secondary-color);
+    // Variants
+    &--contained {
+      color: var(--tag-contained-color, var(--tag-color, var(--text-secondary-color)));
+      background: var(--tag-contained-bg-color, var(--tag-bg-color, var(--bg-secondary-color)));
+      border: none;
+
+      &.#{$root}--primary-color {
+        color: var(--tag-contained-primary-color, #fff);
+        background: var(--primary-color);
+      }
+
+      &.#{$root}--secondary-color {
+        color: var(--tag-contained-secondary-color, #fff);
+        background: var(--secondary-color);
+      }
+
+      &.#{$root}--accent-color {
+        color: var(--tag-contained-accent-color, #fff);
+        background: var(--accent-color);
+      }
     }
 
-    &.#{$root}--accent-color {
-      color: var(--tag-contained-accent-color, #fff);
-      background: var(--accent-color);
-    }
-  }
+    &--outlined {
+      color: var(--tag-outlined-color, var(--tag-color, var(--text-secondary-color)));
+      border: var(--tag-border-width, 1px) solid
+        var(--tag-outlined-border-color, var(--tag-outlined-color, var(--text-secondary-color)));
+      background: var(--tag-outlined-bg-color, none);
 
-  &--outlined {
-    color: var(--tag-outlined-color, var(--tag-color, var(--text-secondary-color)));
-    border: var(--tag-border-width, 1px) solid
-      var(--tag-outlined-border-color, var(--tag-outlined-color, var(--text-secondary-color)));
-    background: var(--tag-outlined-bg-color, none);
+      &.#{$root}--primary-color {
+        color: var(--tag-outlined-color-primary-color, var(--primary-color));
+        border-color: var(--tag-outlined-border-color-primary-color, var(--primary-color));
+        background: var(--tag-outlined-bg-color-primary-color, none);
+      }
 
-    &.#{$root}--primary-color {
-      color: var(--tag-outlined-color-primary-color, var(--primary-color));
-      border-color: var(--tag-outlined-border-color-primary-color, var(--primary-color));
-      background: var(--tag-outlined-bg-color-primary-color, none);
-    }
+      &.#{$root}--secondary-color {
+        color: var(--tag-outlined-color-secondary-color, var(--secondary-color));
+        border-color: var(--tag-outlined-border-color-secondary-color, var(--secondary-color));
+        background: var(--tag-outlined-bg-color-secondary-color, none);
+      }
 
-    &.#{$root}--secondary-color {
-      color: var(--tag-outlined-color-secondary-color, var(--secondary-color));
-      border-color: var(--tag-outlined-border-color-secondary-color, var(--secondary-color));
-      background: var(--tag-outlined-bg-color-secondary-color, none);
-    }
-
-    &.#{$root}--accent-color {
-      color: var(--tag-outlined-color-accent-color, var(--accent-color));
-      border-color: var(--tag-outlined-border-color-accent-color, var(--accent-color));
-      background: var(--tag-outlined-bg-color-accent-color, none);
-    }
-  }
-
-  &--soft {
-    color: var(--tag-soft-color, var(--tag-color, var(--text-secondary-color)));
-    background-color: color-mix(in srgb, white 30%, var(--tag-bg-color, var(--bg-secondary-color)));
-
-    &.#{$root}--primary-color {
-      color: var(--tag-soft-primary-color, #fff);
-      background-color: color-mix(in srgb, white 30%, var(--primary-color));
+      &.#{$root}--accent-color {
+        color: var(--tag-outlined-color-accent-color, var(--accent-color));
+        border-color: var(--tag-outlined-border-color-accent-color, var(--accent-color));
+        background: var(--tag-outlined-bg-color-accent-color, none);
+      }
     }
 
-    &.#{$root}--secondary-color {
-      color: var(--tag-soft-secondary-color, #fff);
-      background-color: color-mix(in srgb, white 30%, var(--secondary-color));
+    &--soft {
+      color: var(--tag-soft-color, var(--tag-color, var(--text-secondary-color)));
+      background-color: color-mix(in srgb, white 30%, var(--tag-bg-color, var(--bg-secondary-color)));
+
+      &.#{$root}--primary-color {
+        color: var(--tag-soft-primary-color, #fff);
+        background-color: color-mix(in srgb, white 30%, var(--primary-color));
+      }
+
+      &.#{$root}--secondary-color {
+        color: var(--tag-soft-secondary-color, #fff);
+        background-color: color-mix(in srgb, white 30%, var(--secondary-color));
+      }
+
+      &.#{$root}--accent-color {
+        color: var(--tag-soft-accent-color, #fff);
+        background-color: color-mix(in srgb, white 30%, var(--accent-color));
+      }
     }
 
-    &.#{$root}--accent-color {
-      color: var(--tag-soft-accent-color, #fff);
-      background-color: color-mix(in srgb, white 30%, var(--accent-color));
+    // Sizes
+    &--small-size {
+      padding: var(--tag-padding-sm, 3px 6px);
+      font-size: var(--tag-font-size-sm, 12px);
     }
-  }
 
-  // Sizes
-  &--small-size {
-    padding: var(--tag-padding-sm, 3px 6px);
-    font-size: var(--tag-font-size-sm, 12px);
-  }
+    &--medium-size {
+      padding: var(--tag-padding-md, 5px 10px);
+      font-size: var(--tag-font-size-md, 14px);
+    }
 
-  &--medium-size {
-    padding: var(--tag-padding-md, 5px 10px);
-    font-size: var(--tag-font-size-md, 14px);
-  }
+    &--large-size {
+      padding: var(--tag-padding-lg, 6px 12px);
+      font-size: var(--tag-font-size-lg, 16px);
+    }
 
-  &--large-size {
-    padding: var(--tag-padding-lg, 6px 12px);
-    font-size: var(--tag-font-size-lg, 16px);
-  }
+    //Radius
+    &--small-radius {
+      border-radius: var(--tag-border-radius-sm, 5px);
+    }
 
-  //Radius
-  &--small-radius {
-    border-radius: var(--tag-border-radius-sm, 5px);
-  }
+    &--medium-radius {
+      border-radius: var(--tag-border-radius-md, 8px);
+    }
 
-  &--medium-radius {
-    border-radius: var(--tag-border-radius-md, 8px);
-  }
-
-  &--large-radius {
-    border-radius: var(--tag-border-radius-lg, 10px);
+    &--large-radius {
+      border-radius: var(--tag-border-radius-lg, 10px);
+    }
   }
 }

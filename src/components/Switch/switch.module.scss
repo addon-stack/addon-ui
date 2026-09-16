@@ -1,3 +1,4 @@
+@use "../../styles/layers";
 @use "../../styles/mixins" as dir;
 
 @function switch-width() {
@@ -18,50 +19,52 @@
 
 $root: switch;
 
-.#{$root} {
-  margin: 0;
-  padding: 0;
-  border: none;
-  box-sizing: border-box;
-  cursor: pointer;
-  position: relative;
-  width: switch-width();
-  height: switch-height();
-  border-radius: var(--switch-border-radius, 9999px);
-  background: var(--switch-bg-color, #bbb);
-  will-change: background;
-  transition: background var(--switch-speed-bg, var(--speed-color));
-
-  &[data-state="checked"] {
-    background: var(--switch-checked-bg-color, var(--primary-color));
-  }
-
-  &:disabled {
-    opacity: var(--switch-disabled-opacity, 0.6);
-    cursor: default;
-  }
-
-  &__thumb {
+@layer addon-ui.components {
+  .#{$root} {
+    margin: 0;
+    padding: 0;
+    border: none;
     box-sizing: border-box;
-    display: block;
-    width: switch-thumb-width();
-    height: switch-thumb-height();
-    transform: translateX(calc((#{switch-height()} - #{switch-thumb-height()}) / 2));
-    background-color: var(--switch-thumb-bg-color, white);
-    border-radius: var(--switch-thumb-border-radius, var(--switch-border-radius, 9999px));
-    will-change: transform;
-    transition:
-      transform var(--switch-speed-transform, var(--speed-sm)) ease-in-out,
-      background-color var(--switch-speed-bg, var(--speed-color));
-
-    @include dir.rtl {
-      margin-right: calc(#{switch-width()} / 2);
-    }
+    cursor: pointer;
+    position: relative;
+    width: switch-width();
+    height: switch-height();
+    border-radius: var(--switch-border-radius, 9999px);
+    background: var(--switch-bg-color, #bbb);
+    will-change: background;
+    transition: background var(--switch-speed-bg, var(--speed-color));
 
     &[data-state="checked"] {
-      transform: translateX(
-        calc(#{switch-width()} - #{switch-thumb-width()} - (#{switch-height()} - #{switch-thumb-height()}) / 2)
-      );
+      background: var(--switch-checked-bg-color, var(--primary-color));
+    }
+
+    &:disabled {
+      opacity: var(--switch-disabled-opacity, 0.6);
+      cursor: default;
+    }
+
+    &__thumb {
+      box-sizing: border-box;
+      display: block;
+      width: switch-thumb-width();
+      height: switch-thumb-height();
+      transform: translateX(calc((#{switch-height()} - #{switch-thumb-height()}) / 2));
+      background-color: var(--switch-thumb-bg-color, white);
+      border-radius: var(--switch-thumb-border-radius, var(--switch-border-radius, 9999px));
+      will-change: transform;
+      transition:
+        transform var(--switch-speed-transform, var(--speed-sm)) ease-in-out,
+        background-color var(--switch-speed-bg, var(--speed-color));
+
+      @include dir.rtl {
+        margin-right: calc(#{switch-width()} / 2);
+      }
+
+      &[data-state="checked"] {
+        transform: translateX(
+          calc(#{switch-width()} - #{switch-thumb-width()} - (#{switch-height()} - #{switch-thumb-height()}) / 2)
+        );
+      }
     }
   }
 }

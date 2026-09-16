@@ -1,93 +1,97 @@
+@use "../../styles/layers";
+
 $root: text-area;
 
-.#{$root} {
-  outline: none;
-  box-sizing: border-box;
-  font-family: var(--text-area-font-family, var(--font-family)), sans-serif;
-  font-weight: var(--text-area-font-weight, 400);
-  font-size: var(--text-area-font-size, 14px);
-  letter-spacing: var(--text-area-letter-spacing, 0.5px);
-  line-height: var(--text-area-line-height, var(--line-height, 1 rem));
-  padding: var(--text-area-padding, 8px 12px);
-  border-radius: var(--text-area-border-radius, 8px);
-  min-width: var(--text-area-min-width, 200px);
-  transition:
-    border-color var(--text-area-speed-border-color, var(--speed-color)),
-    box-shadow var(--text-area-speed-box-shadow, var(--speed-color)),
-    background var(--text-area-speed-bg, var(--speed-color));
+@layer addon-ui.components {
+  .#{$root} {
+    outline: none;
+    box-sizing: border-box;
+    font-family: var(--text-area-font-family, var(--font-family)), sans-serif;
+    font-weight: var(--text-area-font-weight, 400);
+    font-size: var(--text-area-font-size, 14px);
+    letter-spacing: var(--text-area-letter-spacing, 0.5px);
+    line-height: var(--text-area-line-height, var(--line-height, 1 rem));
+    padding: var(--text-area-padding, 8px 12px);
+    border-radius: var(--text-area-border-radius, 8px);
+    min-width: var(--text-area-min-width, 200px);
+    transition:
+      border-color var(--text-area-speed-border-color, var(--speed-color)),
+      box-shadow var(--text-area-speed-box-shadow, var(--speed-color)),
+      background var(--text-area-speed-bg, var(--speed-color));
 
-  &:focus {
-    border-color: var(--text-area-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)));
-    box-shadow: var(--text-area-focus-shadow, 0 0 4px var(--primary-color));
-  }
+    &:focus {
+      border-color: var(--text-area-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)));
+      box-shadow: var(--text-area-focus-shadow, 0 0 4px var(--primary-color));
+    }
 
-  &:disabled {
-    opacity: var(--text-area-disabled-opacity, 0.7);
-    cursor: not-allowed;
-  }
+    &:disabled {
+      opacity: var(--text-area-disabled-opacity, 0.7);
+      cursor: not-allowed;
+    }
 
-  &::placeholder {
-    color: var(--text-area-placeholder-color, var(--placeholder-color));
-    transition: color var(--text-area-speed-color, var(--speed-color));
-  }
+    &::placeholder {
+      color: var(--text-area-placeholder-color, var(--placeholder-color));
+      transition: color var(--text-area-speed-color, var(--speed-color));
+    }
 
-  &--full-width {
-    width: 100% !important;
-  }
+    &--full-width {
+      width: 100% !important;
+    }
 
-  // Variants
-  &--regular {
-    color: var(--text-area-regular-color, var(--text-area-color, var(--text-primary-color)));
-    background: var(--text-area-regular-bg-color, var(--text-area-bg-color, var(--bg-secondary-color)));
-    border-style: solid;
-    border-width: var(--text-area-regular-border-width, var(--text-area-border-width, 1px));
-    border-color: var(--text-area-regular-border-color, var(--border-color));
-  }
+    // Variants
+    &--regular {
+      color: var(--text-area-regular-color, var(--text-area-color, var(--text-primary-color)));
+      background: var(--text-area-regular-bg-color, var(--text-area-bg-color, var(--bg-secondary-color)));
+      border-style: solid;
+      border-width: var(--text-area-regular-border-width, var(--text-area-border-width, 1px));
+      border-color: var(--text-area-regular-border-color, var(--border-color));
+    }
 
-  &--outlined {
-    color: var(--text-area-outlined-color, var(--text-area-color, var(--text-primary-color)));
-    background: transparent;
-    border-style: solid;
-    border-width: var(--text-area-outlined-border-width, var(--text-area-border-width, 1px));
-    border-color: var(--text-area-outlined-border-color, var(--border-color));
-  }
+    &--outlined {
+      color: var(--text-area-outlined-color, var(--text-area-color, var(--text-primary-color)));
+      background: transparent;
+      border-style: solid;
+      border-width: var(--text-area-outlined-border-width, var(--text-area-border-width, 1px));
+      border-color: var(--text-area-outlined-border-color, var(--border-color));
+    }
 
-  &--filled {
-    color: var(--text-area-filled-color, var(--text-area-color, var(--text-primary-color)));
-    background: var(--text-area-filled-bg-color, var(--text-area-bg-color, var(--bg-secondary-color)));
-    border: none;
-  }
+    &--filled {
+      color: var(--text-area-filled-color, var(--text-area-color, var(--text-primary-color)));
+      background: var(--text-area-filled-bg-color, var(--text-area-bg-color, var(--bg-secondary-color)));
+      border: none;
+    }
 
-  // Radius
-  &--none-radius {
-    border-radius: 0;
-  }
+    // Radius
+    &--none-radius {
+      border-radius: 0;
+    }
 
-  &--small-radius {
-    border-radius: var(--text-area-border-radius-sm, 5px);
-  }
+    &--small-radius {
+      border-radius: var(--text-area-border-radius-sm, 5px);
+    }
 
-  &--medium-radius {
-    border-radius: var(--text-area-border-radius-md, 10px);
-  }
+    &--medium-radius {
+      border-radius: var(--text-area-border-radius-md, 10px);
+    }
 
-  &--large-radius {
-    border-radius: var(--text-area-border-radius-lg, 15px);
-  }
+    &--large-radius {
+      border-radius: var(--text-area-border-radius-lg, 15px);
+    }
 
-  // Sizes
-  &--small-size {
-    padding: var(--text-area-padding-sm, 6px 10px);
-    font-size: var(--text-area-font-size-sm, 12px);
-  }
+    // Sizes
+    &--small-size {
+      padding: var(--text-area-padding-sm, 6px 10px);
+      font-size: var(--text-area-font-size-sm, 12px);
+    }
 
-  &--medium-size {
-    padding: var(--text-area-padding-md, 10px 14px);
-    font-size: var(--text-area-font-size-md, 16px);
-  }
+    &--medium-size {
+      padding: var(--text-area-padding-md, 10px 14px);
+      font-size: var(--text-area-font-size-md, 16px);
+    }
 
-  &--large-size {
-    padding: var(--text-area-padding-lg, 12px 16px);
-    font-size: var(--text-area-font-size-lg, 18px);
+    &--large-size {
+      padding: var(--text-area-padding-lg, 12px 16px);
+      font-size: var(--text-area-font-size-lg, 18px);
+    }
   }
 }

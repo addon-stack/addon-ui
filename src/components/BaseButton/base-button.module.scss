@@ -1,19 +1,23 @@
-.base-button {
-  box-sizing: border-box;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  vertical-align: middle;
-  justify-content: center;
-  gap: var(--base-button-gap, 8px);
+@use "../../styles/layers";
 
-  &__after,
-  &__before,
-  &__children {
+@layer addon-ui.components {
+  .base-button {
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
     position: relative;
-    display: inline;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    gap: var(--base-button-gap, 8px);
+
+    &__after,
+    &__before,
+    &__children {
+      position: relative;
+      display: inline;
+    }
   }
 }

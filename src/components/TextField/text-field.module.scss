@@ -1,144 +1,148 @@
+@use "../../styles/layers";
+
 $root: text-field;
 
-.#{$root} {
-  display: flex;
-  align-items: center;
-  gap: var(--text-field-gap, 0.3em);
-  font-family: var(--text-field-font-family, var(--font-family)), sans-serif;
-  font-weight: var(--text-field-font-weight, 400);
-  font-size: var(--text-field-font-size, 14px);
-  letter-spacing: var(--text-field-letter-spacing, 0.5px);
-  line-height: var(--text-field-line-height, var(--line-height, 1rem));
-  padding: var(--text-field-padding, 8px 12px);
-  border-radius: var(--text-field-border-radius, 8px);
-  transition:
-    border-color var(--text-field-speed-border-color, var(--speed-color)),
-    box-shadow var(--text-field-speed-box-shadow, var(--speed-color)),
-    background var(--text-field-speed-bg, var(--speed-color));
+@layer addon-ui.components {
+  .#{$root} {
+    display: flex;
+    align-items: center;
+    gap: var(--text-field-gap, 0.3em);
+    font-family: var(--text-field-font-family, var(--font-family)), sans-serif;
+    font-weight: var(--text-field-font-weight, 400);
+    font-size: var(--text-field-font-size, 14px);
+    letter-spacing: var(--text-field-letter-spacing, 0.5px);
+    line-height: var(--text-field-line-height, var(--line-height, 1rem));
+    padding: var(--text-field-padding, 8px 12px);
+    border-radius: var(--text-field-border-radius, 8px);
+    transition:
+      border-color var(--text-field-speed-border-color, var(--speed-color)),
+      box-shadow var(--text-field-speed-box-shadow, var(--speed-color)),
+      background var(--text-field-speed-bg, var(--speed-color));
 
-  &:has(&__input:focus) {
-    border-color: var(--text-field-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)));
-    box-shadow: var(--text-field-focus-shadow, 0 0 4px var(--primary-color));
-  }
-
-  &:has(&__input:disabled) {
-    opacity: var(--text-field-disabled-opacity, 0.7);
-    cursor: not-allowed;
-  }
-
-  &__input {
-    width: 100%;
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-family: inherit;
-    padding: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    transition: color var(--text-field-speed-color, var(--speed-color));
-    appearance: textfield;
-
-    &:focus {
-      outline: none;
+    &:has(&__input:focus) {
+      border-color: var(--text-field-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)));
+      box-shadow: var(--text-field-focus-shadow, 0 0 4px var(--primary-color));
     }
 
-    &:disabled {
+    &:has(&__input:disabled) {
+      opacity: var(--text-field-disabled-opacity, 0.7);
       cursor: not-allowed;
     }
 
-    &::placeholder {
-      color: var(--text-field-placeholder-color, var(--placeholder-color));
+    &__input {
+      width: 100%;
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      font-family: inherit;
+      padding: 0;
+      border: none;
+      outline: none;
+      background: transparent;
       transition: color var(--text-field-speed-color, var(--speed-color));
+      appearance: textfield;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      &::placeholder {
+        color: var(--text-field-placeholder-color, var(--placeholder-color));
+        transition: color var(--text-field-speed-color, var(--speed-color));
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
 
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+    &__before,
+    &__after {
+      display: inline;
+      cursor: default;
     }
-  }
 
-  &__before,
-  &__after {
-    display: inline;
-    cursor: default;
-  }
+    &--full-width {
+      width: 100%;
+    }
 
-  &--full-width {
-    width: 100%;
-  }
+    // Variants
+    &--regular {
+      color: var(--text-field-regular-color, var(--text-field-color, var(--text-primary-color)));
+      background: var(--text-field-regular-bg-color, var(--text-field-bg-color, var(--bg-secondary-color)));
+      border-style: solid;
+      border-width: var(--text-field-regular-border-width, var(--text-field-border-width, 1px));
+      border-color: var(--text-field-regular-border-color, var(--border-color));
+    }
 
-  // Variants
-  &--regular {
-    color: var(--text-field-regular-color, var(--text-field-color, var(--text-primary-color)));
-    background: var(--text-field-regular-bg-color, var(--text-field-bg-color, var(--bg-secondary-color)));
-    border-style: solid;
-    border-width: var(--text-field-regular-border-width, var(--text-field-border-width, 1px));
-    border-color: var(--text-field-regular-border-color, var(--border-color));
-  }
+    &--outlined {
+      color: var(--text-field-outlined-color, var(--text-field-color, var(--text-primary-color)));
+      background: transparent;
+      border-style: solid;
+      border-width: var(--text-field-outlined-border-width, var(--text-field-border-width, 1px));
+      border-color: var(--text-field-outlined-border-color, var(--border-color));
+    }
 
-  &--outlined {
-    color: var(--text-field-outlined-color, var(--text-field-color, var(--text-primary-color)));
-    background: transparent;
-    border-style: solid;
-    border-width: var(--text-field-outlined-border-width, var(--text-field-border-width, 1px));
-    border-color: var(--text-field-outlined-border-color, var(--border-color));
-  }
+    &--filled {
+      color: var(--text-field-filled-color, var(--text-field-color, var(--text-primary-color)));
+      background: var(--text-field-filled-bg-color, var(--text-field-bg-color, var(--bg-secondary-color)));
+      border: none;
+    }
 
-  &--filled {
-    color: var(--text-field-filled-color, var(--text-field-color, var(--text-primary-color)));
-    background: var(--text-field-filled-bg-color, var(--text-field-bg-color, var(--bg-secondary-color)));
-    border: none;
-  }
+    // Radius
+    &--none-radius {
+      border-radius: 0;
+    }
 
-  // Radius
-  &--none-radius {
-    border-radius: 0;
-  }
+    &--small-radius {
+      border-radius: var(--text-field-border-radius-sm, 5px);
+    }
 
-  &--small-radius {
-    border-radius: var(--text-field-border-radius-sm, 5px);
-  }
+    &--medium-radius {
+      border-radius: var(--text-field-border-radius-md, 10px);
+    }
 
-  &--medium-radius {
-    border-radius: var(--text-field-border-radius-md, 10px);
-  }
+    &--large-radius {
+      border-radius: var(--text-field-border-radius-lg, 15px);
+    }
 
-  &--large-radius {
-    border-radius: var(--text-field-border-radius-lg, 15px);
-  }
+    &--full-radius {
+      border-radius: var(--text-field-border-radius-full, 999px);
+    }
 
-  &--full-radius {
-    border-radius: var(--text-field-border-radius-full, 999px);
-  }
+    // Sizes
+    &--small-size {
+      padding: var(--text-field-padding-sm, 6px 10px);
+      font-size: var(--text-field-font-size-sm, 12px);
+    }
 
-  // Sizes
-  &--small-size {
-    padding: var(--text-field-padding-sm, 6px 10px);
-    font-size: var(--text-field-font-size-sm, 12px);
-  }
+    &--medium-size {
+      padding: var(--text-field-padding-md, 10px 14px);
+      font-size: var(--text-field-font-size-md, 16px);
+    }
 
-  &--medium-size {
-    padding: var(--text-field-padding-md, 10px 14px);
-    font-size: var(--text-field-font-size-md, 16px);
-  }
+    &--large-size {
+      padding: var(--text-field-padding-lg, 12px 16px);
+      font-size: var(--text-field-font-size-lg, 18px);
+    }
 
-  &--large-size {
-    padding: var(--text-field-padding-lg, 12px 16px);
-    font-size: var(--text-field-font-size-lg, 18px);
-  }
+    // Accents
+    &--success {
+      border-color: var(--text-field-success-color, var(--success-color)) !important;
+      border-width: var(--text-field-accent-border-width, 2px) !important;
+      box-shadow: var(--text-field-success-color, 0 0 4px var(--success-color)) !important;
+    }
 
-  // Accents
-  &--success {
-    border-color: var(--text-field-success-color, var(--success-color)) !important;
-    border-width: var(--text-field-accent-border-width, 2px) !important;
-    box-shadow: var(--text-field-success-color, 0 0 4px var(--success-color)) !important;
-  }
-
-  &--error {
-    border-color: var(--text-field-error-color, var(--error-color)) !important;
-    border-width: var(--text-field-accent-border-width, 2px) !important;
-    box-shadow: var(--text-field-error-color, 0 0 4px var(--error-color)) !important;
+    &--error {
+      border-color: var(--text-field-error-color, var(--error-color)) !important;
+      border-width: var(--text-field-accent-border-width, 2px) !important;
+      box-shadow: var(--text-field-error-color, 0 0 4px var(--error-color)) !important;
+    }
   }
 }

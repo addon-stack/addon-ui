@@ -1,171 +1,175 @@
+@use "../../styles/layers";
+
 $root: drawer;
 
-.#{$root} {
-  &-overlay {
-    background-color: var(--drawer-overlay-bg-color, var(--dialog-overlay-bg-color, #111));
-  }
+@layer addon-ui.components {
+  .#{$root} {
+    &-overlay {
+      background-color: var(--drawer-overlay-bg-color, var(--dialog-overlay-bg-color, #111));
+    }
 
-  &-content {
-    padding: var(--drawer-padding, 0);
-    box-shadow: var(--drawer-box-shadow, 0 0 4px rgba(0, 0, 0, 0.5));
-    background-color: var(--drawer-bg-color, var(--bg-secondary-color));
-    transition: background-color var(--drawer-speed-bg, var(--speed-color));
+    &-content {
+      padding: var(--drawer-padding, 0);
+      box-shadow: var(--drawer-box-shadow, 0 0 4px rgba(0, 0, 0, 0.5));
+      background-color: var(--drawer-bg-color, var(--bg-secondary-color));
+      transition: background-color var(--drawer-speed-bg, var(--speed-color));
 
-    &[data-state="open"] {
-      &.#{$root}-content--left-side {
-        animation-name: slideInLeft;
+      &[data-state="open"] {
+        &.#{$root}-content--left-side {
+          animation-name: slideInLeft;
+        }
+
+        &.#{$root}-content--right-side {
+          animation-name: slideInRight;
+        }
+
+        &.#{$root}-content--top-side {
+          animation-name: slideInTop;
+        }
+
+        &.#{$root}-content--bottom-side {
+          animation-name: slideInBottom;
+        }
       }
 
-      &.#{$root}-content--right-side {
-        animation-name: slideInRight;
+      &[data-state="closed"] {
+        &.#{$root}-content--left-side {
+          animation-name: slideOutLeft;
+        }
+
+        &.#{$root}-content--right-side {
+          animation-name: slideOutRight;
+        }
+
+        &.#{$root}-content--top-side {
+          animation-name: slideOutTop;
+        }
+
+        &.#{$root}-content--bottom-side {
+          animation-name: slideOutBottom;
+        }
       }
 
-      &.#{$root}-content--top-side {
-        animation-name: slideInTop;
+      &--left-side {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--drawer-width, 90vw);
+
+        &.#{$root}-content--fullscreen {
+          width: 100%;
+        }
       }
 
-      &.#{$root}-content--bottom-side {
-        animation-name: slideInBottom;
+      &--right-side {
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--drawer-width, 90vw);
+
+        &.#{$root}-content--fullscreen {
+          width: 100%;
+        }
+      }
+
+      &--top-side {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--drawer-height, 90vh);
+
+        &.#{$root}-content--fullscreen {
+          height: 100%;
+        }
+      }
+
+      &--bottom-side {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--drawer-height, 90vh);
+
+        &.#{$root}-content--fullscreen {
+          height: 100%;
+        }
       }
     }
 
-    &[data-state="closed"] {
-      &.#{$root}-content--left-side {
-        animation-name: slideOutLeft;
-      }
-
-      &.#{$root}-content--right-side {
-        animation-name: slideOutRight;
-      }
-
-      &.#{$root}-content--top-side {
-        animation-name: slideOutTop;
-      }
-
-      &.#{$root}-content--bottom-side {
-        animation-name: slideOutBottom;
-      }
-    }
-
-    &--left-side {
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: var(--drawer-width, 90vw);
-
-      &.#{$root}-content--fullscreen {
-        width: 100%;
-      }
-    }
-
-    &--right-side {
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: var(--drawer-width, 90vw);
-
-      &.#{$root}-content--fullscreen {
-        width: 100%;
-      }
-    }
-
-    &--top-side {
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--drawer-height, 90vh);
-
-      &.#{$root}-content--fullscreen {
-        height: 100%;
-      }
-    }
-
-    &--bottom-side {
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: var(--drawer-height, 90vh);
-
-      &.#{$root}-content--fullscreen {
-        height: 100%;
-      }
+    &-children {
+      display: flex;
+      flex-direction: column;
     }
   }
 
-  &-children {
-    display: flex;
-    flex-direction: column;
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-}
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
 
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
+  @keyframes slideInTop {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
 
-@keyframes slideInTop {
-  from {
-    transform: translateY(-100%);
+  @keyframes slideInBottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
-  to {
-    transform: translateY(0);
-  }
-}
 
-@keyframes slideInBottom {
-  from {
-    transform: translateY(100%);
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
   }
-  to {
-    transform: translateY(0);
-  }
-}
 
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
+  @keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
   }
-  to {
-    transform: translateX(100%);
-  }
-}
 
-@keyframes slideOutLeft {
-  from {
-    transform: translateX(0);
+  @keyframes slideOutTop {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
   }
-  to {
-    transform: translateX(-100%);
-  }
-}
 
-@keyframes slideOutTop {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes slideOutBottom {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(100%);
+  @keyframes slideOutBottom {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
   }
 }
