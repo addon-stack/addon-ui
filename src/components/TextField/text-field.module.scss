@@ -19,11 +19,6 @@ $root: text-field;
       box-shadow var(--text-field-speed-box-shadow, var(--speed-color)),
       background var(--text-field-speed-bg, var(--speed-color));
 
-    &:has(&__input:focus) {
-      border-color: var(--text-field-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)));
-      box-shadow: var(--text-field-focus-shadow, 0 0 4px var(--primary-color));
-    }
-
     &:has(&__input:disabled) {
       opacity: var(--text-field-disabled-opacity, 0.7);
       cursor: not-allowed;
@@ -132,17 +127,22 @@ $root: text-field;
       font-size: var(--text-field-font-size-lg, 18px);
     }
 
+    &:where(:has(&__input:focus)) {
+      border-color: var(--text-field-focus-border-color, color-mix(in srgb, white 40%, var(--primary-color)));
+      box-shadow: var(--text-field-focus-shadow, 0 0 4px var(--primary-color));
+    }
+
     // Accents
     &--success {
-      border-color: var(--text-field-success-color, var(--success-color)) !important;
-      border-width: var(--text-field-accent-border-width, 2px) !important;
-      box-shadow: var(--text-field-success-color, 0 0 4px var(--success-color)) !important;
+      border-color: var(--text-field-success-color, var(--success-color));
+      border-width: var(--text-field-accent-border-width, 2px);
+      box-shadow: var(--text-field-success-color, 0 0 4px var(--success-color));
     }
 
     &--error {
-      border-color: var(--text-field-error-color, var(--error-color)) !important;
-      border-width: var(--text-field-accent-border-width, 2px) !important;
-      box-shadow: var(--text-field-error-color, 0 0 4px var(--error-color)) !important;
+      border-color: var(--text-field-error-color, var(--error-color));
+      border-width: var(--text-field-accent-border-width, 2px);
+      box-shadow: var(--text-field-error-color, 0 0 4px var(--error-color));
     }
   }
 }

@@ -19,7 +19,8 @@ $root: scroll-area;
 
       & > div {
         flex: 1;
-        display: flex !important;
+        // Radix sets display: table inline on its measured content wrapper.
+        display: var(--scroll-area-content-display, flex) !important;
         flex-direction: column;
       }
     }

@@ -25,7 +25,7 @@ $root: modal;
         background-color var(--modal-speed-bg, var(--speed-color)),
         transform var(--modal-speed-transform, var(--speed-sm)),
         opacity var(--modal-speed-opacity, var(--speed-sm)),
-        color var(--modal-speed-color, var(--speed-color)) !important;
+        color var(--modal-speed-color, var(--speed-color));
 
       &[data-state="open"] {
         &.#{$root}-content {
@@ -51,14 +51,6 @@ $root: modal;
         }
       }
 
-      &--fullscreen {
-        max-width: 100%;
-        max-height: 100%;
-        width: 100%;
-        height: 100%;
-        border-radius: 0 !important;
-      }
-
       &--none-radius {
         border-radius: 0;
       }
@@ -74,6 +66,14 @@ $root: modal;
       &--large-radius {
         border-radius: var(--modal-border-radius-lg, 20px);
       }
+
+      &--fullscreen {
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
     }
 
     &-children {
@@ -83,7 +83,7 @@ $root: modal;
     }
 
     &-close {
-      position: absolute !important;
+      position: absolute;
       top: var(--modal-close-offset, 5px);
 
       @include dir.ltr {

@@ -1,11 +1,14 @@
 @use "../../styles/layers";
 
 @layer addon-ui.components {
+  :where(.base-button) {
+    position: relative;
+  }
+
   .base-button {
     box-sizing: border-box;
     border: none;
     cursor: pointer;
-    position: relative;
     display: inline-flex;
     flex-direction: row;
     align-items: center;

@@ -156,7 +156,7 @@ $root: toast;
     }
 
     &__close {
-      position: absolute !important;
+      position: absolute;
       top: var(--toast-close-offset, 5px);
 
       @include dir.ltr {

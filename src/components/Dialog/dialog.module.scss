@@ -3,6 +3,14 @@
 $root: dialog;
 
 @layer addon-ui.components {
+  :where(.#{$root}-content) {
+    transition:
+      background-color var(--dialog-speed-bg, var(--speed-color)),
+      transform var(--dialog-speed-transform, var(--speed-sm)),
+      opacity var(--dialog-speed-opacity, var(--speed-sm)),
+      color var(--dialog-speed-color, var(--speed-color));
+  }
+
   .#{$root} {
     &-overlay {
       position: fixed;
@@ -25,11 +33,6 @@ $root: dialog;
       box-sizing: border-box;
       position: fixed;
       z-index: 9999;
-      transition:
-        background-color var(--dialog-speed-bg, var(--speed-color)),
-        transform var(--dialog-speed-transform, var(--speed-sm)),
-        opacity var(--dialog-speed-opacity, var(--speed-sm)),
-        color var(--dialog-speed-color, var(--speed-color));
       animation-timing-function: ease-in-out;
     }
 
