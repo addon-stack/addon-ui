@@ -8,7 +8,7 @@ import {useComponentProps} from "../../providers";
 
 export type {ToggleGroupItemProps};
 
-import styles from "./toggle-group.module.scss?isolation";
+import styles from "./toggle-group.module.scss";
 
 const ToggleGroupItem: ForwardRefRenderFunction<HTMLButtonElement, ToggleGroupItemProps> = (props, ref) => {
     const {asChild = true, children, className, ...other} = {...useComponentProps("toggleGroupItem"), ...props};

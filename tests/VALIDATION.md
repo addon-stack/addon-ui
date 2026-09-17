@@ -154,3 +154,32 @@ Both popup documents open in extension tabs, so the browser toolbar surface is o
 - These are local macOS results. Popup pages run in extension tabs, and the customization probes use DOM
   events and native computed styles. Firefox popup evaluation exceptions are checked through RDP; those
   pages do not have Playwright console monitoring. No remote CI run or toolbar-popup test is claimed.
+
+## Preparation for automatic stylesheet delivery — 2026-09-16
+
+- Removed isolation query suffixes from library, Storybook, virtual-style and fixture imports, along with
+  their dedicated type declarations and Jest mapping. Documentation examples now use ordinary imports.
+- `npm run verify` passes: lint, source/test types, 60 tooling checks, 100 Jest tests and declarations.
+- All four integration builds compile with the still-installed AddonBone 0.12.0, but their delivery
+  assertions fail: the old framework emits UI styles into manifest `content_scripts[].css` instead of
+  routing them into ShadowRoots. The assertions remain intact; no browser pass is claimed for this state.
+- Upgrade the fixture to the forthcoming automatic-delivery framework version and rerun integration and
+  browser checks before release. The preceding passing browser results describe the earlier imports.
+
+## AddonBone 0.13.0 automatic stylesheet delivery — 2026-09-17
+
+- Installed published `adnbn@0.13.0` in the root and automated extension fixture, updating both lockfiles.
+  The minimum framework peer version is now `>=0.13.0`, matching the ordinary stylesheet imports.
+- Updated the build verifier from the removed isolation loader/layer identity to the installed
+  `adnbn-default-modules` loader and `adnbn:css:default` layer. Manifest isolation, CSS/WAR resources,
+  shared popup styles, dependency resolution and lazy stylesheet assertions remain enabled.
+- `npm run verify` passes: lint, source/test types, 60 tooling checks, 100 Jest tests in nine suites
+  and declaration generation. Storybook builds successfully.
+- The full `npm run test:e2e` passes 45 checks: four extension builds and 41 browser
+  scenarios. One existing Firefox document RTL case remains skipped because Playwright Juggler does
+  not expose extension documents. No new skips, retries or runtime warning filters were added.
+- Both browsers verify automatic CSS delivery into two ShadowRoots and extension popup documents,
+  initial/lazy styles, theme variables, shared/app customization and application layer precedence.
+  Existing focus, scroll, Select and Toast scenarios also pass.
+- These local macOS results supersede the preceding AddonBone 0.12.0 delivery failures. Firefox
+  popup checks use RDP; the documented toolbar-popup and console-monitoring limits still apply.

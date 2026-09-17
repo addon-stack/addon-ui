@@ -20,7 +20,7 @@ import {useComponentProps, usePortalContainer} from "../../providers";
 import {SelectPortalContext, SelectTypeaheadContext} from "./context";
 import {useSelectNavigation} from "./hooks/use-select-navigation";
 
-import styles from "./select.module.scss?isolation";
+import styles from "./select.module.scss";
 
 export interface SelectContentProps extends SelectContentRadixProps, SelectPortalProps {
     arrow?: boolean;

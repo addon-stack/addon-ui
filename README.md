@@ -172,7 +172,7 @@ Names without a supported extension (such as `ui.config` or `ui.style`) use exte
 priority: `.tsx` before `.ts`, and `.scss` before `.css`. An explicit supported extension
 selects that exact file; a missing `.ts` or `.css` file is not replaced by another extension.
 
-The plugin requires AddonBone 0.12.0 or newer. It generates the internal modules
+The plugin requires AddonBone 0.13.0 or newer. It generates the internal modules
 `#addon-ui/config` and `#addon-ui/style.scss` using the current Rspack compiler.
 During development it watches configuration/style files and their search directories,
 including directories that do not exist yet. Creating, editing or deleting these files
@@ -199,8 +199,9 @@ Sass source maps and `resolve-url-loader`, applied only to the generated stylesh
 Built-in Sass modules, package imports and external/root-relative URLs keep their normal
 resolution. Watch builds track imported partials and assets through the loaders.
 Application theme rules remain outside the library's cascade layers unless you explicitly
-put them in a layer. Their import keeps `?isolation` for Shadow DOM delivery; CSS extraction
-and web-accessible resources remain owned by AddonBone. See the
+put them in a layer. Stylesheets use ordinary imports; CSS extraction and delivery remain
+owned by AddonBone 0.13.0 or newer, which automatically routes ordinary stylesheet
+imports to the appropriate document or ShadowRoot. See the
 [customization guide](docs/customization.md) for CSS precedence and application layer ordering.
 
 Without `ui()`, the package resolves these internal imports to a configuration with

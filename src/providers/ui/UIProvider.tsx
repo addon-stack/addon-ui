@@ -9,11 +9,11 @@ import {ExtraProvider, IconsProvider, ThemeProvider, type ThemeProviderProps} fr
 
 import {type PortalContainer, PortalContext} from "./context";
 
-import "./styles/default.scss?isolation";
-import "./styles/reset.scss?isolation";
-import "./styles/base.scss?isolation";
-import "./styles/document.scss?isolation";
-import "#addon-ui/style.scss?isolation";
+import "./styles/default.scss";
+import "./styles/reset.scss";
+import "./styles/base.scss";
+import "./styles/document.scss";
+import "#addon-ui/style.scss";
 
 export interface UIProviderProps extends Partial<Config>, Pick<ThemeProviderProps, "storage" | "container"> {
     /**

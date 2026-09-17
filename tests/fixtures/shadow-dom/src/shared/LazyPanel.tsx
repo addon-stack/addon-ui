@@ -2,7 +2,7 @@ import React from "react";
 
 import {Tag} from "addon-ui";
 
-import styles from "./lazy.module.scss?isolation";
+import styles from "./lazy.module.scss";
 
 export default function LazyPanel() {
     return (

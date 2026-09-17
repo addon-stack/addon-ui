@@ -27,7 +27,7 @@ import {useShadowViewport} from "./hooks/use-shadow-viewport";
 import {ToastFocusRestore} from "./ToastFocusRestore";
 import {ToastAnimation, type ToastColor, type ToastRadius, ToastSide} from "./types";
 
-import styles from "./toast.module.scss?isolation";
+import styles from "./toast.module.scss";
 
 const toastSideBySwipeDirectionMap = {
     [ToastSide.TopLeft]: "left",

@@ -8,7 +8,7 @@ import {Tooltip, type TooltipProps} from "../Tooltip";
 
 import type {IconButtonRadius, IconButtonSize, IconButtonVariant} from "./types";
 
-import styles from "./icon-button.module.scss?isolation";
+import styles from "./icon-button.module.scss";
 
 export interface IconButtonProps extends BaseButtonProps {
     size?: IconButtonSize;

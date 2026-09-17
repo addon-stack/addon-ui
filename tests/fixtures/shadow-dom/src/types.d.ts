@@ -1,4 +1,4 @@
-declare module "*.scss?isolation" {
+declare module "*.scss" {
     const styles: Record<string, string>;
     export default styles;
 }

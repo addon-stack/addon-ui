@@ -103,7 +103,8 @@ export function verifyBuild(root, engine) {
     );
 
     assert.ok(
-        modules.some(item => item.layer === "adnbn:css:isolation" && item.identifier.includes("adnbn-isolated-modules"))
+        modules.some(item => item.layer === "adnbn:css:default" && item.identifier.includes("adnbn-default-modules")),
+        "Ordinary stylesheet imports must use the framework's automatic delivery layer"
     );
 
     return {

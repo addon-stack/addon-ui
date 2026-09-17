@@ -17,7 +17,7 @@ import {
     TruncateList,
 } from "addon-ui";
 
-import styles from "./rtl-layout.module.scss?isolation";
+import styles from "./rtl-layout.module.scss";
 
 export default function RtlLayout() {
     const [direction, setDirection] = useState<"ltr" | "rtl">("ltr");

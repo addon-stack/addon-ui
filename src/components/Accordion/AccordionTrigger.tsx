@@ -4,7 +4,7 @@ import {type AccordionTriggerProps as AccordionTriggerRadixProps, Trigger} from 
 
 import classnames from "classnames";
 
-import styles from "./accordion.module.scss?isolation";
+import styles from "./accordion.module.scss";
 
 export type AccordionTriggerProps = AccordionTriggerRadixProps;
 

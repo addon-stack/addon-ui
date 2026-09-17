@@ -13,7 +13,7 @@ import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./scroll-area.module.scss?isolation";
+import styles from "./scroll-area.module.scss";
 
 export interface ScrollAreaProps extends ScrollAreaRootProps {
     xOffset?: number;

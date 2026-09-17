@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./toggle-group.module.scss?isolation";
+import styles from "./toggle-group.module.scss";
 
 export type {ToggleGroupMultipleProps, ToggleGroupSingleProps};
 

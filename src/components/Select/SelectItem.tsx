@@ -12,7 +12,7 @@ import {SelectTypeaheadContext} from "./context";
 import SelectItemIndicator from "./SelectItemIndicator";
 import SelectItemText from "./SelectItemText";
 
-import styles from "./select.module.scss?isolation";
+import styles from "./select.module.scss";
 
 export interface SelectItemProps extends SelectItemRadixProps {
     indicator?: React.ReactNode;

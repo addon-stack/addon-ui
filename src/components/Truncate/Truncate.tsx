@@ -15,7 +15,7 @@ import {useComponentProps} from "../../providers";
 
 import {calculateMiddleTruncate} from "./utils";
 
-import styles from "./truncate.module.scss?isolation";
+import styles from "./truncate.module.scss";
 
 export interface TruncateProps extends ComponentProps<"span"> {
     text?: string;

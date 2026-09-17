@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import useOdometer, {type OdometerOptions} from "./hooks/use-odometer";
 
-import styles from "./odometer.module.scss?isolation";
+import styles from "./odometer.module.scss";
 
 export interface OdometerProps extends OdometerOptions {
     value: number;

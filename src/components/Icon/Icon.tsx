@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 import {useComponentProps, useIcons} from "../../providers";
 
-import styles from "./icon.module.scss?isolation";
+import styles from "./icon.module.scss";
 
 export interface IconProps extends ComponentProps<"svg"> {
     name: string;

@@ -17,7 +17,7 @@ import classnames from "classnames";
 import {useFloatingLayer} from "../../hooks/floating";
 import {useComponentProps, usePortalContainer} from "../../providers";
 
-import styles from "./tooltip.module.scss?isolation";
+import styles from "./tooltip.module.scss";
 
 export interface TooltipProps
     extends TooltipRootProps, Omit<TooltipContentProps, "content">, Pick<TooltipPortalProps, "container"> {

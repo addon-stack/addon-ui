@@ -4,7 +4,7 @@ import {type AccordionContentProps as AccordionContentRadixProps, Content} from 
 
 import classnames from "classnames";
 
-import styles from "./accordion.module.scss?isolation";
+import styles from "./accordion.module.scss";
 
 export type AccordionContentProps = AccordionContentRadixProps;
 

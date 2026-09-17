@@ -17,7 +17,7 @@ import {
     type UIProviderProps,
 } from "addon-ui";
 
-import styles from "./popup.scss?isolation";
+import styles from "./popup.scss";
 
 const LazyTag = lazy(() => import("./LazyTag"));
 

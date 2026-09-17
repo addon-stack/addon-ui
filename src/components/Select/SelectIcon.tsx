@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./select.module.scss?isolation";
+import styles from "./select.module.scss";
 
 export {type SelectIconProps};
 

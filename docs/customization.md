@@ -43,7 +43,7 @@ import React from "react";
 
 import {Button, ButtonColor} from "addon-ui";
 
-import styles from "./checkout.scss?isolation";
+import styles from "./checkout.scss";
 
 export function CheckoutButton() {
     return (
@@ -73,9 +73,9 @@ the library's radius and primary background, even if the component CSS loads lat
 Other properties retain their library defaults. Neither `!important` nor repeated
 class selectors are needed. Class order in the HTML attribute does not affect priority.
 
-The example uses Addon Bone's existing `?isolation` routing so the same stylesheet
-can be delivered to a content-script UI. CSS layers do not change that routing.
-See the [Shadow DOM guide](ShadowDOM.md) for container and portal setup.
+The example uses an ordinary stylesheet import. Delivery to a content-script UI
+requires Addon Bone 0.13.0 or newer with automatic stylesheet routing. CSS layers do not
+change that routing. See the [Shadow DOM guide](ShadowDOM.md) for container and portal setup.
 
 ## Shared and application styles
 
@@ -84,7 +84,7 @@ rules at the matching path under `src/apps/<app>`. Addon Bone's stylesheet mergi
 must be enabled for ordinary component styles. The UI plugin's `mergeStyles` option
 separately controls composition of `ui.style.scss`; it is enabled by default.
 
-For example, a shared component imports `./popup.scss?isolation` and passes
+For example, a shared component imports `./popup.scss` and passes
 `styles["tabs__trigger"]` to its triggers:
 
 ```tsx
@@ -92,7 +92,7 @@ import React from "react";
 
 import {Tabs, TabsList, TabsTrigger} from "addon-ui";
 
-import styles from "./popup.scss?isolation";
+import styles from "./popup.scss";
 
 export function OfferTabs() {
     return (

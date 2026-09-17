@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./switch.module.scss?isolation";
+import styles from "./switch.module.scss";
 
 export interface SwitchProps extends SwitchRootProps {
     thumbClassName?: string;
