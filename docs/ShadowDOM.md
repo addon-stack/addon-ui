@@ -7,7 +7,7 @@ Mount the complete `UIProvider` tree inside each ShadowRoot. The provider still 
 
 The application explicitly supplies both targets. `UIProvider` does not inspect the content-script environment or discover a ShadowRoot to choose them. Omitting the targets keeps the ordinary `"html"` and `document.body` defaults, even when the provider is mounted inside a ShadowRoot.
 
-With **AddonBone 0.12.0 or newer**, use the injected React render props directly:
+With **AddonBone 0.13.0 or newer**, use the injected React render props directly:
 
 ```tsx
 import React from "react";
@@ -43,17 +43,23 @@ The provider's `container` is not a portal target. Changing `portal` does not mo
 
 ## CSS delivery with AddonBone
 
-CSS delivery belongs to AddonBone. Shadow DOM integration requires **AddonBone 0.12.0 or newer** and a content script configured with Shadow DOM isolation. All addon-ui stylesheet imports carry `?isolation`, including component CSS Modules, provider base styles and the virtual `#addon-ui/style.scss` overrides. The framework delivers them into the content script's ShadowRoot; popup styles are linked to the popup document as usual. No custom CSS rule or stylesheet loader is needed in the application.
-
-Mark the application's own stylesheet imports with `?isolation` too:
+CSS delivery belongs to AddonBone. Component CSS Modules, provider base styles and
+virtual `#addon-ui/style.scss` overrides use ordinary imports without a query parameter.
+Application styles use the same form:
 
 ```tsx
-import styles from "./panel.module.scss?isolation";
+import styles from "./panel.module.scss";
 ```
 
-The marker applies to that stylesheet and the Sass sources compiled into it. It does not mark separate CSS imports inside third-party components. The virtual module remains named `#addon-ui/style.scss`; only its import carries the query. Styles from `ui.style.scss` already participate through that virtual import.
+AddonBone 0.13.0 or newer automatically routes ordinary stylesheet imports into the
+content script's ShadowRoot. Popup styles are linked to the popup document. No
+query parameter or application stylesheet-loader override is needed.
 
-The automated [integration fixture](../tests/fixtures/shadow-dom/README.md) installs the published `adnbn@0.12.0` from npm and links the current addon-ui source through `file:`. It uses the framework's standard CSS rules, chunk separation, manifest/WAR generation and isolated-styles runtime. A general mechanism for registering unmarked third-party library styles remains a possible follow-up in AddonBone.
+The automated [integration fixture](../tests/fixtures/shadow-dom/README.md) installs
+published `adnbn@0.13.0` and links the current addon-ui source through `file:`. Build
+checks verify automatic stylesheet routing, empty content-script CSS lists, shared
+popup styles and initial/lazy WAR assets. Browser checks verify delivery and cascade
+inside the popup and both ShadowRoots.
 
 A ShadowRoot stylesheet cannot select the outer page's `:root`. The library declares tokens for `:root, :host`; only the relevant selector matches in each tree. Tag reset rules affect elements inside that tree. Typography and text color apply to `body, :host`; document background and `overflow: hidden` apply to `body` only. Virtual user overrides are imported after all library base styles. No `all: initial` reset is used.
 

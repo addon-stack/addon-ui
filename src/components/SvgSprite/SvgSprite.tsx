@@ -1,17 +1,24 @@
-import React, {type ComponentProps, type FC, memo} from "react";
+import React, {type FC, memo} from "react";
+
+import type {SpriteIcons} from "../Icon";
+
+import SvgSymbol from "./SvgSymbol";
 
 export interface SvgSpriteProps {
-    icons: Record<string, FC<ComponentProps<"svg">>>;
+    icons: SpriteIcons;
+    /** Custom symbol IDs; defaults to the original icon names for standalone sprites. */
+    getSymbolId?: (name: string) => string;
 }
 
-const SvgSprite: FC<SvgSpriteProps> = ({icons}) => {
+const SvgSprite: FC<SvgSpriteProps> = ({icons, getSymbolId}) => {
     return (
-        <svg style={{display: "none"}} aria-hidden="true">
+        <svg
+            style={{position: "absolute", width: 0, height: 0, overflow: "hidden"}}
+            aria-hidden="true" focusable="false"
+        >
             <defs>
-                {Object.entries(icons).map(([name, Icon]) => (
-                    <symbol id={name} key={name} viewBox="0 0 24 24">
-                        <Icon />
-                    </symbol>
+                {Object.entries(icons).map(([name, source]) => (
+                    <SvgSymbol key={name} name={name} source={source} id={getSymbolId?.(name) ?? name} />
                 ))}
             </defs>
         </svg>

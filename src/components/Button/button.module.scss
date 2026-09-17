@@ -1,174 +1,178 @@
+@use "../../styles/layers";
+
 $root: button;
 
-.#{$root} {
-  font-family: var(--button-font-family, var(--font-family)), sans-serif;
-  font-weight: var(--button-font-weight, 500);
-  font-size: var(--button-font-size, var(--font-size, 14px));
-  letter-spacing: var(--button-letter-spacing, 0.5px);
-  line-height: var(--button-line-height, var(--line-height, 1rem));
-  height: var(--button-height, 34px);
-  border-radius: var(--button-border-radius, 10px);
-  padding: var(--button-padding, 0 16px);
-  transition:
-    color var(--button-speed-color, var(--speed-color)),
-    border-color var(--button-speed-border-color, var(--speed-color)),
-    background var(--button-speed-bg, var(--speed-color)),
-    transform var(--button-speed-transform, var(--speed-sm));
+@layer addon-ui.components {
+  .#{$root} {
+    font-family: var(--button-font-family, var(--font-family)), sans-serif;
+    font-weight: var(--button-font-weight, 500);
+    font-size: var(--button-font-size, var(--font-size, 14px));
+    letter-spacing: var(--button-letter-spacing, 0.5px);
+    line-height: var(--button-line-height, var(--line-height, 1rem));
+    height: var(--button-height, 34px);
+    border-radius: var(--button-border-radius, 10px);
+    padding: var(--button-padding, 0 16px);
+    transition:
+      color var(--button-speed-color, var(--speed-color)),
+      border-color var(--button-speed-border-color, var(--speed-color)),
+      background var(--button-speed-bg, var(--speed-color)),
+      transform var(--button-speed-transform, var(--speed-sm));
 
-  &:active:not(:disabled) {
-    transform: scale(var(--button-scale, 0.98));
-  }
-
-  &:disabled {
-    opacity: var(--button-disabled-opacity, 0.75);
-    cursor: default;
-  }
-
-  // Variants
-  &--contained {
-    color: var(--button-contained-text-color, var(--text-primary-color));
-    background: var(--button-contained-bg-color, var(--bg-secondary-color));
-
-    &.#{$root}--primary-color {
-      color: var(--button-contained-primary-text-color, #fff);
-      background: var(--primary-color);
+    &:active:not(:disabled) {
+      transform: scale(var(--button-scale, 0.98));
     }
 
-    &.#{$root}--secondary-color {
-      color: var(--button-contained-secondary-text-color, #fff);
-      background: var(--secondary-color);
+    &:disabled {
+      opacity: var(--button-disabled-opacity, 0.75);
+      cursor: default;
     }
 
-    &.#{$root}--accent-color {
-      color: var(--button-contained-accent-text-color, #fff);
-      background: var(--accent-color);
+    // Variants
+    &--contained {
+      color: var(--button-contained-text-color, var(--text-primary-color));
+      background: var(--button-contained-bg-color, var(--bg-secondary-color));
+
+      &.#{$root}--primary-color {
+        color: var(--button-contained-primary-text-color, #fff);
+        background: var(--primary-color);
+      }
+
+      &.#{$root}--secondary-color {
+        color: var(--button-contained-secondary-text-color, #fff);
+        background: var(--secondary-color);
+      }
+
+      &.#{$root}--accent-color {
+        color: var(--button-contained-accent-text-color, #fff);
+        background: var(--accent-color);
+      }
+
+      &.#{$root}--error-color {
+        color: var(--button-contained-error-text-color, #fff);
+        background: var(--error-color);
+      }
+
+      &.#{$root}--success-color {
+        color: var(--button-contained-success-text-color, #fff);
+        background: var(--success-color);
+      }
     }
 
-    &.#{$root}--error-color {
-      color: var(--button-contained-error-text-color, #fff);
-      background: var(--error-color);
+    &--outlined {
+      color: var(--button-outlined-text-color, var(--text-primary-color));
+      border: 1px solid var(--button-outlined-border-color, var(--button-outlined-text-color, var(--text-primary-color)));
+      background: none;
+
+      &:hover {
+        background-color: var(--button-outlined-bg-color-hover);
+      }
+
+      &:active {
+        background-color: var(--button-outlined-bg-color-active);
+      }
+
+      &.#{$root}--primary-color {
+        color: var(--primary-color);
+        border-color: var(--button-outlined-border-primary-color, var(--primary-color));
+      }
+
+      &.#{$root}--secondary-color {
+        color: var(--secondary-color);
+        border-color: var(--button-outlined-border-secondary-color, var(--secondary-color));
+      }
+
+      &.#{$root}--accent-color {
+        color: var(--accent-color);
+        border-color: var(--button-outlined-border-accent-color, var(--accent-color-color));
+      }
+
+      &.#{$root}--error-color {
+        color: var(--error-color);
+        border-color: var(--button-outlined-border-error-color, var(--error-color));
+      }
+
+      &.#{$root}--success-color {
+        color: var(--success-color);
+        border-color: var(--button-outlined-border-success-color, var(--success-color));
+      }
     }
 
-    &.#{$root}--success-color {
-      color: var(--button-contained-success-text-color, #fff);
-      background: var(--success-color);
-    }
-  }
+    &--text {
+      color: var(--button-text-text-color, var(--text-primary-color));
+      background-color: transparent;
 
-  &--outlined {
-    color: var(--button-outlined-text-color, var(--text-primary-color));
-    border: 1px solid var(--button-outlined-border-color, var(--button-outlined-text-color, var(--text-primary-color)));
-    background: none;
+      &:hover {
+        color: var(--button-text-text-color-hover, var(--text-secondary-color));
+      }
 
-    &:hover {
-      background-color: var(--button-outlined-bg-color-hover);
-    }
+      &:active {
+        color: var(--button-text-text-color-active, var(--text-secondary-color));
+      }
 
-    &:active {
-      background-color: var(--button-outlined-bg-color-active);
-    }
+      &.#{$root}--primary-color {
+        color: var(--primary-color);
+      }
 
-    &.#{$root}--primary-color {
-      color: var(--primary-color);
-      border-color: var(--button-outlined-border-primary-color, var(--primary-color));
-    }
+      &.#{$root}--secondary-color {
+        color: var(--secondary-color);
+      }
 
-    &.#{$root}--secondary-color {
-      color: var(--secondary-color);
-      border-color: var(--button-outlined-border-secondary-color, var(--secondary-color));
-    }
+      &.#{$root}--accent-color {
+        color: var(--accent-color);
+      }
 
-    &.#{$root}--accent-color {
-      color: var(--accent-color);
-      border-color: var(--button-outlined-border-accent-color, var(--accent-color-color));
-    }
+      &.#{$root}--error-color {
+        color: var(--error-color);
+      }
 
-    &.#{$root}--error-color {
-      color: var(--error-color);
-      border-color: var(--button-outlined-border-error-color, var(--error-color));
+      &.#{$root}--success-color {
+        color: var(--success-color);
+      }
     }
 
-    &.#{$root}--success-color {
-      color: var(--success-color);
-      border-color: var(--button-outlined-border-success-color, var(--success-color));
-    }
-  }
-
-  &--text {
-    color: var(--button-text-text-color, var(--text-primary-color));
-    background-color: transparent;
-
-    &:hover {
-      color: var(--button-text-text-color-hover, var(--text-secondary-color));
+    // Sizes
+    &--small-size {
+      height: var(--button-height-sm, 24px);
+      font-size: var(--button-font-size-sm, 12px);
     }
 
-    &:active {
-      color: var(--button-text-text-color-active, var(--text-secondary-color));
+    &--medium-size {
+      height: var(--button-height-md, 44px);
+      font-size: var(--button-font-size-md, 16px);
     }
 
-    &.#{$root}--primary-color {
-      color: var(--primary-color);
+    &--large-size {
+      height: var(--button-height-lg, 54px);
+      min-width: 95px;
+      font-size: var(--button-font-size-lg, 18px);
     }
 
-    &.#{$root}--secondary-color {
-      color: var(--secondary-color);
+    //Radius
+    &--small-radius {
+      border-radius: var(--button-border-radius-sm, 5px);
     }
 
-    &.#{$root}--accent-color {
-      color: var(--accent-color);
+    &--medium-radius {
+      border-radius: var(--button-border-radius-md, 12px);
     }
 
-    &.#{$root}--error-color {
-      color: var(--error-color);
+    &--large-radius {
+      border-radius: var(--button-border-radius-lg, 15px);
     }
 
-    &.#{$root}--success-color {
-      color: var(--success-color);
+    &--full-radius {
+      border-radius: var(--button-height, 999px);
     }
-  }
 
-  // Sizes
-  &--small-size {
-    height: var(--button-height-sm, 24px);
-    font-size: var(--button-font-size-sm, 12px);
-  }
-
-  &--medium-size {
-    height: var(--button-height-md, 44px);
-    font-size: var(--button-font-size-md, 16px);
-  }
-
-  &--large-size {
-    height: var(--button-height-lg, 54px);
-    min-width: 95px;
-    font-size: var(--button-font-size-lg, 18px);
-  }
-
-  //Radius
-  &--small-radius {
-    border-radius: var(--button-border-radius-sm, 5px);
-  }
-
-  &--medium-radius {
-    border-radius: var(--button-border-radius-md, 12px);
-  }
-
-  &--large-radius {
-    border-radius: var(--button-border-radius-lg, 15px);
-  }
-
-  &--full-radius {
-    border-radius: var(--button-height, 999px);
-  }
-
-  &__children {
-    position: relative;
-    z-index: var(--button-children-z-index, 3);
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: var(--button-max-width, 160px);
-    line-height: var(--button-children-line-height, inherit);
-    transition: color var(--button-speed-color, var(--speed-color));
+    &__children {
+      position: relative;
+      z-index: var(--button-children-z-index, 3);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: var(--button-max-width, 160px);
+      line-height: var(--button-children-line-height, inherit);
+      transition: color var(--button-speed-color, var(--speed-color));
+    }
   }
 }

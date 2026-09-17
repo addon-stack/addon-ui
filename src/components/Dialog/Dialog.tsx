@@ -20,7 +20,7 @@ import {useComponentProps, usePortalContainer} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
 import {getShadowRoot} from "../../utils/dom/shadow";
 
-import styles from "./dialog.module.scss?isolation";
+import styles from "./dialog.module.scss";
 
 export interface DialogProps extends DialogRootProps, DialogPortalProps, DialogContentProps {
     speed?: number;

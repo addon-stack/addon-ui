@@ -69,7 +69,7 @@ test("loads lazy CSS and registers SVG independently in both roots", async ({pag
 
             return {
                 width: use?.getBBox().width,
-                symbol: !!root.querySelector("#sample"),
+                symbol: !!root.querySelector('symbol[data-icon="sample"]'),
                 lateRendered: (root.querySelector('[data-testid="late-icon"] use')?.getBBox().width ?? 0) > 0,
             };
         })

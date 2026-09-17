@@ -1,38 +1,42 @@
+@use "../../styles/layers";
+
 $root: view;
 
-.#{$root} {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-
-  &-header {
-    padding-bottom: var(--view-header-padding-bottom, var(--header-padding, var(--side-padding-sm)));
-    justify-content: flex-end;
-
-    &__title {
-      color: var(--view-header-title-color, var(--text-primary-color));
-      font-family: var(--view-header-title-font-family, var(--font-family)), sans-serif;
-    }
-
-    &--separate {
-      border-bottom: var(--view-header-separate-width, 1px) solid
-        var(--view-header-separate-color, var(--separator-color));
-      justify-content: space-between;
-      will-change: border;
-      transition: border-bottom-color var(--view-speed-border-color, var(--speed-color));
-    }
-  }
-
-  &-body {
-    flex-grow: 1;
+@layer addon-ui.components {
+  .#{$root} {
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 
-    .#{$root}--center & {
-      align-items: center;
-      justify-content: center;
+    &-header {
+      padding-bottom: var(--view-header-padding-bottom, var(--header-padding, var(--side-padding-sm)));
+      justify-content: flex-end;
+
+      &__title {
+        color: var(--view-header-title-color, var(--text-primary-color));
+        font-family: var(--view-header-title-font-family, var(--font-family)), sans-serif;
+      }
+
+      &--separate {
+        border-bottom: var(--view-header-separate-width, 1px) solid
+          var(--view-header-separate-color, var(--separator-color));
+        justify-content: space-between;
+        will-change: border;
+        transition: border-bottom-color var(--view-speed-border-color, var(--speed-color));
+      }
+    }
+
+    &-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+
+      .#{$root}--center & {
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 }

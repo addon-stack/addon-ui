@@ -161,9 +161,10 @@ const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = props => {
         }
     }, [theme, container]);
 
-    return (
-        <ThemeContext.Provider value={{theme, changeTheme, toggleTheme, components}}>{children}</ThemeContext.Provider>
-    );
+    const contract = useMemo(() => ({theme, changeTheme, toggleTheme, components}),
+        [theme, changeTheme, toggleTheme, components]);
+
+    return <ThemeContext.Provider value={contract}>{children}</ThemeContext.Provider>;
 };
 
 ThemeProvider.displayName = "ThemeProvider";

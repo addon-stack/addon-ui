@@ -172,7 +172,7 @@ Names without a supported extension (such as `ui.config` or `ui.style`) use exte
 priority: `.tsx` before `.ts`, and `.scss` before `.css`. An explicit supported extension
 selects that exact file; a missing `.ts` or `.css` file is not replaced by another extension.
 
-The plugin requires AddonBone 0.12.0 or newer. It generates the internal modules
+The plugin requires AddonBone 0.13.0 or newer. It generates the internal modules
 `#addon-ui/config` and `#addon-ui/style.scss` using the current Rspack compiler.
 During development it watches configuration/style files and their search directories,
 including directories that do not exist yet. Creating, editing or deleting these files
@@ -198,8 +198,11 @@ from their source file. Nested Sass partials retain their own resource base thro
 Sass source maps and `resolve-url-loader`, applied only to the generated stylesheet.
 Built-in Sass modules, package imports and external/root-relative URLs keep their normal
 resolution. Watch builds track imported partials and assets through the loaders.
-User overrides remain after the library's base styles, and their import keeps `?isolation`
-for Shadow DOM delivery; CSS extraction and web-accessible resources remain owned by AddonBone.
+Application theme rules remain outside the library's cascade layers unless you explicitly
+put them in a layer. Stylesheets use ordinary imports; CSS extraction and delivery remain
+owned by AddonBone 0.13.0 or newer, which automatically routes ordinary stylesheet
+imports to the appropriate document or ShadowRoot. See the
+[customization guide](docs/customization.md) for CSS precedence and application layer ordering.
 
 Without `ui()`, the package resolves these internal imports to a configuration with
 empty `components`, `extra` and `icons`, and an empty override stylesheet. Storybook
@@ -261,7 +264,7 @@ export default defineConfig({
 
 The example above shows how to use the TypeScript configuration with the Addon Bone framework.
 The `defineConfig` helper provides type checking and autocompletion for your configuration.
-You can import enum values from "addon-ui/config" to ensure type safety when configuring components.
+Import component enum values from "addon-ui" and `defineConfig` from "addon-ui/config".
 The configuration can also include SVG icons imported directly from your project files.
 
 #### ui.style.scss
@@ -329,9 +332,19 @@ directories to be combined when enabled.
 
 ## Customization
 
-The `addon-ui` library allows for extensive customization to create different designs for different extensions without
-changing code. This is particularly useful in the Addon Bone framework where you might need to maintain multiple browser
-extensions with the same functionality but different visual appearances.
+Components include their default styles automatically. CSS variables in `ui.style.scss`
+are the primary theming API; use `className` and supported slot classes for additional changes.
+Existing theme mixins and `@include` overrides continue to work without changes.
+
+Library styles use the `addon-ui.reset`, `addon-ui.tokens`, `addon-ui.base` and
+`addon-ui.components` cascade layers. Normal application rules outside layers override
+component defaults, including variants and states, even when library CSS loads later.
+Applications with their own layers should declare an initial order such as
+`@layer addon-ui, application;`.
+
+See [Customizing styles](docs/customization.md) for complete Button and shared/app
+Tabs examples, layer ordering, slot targeting, and the document typography and
+ScrollArea exceptions.
 
 ### Global Theme Customization
 
@@ -369,7 +382,7 @@ For content scripts mounted in a ShadowRoot, pass its host as `container` and th
 | Prop         | Type                                  | Default     | Description                                                    |
 | :----------- | :------------------------------------ | :---------- | :------------------------------------------------------------- |
 | `components` | `ComponentsProps`                     | `{}`        | Component-specific configuration overrides.                    |
-| `icons`      | `Icons`                               | `{}`        | Custom SVG icons registration.                                 |
+| `icons`      | `IconMap`                               | `{}`        | Custom SVG icons registration.                                 |
 | `extra`      | `ExtraProps`                          | `{}`        | App-wide extra properties.                                     |
 | `storage`    | `ThemeStorageContract \| true`        | `undefined` | Persistence storage for theme settings.                        |
 | `container`  | `string \| Element \| false`          | `"html"`    | Target element for attributes. Set to `false` to disable.      |
@@ -535,9 +548,20 @@ through.
 ## Icons and sprite
 
 - Register icons in `ui.config.ts` or via `UIProvider`’s `icons` prop. The Icon component pulls symbols from the
-  automatically mounted SvgSprite.
+  automatically mounted SvgSprite in sprite mode; inline and asset entries render directly.
 - Icons are lazily registered: a symbol is added only after an Icon with that name renders at least once.
 - See docs/Icon.md and docs/SvgSprite.md for details and examples.
+
+### Icon sources
+
+Icon configuration supports component shorthand (sprite), `IconMode.Sprite`,
+`IconMode.Inline` and `IconMode.Asset`, plus their string literals. SVG modes take
+`component`; asset mode takes `src`. The fields are mutually exclusive in TypeScript.
+Shared/app and provider overrides replace each same-name icon entry in full.
+`<Icon name="..." />` and its SVG ref stay unchanged across modes.
+Provider-owned symbol IDs are namespaced per provider; use Icon rather than constructing
+raw `#name` references. Standalone SvgSprite preserves raw names for manual `<use>` links.
+See [Icon configuration and examples](./docs/Icon.md).
 
 ## Extra props (cross-cutting configuration)
 

@@ -4,7 +4,7 @@ import {withFirefoxClient} from "./firefox-addon.mjs";
 
 // Playwright's Firefox JugglerFrameChild explicitly skips moz-extension://.
 // Use Firefox's console actor for the real extension page, without changing its URL or APIs.
-export async function checkFirefoxPopup(port) {
+export async function withFirefoxPopup(port, run) {
     return withFirefoxClient(port, async ({request, receive}) => {
         const poll = async (read, predicate, description) => {
             const deadline = Date.now() + 8000;
@@ -33,9 +33,9 @@ export async function checkFirefoxPopup(port) {
 
         const {frame} = await request(tab.actor, "getTarget");
 
-        const evaluate = async fn => {
+        const evaluate = async (fn, argument) => {
             const {resultID} = await request(frame.consoleActor, "evaluateJSAsync", {
-                text: `JSON.stringify((${fn.toString()})())`,
+                text: `JSON.stringify((${fn.toString()})(${JSON.stringify(argument) ?? "undefined"}))`,
             });
 
             const result = await receive(packet => packet.type === "evaluationResult" && packet.resultID === resultID);
@@ -46,6 +46,34 @@ export async function checkFirefoxPopup(port) {
                 : JSON.parse(result.result);
         };
 
+        const screenshot = async selector => {
+            const {value: prepared} = await request(frame.screenshotContentActor, "prepareCapture", {
+                args: {selector},
+            });
+
+            assert.equal(prepared.error, undefined, JSON.stringify(prepared));
+            const actors = await request("root", "getRoot");
+
+            const {value: captured} = await request(actors.screenshotActor, "capture", {
+                args: {
+                    browsingContextID: tab.browsingContextID,
+                    rect: prepared.rect,
+                    snapshotScale: 1,
+                    disableFlash: true,
+                },
+            });
+
+            assert.ok(captured.data, JSON.stringify(captured));
+
+            return Buffer.from(captured.data.split(",")[1], "base64");
+        };
+
+        return run({evaluate, poll, tab, screenshot});
+    });
+}
+
+export async function checkFirefoxPopup(port) {
+    return withFirefoxPopup(port, async ({evaluate, poll, tab}) => {
         await poll(
             () => evaluate(() => !!document.querySelector('[data-testid="panel"]')),
             Boolean,

@@ -4,7 +4,7 @@ import {type AccordionItemProps as AccordionItemRadixProps, Item} from "@radix-u
 
 import classnames from "classnames";
 
-import styles from "./accordion.module.scss?isolation";
+import styles from "./accordion.module.scss";
 
 export type AccordionItemProps = AccordionItemRadixProps;
 

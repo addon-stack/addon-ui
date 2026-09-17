@@ -1,135 +1,138 @@
+@use "../../styles/layers";
 @use "../../styles/mixins" as dir;
 
 $root: modal;
 
-.#{$root} {
-  &-overlay {
-    background-color: var(--modal-overlay-bg-color, var(--dialog-overlay-bg-color, #111));
-  }
+@layer addon-ui.components {
+  .#{$root} {
+    &-overlay {
+      background-color: var(--modal-overlay-bg-color, var(--dialog-overlay-bg-color, #111));
+    }
 
-  &-content {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: var(--modal-width, 90vw);
-    max-width: var(--modal-max-width, 350px);
-    max-height: var(--modal-max-height, 85vh);
-    height: auto;
-    padding: var(--modal-padding, 0);
-    border-radius: var(--modal-border-radius, 10px);
-    box-shadow: var(--modal-box-shadow, 0 0 4px rgba(0, 0, 0, 0.5));
-    background-color: var(--modal-bg-color, var(--bg-primary-color));
-    transition:
-      background-color var(--modal-speed-bg, var(--speed-color)),
-      transform var(--modal-speed-transform, var(--speed-sm)),
-      opacity var(--modal-speed-opacity, var(--speed-sm)),
-      color var(--modal-speed-color, var(--speed-color)) !important;
+    &-content {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: var(--modal-width, 90vw);
+      max-width: var(--modal-max-width, 350px);
+      max-height: var(--modal-max-height, 85vh);
+      height: auto;
+      padding: var(--modal-padding, 0);
+      border-radius: var(--modal-border-radius, 10px);
+      box-shadow: var(--modal-box-shadow, 0 0 4px rgba(0, 0, 0, 0.5));
+      background-color: var(--modal-bg-color, var(--bg-primary-color));
+      transition:
+        background-color var(--modal-speed-bg, var(--speed-color)),
+        transform var(--modal-speed-transform, var(--speed-sm)),
+        opacity var(--modal-speed-opacity, var(--speed-sm)),
+        color var(--modal-speed-color, var(--speed-color));
 
-    &[data-state="open"] {
-      &.#{$root}-content {
-        &--fade-animation {
-          animation-name: fadeIn;
+      &[data-state="open"] {
+        &.#{$root}-content {
+          &--fade-animation {
+            animation-name: fadeIn;
+          }
+
+          &--fadeScale-animation {
+            animation-name: fadeScaleIn;
+          }
         }
+      }
 
-        &--fadeScale-animation {
-          animation-name: fadeScaleIn;
+      &[data-state="closed"] {
+        &.#{$root}-content {
+          &--fade-animation {
+            animation-name: fadeOut;
+          }
+
+          &--fadeScale-animation {
+            animation-name: fadeScaleOut;
+          }
         }
+      }
+
+      &--none-radius {
+        border-radius: 0;
+      }
+
+      &--small-radius {
+        border-radius: var(--modal-border-radius-sm, 5px);
+      }
+
+      &--medium-radius {
+        border-radius: var(--modal-border-radius-md, 15px);
+      }
+
+      &--large-radius {
+        border-radius: var(--modal-border-radius-lg, 20px);
+      }
+
+      &--fullscreen {
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
       }
     }
 
-    &[data-state="closed"] {
-      &.#{$root}-content {
-        &--fade-animation {
-          animation-name: fadeOut;
-        }
+    &-children {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
 
-        &--fadeScale-animation {
-          animation-name: fadeScaleOut;
-        }
+    &-close {
+      position: absolute;
+      top: var(--modal-close-offset, 5px);
+
+      @include dir.ltr {
+        right: var(--modal-close-offset, 5px);
+      }
+
+      @include dir.rtl {
+        left: var(--modal-close-offset, 5px);
       }
     }
+  }
 
-    &--fullscreen {
-      max-width: 100%;
-      max-height: 100%;
-      width: 100%;
-      height: 100%;
-      border-radius: 0 !important;
+  @keyframes fadeScaleIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(var(--modal-animation-content-scale, 0.96));
     }
-
-    &--none-radius {
-      border-radius: 0;
-    }
-
-    &--small-radius {
-      border-radius: var(--modal-border-radius-sm, 5px);
-    }
-
-    &--medium-radius {
-      border-radius: var(--modal-border-radius-md, 15px);
-    }
-
-    &--large-radius {
-      border-radius: var(--modal-border-radius-lg, 20px);
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 
-  &-children {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  &-close {
-    position: absolute !important;
-    top: var(--modal-close-offset, 5px);
-
-    @include dir.ltr {
-      right: var(--modal-close-offset, 5px);
+  @keyframes fadeScaleOut {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
-
-    @include dir.rtl {
-      left: var(--modal-close-offset, 5px);
+    to {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(var(--modal-animation-content-scale, 0.96));
     }
   }
-}
 
-@keyframes fadeScaleIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -48%) scale(var(--modal-animation-content-scale, 0.96));
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
 
-@keyframes fadeScaleOut {
-  from {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translate(-50%, -48%) scale(var(--modal-animation-content-scale, 0.96));
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 }

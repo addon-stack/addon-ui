@@ -5,7 +5,7 @@ import classnames from "classnames";
 import {useComponentProps} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
 
-import styles from "./footer.module.scss?isolation";
+import styles from "./footer.module.scss";
 
 export interface FooterProps extends ComponentProps<"footer"> {
     left?: ReactNode;

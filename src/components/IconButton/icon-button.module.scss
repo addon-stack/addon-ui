@@ -1,89 +1,93 @@
+@use "../../styles/layers";
+
 $root: icon-button;
 
-.#{$root} {
-  border-radius: var(--icon-button-border-radius, 100%);
-  padding: var(--icon-button-padding, 5px);
-  width: var(--icon-button-size, 25px);
-  height: var(--icon-button-size, 25px);
-  color: var(--icon-button-color);
-  background: none;
-  transition:
-    color var(--icon-button-speed-color, var(--speed-color)),
-    background var(--icon-button-speed-bg, var(--speed-color));
-
-  &:hover:not(:disabled) {
-    color: var(--icon-button-color-hover);
-  }
-
-  &:active:not(:disabled) {
-    transform: scale(var(--icon-button-scale, 0.95));
-  }
-
-  &:disabled {
-    opacity: var(--icon-button-disabled-opacity, 0.75);
-    cursor: default;
-  }
-
-  // Variants
-  &--contained {
-    color: var(--icon-button-contained-color, var(--icon-button-color));
-    background: var(--icon-button-contained-bg-color, var(--icon-button-bg-color));
-
-    &:hover:not(:disabled) {
-      color: var(--icon-button-contained-color-hover, var(--icon-button-color-hover));
-      background-color: var(--icon-button-contained-bg-color-hover, var(--icon-button-bg-color-hover));
-    }
-  }
-
-  &--outlined {
-    color: var(--icon-button-outlined-color, var(--icon-button-color));
-    border-width: var(--icon-button-border-width, 1px);
-    border-color: var(--icon-button-border-color);
-    border-style: solid;
+@layer addon-ui.components {
+  .#{$root} {
+    border-radius: var(--icon-button-border-radius, 100%);
+    padding: var(--icon-button-padding, 5px);
+    width: var(--icon-button-size, 25px);
+    height: var(--icon-button-size, 25px);
+    color: var(--icon-button-color);
     background: none;
+    transition:
+      color var(--icon-button-speed-color, var(--speed-color)),
+      background var(--icon-button-speed-bg, var(--speed-color));
 
     &:hover:not(:disabled) {
-      color: var(--icon-button-outlined-color-hover, var(--icon-button-color-hover));
-      background-color: var(--icon-button-outlined-bg-color-hover, var(--icon-button-bg-color-hover));
+      color: var(--icon-button-color-hover);
     }
-  }
 
-  &--ghost {
-    color: var(--icon-button-ghost-color, var(--icon-button-color));
-    background-color: transparent;
-
-    &:hover:not(:disabled) {
-      color: var(--icon-button-ghost-color-hover, var(--icon-button-color-hover));
-      background-color: var(--icon-button-ghost-bg-color-hover, var(--icon-button-bg-color-hover));
+    &:active:not(:disabled) {
+      transform: scale(var(--icon-button-scale, 0.95));
     }
-  }
 
-  // Sizes
-  &--small-size {
-    width: var(--icon-button-size-sm, 20px);
-    height: var(--icon-button-size-sm, 20px);
-  }
+    &:disabled {
+      opacity: var(--icon-button-disabled-opacity, 0.75);
+      cursor: default;
+    }
 
-  &--medium-size {
-    width: var(--icon-button-size-md, 35px);
-    height: var(--icon-button-size-md, 35px);
-  }
+    // Variants
+    &--contained {
+      color: var(--icon-button-contained-color, var(--icon-button-color));
+      background: var(--icon-button-contained-bg-color, var(--icon-button-bg-color));
 
-  &--large-size {
-    width: var(--icon-button-size-lg, 45px);
-    height: var(--icon-button-size-lg, 45px);
-  }
+      &:hover:not(:disabled) {
+        color: var(--icon-button-contained-color-hover, var(--icon-button-color-hover));
+        background-color: var(--icon-button-contained-bg-color-hover, var(--icon-button-bg-color-hover));
+      }
+    }
 
-  //Radius
-  &--small-radius {
-    border-radius: var(--icon-button-border-radius-sm, 20%);
-  }
+    &--outlined {
+      color: var(--icon-button-outlined-color, var(--icon-button-color));
+      border-width: var(--icon-button-border-width, 1px);
+      border-color: var(--icon-button-border-color);
+      border-style: solid;
+      background: none;
 
-  &--medium-radius {
-    border-radius: var(--icon-button-border-radius-md, 30%);
-  }
+      &:hover:not(:disabled) {
+        color: var(--icon-button-outlined-color-hover, var(--icon-button-color-hover));
+        background-color: var(--icon-button-outlined-bg-color-hover, var(--icon-button-bg-color-hover));
+      }
+    }
 
-  &--large-radius {
-    border-radius: var(--icon-button-border-radius-lg, 40%);
+    &--ghost {
+      color: var(--icon-button-ghost-color, var(--icon-button-color));
+      background-color: transparent;
+
+      &:hover:not(:disabled) {
+        color: var(--icon-button-ghost-color-hover, var(--icon-button-color-hover));
+        background-color: var(--icon-button-ghost-bg-color-hover, var(--icon-button-bg-color-hover));
+      }
+    }
+
+    // Sizes
+    &--small-size {
+      width: var(--icon-button-size-sm, 20px);
+      height: var(--icon-button-size-sm, 20px);
+    }
+
+    &--medium-size {
+      width: var(--icon-button-size-md, 35px);
+      height: var(--icon-button-size-md, 35px);
+    }
+
+    &--large-size {
+      width: var(--icon-button-size-lg, 45px);
+      height: var(--icon-button-size-lg, 45px);
+    }
+
+    //Radius
+    &--small-radius {
+      border-radius: var(--icon-button-border-radius-sm, 20%);
+    }
+
+    &--medium-radius {
+      border-radius: var(--icon-button-border-radius-md, 30%);
+    }
+
+    &--large-radius {
+      border-radius: var(--icon-button-border-radius-lg, 40%);
+    }
   }
 }

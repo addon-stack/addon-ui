@@ -21,6 +21,7 @@ import {
 
 const LazyPanel = lazy(() => import("./LazyPanel"));
 const RtlLayout = lazy(() => import("./RtlLayout"));
+const IconModes = lazy(() => import("./icon-modes/IconModes"));
 
 const icons = {
     sample: () => <rect x="2" y="3" width="17" height="13" />,
@@ -38,6 +39,7 @@ function Controls() {
     const [lazy, setLazy] = useState(false);
     const [empty, setEmpty] = useState(false);
     const [rtlLayout, setRtlLayout] = useState(false);
+    const [iconModes, setIconModes] = useState(false);
 
     const selector = (
         <Select defaultValue="b">
@@ -226,6 +228,8 @@ function Controls() {
                     <RtlLayout />
                 </Suspense>
             )}
+            <button data-testid="icon-modes-open" onClick={() => setIconModes(true)}>Icon modes</button>
+            {iconModes && <Suspense fallback="Loading icons"><IconModes /></Suspense>}
         </div>
     );
 }

@@ -68,6 +68,7 @@ Only variables actually referenced in `src/components/ScrollArea/scroll-area.mod
 
 | Variable                                 | Fallback chain                                                                              |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `--scroll-area-content-display`         | `var(--scroll-area-content-display, flex)`                                                 |
 | `--scroll-area-scrollbar-padding`        | `var(--scroll-area-scrollbar-padding, 3px)`                                                 |
 | `--scroll-area-scrollbar-bg-color`       | `var(--scroll-area-scrollbar-bg-color, transparent)`                                        |
 | `--scroll-area-scrollbar-bg-color-hover` | `var(--scroll-area-scrollbar-bg-color-hover, transparent)`                                  |
@@ -83,6 +84,22 @@ Notes:
 
 - Horizontal scrollbar padding uses: `var(--scroll-area-scrollbar-offset, var(--scroll-area-scrollbar-y-offset, 2px))`.
 - The `xOffset`/`yOffset` props also apply inline padding to the vertical/horizontal scrollbars respectively.
+
+The measured content wrapper uses `display: var(--scroll-area-content-display, flex) !important`
+to override Radix's inline `display: table`. Customize that display through the variable
+on the ScrollArea root, without adding your own `!important`:
+
+```tsx
+<ScrollArea className={styles.results}>{/* Content */}</ScrollArea>
+```
+
+```scss
+.results {
+  --scroll-area-content-display: block;
+}
+```
+
+Other class and variable overrides follow the [customization guide](customization.md).
 
 ### Theming and global configuration
 

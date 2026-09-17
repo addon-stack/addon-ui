@@ -26,7 +26,7 @@ it("resolves the packed package's fallback config and SCSS without aliases or ui
 
         // A probe inside the installed package exercises its private package-import scope.
         await fs.writeFile(path.join(installed, "probe.ts"),
-            'export {default} from "#addon-ui/config"; import "#addon-ui/style.scss?isolation";');
+            'export {default} from "#addon-ui/config"; import "#addon-ui/style.scss";');
 
         await fs.writeFile(path.join(root, "entry.ts"), 'export {default} from "./node_modules/addon-ui/probe";');
         const compiler = createCompiler(root);

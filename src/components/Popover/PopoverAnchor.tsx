@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./popover.module.scss?isolation";
+import styles from "./popover.module.scss";
 
 export type {PopoverAnchorProps};
 

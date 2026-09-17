@@ -1,34 +1,38 @@
-.viewport {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-width: var(--viewport-min-width);
-  max-width: var(--viewport-max-width);
-  min-height: var(--viewport-min-height);
-  max-height: var(--viewport-max-height);
+@use "../../styles/layers";
 
-  &--transition {
-    transition:
-      height var(--viewport-speed-height, var(--speed-md)) ease-in-out,
-      width var(--viewport-speed-width, var(--speed-md)) ease-in-out,
-      min-height var(--viewport-speed-min-height, var(--speed-md)) ease-in-out,
-      min-width var(--viewport-speed-min-width, var(--speed-md)) ease-in-out,
-      max-height var(--viewport-speed-max-height, var(--speed-md)) ease-in-out,
-      max-width var(--viewport-speed-max-width, var(--speed-md)) ease-in-out;
-  }
+@layer addon-ui.components {
+  .viewport {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: var(--viewport-min-width);
+    max-width: var(--viewport-max-width);
+    min-height: var(--viewport-min-height);
+    max-height: var(--viewport-max-height);
 
-  &--expanded {
-    min-height: var(--viewport-max-height);
-    min-width: var(--viewport-max-width);
-  }
+    &--transition {
+      transition:
+        height var(--viewport-speed-height, var(--speed-md)) ease-in-out,
+        width var(--viewport-speed-width, var(--speed-md)) ease-in-out,
+        min-height var(--viewport-speed-min-height, var(--speed-md)) ease-in-out,
+        min-width var(--viewport-speed-min-width, var(--speed-md)) ease-in-out,
+        max-height var(--viewport-speed-max-height, var(--speed-md)) ease-in-out,
+        max-width var(--viewport-speed-max-width, var(--speed-md)) ease-in-out;
+    }
 
-  &--fixed {
-    width: var(--viewport-width);
-    min-width: var(--viewport-width);
-    max-width: var(--viewport-width);
+    &--expanded {
+      min-height: var(--viewport-max-height);
+      min-width: var(--viewport-max-width);
+    }
 
-    height: var(--viewport-height);
-    min-height: var(--viewport-height);
-    max-height: var(--viewport-height);
+    &--fixed {
+      width: var(--viewport-width);
+      min-width: var(--viewport-width);
+      max-width: var(--viewport-width);
+
+      height: var(--viewport-height);
+      min-height: var(--viewport-height);
+      max-height: var(--viewport-height);
+    }
   }
 }

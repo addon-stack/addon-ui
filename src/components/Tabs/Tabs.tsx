@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss?isolation";
+import styles from "./tabs.module.scss";
 
 export interface TabsProps extends Omit<TabsRadixProps, "orientation"> {
     reverse?: boolean;

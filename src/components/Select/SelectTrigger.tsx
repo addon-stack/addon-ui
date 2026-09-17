@@ -16,7 +16,7 @@ import {useComponentProps} from "../../providers";
 
 import {SelectPortalContext} from "./context";
 
-import styles from "./select.module.scss?isolation";
+import styles from "./select.module.scss";
 
 export interface SelectTriggerProps extends SelectTriggerRadixProps {
     center?: boolean;

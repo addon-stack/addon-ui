@@ -1,50 +1,54 @@
-.list-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--list-item-gap, 10px);
-  flex-wrap: nowrap;
-  box-sizing: border-box;
-  line-height: var(--list-item-line-height, var(--line-height, 1rem));
-  transition: background-color var(--list-item-speed-bg, var(--speed-color));
+@use "../../styles/layers";
 
-  &__center {
-    flex-grow: 1;
+@layer addon-ui.components {
+  .list-item {
     display: flex;
-    overflow: hidden;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &__primary,
-  &__secondary {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  &__primary {
-    color: var(--list-item-primary-color, var(--text-primary-color));
-  }
-
-  &__secondary {
-    color: var(--list-item-secondary-color, var(--text-secondary-color));
-  }
-
-  &__left,
-  &__right {
-    display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-  }
+    gap: var(--list-item-gap, 10px);
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    line-height: var(--list-item-line-height, var(--line-height, 1rem));
+    transition: background-color var(--list-item-speed-bg, var(--speed-color));
 
-  &__center,
-  &__primary,
-  &__secondary,
-  &__left,
-  &__right {
-    transition:
-      color var(--list-item-speed-color, var(--speed-color)),
-      background var(--list-item-speed-bg, var(--speed-color));
+    &__center {
+      flex-grow: 1;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__primary,
+    &__secondary {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__primary {
+      color: var(--list-item-primary-color, var(--text-primary-color));
+    }
+
+    &__secondary {
+      color: var(--list-item-secondary-color, var(--text-secondary-color));
+    }
+
+    &__left,
+    &__right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__center,
+    &__primary,
+    &__secondary,
+    &__left,
+    &__right {
+      transition:
+        color var(--list-item-speed-color, var(--speed-color)),
+        background var(--list-item-speed-bg, var(--speed-color));
+    }
   }
 }

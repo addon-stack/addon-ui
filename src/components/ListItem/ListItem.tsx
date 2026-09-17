@@ -5,7 +5,7 @@ import classnames from "classnames";
 import {useComponentProps} from "../../providers";
 import {cloneOrCreateElement} from "../../utils";
 
-import styles from "./list-item.module.scss?isolation";
+import styles from "./list-item.module.scss";
 
 type TagType = keyof JSX.IntrinsicElements;
 export type ListItemType = HTMLLIElement;

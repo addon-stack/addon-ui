@@ -4,16 +4,20 @@ import {getBrowser} from "adnbn";
 import {merge} from "ts-deepmerge";
 
 import config from "#addon-ui/config";
-import type {ComponentsProps, Config, ExtraProps, Icons} from "../../types/config";
+import type {ComponentsProps, Config, ExtraProps, IconMap} from "../../types/config";
 import {ExtraProvider, IconsProvider, ThemeProvider, type ThemeProviderProps} from "..";
 
 import {type PortalContainer, PortalContext} from "./context";
 
-import "./styles/default.scss?isolation";
-import "./styles/reset.scss?isolation";
-import "./styles/base.scss?isolation";
-import "./styles/document.scss?isolation";
-import "#addon-ui/style.scss?isolation";
+import "./styles/default.scss";
+import "./styles/reset.scss";
+import "./styles/base.scss";
+import "./styles/document.scss";
+import "#addon-ui/style.scss";
+
+const EmptyIcons: IconMap = {};
+const EmptyComponents: ComponentsProps = {};
+const EmptyExtra: ExtraProps = {};
 
 export interface UIProviderProps extends Partial<Config>, Pick<ThemeProviderProps, "storage" | "container"> {
     /**
@@ -45,13 +49,16 @@ export interface UIProviderProps extends Partial<Config>, Pick<ThemeProviderProp
 }
 
 const UIProvider: FC<PropsWithChildren<UIProviderProps>> = props => {
-    const {children, components = {}, extra = {}, icons = {}, storage, view, container = "html", portal} = props;
+    const {
+        children, components = EmptyComponents, extra = EmptyExtra, icons = EmptyIcons,
+        storage, view, container = "html", portal,
+    } = props;
 
     const componentsProps = useMemo<ComponentsProps>(() => merge(config.components || {}, components), [components]);
 
     const extraProps = useMemo<ExtraProps>(() => merge(config.extra || {}, extra), [extra]);
 
-    const svgIcons = useMemo<Icons>(() => merge(config.icons || {}, icons), [icons]);
+    const svgIcons = useMemo<IconMap>(() => ({...config.icons, ...icons}), [icons]);
 
     useEffect(() => {
         if (container === false) {

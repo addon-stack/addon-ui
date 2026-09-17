@@ -40,7 +40,7 @@ test("imports use React, Radix, external, internal, same-directory and asset gro
         ['import {local} from "./local";', 'import {barrel} from ".";',
             'import {useLocal} from "./hooks/use-local";', 'import type {LocalProps} from "./types";',
             'import "./register";'],
-        ['import "./z.scss";', 'import "./a.scss";', 'import styles from "./button.module.scss?isolation";',
+        ['import "./z.scss";', 'import "./a.scss";', 'import styles from "./button.module.scss";',
             'import icon from "./icon.svg?raw";', 'import "react/theme.css";',
             'import "@radix-ui/themes/styles.css";', 'import "../styles/reset.scss";'],
     ];
@@ -125,12 +125,12 @@ test("namespace and default type imports retain their required syntax", async ()
 
 test("different asset query strings are distinct imports", async () => {
     const source = 'import raw from "./icon.svg?raw";\nimport url from "./icon.svg?url";\n' +
-        'import styles from "./button.scss?isolation";\nimport "./button.scss";\n';
+        'import styles from "./button.scss?raw";\nimport "./button.scss";\n';
 
     const output = await format(source);
     assert.equal(output.match(/^import /gm).length, 4);
     assert.match(output, /icon\.svg\?raw/);
     assert.match(output, /icon\.svg\?url/);
-    assert.match(output, /button\.scss\?isolation/);
+    assert.match(output, /button\.scss\?raw/);
     assert.match(output, /"\.\/button\.scss"/);
 });

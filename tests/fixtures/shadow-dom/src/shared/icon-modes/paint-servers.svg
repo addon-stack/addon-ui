@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+    <defs>
+        <linearGradient id="gradient">
+            <stop stop-color="#ff0000" />
+            <stop offset="1" stop-color="#0000ff" />
+        </linearGradient>
+        <clipPath id="clip"><circle cx="60" cy="20" r="12" /></clipPath>
+        <mask id="mask" maskUnits="userSpaceOnUse" x="80" y="0" width="40" height="40">
+            <circle cx="100" cy="20" r="12" fill="white" />
+        </mask>
+    </defs>
+    <path d="M0 0h40v40H0z" fill="url(#gradient)" />
+    <path d="M40 0h40v40H40z" fill="#ff0000" clip-path="url(#clip)" />
+    <path d="M80 0h40v40H80z" fill="#0000ff" mask="url(#mask)" />
+</svg>

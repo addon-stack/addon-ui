@@ -1,0 +1,69 @@
+@layer addon-ui, application;
+
+.panel {
+  width: 340px;
+  padding: 16px;
+  background: var(--bg-primary-color);
+}
+
+// Reproduce the consumer's shared/app split without stronger selectors.
+.tabs {
+  &__trigger {
+    flex-direction: column;
+    gap: 0;
+    height: auto;
+    padding: 0;
+  }
+}
+
+.variables {
+  --button-height: 28px;
+  --button-padding: 0 7px;
+  --button-border-radius: 3px;
+}
+
+.custom {
+  position: static;
+  height: 29px;
+  color: rgb(7, 8, 9);
+  background: rgb(90, 80, 70);
+  opacity: 1;
+  font-weight: 400;
+}
+
+@layer application {
+  .layered {
+    height: 31px;
+    background: rgb(30, 40, 50);
+  }
+}
+
+.field {
+  border-color: rgb(40, 50, 60);
+  border-width: 3px;
+  box-shadow: none;
+}
+
+.textarea {
+  width: 240px;
+}
+
+.scroll {
+  --scroll-area-content-display: block;
+}
+
+.modal {
+  border-radius: 17px;
+  transition: opacity 0.01s linear;
+}
+
+.close {
+  position: static;
+}
+
+// This rule must already exist before the Tag component and its CSS load.
+.lazy {
+  padding: 11px;
+  color: rgb(51, 61, 71);
+  background: rgb(81, 91, 101);
+}

@@ -1,2 +1,2 @@
-export {useIcons} from "./context";
+export {useIconRegistry, useIcons} from "./context";
 export {default as IconsProvider} from "./IconsProvider";

@@ -16,7 +16,7 @@ import {IconButton, type IconButtonProps} from "../IconButton";
 
 import {ModalAnimation, type ModalRadius} from "./types";
 
-import styles from "./modal.module.scss?isolation";
+import styles from "./modal.module.scss";
 
 export interface ModalProps extends DialogProps {
     radius?: ModalRadius;

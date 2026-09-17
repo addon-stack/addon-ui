@@ -1,30 +1,33 @@
+@use "../../styles/layers";
 @use "../../styles/mixins" as theme;
 
-.truncate {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: auto;
-  max-width: 100%;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color var(--truncate-speed-color, var(--speed-color));
-
-  &--middle {
-    text-overflow: clip;
-  }
-
-  &__hidden {
-    display: block;
-    height: 0;
-    visibility: hidden;
+@layer addon-ui.components {
+  .truncate {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
     white-space: nowrap;
     overflow: hidden;
-  }
+    text-overflow: ellipsis;
+    transition: color var(--truncate-speed-color, var(--speed-color));
 
-  &__content {
-    display: block;
+    &--middle {
+      text-overflow: clip;
+    }
+
+    &__hidden {
+      display: block;
+      height: 0;
+      visibility: hidden;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &__content {
+      display: block;
+    }
   }
 }

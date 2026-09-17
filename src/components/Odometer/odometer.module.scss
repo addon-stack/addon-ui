@@ -1,82 +1,86 @@
+@use "../../styles/layers";
+
 $root: odometer;
 
-.#{$root} {
-  display: inline-block;
-  position: relative;
-  color: var(--odometer-color, var(--text-primary-color));
-  font-family: var(--odometer-font-family, var(--font-family)), sans-serif;
-  transition: color var(--odometer-speed-color, var(--speed-color));
-
-  &-digit {
+@layer addon-ui.components {
+  .#{$root} {
     display: inline-block;
     position: relative;
+    color: var(--odometer-color, var(--text-primary-color));
+    font-family: var(--odometer-font-family, var(--font-family)), sans-serif;
+    transition: color var(--odometer-speed-color, var(--speed-color));
 
-    &-spacer {
+    &-digit {
       display: inline-block;
-      visibility: hidden;
+      position: relative;
+
+      &-spacer {
+        display: inline-block;
+        visibility: hidden;
+      }
+
+      &-inner {
+        text-align: left;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+      }
     }
 
-    &-inner {
-      text-align: left;
+    &-ribbon {
       display: block;
+
+      &-inner {
+        display: block;
+        -webkit-backface-visibility: hidden;
+
+        .#{$root}-animating-up & {
+          transition: transform var(--speed);
+        }
+
+        .#{$root}-animating-up.#{$root}-animating & {
+          transform: translateY(-100%);
+        }
+
+        .#{$root}-animating-down & {
+          transform: translateY(-100%);
+        }
+
+        .#{$root}-animating-down.#{$root}-animating & {
+          transition: transform var(--speed);
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &-value {
+      display: block;
+      text-align: center;
+      transform: translateZ(0);
+    }
+
+    &-last-value {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
     }
-  }
 
-  &-ribbon {
-    display: block;
-
-    &-inner {
-      display: block;
-      -webkit-backface-visibility: hidden;
-
-      .#{$root}-animating-up & {
-        transition: transform var(--speed);
-      }
-
-      .#{$root}-animating-up.#{$root}-animating & {
-        transform: translateY(-100%);
-      }
-
-      .#{$root}-animating-down & {
-        transform: translateY(-100%);
-      }
-
-      .#{$root}-animating-down.#{$root}-animating & {
-        transition: transform var(--speed);
-        transform: translateY(0);
-      }
-    }
-  }
-
-  &-value {
-    display: block;
-    text-align: center;
-    transform: translateZ(0);
-  }
-
-  &-last-value {
-    position: absolute;
-  }
-
-  &-inside {
-    transition:
-      all var(--speed),
-      color var(--odometer-speed-color, var(--speed-color));
-
-    &:before {
-      content: "";
-      width: 0;
-      display: inline-block;
-      color: inherit;
+    &-inside {
       transition:
         all var(--speed),
         color var(--odometer-speed-color, var(--speed-color));
+
+      &:before {
+        content: "";
+        width: 0;
+        display: inline-block;
+        color: inherit;
+        transition:
+          all var(--speed),
+          color var(--odometer-speed-color, var(--speed-color));
+      }
     }
   }
 }

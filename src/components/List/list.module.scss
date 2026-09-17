@@ -1,10 +1,14 @@
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--list-gap, 10px);
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  transition: background-color var(--list-speed-bg, var(--speed-color));
+@use "../../styles/layers";
+
+@layer addon-ui.components {
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--list-gap, 10px);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    transition: background-color var(--list-speed-bg, var(--speed-color));
+  }
 }

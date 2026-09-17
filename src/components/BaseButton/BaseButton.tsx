@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 import {cloneOrCreateElement} from "../../utils";
 
-import styles from "./base-button.module.scss?isolation";
+import styles from "./base-button.module.scss";
 
 export interface BaseButtonProps extends ComponentProps<"button"> {
     after?: ReactNode;

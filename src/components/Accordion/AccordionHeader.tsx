@@ -4,7 +4,7 @@ import {type AccordionHeaderProps as AccordionHeaderRadixProps, Header} from "@r
 
 import classnames from "classnames";
 
-import styles from "./accordion.module.scss?isolation";
+import styles from "./accordion.module.scss";
 
 export type AccordionHeaderProps = AccordionHeaderRadixProps;
 

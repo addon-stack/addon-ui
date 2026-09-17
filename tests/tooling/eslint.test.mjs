@@ -94,7 +94,7 @@ for (const [filename, source, valid] of [
     ["src/utils/example.ts", 'export {Button} from "../components/Button";', false],
     ["src/hooks/example.ts", 'import("../components/Button");', false],
     ["src/utils/example.ts", 'require("../components/Button");', false],
-    [".storybook/preview.tsx", 'import "../src/providers/ui/styles/base.scss?isolation";', true],
+    [".storybook/preview.tsx", 'import "../src/providers/ui/styles/base.scss";', true],
 ]) {
     test(`module boundaries: ${filename}: ${source}`, () => {
         assert.equal(check("module-boundaries", source, filename).length, valid ? 0 : 1);

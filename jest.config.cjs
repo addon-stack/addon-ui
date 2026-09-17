@@ -29,7 +29,7 @@ module.exports = {
                 ],
             },
             moduleNameMapper: {
-                "\\.(css|scss)(\\?isolation)?$": "<rootDir>/tests/support/components/style.cjs",
+                "\\.(css|scss)$": "<rootDir>/tests/support/components/style.cjs",
                 "^@addon-core/storage$": "<rootDir>/tests/support/components/storage.cjs",
                 "^adnbn$": "<rootDir>/tests/support/components/adnbn.cjs",
                 "^adnbn/locale/react$": "<rootDir>/tests/support/components/locale.cjs",

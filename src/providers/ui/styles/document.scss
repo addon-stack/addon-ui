@@ -1,9 +1,20 @@
+@use "../../../styles/layers";
+
+@layer addon-ui.base {
+  body {
+    overflow: hidden;
+    background-color: var(--bg-primary-color);
+    will-change: background-color, color;
+    transition:
+      color var(--body-speed-color, var(--speed-color)),
+      background-color var(--body-speed-bg, var(--speed-color)),
+      border-color var(--body-speed-border-color, var(--speed-color));
+  }
+}
+
+// Chrome injects unlayered body typography into extension pages. Keep these
+// defaults unlayered too, so the theme variables still control document text.
 body {
-  overflow: hidden;
-  background-color: var(--bg-primary-color);
-  will-change: background-color, color;
-  transition:
-    color var(--body-speed-color, var(--speed-color)),
-    background-color var(--body-speed-bg, var(--speed-color)),
-    border-color var(--body-speed-border-color, var(--speed-color));
+  font-family: var(--font-family), "sans-serif";
+  font-size: var(--font-size);
 }

@@ -4,7 +4,7 @@ import {type AccordionMultipleProps, type AccordionSingleProps, Root} from "@rad
 
 import classnames from "classnames";
 
-import styles from "./accordion.module.scss?isolation";
+import styles from "./accordion.module.scss";
 
 export type AccordionProps = AccordionMultipleProps | AccordionSingleProps;
 

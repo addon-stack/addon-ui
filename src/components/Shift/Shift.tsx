@@ -16,7 +16,7 @@ import React, {
 
 import classnames from "classnames";
 
-import styles from "./shift.module.scss?isolation";
+import styles from "./shift.module.scss";
 
 export interface ShiftProps extends ComponentProps<"div"> {
     active?: number;

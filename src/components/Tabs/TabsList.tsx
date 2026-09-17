@@ -16,7 +16,7 @@ import _debounce from "lodash/debounce";
 
 import {useComponentProps} from "../../providers";
 
-import styles from "./tabs.module.scss?isolation";
+import styles from "./tabs.module.scss";
 
 export interface TabsListProps extends TabsListRadixProps {
     separator?: boolean;

@@ -5,7 +5,7 @@ import classnames from "classnames";
 import {useComponentProps} from "../../providers";
 import {Header, type HeaderProps} from "../Header";
 
-import styles from "./view.module.scss?isolation";
+import styles from "./view.module.scss";
 
 export interface ViewProps extends HeaderProps {
     center?: boolean;

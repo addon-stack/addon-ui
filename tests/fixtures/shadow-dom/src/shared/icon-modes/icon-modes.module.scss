@@ -1,0 +1,28 @@
+.modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: white;
+}
+
+.icon {
+  --icon-test-fill: rgb(120 30 180);
+
+  color: rgb(120 30 180);
+}
+
+.second {
+  --icon-test-fill: rgb(20 100 160);
+}
+
+.geometry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  background: white;
+
+  svg {
+    flex-shrink: 0;
+  }
+}

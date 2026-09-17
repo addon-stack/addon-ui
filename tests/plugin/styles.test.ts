@@ -14,7 +14,7 @@ beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "addon-ui-styles-"));
 
     await fs.writeFile(path.join(root, "entry.ts"),
-        'export {default} from "#addon-ui/config"; import "#addon-ui/style.scss?isolation";');
+        'export {default} from "#addon-ui/config"; import "#addon-ui/style.scss";');
 });
 
 afterEach(async () => {

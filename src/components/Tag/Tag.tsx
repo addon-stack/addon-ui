@@ -6,7 +6,7 @@ import {useComponentProps} from "../../providers";
 
 import {type TagColor, type TagRadius, type TagSize, TagVariant} from "./types";
 
-import styles from "./tag.module.scss?isolation";
+import styles from "./tag.module.scss";
 
 export interface TagProps extends ComponentProps<"span"> {
     size?: TagSize;

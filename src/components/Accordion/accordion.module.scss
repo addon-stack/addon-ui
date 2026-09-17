@@ -1,59 +1,63 @@
+@use "../../styles/layers";
+
 $root: accordion;
 
-.#{$root} {
-  &-item {
-  }
+@layer addon-ui.components {
+  .#{$root} {
+    &-item {
+    }
 
-  &-header {
-    position: relative;
-    padding: var(--accordion-header-pading);
-    display: flex;
-    align-items: center;
-    background-color: var(--accordion-header-bg-color, var(--bg-primary-color));
-    will-change: background-color;
-    transition: background-color var(--accordion-speed-bg, var(--speed-color));
+    &-header {
+      position: relative;
+      padding: var(--accordion-header-pading);
+      display: flex;
+      align-items: center;
+      background-color: var(--accordion-header-bg-color, var(--bg-primary-color));
+      will-change: background-color;
+      transition: background-color var(--accordion-speed-bg, var(--speed-color));
 
-    &:hover {
-      background: var(--accordion-header-hover-bg-color);
+      &:hover {
+        background: var(--accordion-header-hover-bg-color);
+      }
+    }
+
+    &-trigger {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    &-content {
+      background-color: var(--accordion-content-bg-color);
+      will-change: background-color;
+      transition: background-color var(--accordion-speed-bg, var(--speed-color));
+      overflow: hidden;
+
+      &[data-state="open"] {
+        animation: slideDown var(--accordion-speed-animation, var(--speed-sm)) ease-in-out;
+      }
+
+      &[data-state="closed"] {
+        animation: slideUp var(--accordion-speed-animation, var(--speed-sm)) ease-in-out;
+      }
     }
   }
 
-  &-trigger {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  &-content {
-    background-color: var(--accordion-content-bg-color);
-    will-change: background-color;
-    transition: background-color var(--accordion-speed-bg, var(--speed-color));
-    overflow: hidden;
-
-    &[data-state="open"] {
-      animation: slideDown var(--accordion-speed-animation, var(--speed-sm)) ease-in-out;
+  @keyframes slideDown {
+    from {
+      height: 0;
     }
-
-    &[data-state="closed"] {
-      animation: slideUp var(--accordion-speed-animation, var(--speed-sm)) ease-in-out;
+    to {
+      height: var(--radix-collapsible-content-height);
     }
   }
-}
 
-@keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-collapsible-content-height);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: var(--radix-collapsible-content-height);
-  }
-  to {
-    height: 0;
+  @keyframes slideUp {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }

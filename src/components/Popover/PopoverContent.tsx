@@ -13,7 +13,7 @@ import classnames from "classnames";
 import {FloatingLayerContext, useFloatingFocus, useFloatingLayer} from "../../hooks/floating";
 import {useComponentProps, usePortalContainer} from "../../providers";
 
-import styles from "./popover.module.scss?isolation";
+import styles from "./popover.module.scss";
 
 export interface PopoverContentProps extends PopoverContentRadixProps, PopoverPortalProps {
     maxWidth?: number;

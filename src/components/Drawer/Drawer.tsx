@@ -8,7 +8,7 @@ import {Dialog, type DialogProps, DialogPropsKeys} from "../Dialog";
 
 import {DrawerSide} from "./types";
 
-import styles from "./drawer.module.scss?isolation";
+import styles from "./drawer.module.scss";
 
 export interface DrawerProps extends DialogProps {
     side?: DrawerSide;

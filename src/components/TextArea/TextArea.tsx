@@ -17,7 +17,7 @@ import {useComponentProps} from "../../providers";
 
 import {type TextAreaRadius, type TextAreaSize, TextAreaVariant} from "./types";
 
-import styles from "./text-area.module.scss?isolation";
+import styles from "./text-area.module.scss";
 
 export interface TextAreaActions {
     select(): void;

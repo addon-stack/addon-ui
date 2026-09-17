@@ -21,7 +21,7 @@ import {cloneOrCreateElement} from "../../utils";
 import {type TextFieldAccent, type TextFieldRadius, type TextFieldSize, TextFieldVariant} from "./types";
 import {normalizeNumberInput} from "./utils";
 
-import styles from "./text-field.module.scss?isolation";
+import styles from "./text-field.module.scss";
 
 export interface TextFieldActions {
     select(): void;

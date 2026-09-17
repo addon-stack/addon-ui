@@ -1,52 +1,84 @@
+@use "../../styles/layers";
 @use "../../styles/mixins" as dir;
 
 $root: toast;
 
-.#{$root} {
-  box-sizing: border-box;
-  position: relative;
-  display: grid;
-  align-items: center;
-  grid-template-areas: "title action" "description action";
-  grid-template-columns: auto max-content;
-  column-gap: var(--toast-gap, 15px);
-  background-color: var(--toast-bg-color, var(--bg-secondary-color));
-  border-radius: var(--toast-border-radius, 10px);
-  padding: var(--toast-padding, var(--side-padding-xs));
-  transition: background-color var(--toast-speed-bg, var(--speed-color));
+@layer addon-ui.components {
+  .#{$root} {
+    box-sizing: border-box;
+    position: relative;
+    display: grid;
+    align-items: center;
+    grid-template-areas: "title action" "description action";
+    grid-template-columns: auto max-content;
+    column-gap: var(--toast-gap, 15px);
+    background-color: var(--toast-bg-color, var(--bg-secondary-color));
+    border-radius: var(--toast-border-radius, 10px);
+    padding: var(--toast-padding, var(--side-padding-xs));
+    transition: background-color var(--toast-speed-bg, var(--speed-color));
 
-  &[data-state="open"] {
-    &.#{$root}--opacity-animation-in {
-      animation: show var(--toast-speed-animation, var(--speed-md)) ease-out;
+    &[data-state="open"] {
+      &.#{$root}--opacity-animation-in {
+        animation: show var(--toast-speed-animation, var(--speed-md)) ease-out;
+      }
+
+      &.#{$root}--slide-animation-in {
+        &.#{$root}--top-left,
+        &.#{$root}--bottom-left {
+          animation: slideInLeft var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
+
+        &.#{$root}--top-right,
+        &.#{$root}--bottom-right {
+          animation: slideInRight var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
+
+        &.#{$root}--top-center {
+          animation: slideInTop var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
+
+        &.#{$root}--bottom-center {
+          animation: slideInBottom var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
+      }
     }
 
-    &.#{$root}--slide-animation-in {
-      &.#{$root}--top-left,
-      &.#{$root}--bottom-left {
-        animation: slideInLeft var(--toast-speed-animation, var(--speed-md)) ease-out;
+    &[data-state="closed"] {
+      &.#{$root}--opacity-animation-out {
+        animation: hide var(--toast-speed-animation, var(--speed-md)) ease-in;
       }
 
-      &.#{$root}--top-right,
-      &.#{$root}--bottom-right {
-        animation: slideInRight var(--toast-speed-animation, var(--speed-md)) ease-out;
-      }
+      &.#{$root}--slide-animation-out {
+        &.#{$root}--top-left,
+        &.#{$root}--bottom-left {
+          animation: swipeOutLeft var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
 
-      &.#{$root}--top-center {
-        animation: slideInTop var(--toast-speed-animation, var(--speed-md)) ease-out;
-      }
+        &.#{$root}--top-right,
+        &.#{$root}--bottom-right {
+          animation: swipeOutRight var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
 
-      &.#{$root}--bottom-center {
-        animation: slideInBottom var(--toast-speed-animation, var(--speed-md)) ease-out;
+        &.#{$root}--top-center {
+          animation: swipeOutTop var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
+
+        &.#{$root}--bottom-center {
+          animation: swipeOutBottom var(--toast-speed-animation, var(--speed-md)) ease-out;
+        }
       }
     }
-  }
 
-  &[data-state="closed"] {
-    &.#{$root}--opacity-animation-out {
-      animation: hide var(--toast-speed-animation, var(--speed-md)) ease-in;
+    &[data-swipe="move"] {
+      transform: translateX(var(--radix-toast-swipe-move-x)) translateY(var(--radix-toast-swipe-move-y));
     }
 
-    &.#{$root}--slide-animation-out {
+    &[data-swipe="cancel"] {
+      transform: translateX(0) translateY(0);
+      transition: transform var(--toast-speed-transform, var(--speed-sm)) ease-out;
+    }
+
+    &[data-swipe="end"] {
       &.#{$root}--top-left,
       &.#{$root}--bottom-left {
         animation: swipeOutLeft var(--toast-speed-animation, var(--speed-md)) ease-out;
@@ -65,249 +97,220 @@ $root: toast;
         animation: swipeOutBottom var(--toast-speed-animation, var(--speed-md)) ease-out;
       }
     }
-  }
 
-  &[data-swipe="move"] {
-    transform: translateX(var(--radix-toast-swipe-move-x)) translateY(var(--radix-toast-swipe-move-y));
-  }
-
-  &[data-swipe="cancel"] {
-    transform: translateX(0) translateY(0);
-    transition: transform var(--toast-speed-transform, var(--speed-sm)) ease-out;
-  }
-
-  &[data-swipe="end"] {
-    &.#{$root}--top-left,
-    &.#{$root}--bottom-left {
-      animation: swipeOutLeft var(--toast-speed-animation, var(--speed-md)) ease-out;
+    &--none-radius {
+      border-radius: 0;
     }
 
-    &.#{$root}--top-right,
-    &.#{$root}--bottom-right {
-      animation: swipeOutRight var(--toast-speed-animation, var(--speed-md)) ease-out;
+    &--small-radius {
+      border-radius: var(--toast-border-radius-sm, 6px);
     }
 
-    &.#{$root}--top-center {
-      animation: swipeOutTop var(--toast-speed-animation, var(--speed-md)) ease-out;
+    &--medium-radius {
+      border-radius: var(--toast-border-radius-md, 15px);
     }
 
-    &.#{$root}--bottom-center {
-      animation: swipeOutBottom var(--toast-speed-animation, var(--speed-md)) ease-out;
+    &--large-radius {
+      border-radius: var(--toast-border-radius-lg, 20px);
+    }
+
+    &--error-color {
+      background-color: var(--toast-error-bg-color, var(--error-color));
+    }
+
+    &--success-color {
+      background-color: var(--toast-success-bg-color, var(--success-color));
+    }
+
+    &__title,
+    &__description {
+      transition: color var(--toast-speed-color, var(--speed-color));
+
+      .#{$root}--error-color & {
+        color: var(--toast-error-text-color, white);
+      }
+
+      .#{$root}--success-color & {
+        color: var(--toast-success-text-color, white);
+      }
+    }
+
+    &__title {
+      grid-area: title;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--text-primary-color);
+      font-size: 15px;
+    }
+
+    &__description {
+      grid-area: description;
+      margin: 0;
+      color: var(--text-secondary-color);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    &__action {
+      grid-area: action;
+    }
+
+    &__close {
+      position: absolute;
+      top: var(--toast-close-offset, 5px);
+
+      @include dir.ltr {
+        right: var(--toast-close-offset, 5px);
+      }
+
+      @include dir.rtl {
+        left: var(--toast-close-offset, 5px);
+      }
+    }
+
+    &__viewport {
+      box-sizing: border-box;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      gap: var(--toast-viewport-gap, 10px);
+      width: var(--toast-width, 300px);
+      padding: var(--toast-viewport-padding, var(--side-padding-xs));
+      max-width: 100vw;
+      margin: 0;
+      list-style: none;
+      z-index: 999999;
+      outline: none;
+
+      &:has(.#{$root}--full-width) {
+        width: 100%;
+      }
+
+      &:has(.#{$root}--sticky) {
+        padding: 0;
+      }
+
+      &:has(.#{$root}--top-center) {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &:has(.#{$root}--top-left) {
+        top: 0;
+        left: 0;
+      }
+
+      &:has(.#{$root}--top-right) {
+        top: 0;
+        right: 0;
+      }
+
+      &:has(.#{$root}--bottom-right) {
+        bottom: 0;
+        right: 0;
+      }
+
+      &:has(.#{$root}--bottom-left) {
+        bottom: 0;
+        left: 0;
+      }
+
+      &:has(.#{$root}--bottom-center) {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 
-  &--none-radius {
-    border-radius: 0;
-  }
-
-  &--small-radius {
-    border-radius: var(--toast-border-radius-sm, 6px);
-  }
-
-  &--medium-radius {
-    border-radius: var(--toast-border-radius-md, 15px);
-  }
-
-  &--large-radius {
-    border-radius: var(--toast-border-radius-lg, 20px);
-  }
-
-  &--error-color {
-    background-color: var(--toast-error-bg-color, var(--error-color));
-  }
-
-  &--success-color {
-    background-color: var(--toast-success-bg-color, var(--success-color));
-  }
-
-  &__title,
-  &__description {
-    transition: color var(--toast-speed-color, var(--speed-color));
-
-    .#{$root}--error-color & {
-      color: var(--toast-error-text-color, white);
+  @keyframes hide {
+    from {
+      opacity: 1;
     }
-
-    .#{$root}--success-color & {
-      color: var(--toast-success-text-color, white);
+    to {
+      opacity: 0;
     }
   }
 
-  &__title {
-    grid-area: title;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: var(--text-primary-color);
-    font-size: 15px;
-  }
-
-  &__description {
-    grid-area: description;
-    margin: 0;
-    color: var(--text-secondary-color);
-    font-size: 13px;
-    line-height: 1.3;
-  }
-
-  &__action {
-    grid-area: action;
-  }
-
-  &__close {
-    position: absolute !important;
-    top: var(--toast-close-offset, 5px);
-
-    @include dir.ltr {
-      right: var(--toast-close-offset, 5px);
+  @keyframes show {
+    from {
+      opacity: 0;
     }
-
-    @include dir.rtl {
-      left: var(--toast-close-offset, 5px);
+    to {
+      opacity: 1;
     }
   }
 
-  &__viewport {
-    box-sizing: border-box;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    gap: var(--toast-viewport-gap, 10px);
-    width: var(--toast-width, 300px);
-    padding: var(--toast-viewport-padding, var(--side-padding-xs));
-    max-width: 100vw;
-    margin: 0;
-    list-style: none;
-    z-index: 999999;
-    outline: none;
-
-    &:has(.#{$root}--full-width) {
-      width: 100%;
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
     }
-
-    &:has(.#{$root}--sticky) {
-      padding: 0;
-    }
-
-    &:has(.#{$root}--top-center) {
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    &:has(.#{$root}--top-left) {
-      top: 0;
-      left: 0;
-    }
-
-    &:has(.#{$root}--top-right) {
-      top: 0;
-      right: 0;
-    }
-
-    &:has(.#{$root}--bottom-right) {
-      bottom: 0;
-      right: 0;
-    }
-
-    &:has(.#{$root}--bottom-left) {
-      bottom: 0;
-      left: 0;
-    }
-
-    &:has(.#{$root}--bottom-center) {
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
+    to {
+      transform: translateX(0);
     }
   }
-}
 
-@keyframes hide {
-  from {
-    opacity: 1;
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-  to {
-    opacity: 0;
-  }
-}
 
-@keyframes show {
-  from {
-    opacity: 0;
+  @keyframes slideInTop {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
+  @keyframes slideInBottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
 
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
+  @keyframes swipeOutRight {
+    from {
+      transform: translateX(var(--radix-toast-swipe-end-x));
+    }
+    to {
+      transform: translateX(100%);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
 
-@keyframes slideInTop {
-  from {
-    transform: translateY(-100%);
+  @keyframes swipeOutLeft {
+    from {
+      transform: translateX(var(--radix-toast-swipe-end-x));
+    }
+    to {
+      transform: translateX(-100%);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
 
-@keyframes slideInBottom {
-  from {
-    transform: translateY(100%);
+  @keyframes swipeOutTop {
+    from {
+      transform: translateY(var(--radix-toast-swipe-end-y));
+    }
+    to {
+      transform: translateY(-100%);
+    }
   }
-  to {
-    transform: translateX(0);
-  }
-}
 
-@keyframes swipeOutRight {
-  from {
-    transform: translateX(var(--radix-toast-swipe-end-x));
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes swipeOutLeft {
-  from {
-    transform: translateX(var(--radix-toast-swipe-end-x));
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes swipeOutTop {
-  from {
-    transform: translateY(var(--radix-toast-swipe-end-y));
-  }
-  to {
-    transform: translateY(-100%);
-  }
-}
-
-@keyframes swipeOutBottom {
-  from {
-    transform: translateY(var(--radix-toast-swipe-end-y));
-  }
-  to {
-    transform: translateY(100%);
+  @keyframes swipeOutBottom {
+    from {
+      transform: translateY(var(--radix-toast-swipe-end-y));
+    }
+    to {
+      transform: translateY(100%);
+    }
   }
 }

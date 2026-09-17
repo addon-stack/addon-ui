@@ -4,7 +4,7 @@ import {ItemText, type SelectItemTextProps} from "@radix-ui/react-select";
 
 import classnames from "classnames";
 
-import styles from "./select.module.scss?isolation";
+import styles from "./select.module.scss";
 
 export {type SelectItemTextProps};
 
