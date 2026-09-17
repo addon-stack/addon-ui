@@ -4,7 +4,7 @@ import {getBrowser} from "adnbn";
 import {merge} from "ts-deepmerge";
 
 import config from "#addon-ui/config";
-import type {ComponentsProps, Config, ExtraProps, Icons} from "../../types/config";
+import type {ComponentsProps, Config, ExtraProps, IconMap} from "../../types/config";
 import {ExtraProvider, IconsProvider, ThemeProvider, type ThemeProviderProps} from "..";
 
 import {type PortalContainer, PortalContext} from "./context";
@@ -15,7 +15,7 @@ import "./styles/base.scss";
 import "./styles/document.scss";
 import "#addon-ui/style.scss";
 
-const EmptyIcons: Icons = {};
+const EmptyIcons: IconMap = {};
 const EmptyComponents: ComponentsProps = {};
 const EmptyExtra: ExtraProps = {};
 
@@ -58,7 +58,7 @@ const UIProvider: FC<PropsWithChildren<UIProviderProps>> = props => {
 
     const extraProps = useMemo<ExtraProps>(() => merge(config.extra || {}, extra), [extra]);
 
-    const svgIcons = useMemo<Icons>(() => ({...config.icons, ...icons}), [icons]);
+    const svgIcons = useMemo<IconMap>(() => ({...config.icons, ...icons}), [icons]);
 
     useEffect(() => {
         if (container === false) {

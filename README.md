@@ -382,7 +382,7 @@ For content scripts mounted in a ShadowRoot, pass its host as `container` and th
 | Prop         | Type                                  | Default     | Description                                                    |
 | :----------- | :------------------------------------ | :---------- | :------------------------------------------------------------- |
 | `components` | `ComponentsProps`                     | `{}`        | Component-specific configuration overrides.                    |
-| `icons`      | `Icons`                               | `{}`        | Custom SVG icons registration.                                 |
+| `icons`      | `IconMap`                               | `{}`        | Custom SVG icons registration.                                 |
 | `extra`      | `ExtraProps`                          | `{}`        | App-wide extra properties.                                     |
 | `storage`    | `ThemeStorageContract \| true`        | `undefined` | Persistence storage for theme settings.                        |
 | `container`  | `string \| Element \| false`          | `"html"`    | Target element for attributes. Set to `false` to disable.      |

@@ -3,9 +3,9 @@ import React, {type FC, type PropsWithChildren, useCallback, useMemo, useState} 
 import {getIconDefinition, IconMode, type SpriteIcons} from "../../components/Icon";
 import {SvgSprite} from "../../components/SvgSprite";
 import type {Config} from "../../types/config";
-import {createSymbolPrefix, getSymbolId} from "../../utils/icons";
 
 import {IconRegistryContext, IconsContext} from "./context";
+import {createSymbolPrefix, getSymbolId} from "./symbol-id";
 
 const IconsProvider: FC<PropsWithChildren<Pick<Config, "icons">>> = ({children, icons}) => {
     const [prefix] = useState(createSymbolPrefix);

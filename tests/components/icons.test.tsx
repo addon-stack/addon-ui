@@ -1,7 +1,7 @@
 import React, {act, type ComponentProps, createRef, memo, useState} from "react";
 import {createRoot, type Root} from "react-dom/client";
 
-import {Icon, IconMode, type IconProps, type Icons} from "../../src/components/Icon";
+import {Icon, type IconMap, IconMode, type IconProps} from "../../src/components/Icon";
 import {UIProvider, useIcons} from "../../src/providers";
 import config from "../../src/virtual/config";
 
@@ -23,7 +23,7 @@ afterEach(async () => {
     document.body.replaceChildren();
 });
 
-const render = async (icons: Icons, props: Partial<IconProps> = {}) => {
+const render = async (icons: IconMap, props: Partial<IconProps> = {}) => {
     await act(async () => root.render(
         <UIProvider container={false} icons={icons}>
             <Icon name="sample" data-testid="icon" {...props} />
@@ -89,7 +89,10 @@ function StatefulIcon(props: ComponentProps<"svg">) {
 }
 
 test("inline icons have independent state, retain the source viewBox and never register symbols", async () => {
-    const icons: Icons = {sample: {mode: "inline", component: StatefulIcon}, shape: {mode: "inline", component: Shape}};
+    const icons: IconMap = {
+        sample: {mode: "inline", component: StatefulIcon},
+        shape: {mode: "inline", component: Shape},
+    };
 
     await act(async () => root.render(
         <UIProvider container={false} icons={icons}>
@@ -108,7 +111,7 @@ test.each([IconMode.Sprite, IconMode.Inline, IconMode.Asset])("%s preserves SVG 
     const ref = createRef<SVGSVGElement>();
     const onClick = jest.fn();
 
-    const icons: Icons = {sample: mode === IconMode.Asset
+    const icons: IconMap = {sample: mode === IconMode.Asset
         ? {mode, src: "/icon.svg"}
         : {mode, component: Shape}};
 
@@ -150,7 +153,7 @@ test("switches between all modes and updates the registered symbol when a source
     expect(mount.querySelector("symbol path")).not.toBeNull();
 });
 
-let resolved: Icons;
+let resolved: IconMap;
 
 function ReadIcons() {
     resolved = useIcons().icons;

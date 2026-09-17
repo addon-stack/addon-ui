@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {createPortal} from "react-dom";
 
-import {Icon, IconMode, type Icons, UIProvider} from "addon-ui";
+import {Icon, type IconMap, IconMode, UIProvider} from "addon-ui";
 
 import IconIds from "./IconIds";
 
@@ -11,13 +11,13 @@ import Wide from "./wide.svg?react";
 import WithDimensions from "./with-dimensions.svg?react";
 import styles from "./icon-modes.module.scss";
 
-const Sources: Icons = {
+const Sources: IconMap = {
     "mode-sprite": {mode: IconMode.Sprite, component: Wide, viewBox: "0 0 80 20"},
     "mode-inline": {mode: "inline", component: Wide},
     "mode-asset": {mode: IconMode.Asset, src: Asset},
 };
 
-const GeometrySources: Icons = {
+const GeometrySources: IconMap = {
     "wide-component": Wide,
     "wide-descriptor": {mode: "sprite", component: Wide},
     "fixed-component": WithDimensions,

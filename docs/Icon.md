@@ -214,8 +214,10 @@ so registering another name does not notify existing Icon consumers. Existing sy
 components are memoized by source identity. Pass a new source object when changing a
 definition; mutating a previously supplied definition in place is not supported.
 
-`Icons`, `IconMode` and definition types are imported from `addon-ui`; `addon-ui/config`
+`IconMap`, `IconMode` and definition types are imported from `addon-ui`; `addon-ui/config`
 exports `defineConfig` and the general configuration types only.
+The former `Icons` type is now named `IconMap`; update type imports and annotations.
+The configuration property remains `icons`.
 
 Provide `aria-label` and `role="img"` for meaningful icons, or `aria-hidden="true"`
 for decoration. Give surrounding controls their own accessible labels.

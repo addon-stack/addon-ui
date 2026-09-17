@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import {createPortal} from "react-dom";
 
-import {Icon, type Icons, UIProvider} from "addon-ui";
+import {Icon, type IconMap, UIProvider} from "addon-ui";
 
 import Circle from "./circle.svg?react";
 import Square from "./square.svg?react";
 
 const Names = ["shared", "shared space", "shared_20_space", "50%#😀"];
-const OuterIcons: Icons = Object.fromEntries(Names.map(name => [name, Square]));
-const InnerIcons: Icons = {shared: Circle};
+const OuterIcons: IconMap = Object.fromEntries(Names.map(name => [name, Square]));
+const InnerIcons: IconMap = {shared: Circle};
 
 export default function IconIds() {
     const [portal, setPortal] = useState<HTMLDivElement | null>(null);

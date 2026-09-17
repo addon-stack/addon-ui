@@ -1,10 +1,12 @@
 import React, {act, type ComponentProps, memo, Profiler, useState} from "react";
 import {createRoot, type Root} from "react-dom/client";
 
-import {Icon, type Icons} from "../../src/components/Icon";
+import {Icon, type IconMap} from "../../src/components/Icon";
 import {SvgSprite} from "../../src/components/SvgSprite";
 import {IconsProvider, UIProvider, useIcons, useTheme} from "../../src/providers";
-import {createSymbolPrefix, getSymbolId} from "../../src/utils/icons";
+// Test the private ID helpers without exposing them through the provider API.
+// eslint-disable-next-line project/module-boundaries
+import {createSymbolPrefix, getSymbolId} from "../../src/providers/icons/symbol-id";
 import config from "../../src/virtual/config";
 
 let root: Root;
@@ -105,7 +107,7 @@ test("icon replacements, component defaults and theme changes still reach memoiz
         return null;
     });
 
-    const render = async (icons: Icons, size: number) => act(async () => root.render(
+    const render = async (icons: IconMap, size: number) => act(async () => root.render(
         <UIProvider container={false} icons={icons} components={{icon: {size}}}>
             <Icon name="a" /><ReadTheme />
         </UIProvider>

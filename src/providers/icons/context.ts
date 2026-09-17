@@ -1,9 +1,9 @@
 import {createContext, useContext} from "react";
 
-import type {Icons} from "../../components";
+import type {IconMap} from "../../components";
 
 export interface IconsContract {
-    icons: Icons;
+    icons: IconMap;
     registeredIconNames: string[];
     registerIcon: (name: string) => void;
 }
@@ -21,7 +21,7 @@ IconsContext.displayName = "IconsContext";
 export const useIcons = () => useContext(IconsContext);
 
 export interface IconRegistryContract {
-    icons: Icons;
+    icons: IconMap;
     registerIcon: (name: string) => void;
     getSymbolId: (name: string) => string;
 }

@@ -31,5 +31,5 @@ export interface AssetIconDefinition {
 
 export type IconDefinition = SpriteIconDefinition | InlineIconDefinition | AssetIconDefinition;
 export type IconSource = IconComponent | IconDefinition;
-export type Icons = Record<string, IconSource>;
+export type IconMap = Record<string, IconSource>;
 export type SpriteIcons = Record<string, IconComponent | SpriteIconDefinition>;
