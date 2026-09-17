@@ -4,6 +4,8 @@ import classnames from "classnames";
 
 import {useComponentProps, useIcons} from "../../providers";
 
+import {getIconDefinition, IconMode} from "./definition";
+
 import styles from "./icon.module.scss";
 
 export interface IconProps extends ComponentProps<"svg"> {
@@ -18,14 +20,22 @@ const Icon: ForwardRefRenderFunction<SVGSVGElement, IconProps> = (props, ref) =>
         size = 24,
         width = size,
         height = size,
+        viewBox,
+        preserveAspectRatio,
         ...other
     } = {...useComponentProps("icon"), ...props};
 
     const {icons, registerIcon} = useIcons();
 
-    useEffect(() => icons[name] && registerIcon(name), [name, icons, registerIcon]);
+    const definition = icons[name] ? getIconDefinition(icons[name]) : undefined;
 
-    if (!icons[name]) {
+    useEffect(() => {
+        if (definition?.mode === IconMode.Sprite) {
+            registerIcon(name);
+        }
+    }, [name, definition?.mode, registerIcon]);
+
+    if (!definition) {
         console.warn(`Icon "${name}" not found.`);
 
         return (
@@ -38,9 +48,32 @@ const Icon: ForwardRefRenderFunction<SVGSVGElement, IconProps> = (props, ref) =>
         );
     }
 
+    const resolvedViewBox = viewBox ?? definition.viewBox;
+
+    const Component = definition.mode === IconMode.Inline ? definition.component : undefined;
+
     return (
-        <svg ref={ref} className={classnames(styles["icon"], className)} width={width} height={height} {...other}>
-            <use href={`#${name}`} />
+        <svg
+            ref={ref}
+            className={classnames(styles["icon"], className)}
+            width={width}
+            height={height}
+            viewBox={resolvedViewBox}
+            preserveAspectRatio={preserveAspectRatio}
+            {...other}
+        >
+            {definition.mode === IconMode.Sprite && <use href={`#${name}`} />}
+            {Component && (
+                <Component
+                    width="100%"
+                    height="100%"
+                    {...(resolvedViewBox === undefined ? {} : {viewBox: resolvedViewBox})}
+                    {...(preserveAspectRatio === undefined ? {} : {preserveAspectRatio})}
+                />
+            )}
+            {definition.mode === IconMode.Asset && (
+                <image href={definition.src} width="100%" height="100%" preserveAspectRatio={preserveAspectRatio} />
+            )}
         </svg>
     );
 };

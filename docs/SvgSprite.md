@@ -60,7 +60,7 @@ Only the prop name, type, and default are listed below.
 
 | Prop    | Type                                                    | Default |
 | ------- | ------------------------------------------------------- | ------- |
-| `icons` | `Record<string, React.FC<React.ComponentProps<'svg'>>>` | —       |
+| `icons` | `Record<string, IconComponent | SpriteIconDefinition>` | —       |
 
 Notes:
 
@@ -103,6 +103,18 @@ import CloseIcon from "./icons/close.svg?react";
 
 ### Accessibility (A11y)
 
-- SvgSprite renders an `<svg>` with `display: none` and `aria-hidden="true"`; it has no interactive semantics.
+- SvgSprite renders an absolutely positioned, zero-size `<svg>` with hidden overflow,
+  `aria-hidden="true"` and `focusable="false"`. Keeping it out of `display: none` preserves
+  gradient, clipPath and mask references in Chromium.
 - Provide accessible names on actual Icon usage (e.g., `aria-label`, surrounding label, or `<title>` where appropriate).
 - Ensure color contrast for rendered icons where they convey meaning.
+
+### Sprite descriptors
+
+`icons` accepts component shorthand and `{mode: IconMode.Sprite,
+component, viewBox?}` entries. String `"sprite"` is also accepted. The default
+symbol viewBox remains `0 0 24 24`. A descriptor forwards an explicitly supplied
+viewBox and 100% width/height to its component; an omitted viewBox never overrides
+the component's own coordinate system. File attributes may override these props.
+Component shorthand renders without additional props. Inline and asset entries belong in UIProvider configuration and are
+not accepted by the standalone SvgSprite component. See [Icon](./Icon.md).

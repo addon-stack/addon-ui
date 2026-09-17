@@ -89,3 +89,21 @@ projects exercise real `Workspace.Multi` stylesheet composition and the UI plugi
 Build assertions also check emitted library/application layers, unlayered application theme tokens,
 empty manifest content-script CSS lists and a separate lazy Tag stylesheet. These checks complement
 browser behavior; checking emitted CSS alone does not prove which declaration wins.
+
+## Icon modes
+
+`components/icons.test.tsx` covers mode changes, sprite registration, independent
+inline instances, SVG refs and config replacement. `types/icons.tsx` checks the
+public discriminated union with `npm run typecheck:tests`. Plugin tests exercise
+whole-entry shared/app replacement with the real compiler. `e2e/icons.spec.mjs`
+loads SVG files through the framework and checks sprite/inline/asset rendering,
+custom colors, resource URLs, lazy styles and mode changes in extension pages
+and separate ShadowRoots.
+
+Icon regression coverage also includes fixed-dimension and viewBox-only files
+through the real `?react` loader, plus pixel samples for sprite gradients,
+clipPath and mask. PNGs are decoded in a browser canvas with a color tolerance;
+no PNG decoder dependency or byte-for-byte screenshot comparison is used.
+Firefox extension-document pixels come from its RDP screenshot actor, while
+Playwright captures ShadowRoots. `plugin/config-entry.test.ts` checks development
+module stats before tree shaking; the definition leaf's imports are lint-guarded.

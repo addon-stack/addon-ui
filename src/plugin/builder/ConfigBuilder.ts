@@ -14,7 +14,9 @@ export default class ConfigBuilder implements BuilderContract {
         return [
             `import {merge} from ${JSON.stringify(createRequire(import.meta.url).resolve("ts-deepmerge"))};`,
             ...imports,
-            `export default merge(${configs.join(", ")});`,
+            `const configs = [${configs.join(", ")}];`,
+            "const settings = configs.map(({icons, ...settings}) => settings);",
+            "export default {...merge(...settings), icons: Object.assign({}, ...configs.map(config => config.icons))};",
         ].join("\n");
     }
 }

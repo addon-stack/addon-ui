@@ -173,13 +173,76 @@ Both popup documents open in extension tabs, so the browser toolbar surface is o
 - Updated the build verifier from the removed isolation loader/layer identity to the installed
   `adnbn-default-modules` loader and `adnbn:css:default` layer. Manifest isolation, CSS/WAR resources,
   shared popup styles, dependency resolution and lazy stylesheet assertions remain enabled.
-- `npm run verify` passes: lint, source/test types, 60 tooling checks, 100 Jest tests in nine suites
+- `npm run verify` passes: lint, source/test types, 60 tooling checks, 111 Jest tests in ten suites
   and declaration generation. Storybook builds successfully.
-- The full `npm run test:e2e` passes 45 checks: four extension builds and 41 browser
+- The full `npm run test:e2e` passes 49 checks in 42.5 seconds: four extension builds and 45 browser
   scenarios. One existing Firefox document RTL case remains skipped because Playwright Juggler does
   not expose extension documents. No new skips, retries or runtime warning filters were added.
 - Both browsers verify automatic CSS delivery into two ShadowRoots and extension popup documents,
   initial/lazy styles, theme variables, shared/app customization and application layer precedence.
-  Existing focus, scroll, Select and Toast scenarios also pass.
+  Existing focus, scroll, Select, Toast and SVG icon mode scenarios also pass.
 - These local macOS results supersede the preceding AddonBone 0.12.0 delivery failures. Firefox
   popup checks use RDP; the documented toolbar-popup and console-monitoring limits still apply.
+
+## Icon modes — initial run before the AddonBone 0.13 upgrade (superseded)
+
+- `IconMode` and literal modes are checked as a discriminated union, including
+  invalid mixed fields held in variables (`tests/types/icons.tsx`).
+- `npm run verify`: lint, source/test types, 60 tooling tests, 111 Jest tests and
+  declaration generation passed. The icon component suite covers component shorthand,
+  memo components, custom viewBox, independent inline state, mode changes, SVG
+  refs/callbacks, config replacement and the missing-name fallback. The real
+  compiler suite verifies whole-entry shared/app icon replacement while other
+  config values retain deep/array merge behavior.
+- Storybook production build passed.
+- Rebuilt the Single fixture for Chrome and Firefox and checked fixture types.
+  `npm run test:e2e -- tests/e2e/icons.spec.mjs --no-deps`: **4 passed**. Both
+  browsers render real SVG-file imports in sprite/inline/asset modes in two
+  ShadowRoots and an extension page. Checks cover source viewBox, per-instance
+  colors, lazy fixture CSS, portal references, asset decoding and mode changes.
+  Firefox extension-page checks use the existing RDP helper.
+- Asset URLs must use regular `.svg` imports here. The `?browser` query in the
+  installed AddonBone 0.12 emits a CSS-localization extension-ID placeholder that
+  remains unresolved when used as a JavaScript URL.
+- At that point the full integration gate failed: all four build checks stopped
+  on nonempty `manifest.content_scripts[0].css` with AddonBone 0.12.0. The focused
+  icon fixture still used an isolation query. These historical results are superseded
+  by the AddonBone 0.13 upgrade above and the final regression run below.
+
+
+## Icon review fixes — 2026-09-17
+
+- Published AddonBone 0.13.0 is installed in both the package and the automated fixture.
+  The last icon stylesheet isolation query and its ambient declaration are removed;
+  all fixture styles use automatic framework delivery.
+- Icon contracts and normalization now live in `Icon/definition`, without runtime
+  dependencies on components, providers or SCSS. A real development Rspack build
+  with side-effect pruning and used-export optimization disabled checks module stats.
+  Eleven lint cases guard this leaf, including type imports, re-exports, dynamic imports
+  and stylesheet imports. `getIconDefinition` is no longer a public package export.
+- Red/green evidence: the new component test first failed because a sprite descriptor
+  changed the handwritten source viewBox from `0 0 80 20` to `0 0 24 24`. It passes
+  after forwarding viewBox only when explicitly supplied.
+- Real SVG-file fixtures cover a viewBox-only source and a source with matching fixed
+  width/height/viewBox. The actual framework loader strips the latter's redundant viewBox
+  and retains dimensions. Pixel samples confirm explicit descriptor metadata scales the
+  fixed source to 40x10 in both sprite and inline modes.
+- With the original `display: none` sprite, Chromium's new pixel checks failed in both
+  ShadowRoot and extension document: gradient samples were white and clip/mask corners
+  were incorrectly filled. Firefox passed the same cases. Both browsers pass after
+  switching to an absolutely positioned, zero-size sprite with hidden overflow.
+- Pixel checks sample gradient endpoints, clip/mask centers and corners with a channel
+  tolerance of 12. PNG screenshots are decoded through Image and OffscreenCanvas without
+  an added dependency. Firefox's RDP screenshot actor captures actual extension documents;
+  these checks do not substitute an HTML copy or add an extension-document skip.
+- `npm run verify` passes: lint, source/test typechecks, 71 tooling tests, 113 Jest tests
+  in eleven suites, and declaration generation. Storybook production build passes.
+- Full `npm run test:e2e`: **55 passed, 1 existing skip** in 46.6 seconds, including all
+  four extension builds and the ten icon scenarios. The skip remains Firefox document
+  RTL; no skips or retries were added for icons. CSS delivery, lazy styles, customization,
+  focus, scrolling, Select and Toast checks also pass.
+- README and Icon/SvgSprite documentation cover the current modes, fixed-size SVG metadata,
+  asset URL handling, props and CSS-variable tables. Local screenshot output is ignored.
+- These are local macOS results. Firefox popup interactions and screenshots use RDP;
+  its existing console-monitoring and toolbar-popup limitations remain. ID namespacing,
+  registration-context optimization and SVGR dimensions normalization remain follow-ups.

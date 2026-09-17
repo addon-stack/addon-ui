@@ -63,6 +63,47 @@ it.each([true, false])("preserves priority and merge=%s for config and SCSS", as
     }
 });
 
+it("replaces whole icon entries between shared and app without changing other config merging", async () => {
+    await write("shared", "ui.config.ts", `
+        const component = () => "shared";
+        export default {
+            components: {icon: {size: 24}}, extra: {values: [1]},
+            icons: {
+                retained: component,
+                toAsset: {mode: "sprite", component, viewBox: "0 0 40 20"},
+                toInline: {mode: "asset", src: "old.svg"},
+                toLegacy: {mode: "asset", src: "old.svg"},
+                sameMode: {mode: "sprite", component, viewBox: "0 0 80 20"}
+            }
+        };
+    `);
+
+    await write("app theme.v2", "ui.config.ts", `
+        const component = () => "app";
+        export default {
+            components: {icon: {className: "custom"}}, extra: {values: [2]},
+            icons: {
+                toAsset: {mode: "asset", src: "new.svg"},
+                toInline: {mode: "inline", component},
+                toLegacy: component,
+                sameMode: {mode: "sprite", component}
+            }
+        };
+    `);
+
+    const compiler = createCompiler(root, createSources(root));
+    expect((await build(compiler)).hasErrors()).toBe(false);
+    const {config} = readResult(compiler);
+    expect(config.icons.toAsset).toEqual({mode: "asset", src: "new.svg"});
+    expect(Object.keys(config.icons.toInline).sort()).toEqual(["component", "mode"]);
+    expect(config.icons.toInline.component()).toBe("app");
+    expect(config.icons.toLegacy()).toBe("app");
+    expect(config.icons.retained()).toBe("shared");
+    expect(config.icons.sameMode.viewBox).toBeUndefined();
+    expect(config.components.icon).toEqual({size: 24, className: "custom"});
+    expect(config.extra.values).toEqual([1, 2]);
+});
+
 it("refreshes additions, edits, removals and recovers from invalid SCSS/config in watch", async () => {
     const session = watch(createCompiler(root, createSources(root)));
 

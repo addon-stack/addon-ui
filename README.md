@@ -264,7 +264,7 @@ export default defineConfig({
 
 The example above shows how to use the TypeScript configuration with the Addon Bone framework.
 The `defineConfig` helper provides type checking and autocompletion for your configuration.
-You can import enum values from "addon-ui/config" to ensure type safety when configuring components.
+Import component enum values from "addon-ui" and `defineConfig` from "addon-ui/config".
 The configuration can also include SVG icons imported directly from your project files.
 
 #### ui.style.scss
@@ -548,9 +548,18 @@ through.
 ## Icons and sprite
 
 - Register icons in `ui.config.ts` or via `UIProvider`’s `icons` prop. The Icon component pulls symbols from the
-  automatically mounted SvgSprite.
+  automatically mounted SvgSprite in sprite mode; inline and asset entries render directly.
 - Icons are lazily registered: a symbol is added only after an Icon with that name renders at least once.
 - See docs/Icon.md and docs/SvgSprite.md for details and examples.
+
+### Icon sources
+
+Icon configuration supports component shorthand (sprite), `IconMode.Sprite`,
+`IconMode.Inline` and `IconMode.Asset`, plus their string literals. SVG modes take
+`component`; asset mode takes `src`. The fields are mutually exclusive in TypeScript.
+Shared/app and provider overrides replace each same-name icon entry in full.
+`<Icon name="..." />` and its SVG ref stay unchanged across modes.
+See [Icon configuration and examples](./docs/Icon.md).
 
 ## Extra props (cross-cutting configuration)
 

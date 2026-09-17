@@ -46,7 +46,29 @@ export async function withFirefoxPopup(port, run) {
                 : JSON.parse(result.result);
         };
 
-        return run({evaluate, poll, tab});
+        const screenshot = async selector => {
+            const {value: prepared} = await request(frame.screenshotContentActor, "prepareCapture", {
+                args: {selector},
+            });
+
+            assert.equal(prepared.error, undefined, JSON.stringify(prepared));
+            const actors = await request("root", "getRoot");
+
+            const {value: captured} = await request(actors.screenshotActor, "capture", {
+                args: {
+                    browsingContextID: tab.browsingContextID,
+                    rect: prepared.rect,
+                    snapshotScale: 1,
+                    disableFlash: true,
+                },
+            });
+
+            assert.ok(captured.data, JSON.stringify(captured));
+
+            return Buffer.from(captured.data.split(",")[1], "base64");
+        };
+
+        return run({evaluate, poll, tab, screenshot});
     });
 }
 

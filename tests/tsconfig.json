@@ -10,6 +10,7 @@
   },
   "include": [
     "components/**/*.tsx",
+    "types/**/*.tsx",
     "support/components/**/*.ts",
     "../src/declaration.d.ts",
     "../src/types/vendors/odometer.d.ts",

@@ -51,7 +51,7 @@ const UIProvider: FC<PropsWithChildren<UIProviderProps>> = props => {
 
     const extraProps = useMemo<ExtraProps>(() => merge(config.extra || {}, extra), [extra]);
 
-    const svgIcons = useMemo<Icons>(() => merge(config.icons || {}, icons), [icons]);
+    const svgIcons = useMemo<Icons>(() => ({...config.icons, ...icons}), [icons]);
 
     useEffect(() => {
         if (container === false) {
