@@ -4,8 +4,8 @@ import type {Config} from "../../types/config";
 import {Theme, type ThemeStorageContract} from "../../types/theme";
 
 import {ThemeContext} from "./context";
-import {isDarkMedia, isValid} from "./theme-utils";
 import ThemeStorage from "./ThemeStorage";
+import {isDarkMedia, isValid} from "./utils";
 
 export interface ThemeProviderProps extends Pick<Config, "components"> {
     /**

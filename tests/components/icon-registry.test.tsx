@@ -6,7 +6,7 @@ import {SvgSprite} from "../../src/components/SvgSprite";
 import {IconsProvider, UIProvider, useIcons, useTheme} from "../../src/providers";
 // Test the private ID helpers without exposing them through the provider API.
 // eslint-disable-next-line project/module-boundaries
-import {createSymbolPrefix, getSymbolId} from "../../src/providers/icons/symbol-id";
+import {createSymbolPrefix, getSymbolId} from "../../src/providers/icons/utils";
 import config from "../../src/virtual/config";
 
 let root: Root;

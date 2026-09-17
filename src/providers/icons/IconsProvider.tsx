@@ -5,7 +5,7 @@ import {SvgSprite} from "../../components/SvgSprite";
 import type {Config} from "../../types/config";
 
 import {IconRegistryContext, IconsContext} from "./context";
-import {createSymbolPrefix, getSymbolId} from "./symbol-id";
+import {createSymbolPrefix, getSymbolId} from "./utils";
 
 const IconsProvider: FC<PropsWithChildren<Pick<Config, "icons">>> = ({children, icons}) => {
     const [prefix] = useState(createSymbolPrefix);
