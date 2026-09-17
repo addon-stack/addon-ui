@@ -1,5 +1,73 @@
 # Changelog
 
+## 🚀 Release `addon-ui` v0.13.0 (2026-09-17)
+
+### 💥 Breaking Changes
+
+* Rename the Icons type to IconMap. Import IconMap from addon-ui;
+the icons configuration property remains unchanged.
+
+* Provider-owned symbol IDs are generated per provider.
+Use Icon or a standalone SvgSprite for manual references. Import the Icons type
+from addon-ui instead of addon-ui/config.
+
+* Addon Bone 0.13.0 or newer is required for automatic stylesheet delivery.
+
+
+### ✨ Features
+
+* **icons:** isolate sprite identifiers and optimize registration ([6eb4f91](https://github.com/addon-stack/addon-ui/commit/6eb4f91a80d9b393b25753e85e0ee887be5fdbe7))
+
+  Namespace provider-owned symbols, separate registration context, and memoize
+  unchanged symbols and provider values. Consolidate Icon types and utilities
+  beside the component and verify public exports and bundle output.
+
+* **icons:** support sprite, inline and asset sources ([9e09c2d](https://github.com/addon-stack/addon-ui/commit/9e09c2daf54aa94c33db285110031c5031a1a3a1))
+
+
+* **styles:** establish overridable library cascade layers ([92482df](https://github.com/addon-stack/addon-ui/commit/92482df5289373fb48a685240e30bff3f831ed4e))
+
+
+
+
+### 🐛 Bug Fixed
+
+* **styles:** replace visual important overrides with predictable cascade ([89caac2](https://github.com/addon-stack/addon-ui/commit/89caac281e867f8096c81c6d32deb3e27f5bb3cc))
+
+
+
+
+### 📝 Documentation
+
+* **styles:** explain customization and cascade layer precedence ([769a87d](https://github.com/addon-stack/addon-ui/commit/769a87de4dfae5cde49deeb6ba394af801fd9598))
+
+
+
+
+### 🧪 Tests
+
+* **styles:** cover application customization across cascade layers ([1f74c51](https://github.com/addon-stack/addon-ui/commit/1f74c51d2efe31180a8feb021918e81c3fc9882f))
+
+
+
+
+### 🛠️ Refactoring
+
+* **icons:** rename icon map and colocate symbol helpers ([a66e3db](https://github.com/addon-stack/addon-ui/commit/a66e3db96b166a9a08d3621f6f2c7715f29fd282))
+
+  Move private symbol ID utilities next to IconsProvider and update their tests.
+  Rename the public icon map type throughout source, fixtures and documentation.
+
+* **styles:** adopt Addon Bone 0.13 stylesheet routing ([49c187c](https://github.com/addon-stack/addon-ui/commit/49c187cde49c45ea60fc474df44de0a8d260824d))
+
+
+
+
+
+### 🙌 Contributors
+
+- [Anjey Tsibylskij](https://github.com/atldays) (@atldays) — commits: 9
+
 ## 🚀 Release `addon-ui` v0.12.0 (2026-09-15)
 
 ### 💥 Breaking Changes
