@@ -95,17 +95,6 @@ for (const [filename, source, valid] of [
     ["src/hooks/example.ts", 'import("../components/Button");', false],
     ["src/utils/example.ts", 'require("../components/Button");', false],
     [".storybook/preview.tsx", 'import "../src/providers/ui/styles/base.scss";', true],
-    ["src/components/Icon/definition/types.ts", 'import type {ComponentType} from "react";', true],
-    ["src/components/Icon/definition/types.ts", 'import {type ComponentType} from "react";', true],
-    ["src/components/Icon/definition/icon-definition.ts", 'import {IconMode} from "./types";', true],
-    ["src/components/Icon/definition/index.ts", 'export * from "./types";', true],
-    ["src/components/Icon/definition/types.ts", 'import {useId} from "react";', false],
-    ["src/components/Icon/definition/types.ts", 'import type {IconProps} from "../Icon";', false],
-    ["src/components/Icon/definition/index.ts", 'export * from "../index";', false],
-    ["src/components/Icon/definition/icon-definition.ts", 'import("../../../providers");', false],
-    ["src/components/Icon/definition/icon-definition.ts", 'require("addon-ui");', false],
-    ["src/components/Icon/definition/icon-definition.ts", 'import "../icon.module.scss";', false],
-    ["src/components/Icon/definition/icon-definition.ts", 'import "./style.scss";', false],
 ]) {
     test(`module boundaries: ${filename}: ${source}`, () => {
         assert.equal(check("module-boundaries", source, filename).length, valid ? 0 : 1);

@@ -41,7 +41,11 @@ test("component shorthand retains original props and shares one registered symbo
         </UIProvider>
     ));
 
-    expect(mount.querySelectorAll('use[href="#sample"]')).toHaveLength(2);
+    const id = mount.querySelector('symbol[data-icon="sample"]')!.id;
+
+    expect([...mount.querySelectorAll("use")].map(element => element.getAttribute("href")))
+        .toEqual([`#${id}`, `#${id}`]);
+
     expect(mount.querySelectorAll("symbol")).toHaveLength(1);
     expect(mount.querySelector("svg")?.hasAttribute("viewBox")).toBe(false);
     expect(component.mock.calls[0][0]).toEqual({});

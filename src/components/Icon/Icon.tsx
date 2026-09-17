@@ -2,9 +2,10 @@ import React, {type ComponentProps, forwardRef, type ForwardRefRenderFunction, m
 
 import classnames from "classnames";
 
-import {useComponentProps, useIcons} from "../../providers";
+import {useComponentProps, useIconRegistry} from "../../providers";
 
-import {getIconDefinition, IconMode} from "./definition";
+import {IconMode} from "./types";
+import {getIconDefinition} from "./utils";
 
 import styles from "./icon.module.scss";
 
@@ -25,7 +26,7 @@ const Icon: ForwardRefRenderFunction<SVGSVGElement, IconProps> = (props, ref) =>
         ...other
     } = {...useComponentProps("icon"), ...props};
 
-    const {icons, registerIcon} = useIcons();
+    const {icons, registerIcon, getSymbolId} = useIconRegistry();
 
     const definition = icons[name] ? getIconDefinition(icons[name]) : undefined;
 
@@ -62,7 +63,7 @@ const Icon: ForwardRefRenderFunction<SVGSVGElement, IconProps> = (props, ref) =>
             preserveAspectRatio={preserveAspectRatio}
             {...other}
         >
-            {definition.mode === IconMode.Sprite && <use href={`#${name}`} />}
+            {definition.mode === IconMode.Sprite && <use href={`#${getSymbolId(name)}`} />}
             {Component && (
                 <Component
                     width="100%"

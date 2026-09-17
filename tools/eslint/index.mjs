@@ -157,24 +157,6 @@ const moduleBoundaries = {
                 return;
             }
 
-            if (isWithin(importer, "src/components/Icon/definition")) {
-                const target = value.startsWith(".")
-                    ? path.posix.normalize(path.posix.join(path.posix.dirname(importer), value)) : value;
-
-                const reactTypes = value === "react" && node.type === "ImportDeclaration"
-                    && (node.importKind === "type" || node.specifiers.length > 0
-                        && node.specifiers.every(specifier => specifier.importKind === "type"));
-
-                if (!reactTypes && (!isWithin(target, "src/components/Icon/definition")
-                    || /\.(?:css|scss)(?:\?|$)/.test(value))) {
-                    context.report({node: source, messageId: "boundary", data: {
-                        reason: "Icon definitions may only import local definitions and React types.",
-                    }});
-                }
-
-                return;
-            }
-
             if (/\.(?:css|scss)(?:\?|$)/.test(value)) {
                 return;
             }

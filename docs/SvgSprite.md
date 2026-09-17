@@ -1,6 +1,8 @@
 ### SvgSprite
 
-The SvgSprite component renders an invisible SVG sprite (`<svg><defs><symbol/></defs></svg>`) that is used by the Icon component via `<use href="#name" />`. In typical usage you don’t need to mount it manually: the UIProvider renders it for you through the internal IconsProvider.
+The SvgSprite component renders an invisible SVG sprite (`<svg><defs><symbol/></defs></svg>`).
+Icon references its provider's generated symbol IDs through `<use>`. In typical usage
+you don’t need to mount the sprite manually: UIProvider renders it through IconsProvider.
 
 #### Import and basic usage
 
@@ -48,7 +50,7 @@ export function ManualSprite() {
         <>
             {/* Mount once near the root */}
             <SvgSprite icons={icons} />
-            {/* Your app ... */}
+            <svg width="24" height="24"><use href="#close" /></svg>
         </>
     );
 }
@@ -60,12 +62,18 @@ Only the prop name, type, and default are listed below.
 
 | Prop    | Type                                                    | Default |
 | ------- | ------------------------------------------------------- | ------- |
-| `icons` | `Record<string, IconComponent | SpriteIconDefinition>` | —       |
+| `icons` | `Record<string, IconComponent \| SpriteIconDefinition>` | —       |
+| `getSymbolId` | `(name: string) => string` | Original name |
 
 Notes:
 
 - With UIProvider, you don’t pass `icons` to SvgSprite directly; provide them via the `icons` field in config/provider.
 - Icons are lazily registered: a symbol is added only after an Icon with that `name` is rendered at least once.
+- Provider-owned sprites use a separate random prefix per provider. Standalone SvgSprite
+  retains raw names, so manual `<use href="#name">` remains supported. An optional
+  `getSymbolId` resolver can customize standalone IDs; use that same resolver for manual links.
+- Each symbol exposes `data-icon` with its original name. A generated ID is an implementation
+  detail; use the name for configuration and debugging.
 
 ### Theming and global configuration
 

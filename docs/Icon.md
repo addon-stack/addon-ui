@@ -34,6 +34,10 @@ accepts its string literal: `"sprite"`, `"inline"`, or `"asset"`. Descriptors re
 an explicit mode. TypeScript rejects `src` in sprite/inline entries and `component`
 in asset entries, including when an entry comes from a variable.
 
+`getIconDefinition(source)` is also exported from `addon-ui`. It wraps a component
+source as `{mode: IconMode.Sprite, component: source}` and returns an existing
+descriptor unchanged. It does not register or render the icon.
+
 - **Sprite:** a component or `{mode: "sprite", component, viewBox?}`. The provider
   registers a symbol when the name is first used. Repeated instances reference
   that symbol through `<use>`. The default symbol viewBox is `0 0 24 24`.
@@ -123,8 +127,12 @@ loader. The library forwards a source `viewBox` override only when explicitly
 specified; it never replaces it with the symbol's default.
 
 SVG attributes explicitly written after a component's props still take precedence.
-Loader-level normalization such as SVGR `dimensions: false` is a separate
-AddonBone follow-up; it is not enabled by addon-ui.
+Loader-level normalization is a separate AddonBone follow-up and is not enabled
+by addon-ui. An opt-in should generate a missing viewBox from numeric dimensions
+before removing them (SVGO `removeDimensions`), preserve existing viewBox values,
+and retain `prefixIds` when specifying a custom SVGO plugin list. Normalized inline
+sources could then scale without descriptor metadata. Non-square sprite sources
+would still need explicit metadata to match the symbol's coordinate system.
 
 #### Shared configuration and provider overrides
 
@@ -179,8 +187,35 @@ individual elements.
 
 In Shadow DOM, place the provider and its sprite consumers in the same ShadowRoot,
 including portal contents. Independent roots can use the same configured names.
-Provider nesting within one DOM tree does not namespace symbol IDs; avoid conflicting
-sprite names in that tree.
+
+#### Symbol identifiers and registration
+
+Each IconsProvider (including the one inside UIProvider) creates its own random
+symbol prefix. `Icon` and its provider's sprite share the same resolver, so sibling
+and nested providers can register different icons under the same name in one document.
+Portals retain their React provider's resolver; the referenced sprite must still be
+in the same document or ShadowRoot as the portal contents.
+
+Generated IDs are stable for the provider's lifetime, including definition and mode
+changes, but change when it remounts. Names containing spaces, percent signs or Unicode
+are encoded by code point without percent escapes. Do not construct `href="#name"`
+for a provider-owned sprite or depend on the generated ID format. Use `Icon` and the
+configured name. For tests and inspection, symbols expose `data-icon` with that name;
+scope queries to the appropriate provider when names repeat.
+
+This prefixes symbol IDs, not IDs inside their SVG contents. SVGR prefixes file IDs;
+repeated copies of a static file normally have identical definitions. Handwritten or
+customized instances with the same internal ID and different definitions can still
+conflict. Supply unique matching IDs/references for those cases.
+
+`useIcons` retains `{icons, registeredIconNames, registerIcon}`. Registered names remain
+an ordered array without duplicates. Icon rendering uses a separate internal context,
+so registering another name does not notify existing Icon consumers. Existing symbol
+components are memoized by source identity. Pass a new source object when changing a
+definition; mutating a previously supplied definition in place is not supported.
+
+`Icons`, `IconMode` and definition types are imported from `addon-ui`; `addon-ui/config`
+exports `defineConfig` and the general configuration types only.
 
 Provide `aria-label` and `role="img"` for meaningful icons, or `aria-hidden="true"`
 for decoration. Give surrounding controls their own accessible labels.

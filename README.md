@@ -559,6 +559,8 @@ Icon configuration supports component shorthand (sprite), `IconMode.Sprite`,
 `component`; asset mode takes `src`. The fields are mutually exclusive in TypeScript.
 Shared/app and provider overrides replace each same-name icon entry in full.
 `<Icon name="..." />` and its SVG ref stay unchanged across modes.
+Provider-owned symbol IDs are namespaced per provider; use Icon rather than constructing
+raw `#name` references. Standalone SvgSprite preserves raw names for manual `<use>` links.
 See [Icon configuration and examples](./docs/Icon.md).
 
 ## Extra props (cross-cutting configuration)

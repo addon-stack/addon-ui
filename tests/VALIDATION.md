@@ -246,3 +246,48 @@ Both popup documents open in extension tabs, so the browser toolbar surface is o
 - These are local macOS results. Firefox popup interactions and screenshots use RDP;
   its existing console-monitoring and toolbar-popup limitations remain. ID namespacing,
   registration-context optimization and SVGR dimensions normalization remain follow-ups.
+
+## Icon registration and symbol IDs — 2026-09-17
+
+- Completed the registration-context and symbol-ID follow-ups above. The internal
+  registry is stable across name registrations; public `useIcons` retains its contract.
+  Immutable Sets deduplicate names, while the public array retains insertion order.
+  UIProvider empty defaults and theme/extra context values are stable across unchanged
+  parent renders; memoized SvgSymbol instances preserve unchanged source renders.
+- Provider symbol prefixes use 128 random bits from crypto.getRandomValues, generated
+  once per mounted provider. Names are encoded by Unicode code point, including `_`;
+  tests fix the emoji encoding and distinguish literal escape-like strings from spaces.
+  Standalone SvgSprite retains raw IDs and supports an explicit resolver.
+- Profiler tests verify that registering B and mounting B through a parent update do not
+  update the A list or rerender its symbol. Replacement sources, component size defaults
+  and theme changes still update consumers; duplicate registration keeps the public
+  names array unchanged.
+- The package root explicitly enumerates provider exports. A TypeScript checker test
+  snapshots all 180 root exports and the four config exports, including erased types.
+  `Icons` is available from the root only; the internal registry hook is not package API.
+- Four new Chrome/Firefox scenarios check nested/sibling providers, application elements
+  with matching IDs, Unicode/percent/space names, portals and stable IDs across updates.
+  Both ShadowRoots and real extension documents are covered, including pixel checks and
+  Firefox RDP screenshots. Existing gradient, clipping, masking and mode tests still pass.
+- `npm run verify` passes: lint, source/test types, 72 tooling tests, 119 Jest tests in
+  twelve suites and declaration generation. Storybook production build passes.
+- Full `npm run test:e2e`: **59 passed, 1 existing Firefox document RTL skip** in 50.8s,
+  including all four extension builds. No new skips, retries or warning filters.
+- These local macOS checks retain the previously documented Firefox console-monitoring
+  and toolbar-popup limits. Internal gradient/mask IDs are not rewritten; the AddonBone
+  opt-in for size normalization remains a separate framework task. No version was bumped.
+
+
+## Icon module layout — 2026-09-17
+
+- Supersedes the earlier definition-leaf layout: `types.ts` and `utils.ts`
+  now sit beside `Icon.tsx`. Consumers import their exports through `Icon/index.ts`;
+  Icon itself uses sibling imports. The obsolete leaf-only lint rule was removed.
+- `getIconDefinition` is intentionally exported from the package root. The TypeScript
+  API snapshot now includes 181 root exports and the unchanged four config exports.
+- A production Rspack regression test imports IconMode and getIconDefinition from the
+  root entry. Chunk module stats contain only the consumer and those two source modules;
+  no UI components or CSS are emitted. The unoptimized config-entry test also passes.
+- `npm run verify` passes: lint, source/test types, 61 tooling tests, 120 Jest tests in
+  twelve suites and declarations. Storybook production build passes. The browser suite
+  was not repeated for this module relocation; its previous result is recorded above.

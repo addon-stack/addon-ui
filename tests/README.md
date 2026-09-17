@@ -106,4 +106,14 @@ clipPath and mask. PNGs are decoded in a browser canvas with a color tolerance;
 no PNG decoder dependency or byte-for-byte screenshot comparison is used.
 Firefox extension-document pixels come from its RDP screenshot actor, while
 Playwright captures ShadowRoots. `plugin/config-entry.test.ts` checks development
-module stats before tree shaking; the definition leaf's imports are lint-guarded.
+module stats before tree shaking. Icon contracts and normalization are exported
+through the component index; the config entry has no runtime dependency on them.
+A production compilation also verifies that importing IconMode and getIconDefinition
+from the public package entry emits only their modules, without UI components or CSS.
+
+`components/icon-registry.test.tsx` checks render isolation with Profiler, source
+replacement, stable theme/config values, public registry compatibility, Unicode ID
+encoding and standalone sprites. `e2e/icon-ids.spec.mjs` checks actual `<use>` rendering
+for application-ID collisions, nested/sibling providers and portals in both ShadowRoots
+and extension documents. `tooling/public-exports.test.mjs` uses the TypeScript checker
+to compare package and config exports, including erased types, against the committed list.

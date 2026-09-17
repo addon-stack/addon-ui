@@ -3,6 +3,8 @@ import {createPortal} from "react-dom";
 
 import {Icon, IconMode, type Icons, UIProvider} from "addon-ui";
 
+import IconIds from "./IconIds";
+
 import Asset from "./asset.svg";
 import PaintServers from "./paint-servers.svg?react";
 import Wide from "./wide.svg?react";
@@ -55,6 +57,7 @@ export default function IconModes() {
                     ))}
                     <Icon name="paint-servers" width={120} height={40} data-testid="paint-servers" />
                 </div>
+                <IconIds />
             </section>
         </UIProvider>
     );

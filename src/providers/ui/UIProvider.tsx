@@ -15,6 +15,10 @@ import "./styles/base.scss";
 import "./styles/document.scss";
 import "#addon-ui/style.scss";
 
+const EmptyIcons: Icons = {};
+const EmptyComponents: ComponentsProps = {};
+const EmptyExtra: ExtraProps = {};
+
 export interface UIProviderProps extends Partial<Config>, Pick<ThemeProviderProps, "storage" | "container"> {
     /**
      * A custom view identifier that allows developers to specify a unique name for styling customization.
@@ -45,7 +49,10 @@ export interface UIProviderProps extends Partial<Config>, Pick<ThemeProviderProp
 }
 
 const UIProvider: FC<PropsWithChildren<UIProviderProps>> = props => {
-    const {children, components = {}, extra = {}, icons = {}, storage, view, container = "html", portal} = props;
+    const {
+        children, components = EmptyComponents, extra = EmptyExtra, icons = EmptyIcons,
+        storage, view, container = "html", portal,
+    } = props;
 
     const componentsProps = useMemo<ComponentsProps>(() => merge(config.components || {}, components), [components]);
 

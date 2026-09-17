@@ -26,12 +26,12 @@ const checkPaint = async (page, png) => {
 
 const checkDimensions = async (page, scope) => {
     for (const name of ["wide-component", "wide-descriptor"]) {
-        await expect(scope.locator(`symbol[id="${name}"] svg`)).toHaveAttribute("viewBox", "0 0 80 20");
+        await expect(scope.locator(`symbol[data-icon="${name}"] svg`)).toHaveAttribute("viewBox", "0 0 80 20");
     }
 
     // Real SVGR/SVGO drops the redundant viewBox and retains fixed file dimensions.
     for (const name of ["fixed-component", "fixed-descriptor"]) {
-        const source = scope.locator(`symbol[id="${name}"] svg`);
+        const source = scope.locator(`symbol[data-icon="${name}"] svg`);
         await expect(source).toHaveAttribute("width", "80");
         await expect(source).toHaveAttribute("height", "20");
         await expect(source).not.toHaveAttribute("viewBox");
@@ -72,7 +72,7 @@ test("paints resources and fixed-size files in an extension document", async ({p
 
             await evaluate(() => document.querySelector('[data-testid="icon-modes-open"]').click());
 
-            await poll(() => evaluate(() => !!document.querySelector('symbol[id="paint-servers"]')),
+            await poll(() => evaluate(() => !!document.querySelector('symbol[data-icon="paint-servers"]')),
                 Boolean, "paint resource registration");
 
             // Juggler cannot inspect extension documents. Firefox's screenshot actor captures the real tab.
@@ -103,7 +103,8 @@ const checkModes = async scope => {
     const sprite = scope.getByTestId("mode-sprite");
     await expect(sprite).toHaveAttribute("viewBox", "0 0 80 20");
     await expect.poll(() => sprite.locator("use").evaluate(element => element.getBBox().width)).toBe(80);
-    await expect(scope.getByTestId("mode-portal").locator("use")).toHaveAttribute("href", "#mode-sprite");
+    const symbolId = await scope.locator('symbol[data-icon="mode-sprite"]').getAttribute("id");
+    await expect(scope.getByTestId("mode-portal").locator("use")).toHaveAttribute("href", `#${symbolId}`);
     await expect(scope.getByTestId("mode-inline").locator("path")).toHaveCSS("fill", "rgb(120, 30, 180)");
     await expect(scope.getByTestId("mode-inline-second").locator("path")).toHaveCSS("fill", "rgb(20, 100, 160)");
 
@@ -116,17 +117,17 @@ const checkModes = async scope => {
     });
 
     expect(loaded).toEqual({width: 80, height: 20, box: 80});
-    await expect(scope.locator('symbol[id="mode-inline"], symbol[id="mode-asset"]')).toHaveCount(0);
+    await expect(scope.locator('symbol[data-icon="mode-inline"], symbol[data-icon="mode-asset"]')).toHaveCount(0);
     const switched = scope.getByTestId("mode-switch");
     await expect(switched.locator("use")).toHaveCount(1);
     await scope.getByTestId("icon-mode-next").click();
     await expect(switched.locator("path")).toHaveCount(1);
-    await expect(scope.locator('symbol[id="mode-switch"]')).toHaveCount(0);
+    await expect(scope.locator('symbol[data-icon="mode-switch"]')).toHaveCount(0);
     await scope.getByTestId("icon-mode-next").click();
     await expect(switched.locator("image")).toHaveCount(1);
     await scope.getByTestId("icon-mode-next").click();
     await expect(switched.locator("use")).toHaveCount(1);
-    await expect(scope.locator('symbol[id="mode-switch"]')).toHaveCount(1);
+    await expect(scope.locator('symbol[data-icon="mode-switch"]')).toHaveCount(1);
 };
 
 test("renders SVG file sources in every mode, with lazy styles and independent ShadowRoots", async ({page, host}) => {
@@ -147,7 +148,7 @@ test("preserves icon modes in an extension page", async ({host, extension, engin
             await evaluate(() => document.querySelector('[data-testid="icon-modes-open"]').click());
 
             await poll(
-                () => evaluate(() => !!document.querySelector('symbol[id="mode-sprite"]')),
+                () => evaluate(() => !!document.querySelector('symbol[data-icon="mode-sprite"]')),
                 Boolean, "sprite registration"
             );
 
@@ -167,7 +168,7 @@ test("preserves icon modes in an extension page", async ({host, extension, engin
                     fill: getComputedStyle(get("mode-inline").querySelector("path")).fill,
                     secondFill: getComputedStyle(get("mode-inline-second").querySelector("path")).fill,
                     unexpectedSymbols: document.querySelectorAll(
-                        'symbol[id="mode-inline"], symbol[id="mode-asset"]'
+                        'symbol[data-icon="mode-inline"], symbol[data-icon="mode-asset"]'
                     ).length,
                 };
             });
